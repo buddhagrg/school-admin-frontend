@@ -1,0 +1,33 @@
+/api/user/profile/basic
+/api/user/profile/details
+/api/dahboard
+
+/api/students (GET/POST)
+/api/students/:student (GET/PUT)
+
+/api/attendance?userId=12345&date=2024-06-05 (GET-specific date and user)
+/api/attendance?date=2024-06-05 (GET/POST-specific date)
+/api/classes (GET/POST)
+/api/classes/:class (PUT)
+/api/class-teachers (GET/POST)
+/api/class-teachers/:teacher (PUT)
+
+/api/leave/policies (GET/POST)
+/api/leave/policies/:policy (PUT)
+/api/leave/policies/:policy/users (GET/POST)
+/api/leave/pending (GET)
+/api/leave/pending/:id (PUT/DELETE)
+/api/leave/pending/:id/approve (POST)
+/api/leave/request (GET/POST - to list all and to take new)
+
+/api/notices (GET/POST)
+/api/notices/:notice (PUT/DELETE/POST)
+/api/notices/recipients (GET)
+
+/api/staff (GET/POST)
+/api/staffs/:staff (PUT/GET)
+
+/api/roles (GET/POST)
+/api/roles/:role/users (GET/POST)
+/api/roles/:role/routes (GET/POST)
+/api/roles/:role/actions (PUT)
