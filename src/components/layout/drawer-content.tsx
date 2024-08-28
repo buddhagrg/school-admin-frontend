@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 import { getUserMenus } from "@/domains/auth/slice";
 
-const API_URL = await import.meta.env.VITE_API_DOMAIN_PORT;
 type DrawerContentProps = {
     handleNavigationClick: (name: string) => void;
     openNavMenu: string | null;
@@ -18,6 +17,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
     openNavMenu,
 }) => {
     const menus = useSelector(getUserMenus);
+    const API_URL = import.meta.env.VITE_API_DOMAIN_PORT;
 
     return (
         <div>

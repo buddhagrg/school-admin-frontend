@@ -3,9 +3,8 @@ import Cookies from "js-cookie";
 import { Tag } from "./tag-types";
 import { resetUser } from "@/domains/auth/slice";
 
-const API_URL = await import.meta.env.VITE_API_DOMAIN_PORT;
 const baseQuery = fetchBaseQuery({
-    baseUrl: `${API_URL}/api/v1`,
+    baseUrl: `${import.meta.env.VITE_API_DOMAIN_PORT}/api/v1`,
     prepareHeaders: (headers) => {
         const csrfToken = Cookies.get("csrfToken");
         if (csrfToken) {
