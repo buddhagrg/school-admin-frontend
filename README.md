@@ -2,6 +2,10 @@
 School Admin is a user friendly web application for school administration built on top of React, Redux toolkit, NodeJS and PgSQL.
 
 ## Repo Overview
+> **Login Credentials** \
+> Username- <mark>`admin@gmail.com`</mark> \
+> Password- <mark>`password`</mark>
+
 This repo is for frontend. There are separate repos for api and database. \
 API- https://github.com/buddhagrg/school-admin-api \
 DB- https://github.com/buddhagrg/school-admin-db
