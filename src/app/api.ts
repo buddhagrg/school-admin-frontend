@@ -7,6 +7,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_API_DOMAIN_PORT}/api/v1`,
     prepareHeaders: (headers) => {
         const csrfToken = Cookies.get("csrfToken");
+        console.log(csrfToken);
         if (csrfToken) {
             headers.set("x-csrf-token", csrfToken);
         }
