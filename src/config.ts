@@ -1,1 +1,1 @@
-export const API_DOMAIN_PORT = `http://localhost:5000`;
+export const API_DOMAIN_PORT = `https://school-admin-api.onrender.com`;

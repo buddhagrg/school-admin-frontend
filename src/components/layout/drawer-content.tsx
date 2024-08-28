@@ -5,9 +5,9 @@ import { blue } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { API_DOMAIN_PORT } from "@/config";
 import { getUserMenus } from "@/domains/auth/slice";
 
+const API_URL = await import.meta.env.VITE_API_DOMAIN_PORT;
 type DrawerContentProps = {
     handleNavigationClick: (name: string) => void;
     openNavMenu: string | null;
@@ -38,7 +38,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
                                 <Box key={name}>
                                     <ListItemButton onClick={() => handleNavigationClick(name)}>
                                         <ListItemIcon>
-                                            <img width="20px" height="20px" src={`${API_DOMAIN_PORT}/${icon}`} />
+                                            <img width="20px" height="20px" src={`${API_URL}/${icon}`} />
                                         </ListItemIcon>
                                         <ListItemText primary={name} />
                                         {openNavMenu === name ? <ArrowDropDown /> : <ArrowRight />}
@@ -63,7 +63,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
                             return (
                                 <ListItemButton key={name} component={Link} to={`/app/${path}`}>
                                     <ListItemIcon>
-                                        <img width="20px" height="20px" src={`${API_DOMAIN_PORT}/${icon}`} />
+                                        <img width="20px" height="20px" src={`${API_URL}/${icon}`} />
                                     </ListItemIcon>
                                     <ListItemText primary={name} />
                                 </ListItemButton>
