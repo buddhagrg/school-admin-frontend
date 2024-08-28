@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./protected-route";
 import { AppRoot } from "./root";
 import { LoginPage } from '@/domains/auth/login';
@@ -30,6 +30,10 @@ import { EditStaff } from '@/domains/staff/edit';
 import { RoleAndPermission } from '@/domains/role-and-permission';
 
 export const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Navigate to="/app" replace />
+    },
     {
         path: "/auth/login",
         element: <LoginPage />

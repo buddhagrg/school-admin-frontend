@@ -13,8 +13,8 @@ export default ({ mode }: { mode: string }) => {
         "@": path.resolve(__dirname, "src")
       }
     },
-    server: {
-      open: "/app"
-    }
+    // server: {
+    //   open: "/app"
+    // }
   })
 }
