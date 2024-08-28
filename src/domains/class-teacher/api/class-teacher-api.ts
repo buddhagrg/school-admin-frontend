@@ -31,7 +31,7 @@ export const classTeacherApi = api.injectEndpoints({
                 method: "PUT",
                 body: payload
             }),
-            invalidatesTags: (result, error, { id }) => [{ type: Tag.CLASS_TEACHERS, id }]
+            invalidatesTags: (_result, _error, { id }) => [{ type: Tag.CLASS_TEACHERS, id }]
         }),
     })
 });

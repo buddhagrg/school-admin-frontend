@@ -28,7 +28,7 @@ export const classApi = api.injectEndpoints({
                 method: "PUT",
                 body: payload
             }),
-            invalidatesTags: (result, error, { id }) => [{ type: Tag.CLASSES, id }]
+            invalidatesTags: (_result, _error, { id }) => [{ type: Tag.CLASSES, id }]
         }),
         deleteClass: builder.mutation<{ message: string }, number>({
             query: (id) => ({

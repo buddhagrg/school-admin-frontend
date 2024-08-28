@@ -14,7 +14,7 @@ export const StudentAccountPage = () => {
         setTab(0);
     }, []);
 
-    const handleTabChange = (event: any, index: number) => {
+    const handleTabChange = (_event: any, index: number) => {
         setTab(index);
     }
 

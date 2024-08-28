@@ -11,9 +11,9 @@ import { Manage, Overview, PolicyUsers } from '../components';
 
 export const LeaveDefine = () => {
     const [tab, setTab] = React.useState(0);
-    const { data, isLoading, isError, error } = useGetLeavePoliciesQuery();
+    const { data, isLoading } = useGetLeavePoliciesQuery();
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTab(newValue);
     };
 

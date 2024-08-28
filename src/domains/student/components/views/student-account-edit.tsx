@@ -62,7 +62,7 @@ export const StudentAccountEdit: React.FC<StudentAccountEditProps> = ({
             toast.info(result.message);
             navigate(redirectPath);
         } catch (error) {
-            const { message, detail } = getErrorMsg(error as FetchBaseQueryError | SerializedError);
+            const { message } = getErrorMsg(error as FetchBaseQueryError | SerializedError);
             toast.error(message);
         }
     }

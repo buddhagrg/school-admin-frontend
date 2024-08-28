@@ -24,7 +24,7 @@ export const staffApi = api.injectEndpoints({
                 method: "POST",
                 body: { status }
             }),
-            invalidatesTags: (result, error, { id }) => [{ type: Tag.STAFFS, id }, Tag.STAFFS]
+            invalidatesTags: (_result, _error, { id }) => [{ type: Tag.STAFFS, id }, Tag.STAFFS]
         }),
         addStaff: builder.mutation<{ message: string }, StaffFormProps>({
             query: (payload) => ({
@@ -40,7 +40,7 @@ export const staffApi = api.injectEndpoints({
                 method: "PUT",
                 body: payload
             }),
-            invalidatesTags: (result, error, { id }) => [{ type: Tag.STAFFS, id }]
+            invalidatesTags: (_result, _error, { id }) => [{ type: Tag.STAFFS, id }]
         }),
     }),
 });

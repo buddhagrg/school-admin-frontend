@@ -26,7 +26,7 @@ export const leaveApi = api.injectEndpoints({
                 method: "PUT",
                 body: { ...restPayload }
             }),
-            invalidatesTags: (result, error, { id }) => result
+            invalidatesTags: (result, _error, { id }) => result
                 ? [{ type: Tag.LEAVE_HISTORY, id }, { type: Tag.PENDING_LEAVES, id }]
                 : []
         }),
@@ -35,7 +35,7 @@ export const leaveApi = api.injectEndpoints({
                 url: `/leave/request/${id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: (result, error, id) => result
+            invalidatesTags: (result, _error, id) => result
                 ? [{ type: Tag.LEAVE_HISTORY, id }, { type: Tag.PENDING_LEAVES, id }]
                 : []
         }),
@@ -52,7 +52,7 @@ export const leaveApi = api.injectEndpoints({
                 method: "POST",
                 body: { status }
             }),
-            invalidatesTags: (result, error, { id }) => result
+            invalidatesTags: (result, _error, { id }) => result
                 ? [{ type: Tag.LEAVE_HISTORY, id }, { type: Tag.PENDING_LEAVES, id }]
                 : []
         }),
@@ -90,7 +90,7 @@ export const leaveApi = api.injectEndpoints({
                 method: "PUT",
                 body: { name }
             }),
-            invalidatesTags: (result, error, { id }) => result
+            invalidatesTags: (result, _error, { id }) => result
                 ? [{ type: Tag.LEAVE_POLICIES, id }]
                 : []
         }),
@@ -100,7 +100,7 @@ export const leaveApi = api.injectEndpoints({
                 method: "POST",
                 body: { status }
             }),
-            invalidatesTags: (result, error, { id }) => result
+            invalidatesTags: (result, _error, { id }) => result
                 ? [{ type: Tag.LEAVE_POLICIES, id }]
                 : []
         }),
@@ -120,7 +120,7 @@ export const leaveApi = api.injectEndpoints({
                 method: "DELETE",
                 body: { user: userId }
             }),
-            invalidatesTags: (result, error, { userId }) => result
+            invalidatesTags: (result, _error, { userId }) => result
                 ? [{ type: Tag.LEAVE_POLICY_USERS, id: userId }]
                 : []
         }),

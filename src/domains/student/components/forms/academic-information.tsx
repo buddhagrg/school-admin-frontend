@@ -36,7 +36,7 @@ export const AcademicInformation = () => {
                                     onChange={(event) => onChange(event.target.value)}
                                 >
                                     {
-                                        classes.map(({ id, name }) =>
+                                        classes.map(({ name }) =>
                                             <MenuItem value={name} key={name}>{name}</MenuItem>
                                         )
                                     }

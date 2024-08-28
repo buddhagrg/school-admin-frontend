@@ -15,6 +15,7 @@ type DialogModalProps = {
     handleSave: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
+//@ts-ignore
 function PaperComponent(props: PaperProps) {
     return (
         <Draggable

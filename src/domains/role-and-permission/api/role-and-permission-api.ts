@@ -44,7 +44,7 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
                 method: "PUT",
                 body: payload
             }),
-            invalidatesTags: (result, error, { id }) => result
+            invalidatesTags: (result, _error, { id }) => result
                 ? [{ type: Tag.ROLES, id }] : []
         }),
         handleRoleStatus: builder.mutation<{ message: string }, HandleRoleStatus>({
@@ -53,7 +53,7 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
                 method: "POST",
                 body: { status }
             }),
-            invalidatesTags: (result, error, { id }) => result
+            invalidatesTags: (result, _error, { id }) => result
                 ? [{ type: Tag.ROLES, id }] : []
         }),
         updateRolePermission: builder.mutation<{ message: string }, RolePermission>({
@@ -62,7 +62,7 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
                 method: "POST",
                 body: { permissions }
             }),
-            invalidatesTags: (result, error, { id }) => result
+            invalidatesTags: (result, _error, { id }) => result
                 ? [{ type: Tag.ROLE_PERMISSIONS, id }] : []
         }),
         switchUserRole: builder.mutation<{ message: string }, UserRole>({

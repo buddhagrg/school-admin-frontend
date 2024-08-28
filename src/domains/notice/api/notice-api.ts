@@ -40,7 +40,7 @@ export const noticeApi = api.injectEndpoints({
                 method: "PUT",
                 body: payload
             }),
-            invalidatesTags: (result, error, { id }) => [{ type: Tag.NOTICES, id }]
+            invalidatesTags: (_result, _error, { id }) => [{ type: Tag.NOTICES, id }]
         }),
         handleNoticeStatus: builder.mutation<{ message: string }, ReviewNotice>({
             query: ({ id, status }) => ({
@@ -48,7 +48,7 @@ export const noticeApi = api.injectEndpoints({
                 method: "POST",
                 body: { status }
             }),
-            invalidatesTags: (result, error, { id }) => [{ type: Tag.NOTICES, id }]
+            invalidatesTags: (_result, _error, { id }) => [{ type: Tag.NOTICES, id }]
         }),
     }),
 });
