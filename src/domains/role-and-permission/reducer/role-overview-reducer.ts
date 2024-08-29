@@ -59,6 +59,7 @@ export const roleOverviewReducer = (state: State, action: Action): State => {
         case "SET_ADD_ROLE":
             return {
                 ...state,
+                roleId: 0,
                 title: "Add Role",
                 isRoleAddEditModalOpen: true,
                 anchorElement: null
