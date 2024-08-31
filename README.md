@@ -4,7 +4,7 @@ School Admin is a user friendly web application for school administration built 
 ## Repo Overview
 > **Login Credentials** \
 > Username- <mark>`admin@gmail.com`</mark> \
-> Password- <mark>`password`</mark>
+> Password- <mark>`3OU4zn3q6Zh9`</mark>
 
 This repo is for frontend. There are separate repos for api and database. \
 API- https://github.com/buddhagrg/school-admin-api \
