@@ -1,11 +1,12 @@
 type StaffReducerState = {
+    isSaving: boolean;
     anchorEl: HTMLElement | null;
     openStaffRowId: null | number;
     isModalOpen: boolean;
     modalTitle: string;
     modalBodyText: string;
     selectedStaffId: number;
-    status: boolean;
+    menuItemValue: string;
 };
 
 type SetMenuClickAction = {
@@ -19,15 +20,16 @@ type SetMenuClose = { type: "SET_MENU_CLOSE" };
 type SetMenuItemClick = {
     type: "SET_MENU_ITEM_CLICK",
     payload: {
-        status: boolean;
+        menuItemValue: string;
         modalTitle: string;
         modalBodyText: string;
     }
 };
 type SetModalFalse = { type: "SET_MODAL_FALSE" };
-type StaffReducerAction = SetMenuClickAction | SetMenuClose | SetMenuItemClick | SetModalFalse;
+type SetLoader = { type: "SET_LOADER" };
+type StaffReducerAction = SetMenuClickAction | SetMenuClose | SetMenuItemClick | SetModalFalse | SetLoader;
 
-export const staffReducer = (state: StaffReducerState, action: StaffReducerAction): StaffReducerState => {
+export const userAccountBasicReducer = (state: StaffReducerState, action: StaffReducerAction): StaffReducerState => {
     switch (action.type) {
         case "SET_MENU_CLICK": {
             const { selectedStaffId, anchorEl } = action.payload;
@@ -46,13 +48,13 @@ export const staffReducer = (state: StaffReducerState, action: StaffReducerActio
             }
         case "SET_MENU_ITEM_CLICK":
             {
-                const { status, modalTitle, modalBodyText } = action.payload;
+                const { menuItemValue, modalTitle, modalBodyText } = action.payload;
                 return {
                     ...state,
                     anchorEl: null,
                     openStaffRowId: null,
                     isModalOpen: !state.isModalOpen,
-                    status,
+                    menuItemValue,
                     modalTitle,
                     modalBodyText
                 };
@@ -61,6 +63,11 @@ export const staffReducer = (state: StaffReducerState, action: StaffReducerActio
             return {
                 ...state,
                 isModalOpen: !state.isModalOpen
+            };
+        case "SET_LOADER":
+            return {
+                ...state,
+                isSaving: !state.isSaving
             };
         default:
             return state;

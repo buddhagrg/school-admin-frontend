@@ -12,7 +12,7 @@ import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { StaffFilter, StaffFilterSchema } from "../../types";
 import { useGetStaffsQuery } from "../../api";
 import { FilterStaff } from "../../components/forms";
-import { StaffTable } from "../../components/views";
+import { UserAccountBasic } from "@/domains/shared/user-account-basic";
 
 const initialState = {
     roleId: "",
@@ -54,12 +54,12 @@ export const ListStaffs = () => {
             />
             <Box sx={{ my: 10 }} />
             <PageContentHeader icon={<InfoOutlined sx={{ mr: 1 }} />} heading="Staff Information" />
-            <StaffTable
+            <UserAccountBasic
                 data={{
                     isLoading,
                     isError,
                     error: getErrorMsg(error as FetchBaseQueryError | SerializedError).message,
-                    staffs: data?.staffs ?? []
+                    users: data?.staffs ?? []
                 }}
             />
         </>

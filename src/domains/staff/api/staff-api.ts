@@ -18,7 +18,7 @@ export const staffApi = api.injectEndpoints({
             query: (id) => id ? `/staffs/${id}` : `/account/me`,
             providesTags: (result) => result ? [{ type: Tag.STAFFS, id: result.id }] : []
         }),
-        disableStaff: builder.mutation<{ message: string }, StaffStatusRequest>({
+        handleStaffStatus: builder.mutation<{ message: string }, StaffStatusRequest>({
             query: ({ id, status }) => ({
                 url: `/staffs/${id}/status`,
                 method: "POST",
@@ -50,7 +50,7 @@ export const {
     useLazyGetStaffsQuery,
     useLazyGetStaffDetailQuery,
     useGetStaffDetailQuery,
-    useDisableStaffMutation,
+    useHandleStaffStatusMutation,
     useAddStaffMutation,
     useUpdateStaffMutation,
 } = staffApi;

@@ -1,5 +1,5 @@
 import { api } from "@/app/api";
-import { LoginRequest, PasswordProps, SetupPasswordProps, User } from "../types";
+import { LoginRequest, PasswordProps, SetupPasswordProps, User, UserId } from "../types";
 
 export const authApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -30,6 +30,27 @@ export const authApi = api.injectEndpoints({
                 body: payload
             })
         }),
+        resendVerificationEmail: builder.mutation<{ message: string }, UserId>({
+            query: (payload) => ({
+                url: `/auth/resend-email-verification`,
+                method: "POST",
+                body: payload
+            })
+        }),
+        resendPwdSetupLink: builder.mutation<{ message: string }, UserId>({
+            query: (payload) => ({
+                url: `/auth/resend-pwd-setup-link`,
+                method: "POST",
+                body: payload
+            })
+        }),
+        resetPwd: builder.mutation<{ message: string }, UserId>({
+            query: (payload) => ({
+                url: `/auth/reset-pwd`,
+                method: "POST",
+                body: payload
+            })
+        }),
     })
 });
 
@@ -38,4 +59,7 @@ export const {
     useLogoutMutation,
     useChangePwdMutation,
     useSetupPasswordMutation,
+    useResendVerificationEmailMutation,
+    useResendPwdSetupLinkMutation,
+    useResetPwdMutation,
 } = authApi;

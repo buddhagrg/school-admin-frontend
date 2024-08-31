@@ -3,4 +3,3 @@ export * from "./others";
 export * from "./parents-information";
 export * from "./personal-detail";
 export * from "./staff-account-edit";
-export * from "./staff-table";

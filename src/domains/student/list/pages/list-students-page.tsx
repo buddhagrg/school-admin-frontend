@@ -12,7 +12,7 @@ import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { StudentFilter, StudentFilterSchema } from "../../types";
 import { useGetStudentsQuery } from "../../api";
 import { FilterStudent } from "../../components/forms";
-import { StudentTable } from "../../components/views";
+import { UserAccountBasic } from "@/domains/shared/user-account-basic";
 
 const initialState = {
     class: "",
@@ -56,12 +56,12 @@ export const ListStudents: React.FC = () => {
             />
             <Box sx={{ my: 10 }} />
             <PageContentHeader icon={<InfoOutlined sx={{ mr: 1 }} />} heading="Student Information" />
-            <StudentTable
+            <UserAccountBasic
                 data={{
                     isLoading,
                     isError,
                     error: getErrorMsg(error as FetchBaseQueryError | SerializedError).message,
-                    students: data?.students || []
+                    users: data?.students || []
                 }}
             />
         </>
