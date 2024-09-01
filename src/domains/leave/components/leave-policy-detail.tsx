@@ -6,11 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 
 import { DialogModal } from "@/components/dialog-modal";
-import { LeaveDetail } from "../request/components/leave-detail";
+import { LeaveDetail } from "./leave-detail";
 import { LeaveForm } from "./leave-form";
 import { API_DATE_FORMAT, getFormattedDate } from "@/utils/helpers/date";
-import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from "../api";
 import { LeaveRequest, LeaveRequestSchema } from "../types";
+import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from "../api/leave-api";
 
 export const LeavePolicyDetail = () => {
     const [applyLeaveRequest, { isLoading: isApplyingLeave }] = useApplyLeaveRequestMutation();

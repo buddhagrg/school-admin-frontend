@@ -20,8 +20,8 @@ import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { StudentProps } from "../../types";
 import { studentFormInitialState } from "../../reducer/student-form-reducer";
 import { StudentSchema } from "../../types/student-schema";
-import { useUpdateStudentMutation } from "../../api";
 import { useGetStudentDetail } from "../../hooks";
+import { useUpdateStudentMutation } from "../../api/student-api";
 
 type StudentAccountEditProps = {
     heading: string;

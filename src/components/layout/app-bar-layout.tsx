@@ -8,8 +8,8 @@ import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { getUserEmail, getUserName, getUserRole, resetUser } from "@/domains/auth/slice";
 import { useLogoutMutation } from "@/domains/auth/api";
+import { getUserEmail, getUserName, getUserRole, resetUser } from "@/domains/auth/slice";
 
 type AppBarLayoutProps = {
     handleDrawerToggle: () => void;

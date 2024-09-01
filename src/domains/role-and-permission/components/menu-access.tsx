@@ -8,7 +8,7 @@ import { SerializedError } from "@reduxjs/toolkit";
 
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { Action, Permission, SubPermission } from "../types";
-import { useUpdateRolePermissionMutation } from "../api";
+import { useUpdateRolePermissionMutation } from "../api/role-and-permission-api";
 
 type MenuAccessProps = {
     roleId: number | null;

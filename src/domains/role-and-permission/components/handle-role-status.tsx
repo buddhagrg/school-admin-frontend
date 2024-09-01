@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { useHandleRoleStatusMutation } from "../api";
+import { useHandleRoleStatusMutation } from "../api/role-and-permission-api";
 
 type RoleStatusProps = {
     roleStatus: boolean;

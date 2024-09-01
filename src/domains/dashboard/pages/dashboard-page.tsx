@@ -3,11 +3,11 @@ import { Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { getUserRole } from "@/domains/auth/slice";
-import { useGetDashboardDataQuery } from "../api";
-import { useGetMenusQuery } from "@/domains/role-and-permission/api";
-import { setMenus } from "@/domains/role-and-permission/slice/menu-slice";
+import { useGetDashboardDataQuery } from "../api/dashboard-api";
 import { Celebrations, GridCard, LeavePolicyDetail, Notices, WhoIsOut } from "../components";
+import { getUserRole } from "@/domains/auth/slice";
+import { useGetMenusQuery } from "@/domains/role-and-permission/api";
+import { setMenus } from "@/domains/role-and-permission/slice";
 import { DashboardProps } from "../types";
 
 export const DashboardPage = () => {

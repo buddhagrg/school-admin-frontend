@@ -13,9 +13,9 @@ import { parseISO } from "date-fns";
 import { PageContentHeader } from "@/components/page-content-header";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { useGetStaffDetail } from "../../hooks";
-import { useUpdateStaffMutation } from "../../api";
 import { StaffFormProps, StaffFormSchema } from "../../types";
 import { Address, BasicInformation, OtherInformation, ParentsInformation, staffInitialState } from "../forms";
+import { useUpdateStaffMutation } from "../../api/staff-api";
 
 type StaffAccountEditProps = {
     id?: string;

@@ -21,6 +21,6 @@ const menuSlice = createSlice({
 });
 
 export const { setMenus } = menuSlice.actions;
-export default menuSlice.reducer;
+export const menuReducer = menuSlice.reducer;
 
 export const getMenuList = (state: RootState) => state.menu.menuList;

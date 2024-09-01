@@ -12,7 +12,7 @@ import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from "@/utils/helpers/date";
 import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { StudentState } from "../../types";
-import { useReviewStudentStatusMutation } from "../../api";
+import { useReviewStudentStatusMutation } from "../../api/student-api";
 
 const columns: NameIdType[] = [
     { id: "action", name: "Action" },

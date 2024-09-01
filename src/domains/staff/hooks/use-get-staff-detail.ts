@@ -1,5 +1,5 @@
-import { useGetStaffDetailQuery } from "../api";
 import { staffInitialState } from "../components/forms/staff-initial-state";
+import { useGetStaffDetailQuery } from "../api/staff-api";
 import { StaffFormPropsWithId } from "../types";
 
 const initialState: StaffFormPropsWithId = { id: 0, ...staffInitialState };

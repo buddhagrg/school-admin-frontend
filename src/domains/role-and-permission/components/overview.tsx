@@ -5,7 +5,7 @@ import { AddCircle, Circle, MoreVert } from "@mui/icons-material";
 import { AddEditRole } from "./add-edit-role";
 import { HandleRoleStatus } from "./handle-role-status";
 import { roleOverviewReducer } from "../reducer/role-overview-reducer";
-import { useGetRolesQuery } from "../api";
+import { useGetRolesQuery } from "../api/role-and-permission-api";
 
 const initialState = {
     anchorElement: null,

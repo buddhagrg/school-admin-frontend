@@ -1,5 +1,5 @@
-import { useGetMyLeaveHistoryQuery } from "../api";
-import { RequestHistoryTable } from "../pending/components/request-history-table";
+import { useGetMyLeaveHistoryQuery } from "../api/leave-api";
+import { RequestHistoryTable } from "../pages/pending/request-history-table";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 
 export const RequestHistory = () => {

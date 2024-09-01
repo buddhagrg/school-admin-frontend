@@ -1,6 +1,6 @@
-import { useLazyGetClassesQuery } from "@/domains/class/api";
-import { ClassDataPropsWithId } from "@/domains/class/types";
 import * as React from "react";
+import { ClassDataPropsWithId } from "@/domains/class/types";
+import { useLazyGetClassesQuery } from "@/domains/class/api";
 
 export const useClasses = () => {
     const [classes, setClasses] = React.useState<ClassDataPropsWithId[]>([]);

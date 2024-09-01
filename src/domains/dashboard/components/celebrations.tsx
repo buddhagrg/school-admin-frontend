@@ -1,7 +1,7 @@
 import { Celebration } from "@mui/icons-material";
 import { Avatar, Card, CardContent, Divider, List, ListItem, ListItemAvatar, ListItemText, Stack, Typography } from "@mui/material";
-import { getFormattedCelebrationDate } from "../util/get-celebration-date";
-import { CelebrationProps } from "../types";
+import { CelebrationProps } from "../types/dashboard-type";
+import { getFormattedCelebrationDate } from "../util";
 
 export const Celebrations = ({ celebrations }: { celebrations: CelebrationProps[] }) => {
     return (

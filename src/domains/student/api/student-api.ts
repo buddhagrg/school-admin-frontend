@@ -1,8 +1,7 @@
 import { api } from "@/app/api";
-import { AddStudent, GetStudentDetailProps, ReviewStudentStatusRequest, StudentData, StudentFilter, StudentProps, StudentPropsWithId } from "../types";
+import { AddStudent, GetStudentDetailProps, GetTeachers, ReviewStudentStatusRequest, StudentData, StudentFilter, StudentProps, StudentPropsWithId } from "../types";
 import { getQueryString } from "@/utils/helpers/get-query-string";
 import { Tag } from "@/app/tag-types";
-import { GetTeachers } from "../types";
 
 export const studentApi = api.injectEndpoints({
     endpoints: (builder) => ({

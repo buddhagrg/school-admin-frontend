@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import { DATE_FORMAT, getFormattedDate } from "@/utils/helpers/date";
 import { Notice } from "@/domains/notice/types";
-
 const NO_RECORD = "Record not found";
 
 export const Notices = ({ notices }: { notices: Notice[] }) => {

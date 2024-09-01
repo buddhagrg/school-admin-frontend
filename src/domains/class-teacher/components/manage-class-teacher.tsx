@@ -10,7 +10,7 @@ import { LoadingButton } from "@mui/lab";
 import { sectionList } from "@/const";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { ClassTeacherProps, Teacher } from "@/domains/class/types";
-import { useAddClassTeacherMutation, useLazyGetTeachersQuery, useUpdateClassTeacherMutation } from "../api";
+import { useAddClassTeacherMutation, useLazyGetTeachersQuery, useUpdateClassTeacherMutation } from "../api/class-teacher-api";
 
 type ManageClassTeacherProps = {
     operation: string;

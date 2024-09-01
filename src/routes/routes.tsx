@@ -3,31 +3,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./protected-route";
 import { AppRoot } from "./root";
-import { LoginPage } from '@/domains/auth/login';
-import { SetupPasswordPage } from '@/domains/auth/setup-password';
-import { DashboardPage } from '@/domains/dashboard';
-import { AccountRoute } from '@/domains/account';
-import { LeaveDefine } from '@/domains/leave/define';
-import { MyLeaveRequest } from '@/domains/leave/request';
-import { PendingRequest } from '@/domains/leave/pending';
-import { ListClasses } from '@/domains/class/list';
-import { EditClass } from '@/domains/class/edit';
-import { ListClassTeachers } from '@/domains/class-teacher/list';
-import { EditClassTeacher } from '@/domains/class-teacher/edit';
-import { ListStudents } from '@/domains/student/list';
-import { AddStudent } from '@/domains/student/add';
-import { ViewStudent } from '@/domains/student/view';
-import { EditStudent } from '@/domains/student/edit';
-import { ListNotices } from '@/domains/notice/list';
-import { AddNotice } from '@/domains/notice/add';
-import { ViewNotice } from '@/domains/notice/view';
-import { EditNotice } from '@/domains/notice/edit';
-import { ManageNotices } from '@/domains/notice/manage';
-import { ListStaffs } from '@/domains/staff/list';
-import { AddStaff } from '@/domains/staff/add';
-import { ViewStaff } from '@/domains/staff/view';
-import { EditStaff } from '@/domains/staff/edit';
-import { RoleAndPermission } from '@/domains/role-and-permission';
+import { LoginPage, SetupPasswordPage } from '@/domains/auth/pages';
+import { DashboardPage } from '@/domains/dashboard/pages';
+import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/domains/leave/pages';
+import { EditClass, ListClasses } from '@/domains/class/pages';
+import { EditClassTeacher, ListClassTeachers } from '@/domains/class-teacher/pages';
+import { AddStudent, EditStudent, ListStudents, ViewStudent } from '@/domains/student/pages';
+import { AddNotice, EditNotice, ListNotices, ManageNotices, ViewNotice } from '@/domains/notice/pages';
+import { AddStaff, EditStaff, ListStaffs, ViewStaff } from '@/domains/staff/pages';
+import { RoleAndPermission } from '@/domains/role-and-permission/pages';
+import { AccountPage } from '@/domains/account/pages';
 
 export const router = createBrowserRouter([
     {
@@ -53,7 +38,7 @@ export const router = createBrowserRouter([
         children: [
             { index: true, element: <DashboardPage /> },
             { path: "dashboard", element: <DashboardPage /> },
-            { path: "account", element: <AccountRoute /> },
+            { path: "account", element: <AccountPage /> },
             { path: "leave/define", element: <LeaveDefine /> },
             { path: "leave/request", element: <MyLeaveRequest /> },
             { path: "leave/pending", element: <PendingRequest /> },

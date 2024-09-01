@@ -12,10 +12,10 @@ import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from "@/utils/helpers/date";
 import { DialogModal } from "@/components/dialog-modal";
 import { isApprovePermissionAvailable, isDeletePermissionAvailable, isEditPermissionAvailable, isRejectPermissionAvailable } from "@/utils/helpers/get-notice-permission";
 import { NoticeStatus } from "./notice-status";
-import { noticeReducer, NoticeReducerState } from "../reducer/notice-reducer";
 import { Notice } from "../types";
+import { useHandleNoticeStatusMutation } from "../api/notice-api";
 import { getUserId } from "@/domains/auth/slice";
-import { useHandleNoticeStatusMutation } from "../api";
+import { noticeReducer, NoticeReducerState } from "../reducer";
 
 const initialState: NoticeReducerState = {
     isModalOpen: false,

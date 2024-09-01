@@ -12,9 +12,8 @@ import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { API_DATE_FORMAT, getFormattedDate } from "@/utils/helpers/date";
 import { LeaveRequest, LeaveRequestSchema, MyLeavePolicy } from "@/domains/leave/types";
+import { LeaveDetail, LeaveForm } from "@/domains/leave/components";
 import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from "@/domains/leave/api";
-import { LeaveForm } from "@/domains/leave/components";
-import { LeaveDetail } from "@/domains/leave/request/components";
 
 const NO_RECORD = "Record not found";
 const settings = {

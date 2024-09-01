@@ -4,7 +4,6 @@ import { Box, Collapse, Divider, List, ListItemButton, ListItemIcon, ListItemTex
 import { blue } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { getUserMenus } from "@/domains/auth/slice";
 
 type DrawerContentProps = {

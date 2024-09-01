@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useLazyGetStaffsQuery } from "../api";
 import { UserAccountBasicProps } from "@/domains/shared/user-account-basic";
+import { useLazyGetStaffsQuery } from "../api/staff-api";
 
 export const useGetStaffs = () => {
     const [staffs, setStaffs] = React.useState<UserAccountBasicProps[]>([]);

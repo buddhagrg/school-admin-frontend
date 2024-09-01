@@ -1,7 +1,7 @@
 import { CalendarMonth } from "@mui/icons-material";
 import { Avatar, Card, CardContent, Divider, List, ListItem, ListItemAvatar, ListItemText, Stack, Typography } from "@mui/material";
-import { getFormattedLeaveDate } from "../util/get-who-is-out-date";
-import { WhoIsOutProps } from "../types";
+import { WhoIsOutProps } from "../types/dashboard-type";
+import { getFormattedLeaveDate } from "../util";
 
 export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {
     return (

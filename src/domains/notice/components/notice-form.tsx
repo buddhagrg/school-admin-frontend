@@ -5,7 +5,7 @@ import { LoadingButton } from "@mui/lab";
 
 import { noticeStatusList } from "@/const";
 import { NoticeFormProps, RecipientData } from "../types";
-import { useLazyGetNoticeRecipientsQuery } from "../api";
+import { useLazyGetNoticeRecipientsQuery } from "../api/notice-api";
 
 type Props = {
     isSaving: boolean;

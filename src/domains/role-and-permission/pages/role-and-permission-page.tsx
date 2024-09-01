@@ -6,8 +6,8 @@ import { AdminPanelSettings } from '@mui/icons-material';
 import { PageContentHeader } from '@/components/page-content-header';
 import { TabPanel } from '@/components/tab-panel';
 import { Menu, Permission, RolesAndPermissionState } from '../types';
-import { roleAndPermissionReducer } from '../reducer/role-and-permission-reducer';
-import { useGetRolesQuery, useLazyGetRolePermissionsQuery, useLazyGetRoleUsersQuery } from '../api';
+import { roleAndPermissionReducer } from '../reducer';
+import { useGetRolesQuery, useLazyGetRolePermissionsQuery, useLazyGetRoleUsersQuery } from '../api/role-and-permission-api';
 import { getMenuList } from '../slice/menu-slice';
 import { MenuAccess, Overview, RoleManage, RoleUsers } from '../components';
 

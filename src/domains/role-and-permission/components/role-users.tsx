@@ -13,7 +13,7 @@ import { TableRowWithColSpan } from "@/components/table-row-with-col-span";
 import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { User } from "../types";
-import { useGetRolesQuery, useSwitchUserRoleMutation } from "../api";
+import { useGetRolesQuery, useSwitchUserRoleMutation } from "../api/role-and-permission-api";
 
 const Schema = z.object({
     roleId: z.number().min(1, "You must select one role")
