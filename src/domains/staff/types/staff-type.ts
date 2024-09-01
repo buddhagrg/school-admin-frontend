@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { BasicInfoSchema, ParentsInfoSchema, StaffFilterSchema, StaffFormSchema } from "./staff-schema";
-import { UserAccountBasicProps } from "@/domains/shared/user-account-basic";
+import { UserAccountBasicProps } from "@/components/user-account-basic";
 
 export type StaffFilter = z.infer<typeof StaffFilterSchema>;
 

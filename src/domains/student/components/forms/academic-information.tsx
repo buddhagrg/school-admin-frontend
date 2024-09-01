@@ -4,10 +4,10 @@ import { Controller, useFormContext } from "react-hook-form";
 import { School } from "@mui/icons-material";
 import { parseISO } from "date-fns";
 
-import { sectionList } from "@/const";
 import { DATE_FORMAT } from "@/utils/helpers/date";
 import { StudentProps } from "../../types";
 import { useClasses } from "../../hooks";
+import { sectionList } from "@/constants";
 
 export const AcademicInformation = () => {
     const { register, control, formState: { errors } } = useFormContext<StudentProps>();

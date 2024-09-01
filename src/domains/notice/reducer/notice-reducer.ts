@@ -1,12 +1,13 @@
 export type NoticeReducerState = {
+    isSavingAction: boolean;
     isModalOpen: boolean;
     modalTitle: string;
     modalBodyText: string
     noticeId: number;
     anchorElement: HTMLElement | null;
     openNoticeRowId: null | number;
-    noticeStatus: number;
     actionType: string;
+    menuItemValue: string;
 };
 
 type MenuClickAction = {
@@ -20,22 +21,23 @@ type MenuCloseAction = { type: "SET_MENU_CLOSE" };
 type MenuItemClickAction = {
     type: "SET_MENU_ITEM_CLICK",
     payload: {
+        menuItemValue: string;
         modalTitle: string;
         modalBodyText: string;
-        noticeStatus: number;
     }
 };
 type MenuIconClick = {
     type: "SET_ICON_CLICK",
     payload: {
+        menuItemValue: string;
         noticeId: number;
         modalTitle: string;
         modalBodyText: string;
-        noticeStatus: number;
     }
 };
 type ModalStateAction = { type: "SET_MODAL_STATE" };
-type NoticeReducerAction = MenuClickAction | MenuCloseAction | MenuItemClickAction | ModalStateAction | MenuIconClick;
+type SetLoader = { type: "SET_LOADER" };
+type NoticeReducerAction = MenuClickAction | MenuCloseAction | MenuItemClickAction | ModalStateAction | MenuIconClick | SetLoader;
 
 export const noticeReducer = (state: NoticeReducerState, action: NoticeReducerAction): NoticeReducerState => {
     switch (action.type) {
@@ -55,15 +57,15 @@ export const noticeReducer = (state: NoticeReducerState, action: NoticeReducerAc
             };
         case "SET_MENU_ITEM_CLICK":
             {
-                const { modalTitle, modalBodyText, noticeStatus } = action.payload;
+                const { modalTitle, modalBodyText, menuItemValue } = action.payload;
                 return {
                     ...state,
                     isModalOpen: !state.isModalOpen,
                     modalTitle,
                     modalBodyText,
-                    noticeStatus,
                     anchorElement: null,
-                    openNoticeRowId: null
+                    openNoticeRowId: null,
+                    menuItemValue
                 };
             }
         case "SET_MODAL_STATE":
@@ -73,16 +75,21 @@ export const noticeReducer = (state: NoticeReducerState, action: NoticeReducerAc
             };
         case "SET_ICON_CLICK":
             {
-                const { noticeId, modalTitle, modalBodyText, noticeStatus } = action.payload;
+                const { noticeId, modalTitle, modalBodyText, menuItemValue } = action.payload;
                 return {
                     ...state,
                     isModalOpen: !state.isModalOpen,
                     noticeId,
                     modalTitle,
                     modalBodyText,
-                    noticeStatus
+                    menuItemValue
                 }
             }
+        case "SET_LOADER":
+            return {
+                ...state,
+                isSavingAction: !state.isSavingAction
+            };
         default:
             return state;
     }

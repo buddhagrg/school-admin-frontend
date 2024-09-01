@@ -11,7 +11,7 @@ import { PageContentHeader } from "@/components/page-content-header";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { StudentFilter, StudentFilterSchema } from "../types";
 import { FilterStudent } from "../components/forms";
-import { UserAccountBasic } from "@/domains/shared/user-account-basic";
+import { UserAccountBasic } from "@/components/user-account-basic";
 import { useGetStudentsQuery } from "../api/student-api";
 
 const initialState = {
@@ -58,6 +58,7 @@ export const ListStudents: React.FC = () => {
             <PageContentHeader icon={<InfoOutlined sx={{ mr: 1 }} />} heading="Student Information" />
             <UserAccountBasic
                 data={{
+                    userType: "student",
                     isLoading,
                     isError,
                     error: getErrorMsg(error as FetchBaseQueryError | SerializedError).message,

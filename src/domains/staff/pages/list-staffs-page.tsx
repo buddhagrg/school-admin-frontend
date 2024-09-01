@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { PageContentHeader } from "@/components/page-content-header";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { UserAccountBasic } from "@/domains/shared/user-account-basic";
+import { UserAccountBasic } from "@/components/user-account-basic";
 import { StaffFilter, StaffFilterSchema } from "../types";
 import { useGetStaffsQuery } from "../api/staff-api";
 import { FilterStaff } from "../components/forms";
@@ -56,6 +56,7 @@ export const ListStaffs = () => {
             <PageContentHeader icon={<InfoOutlined sx={{ mr: 1 }} />} heading="Staff Information" />
             <UserAccountBasic
                 data={{
+                    userType: "staff",
                     isLoading,
                     isError,
                     error: getErrorMsg(error as FetchBaseQueryError | SerializedError).message,

@@ -8,10 +8,10 @@ import { SerializedError } from "@reduxjs/toolkit";
 import { LoadingButton } from "@mui/lab";
 import { useNavigate } from "react-router-dom";
 
-import { sectionList } from "@/const";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { ClassProps } from "../types";
 import { useAddClassMutation, useUpdateClassMutation } from "../api/class-api";
+import { sectionList } from "@/constants";
 
 type ManageClassProps = {
     id?: number;

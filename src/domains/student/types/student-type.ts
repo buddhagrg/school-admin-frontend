@@ -2,7 +2,7 @@ import { z } from "zod";
 import { NameIdType } from "@/utils/type/misc";
 import { ClassPropsWithId } from "@/domains/class/types";
 import { AcademicInfoSchema, AddressInfoSchema, BasicInfoSchema, OtherInfoSchema, ParentsAndGuardianInfoSchema, StudentFilterSchema, StudentSchema } from "./student-schema";
-import { UserAccountBasicProps } from "@/domains/shared/user-account-basic";
+import { UserAccountBasicProps } from "@/components/user-account-basic";
 
 export type Student = {
     id: number;

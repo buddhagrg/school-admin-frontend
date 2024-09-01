@@ -1,5 +1,5 @@
 import * as React from "react";
-import { UserAccountBasicProps } from "@/domains/shared/user-account-basic";
+import { UserAccountBasicProps } from "@/components/user-account-basic";
 import { useLazyGetStaffsQuery } from "../api/staff-api";
 
 export const useGetStaffs = () => {

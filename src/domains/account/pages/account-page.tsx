@@ -6,7 +6,7 @@ import { PageContentHeader } from "@/components/page-content-header";
 import { TabPanel } from "@/components/tab-panel";
 import { getUserRole } from "@/domains/auth/slice";
 import { ChangePassword } from "../components";
-import { StaffProfile, StudentProfile } from "@/domains/shared/user-account-profile";
+import { StaffProfile, StudentProfile } from "@/components/user-account-profile";
 
 const tabs = ["Profile", "Change Password"];
 export const AccountPage = () => {

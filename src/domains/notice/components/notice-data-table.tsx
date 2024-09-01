@@ -13,9 +13,10 @@ import { DialogModal } from "@/components/dialog-modal";
 import { isApprovePermissionAvailable, isDeletePermissionAvailable, isEditPermissionAvailable, isRejectPermissionAvailable } from "@/utils/helpers/get-notice-permission";
 import { NoticeStatus } from "./notice-status";
 import { Notice } from "../types";
-import { useHandleNoticeStatusMutation } from "../api/notice-api";
 import { getUserId } from "@/domains/auth/slice";
 import { noticeReducer, NoticeReducerState } from "../reducer";
+import { useHandleMenuAction } from "@/hooks";
+import { menuItemTexts } from "@/constants";
 
 const initialState: NoticeReducerState = {
     isModalOpen: false,
@@ -24,8 +25,9 @@ const initialState: NoticeReducerState = {
     noticeId: 0,
     anchorElement: null,
     openNoticeRowId: null,
-    noticeStatus: 0,
-    actionType: ""
+    actionType: "",
+    menuItemValue: "",
+    isSavingAction: false
 };
 
 export type ActionCellType = 'menu' | 'icon';
@@ -40,7 +42,7 @@ type MenuTableCellProps = {
     handleMenuClick: (noticeId: number, event: React.MouseEvent<HTMLElement>) => void;
     handleMenuClose: () => void;
     currentUserId?: number;
-    onNoticeMenuItemClick: (noticeStatus: number, text: string) => void;
+    onNoticeMenuItemClick: (text: string) => void;
 };
 
 const MenuTableCell: React.FC<MenuTableCellProps> = ({
@@ -73,15 +75,15 @@ const MenuTableCell: React.FC<MenuTableCellProps> = ({
                 >Edit</MenuItem>
                 <MenuItem
                     disabled={isApprovePermissionAvailable(notice.statusId)}
-                    onClick={() => onNoticeMenuItemClick(5, "Approve Notice")}
+                    onClick={() => onNoticeMenuItemClick("APPROVE_NOTICE")}
                 >Approve</MenuItem>
                 <MenuItem
                     disabled={isRejectPermissionAvailable(notice.statusId)}
-                    onClick={() => onNoticeMenuItemClick(4, "Reject Notice")}
+                    onClick={() => onNoticeMenuItemClick("REJECT_NOTICE")}
                 >Reject</MenuItem>
                 <MenuItem
                     disabled={isDeletePermissionAvailable(notice.statusId)}
-                    onClick={() => onNoticeMenuItemClick(6, "Delete Notice")}
+                    onClick={() => onNoticeMenuItemClick("DELETE_NOTICE")}
                 >Delete</MenuItem>
             </Menu>
         </TableCell>
@@ -92,9 +94,9 @@ export const NoticeDataTable: React.FC<NoticeDataTableProps> = ({
     notice,
     actionCellType
 }) => {
+    const { handleAction } = useHandleMenuAction();
     const [state, dispatch] = React.useReducer(noticeReducer, initialState);
     const currentUserId = useSelector(getUserId);
-    const [handleNoticeStatus, { isLoading: isReviewingStatus }] = useHandleNoticeStatusMutation();
 
     const toggleModalState = () => {
         dispatch({ type: "SET_MODAL_STATE" });
@@ -111,24 +113,28 @@ export const NoticeDataTable: React.FC<NoticeDataTableProps> = ({
     const handleMenuClose = () => {
         dispatch({ type: "SET_MENU_CLOSE" });
     }
-    const onNoticeMenuItemClick = (noticeStatus: number, text: string) => {
+    const onNoticeMenuItemClick = (menuItemValue: string) => {
+        const stsText = menuItemTexts[menuItemValue] || "";
+
         dispatch({
             type: "SET_MENU_ITEM_CLICK",
             payload: {
-                modalTitle: text,
-                modalBodyText: `Are you sure you want to ${text}?`,
-                noticeStatus
+                menuItemValue,
+                modalTitle: stsText,
+                modalBodyText: `Are you sure you want to ${stsText}?`
             }
         });
     }
-    const onNoticeIconClick = (noticeId: number, noticeStatus: number, text: string) => {
+    const onNoticeIconClick = (noticeId: number, menuItemValue: string) => {
+        const stsText = menuItemTexts[menuItemValue] || "";
+
         dispatch({
             type: "SET_ICON_CLICK",
             payload: {
+                menuItemValue,
                 noticeId,
-                modalTitle: text,
-                modalBodyText: `Are you sure you want to ${text}?`,
-                noticeStatus
+                modalTitle: stsText,
+                modalBodyText: `Are you sure you want to ${stsText}?`
             }
         });
     }
@@ -154,7 +160,7 @@ export const NoticeDataTable: React.FC<NoticeDataTableProps> = ({
                                 : ''
                         }}
                         color="error"
-                        onClick={() => onNoticeIconClick(notice.id, 3, "Delete Notice")}
+                        onClick={() => onNoticeIconClick(notice.id, "DELETE_NOTICE_BY_SELF")}
                     >
                         <Delete />
                     </IconButton>
@@ -164,12 +170,16 @@ export const NoticeDataTable: React.FC<NoticeDataTableProps> = ({
     }
     const onSave = async () => {
         try {
-            const { noticeId, noticeStatus } = state;
-            const result = await handleNoticeStatus({ id: noticeId, status: noticeStatus }).unwrap();
+            dispatch({ type: "SET_LOADER" });
+            const { noticeId, menuItemValue } = state;
+            const result = await handleAction(menuItemValue, noticeId);
             toast.info(result.message);
             toggleModalState();
         } catch (error) {
+            console.log(error)
             toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message)
+        } finally {
+            dispatch({ type: "SET_LOADER" });
         }
     }
 
@@ -209,7 +219,7 @@ export const NoticeDataTable: React.FC<NoticeDataTableProps> = ({
             </TableRow>
 
             <DialogModal
-                isSaving={isReviewingStatus}
+                isSaving={state.isSavingAction}
                 actionFooterCancelText="No"
                 actionFooterSaveText="Yes"
                 titleText={`${state.modalTitle}?`}

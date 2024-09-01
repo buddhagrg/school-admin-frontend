@@ -13,7 +13,8 @@ import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from "@/utils/helpers/date";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { UserAccountBasicDataProps } from "./user-account-basic-type";
 import { userAccountBasicReducer } from "./user-account-basic-reducer";
-import useHandleMenuAction from "./use-handle-menu-action";
+import { useHandleMenuAction } from "../../hooks";
+import { menuItemTexts } from "@/constants";
 
 const columns: NameIdType[] = [
     { id: "action", name: "Action" },
@@ -28,19 +29,12 @@ const columns: NameIdType[] = [
 const initialState = {
     isSaving: false,
     anchorEl: null,
-    openStaffRowId: null,
+    openRowUserId: null,
     isModalOpen: false,
     modalTitle: "",
     modalBodyText: "",
-    selectedStaffId: 0,
+    selectedUserId: 0,
     menuItemValue: ""
-};
-const menuItemTexts: Record<string, string> = {
-    "true": "Enable Staff",
-    "false": "Disable Staff",
-    "RESEND_EMAIL": "Resend Verification Email",
-    "RESEND_PWD_LINK": "Resend Password Setup Link",
-    "RESET_PWD": "Reset User Password"
 };
 
 export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) => {
@@ -51,7 +45,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
         dispatch({
             type: "SET_MENU_CLICK",
             payload: {
-                selectedStaffId: id,
+                selectedUserId: id,
                 anchorEl: event.currentTarget,
             }
         });
@@ -66,22 +60,22 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
             type: "SET_MENU_ITEM_CLICK",
             payload: {
                 menuItemValue,
-                modalTitle: `${stsText}`,
+                modalTitle: stsText,
                 modalBodyText: `Are you sure you want to ${stsText}?`
             }
         });
     }
-    const toggleStaffDisableModal = () => {
+    const toggleModal = () => {
         dispatch({ type: "SET_MODAL_FALSE" });
     }
 
     const onSave = async () => {
         try {
             dispatch({ type: "SET_LOADER" });
-            const { selectedStaffId, menuItemValue } = state;
-            let result = await handleAction(menuItemValue, selectedStaffId);
+            const { selectedUserId, menuItemValue } = state;
+            let result = await handleAction(menuItemValue, selectedUserId);
             toast.info(result.message);
-            toggleStaffDisableModal();
+            toggleModal();
         } catch (error) {
             toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
         } finally {
@@ -89,7 +83,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
         }
     }
 
-    const { users, isLoading, isError, error } = data;
+    const { users, isLoading, isError, error, userType } = data;
     let content: React.ReactNode | null = null;
     if (isLoading) {
         content = <TableRowWithColSpan colSpan={4} text="loading..." />
@@ -100,7 +94,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
     } else {
         content = (
             users.map(user => {
-                const isMenuOpen = state.openStaffRowId === user.id;
+                const isMenuOpen = state.openRowUserId === user.id;
                 return (
                     <TableRow hover key={user.id}>
                         <TableCell>
@@ -114,7 +108,11 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                             >
                                 <MenuItem
                                     component={Link}
-                                    to={`/app/staffs/${user.id}`}
+                                    to={
+                                        userType === "staff"
+                                            ? `/app/staffs/${user.id}`
+                                            : `/app/students/${user.id}`
+                                    }
                                 >
                                     <ListItemIcon>
                                         <Visibility fontSize="small" />
@@ -123,7 +121,11 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                                 </MenuItem>
                                 <MenuItem
                                     component={Link}
-                                    to={`/app/staffs/edit/${user.id}`}
+                                    to={
+                                        userType === "staff"
+                                            ? `/app/staffs/edit/${user.id}`
+                                            : `/app/students/edit/${user.id}`
+                                    }
                                 >
                                     <ListItemIcon>
                                         <Edit fontSize="small" />
@@ -132,7 +134,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                                 </MenuItem>
                                 <MenuItem
                                     disabled={!user.systemAccess}
-                                    onClick={() => onMenuItemClick("false")}
+                                    onClick={() => onMenuItemClick(userType === "staff" ? "DISABLE_STAFF_STATUS" : "DISABLE_STUDENT_STATUS")}
                                 >
                                     <ListItemIcon>
                                         <Block fontSize="small" />
@@ -141,7 +143,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                                 </MenuItem>
                                 <MenuItem
                                     disabled={user.systemAccess}
-                                    onClick={() => onMenuItemClick("true")}
+                                    onClick={() => onMenuItemClick(userType === "staff" ? "ENABLE_STAFF_STATUS" : "ENABLE_STUDENT_STATUS")}
                                 >
                                     <ListItemIcon>
                                         <CheckCircle fontSize="small" />
@@ -149,7 +151,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                                     <ListItemText>Enable</ListItemText>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => onMenuItemClick("RESEND_EMAIL")}
+                                    onClick={() => onMenuItemClick("RESEND_VERIFICATION_EMAIL_TO_USER")}
                                 >
                                     <ListItemIcon>
                                         <Email fontSize="small" />
@@ -157,7 +159,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                                     <ListItemText>Resend Verification Email</ListItemText>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => onMenuItemClick("RESEND_PWD_LINK")}
+                                    onClick={() => onMenuItemClick("RESEND_PWD_LINK_EMAIL_TO_USER")}
                                 >
                                     <ListItemIcon>
                                         <Key fontSize="small" />
@@ -165,7 +167,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                                     <ListItemText>Resend Password Setup Link</ListItemText>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => onMenuItemClick("RESET_PWD")}
+                                    onClick={() => onMenuItemClick("RESET_USER_PWD")}
                                 >
                                     <ListItemIcon>
                                         <LockReset fontSize="small" />
@@ -211,7 +213,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
                 actionFooterCancelText="No"
                 actionFooterSaveText="Yes"
                 isOpen={state.isModalOpen}
-                closeModal={toggleStaffDisableModal}
+                closeModal={toggleModal}
                 handleSave={onSave}
             >
                 <Typography variant="body1">

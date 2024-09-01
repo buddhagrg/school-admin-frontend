@@ -3,6 +3,7 @@ export type UserAccountBasicDataProps = {
     isLoading: boolean;
     isError: boolean;
     error?: string;
+    userType: "staff" | "student";
 };
 
 export type UserAccountBasicProps = {

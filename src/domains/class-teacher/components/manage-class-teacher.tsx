@@ -7,10 +7,10 @@ import { SerializedError } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 
-import { sectionList } from "@/const";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { ClassTeacherProps, Teacher } from "@/domains/class/types";
 import { useAddClassTeacherMutation, useLazyGetTeachersQuery, useUpdateClassTeacherMutation } from "../api/class-teacher-api";
+import { sectionList } from "@/constants";
 
 type ManageClassTeacherProps = {
     operation: string;

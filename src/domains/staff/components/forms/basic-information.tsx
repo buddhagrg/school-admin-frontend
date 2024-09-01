@@ -5,9 +5,9 @@ import { parseISO } from "date-fns";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { useGetRoles } from "../../hooks/use-get-roles";
-import { genders, maritalStatusList } from "@/const";
 import { DATE_FORMAT } from "@/utils/helpers/date";
 import { StaffFormProps } from "../../types";
+import { genders, maritalStatusList } from "@/constants";
 
 export const BasicInformation = () => {
     const roles = useGetRoles();

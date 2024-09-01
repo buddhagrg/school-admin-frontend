@@ -3,9 +3,9 @@ import { Box, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, In
 import { Controller, UseFormReturn } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 
-import { noticeStatusList } from "@/const";
 import { NoticeFormProps, RecipientData } from "../types";
 import { useLazyGetNoticeRecipientsQuery } from "../api/notice-api";
+import { noticeStatusList } from "@/constants";
 
 type Props = {
     isSaving: boolean;

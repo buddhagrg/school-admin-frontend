@@ -5,8 +5,8 @@ import { parseISO } from "date-fns";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { DATE_FORMAT } from "@/utils/helpers/date";
-import { genders } from "@/const";
 import { StudentProps } from "../../types";
+import { genders } from "@/constants";
 
 export const BasicInformation = () => {
     const { register, control, formState: { errors } } = useFormContext<StudentProps>();
