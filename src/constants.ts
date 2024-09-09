@@ -1,7 +1,5 @@
 import { NameIdType } from "./utils/type/misc";
 
-export const sectionList = ["A", "B", "C", "D"];
-
 export const noticeStatusList: NameIdType[] = [
     { id: 1, name: "Draft" },
     { id: 2, name: "Submit for Approval" }

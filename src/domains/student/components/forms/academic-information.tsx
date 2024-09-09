@@ -7,12 +7,13 @@ import { parseISO } from "date-fns";
 import { DATE_FORMAT } from "@/utils/helpers/date";
 import { StudentProps } from "../../types";
 import { useClasses } from "../../hooks";
-import { sectionList } from "@/constants";
+import { useGetSectionsQuery } from "@/domains/section/api";
 
 export const AcademicInformation = () => {
     const { register, control, formState: { errors } } = useFormContext<StudentProps>();
 
     const classes = useClasses();
+    const { data, isLoading } = useGetSectionsQuery();
 
     return (
         <>
@@ -61,9 +62,11 @@ export const AcademicInformation = () => {
                                     notched
                                 >
                                     {
-                                        sectionList.map(section =>
-                                            <MenuItem value={section} key={section}>{section}</MenuItem>
-                                        )
+                                        isLoading
+                                            ? <>loading...</>
+                                            : data?.sections?.map(({ name }) =>
+                                                <MenuItem value={name} key={name}>{name}</MenuItem>
+                                            )
                                     }
                                 </Select>
                                 <FormHelperText>{error?.message}</FormHelperText>

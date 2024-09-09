@@ -10,7 +10,7 @@ import { LoadingButton } from "@mui/lab";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { ClassTeacherProps, Teacher } from "@/domains/class/types";
 import { useAddClassTeacherMutation, useLazyGetTeachersQuery, useUpdateClassTeacherMutation } from "../api/class-teacher-api";
-import { sectionList } from "@/constants";
+import { useGetSectionsQuery } from "@/domains/section/api";
 
 type ManageClassTeacherProps = {
     operation: string;
@@ -23,6 +23,7 @@ export const ManageClassTeacher: React.FC<ManageClassTeacherProps> = ({
     id,
     methods,
 }) => {
+    const { data, isLoading } = useGetSectionsQuery();
     const [getTeachers] = useLazyGetTeachersQuery();
     const [teachers, setTeachers] = React.useState<Teacher[]>([]);
     const [addClassTeacher, { isLoading: addingClassTeacher }] = useAddClassTeacherMutation();
@@ -87,14 +88,16 @@ export const ManageClassTeacher: React.FC<ManageClassTeacherProps> = ({
                                     {...field}
                                 >
                                     {
-                                        sectionList.map(item =>
-                                            <FormControlLabel
-                                                key={item}
-                                                label={item}
-                                                value={item}
-                                                control={<Radio size="small" />}
-                                            />
-                                        )
+                                        isLoading
+                                            ? <>loading...</>
+                                            : data?.sections?.map(({ name }) =>
+                                                <FormControlLabel
+                                                    key={name}
+                                                    label={name}
+                                                    value={name}
+                                                    control={<Radio size="small" />}
+                                                />
+                                            )
                                     }
                                 </RadioGroup>
                             )}

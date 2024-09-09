@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { ClassProps } from "../types";
 import { useAddClassMutation, useUpdateClassMutation } from "../api/class-api";
-import { sectionList } from "@/constants";
+import { useGetSectionsQuery } from "@/domains/section/api";
 
 type ManageClassProps = {
     id?: number;
@@ -24,6 +24,7 @@ export const ManageClass: React.FC<ManageClassProps> = ({
     operation,
     methods
 }) => {
+    const { data, isLoading } = useGetSectionsQuery();
     const [addNewClass, { isLoading: isAddingClass }] = useAddClassMutation();
     const [updateClass, { isLoading: isUpdatingClass }] = useUpdateClassMutation();
     const navigate = useNavigate();
@@ -76,28 +77,31 @@ export const ManageClass: React.FC<ManageClassProps> = ({
                 <FormControl sx={{ mt: 2 }}>
                     <FormLabel>Sections</FormLabel>
                     {
-                        sectionList.map(section => (
-                            <FormGroup key={section}>
-                                <Controller
-                                    name="sections"
-                                    control={control}
-                                    render={() => (
-                                        <FormControlLabel
-                                            label={section}
-                                            control={
-                                                <Checkbox
-                                                    size="small"
-                                                    checked={isSectionPresent(section)}
-                                                    icon={<CheckBoxOutlineBlank />}
-                                                    checkedIcon={<CheckBox />}
-                                                    onChange={() => handleChange(section)}
-                                                />
-                                            }
-                                        />
-                                    )}
-                                />
-                            </FormGroup>
-                        ))
+                        isLoading
+                            ? <>loading...</>
+                            : data?.sections &&
+                            data?.sections.map(({ name }) => (
+                                <FormGroup key={name}>
+                                    <Controller
+                                        name="sections"
+                                        control={control}
+                                        render={() => (
+                                            <FormControlLabel
+                                                label={name}
+                                                control={
+                                                    <Checkbox
+                                                        size="small"
+                                                        checked={isSectionPresent(name)}
+                                                        icon={<CheckBoxOutlineBlank />}
+                                                        checkedIcon={<CheckBox />}
+                                                        onChange={() => handleChange(name)}
+                                                    />
+                                                }
+                                            />
+                                        )}
+                                    />
+                                </FormGroup>
+                            ))
                     }
                 </FormControl>
 
