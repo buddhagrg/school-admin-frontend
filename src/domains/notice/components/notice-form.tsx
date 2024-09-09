@@ -3,9 +3,9 @@ import { Box, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, In
 import { Controller, UseFormReturn } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 
-import { NoticeFormProps, RecipientData } from "../types";
-import { useLazyGetNoticeRecipientsQuery } from "../api/notice-api";
+import { NoticeFormProps, RecipientListData } from "../types";
 import { noticeStatusList } from "@/constants";
+import { useLazyGetNoticeRecipientListQuery } from "../api";
 
 type Props = {
     isSaving: boolean;
@@ -24,9 +24,9 @@ export const NoticeForm: React.FC<Props> = ({
     handleRecipientChange,
     selectedRoleId
 }) => {
-    const [getRecipients] = useLazyGetNoticeRecipientsQuery();
+    const [getRecipients] = useLazyGetNoticeRecipientListQuery();
     const { register, formState: { errors }, control, watch } = methods;
-    const [recipients, setRecipients] = React.useState<RecipientData>([]);
+    const [recipients, setRecipients] = React.useState<RecipientListData>([]);
 
     const recipientWatch = watch("recipientType");
     React.useEffect(() => {
@@ -42,7 +42,7 @@ export const NoticeForm: React.FC<Props> = ({
     }, []);
 
     const getDependentFields = () => {
-        const role = recipients.find(r => r.id === selectedRoleId);
+        const role = recipients.find(r => r.roleId === selectedRoleId);
         if (!role) return { primaryDependents: [] };
 
         return {
@@ -50,7 +50,7 @@ export const NoticeForm: React.FC<Props> = ({
         }
     }
     const getDependentRole = (type: "primaryDependents") => {
-        return recipients.find(r => r.id === selectedRoleId)?.[type].name;
+        return recipients.find(r => r.roleId === selectedRoleId)?.[type].name;
     }
 
     const { primaryDependents } = getDependentFields();
@@ -154,7 +154,7 @@ export const NoticeForm: React.FC<Props> = ({
                                             >
                                                 {
                                                     recipients.map(item => (
-                                                        <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                                        <MenuItem key={item.roleId} value={item.roleId}>{item.name}</MenuItem>
                                                     ))
                                                 }
                                             </Select>

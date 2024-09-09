@@ -10,7 +10,7 @@ import { NameIdType } from "@/utils/type/misc";
 import { TableRowWithColSpan } from "@/components/table-row-with-col-span";
 import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { useDeleteClassMutation, useGetClassesQuery } from "../../api/class-api";
+import { useDeleteDepartmentMutation, useGetDepartmentsQuery } from "../../api";
 
 const columns: NameIdType[] = [
     {
@@ -18,24 +18,20 @@ const columns: NameIdType[] = [
         name: "NAME",
     },
     {
-        id: "sections",
-        name: "SECTIONS"
-    },
-    {
         id: "actions",
         name: "ACTIONS"
     }
 ];
 
-export const ClassDataTable = () => {
+export const DepartmentDataTable = () => {
     const [modalOpen, setModalOpen] = React.useState(false);
-    const [classId, setClassId] = React.useState<number | null>(null);
+    const [departmentId, setDepartmentId] = React.useState<number | null>(null);
 
-    const { data, isLoading, isError, error } = useGetClassesQuery();
-    const [deleteClass, { isLoading: isDeletingClass }] = useDeleteClassMutation();
+    const { data, isLoading, isError, error } = useGetDepartmentsQuery();
+    const [deleteDepartment, { isLoading: isDeletingDepartment }] = useDeleteDepartmentMutation();
 
     const handleDelete = (id: number) => () => {
-        setClassId(id);
+        setDepartmentId(id);
         setModalOpen(true);
     }
 
@@ -44,21 +40,20 @@ export const ClassDataTable = () => {
         content = <TableRowWithColSpan colSpan={3} text="loading..." />
     } else if (isError) {
         content = <TableRowWithColSpan colSpan={4} text={getErrorMsg(error).message} />
-    } else if (!Array.isArray(data?.classes) || data.classes.length <= 0) {
+    } else if (!Array.isArray(data?.departments) || data.departments.length <= 0) {
         content = <TableRowWithColSpan colSpan={3} />
     } else {
         content = <>
             {
-                data.classes.map(c => (
+                data.departments.map(c => (
                     <TableRow hover key={c.id}>
                         <TableCell>{c.name}</TableCell>
-                        <TableCell>{c.sections}</TableCell>
                         <TableCell>
                             <Stack direction="row" spacing={1}>
-                                <IconButton title="Edit Class" color="primary" component={Link} to={`/app/classes/edit/${c.id}`}>
+                                <IconButton title="Edit Department" color="primary" component={Link} to={`/app/departments/edit/${c.id}`}>
                                     <Edit />
                                 </IconButton>
-                                <IconButton title="Delete Class" color="error" onClick={handleDelete(c.id)}>
+                                <IconButton title="Delete Department" color="error" onClick={handleDelete(c.id)}>
                                     <Delete />
                                 </IconButton>
                             </Stack>
@@ -71,9 +66,9 @@ export const ClassDataTable = () => {
     const handleModalClose = () => {
         setModalOpen(false);
     }
-    const onDeleteClass = async () => {
+    const onDeleteDepartment = async () => {
         try {
-            const result = await deleteClass(classId!).unwrap();
+            const result = await deleteDepartment(departmentId!).unwrap();
             toast.info(result.message);
             handleModalClose();
         } catch (error) {
@@ -103,15 +98,15 @@ export const ClassDataTable = () => {
             </Box>
 
             <DialogModal
-                isSaving={isDeletingClass}
+                isSaving={isDeletingDepartment}
                 actionFooterCancelText="No"
                 actionFooterSaveText="Yes"
                 isOpen={modalOpen}
                 closeModal={handleModalClose}
-                handleSave={onDeleteClass}
-                titleText="Delete Class"
+                handleSave={onDeleteDepartment}
+                titleText="Delete Department"
             >
-                <Typography variant="body1">Are you sure you want to delete this class?</Typography>
+                <Typography variant="body1">Are you sure you want to delete this department?</Typography>
             </DialogModal>
         </>
     );

@@ -5,10 +5,10 @@ export const NameValueSchema = z.object({
     id: z.string(),
 });
 
-export const SectionSchema = z.record(z.number(), z.array(NameValueSchema));
 export const RecipientDetailSchema = z.object({
     id: z.number(),
     name: z.string(),
+    roleId: z.number(),
     primaryDependents: z.object({
         name: z.string(),
         list: z.union([z.array(NameValueSchema), z.array(z.never())])
@@ -33,4 +33,10 @@ export const NoticeFormSchema = z.object({
             });
         }
     }
+});
+
+export const NoticeRecipientSchema = z.object({
+    roleId: z.number().min(1, "Role is required"),
+    primaryDependentName: z.string().min(1, "Name is required"),
+    primaryDependentSelect: z.string().min(1, "Select statement is required")
 });

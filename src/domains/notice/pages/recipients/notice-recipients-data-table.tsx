@@ -10,16 +10,20 @@ import { NameIdType } from "@/utils/type/misc";
 import { TableRowWithColSpan } from "@/components/table-row-with-col-span";
 import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { useDeleteClassMutation, useGetClassesQuery } from "../../api/class-api";
+import { useDeleteNoticeRecipientMutation, useGetNoticeRecipientsQuery } from "../../api";
 
 const columns: NameIdType[] = [
     {
-        id: "name",
-        name: "NAME",
+        id: "Role",
+        name: "ROLE",
     },
     {
-        id: "sections",
-        name: "SECTIONS"
+        id: "dependentName",
+        name: "DEPENDENT NAME",
+    },
+    {
+        id: "dependentSelect",
+        name: "DEPENDENT SELECT",
     },
     {
         id: "actions",
@@ -27,15 +31,15 @@ const columns: NameIdType[] = [
     }
 ];
 
-export const ClassDataTable = () => {
+export const RecipientDataTable = () => {
     const [modalOpen, setModalOpen] = React.useState(false);
-    const [classId, setClassId] = React.useState<number | null>(null);
+    const [recipientId, setRecipientId] = React.useState<number | null>(null);
 
-    const { data, isLoading, isError, error } = useGetClassesQuery();
-    const [deleteClass, { isLoading: isDeletingClass }] = useDeleteClassMutation();
+    const { data, isLoading, isError, error } = useGetNoticeRecipientsQuery();
+    const [deleteRecipient, { isLoading: isDeletingRecipient }] = useDeleteNoticeRecipientMutation();
 
     const handleDelete = (id: number) => () => {
-        setClassId(id);
+        setRecipientId(id);
         setModalOpen(true);
     }
 
@@ -44,21 +48,22 @@ export const ClassDataTable = () => {
         content = <TableRowWithColSpan colSpan={3} text="loading..." />
     } else if (isError) {
         content = <TableRowWithColSpan colSpan={4} text={getErrorMsg(error).message} />
-    } else if (!Array.isArray(data?.classes) || data.classes.length <= 0) {
+    } else if (!Array.isArray(data?.noticeRecipients) || data.noticeRecipients.length <= 0) {
         content = <TableRowWithColSpan colSpan={3} />
     } else {
         content = <>
             {
-                data.classes.map(c => (
+                data.noticeRecipients.map(c => (
                     <TableRow hover key={c.id}>
-                        <TableCell>{c.name}</TableCell>
-                        <TableCell>{c.sections}</TableCell>
+                        <TableCell>{c.roleName}</TableCell>
+                        <TableCell>{c.primaryDependentName}</TableCell>
+                        <TableCell>{c.primaryDependentSelect}</TableCell>
                         <TableCell>
                             <Stack direction="row" spacing={1}>
-                                <IconButton title="Edit Class" color="primary" component={Link} to={`/app/classes/edit/${c.id}`}>
+                                <IconButton title="Edit Recipient" color="primary" component={Link} to={`/app/notices/recipients/edit/${c.id}`}>
                                     <Edit />
                                 </IconButton>
-                                <IconButton title="Delete Class" color="error" onClick={handleDelete(c.id)}>
+                                <IconButton title="Delete Recipient" color="error" onClick={handleDelete(c.id)}>
                                     <Delete />
                                 </IconButton>
                             </Stack>
@@ -71,9 +76,9 @@ export const ClassDataTable = () => {
     const handleModalClose = () => {
         setModalOpen(false);
     }
-    const onDeleteClass = async () => {
+    const onDeleteRecipient = async () => {
         try {
-            const result = await deleteClass(classId!).unwrap();
+            const result = await deleteRecipient(recipientId!).unwrap();
             toast.info(result.message);
             handleModalClose();
         } catch (error) {
@@ -103,15 +108,15 @@ export const ClassDataTable = () => {
             </Box>
 
             <DialogModal
-                isSaving={isDeletingClass}
+                isSaving={isDeletingRecipient}
                 actionFooterCancelText="No"
                 actionFooterSaveText="Yes"
                 isOpen={modalOpen}
                 closeModal={handleModalClose}
-                handleSave={onDeleteClass}
-                titleText="Delete Class"
+                handleSave={onDeleteRecipient}
+                titleText="Delete Recipient"
             >
-                <Typography variant="body1">Are you sure you want to delete this class?</Typography>
+                <Typography variant="body1">Are you sure you want to delete this recipient?</Typography>
             </DialogModal>
         </>
     );

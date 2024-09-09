@@ -5,6 +5,7 @@ export enum Tag {
     CLASS_TEACHERS = "ClassTeachers",
     STUDENTS = "Students",
     NOTICES = "Notices",
+    NOTICE_RECIPIENT_LIST = "NoticeRecipientList",
     NOTICE_RECIPIENTS = "NoticeRecipients",
     STAFFS = "Staffs",
     DASHBOARD = "Dashboard",
@@ -15,5 +16,7 @@ export enum Tag {
     ROLES = "Roles",
     MENUS = "Menus",
     ROLE_USERS = "RoleUsers",
-    ROLE_PERMISSIONS = "RolePermissions"
+    ROLE_PERMISSIONS = "RolePermissions",
+    SECTIONS = "Sections",
+    DEPARTMENTS = "Departments"
 };

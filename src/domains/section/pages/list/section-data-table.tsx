@@ -10,7 +10,7 @@ import { NameIdType } from "@/utils/type/misc";
 import { TableRowWithColSpan } from "@/components/table-row-with-col-span";
 import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { useDeleteClassMutation, useGetClassesQuery } from "../../api/class-api";
+import { useDeleteSectionMutation, useGetSectionsQuery } from "../../api";
 
 const columns: NameIdType[] = [
     {
@@ -18,24 +18,20 @@ const columns: NameIdType[] = [
         name: "NAME",
     },
     {
-        id: "sections",
-        name: "SECTIONS"
-    },
-    {
         id: "actions",
         name: "ACTIONS"
     }
 ];
 
-export const ClassDataTable = () => {
+export const SectionDataTable = () => {
     const [modalOpen, setModalOpen] = React.useState(false);
-    const [classId, setClassId] = React.useState<number | null>(null);
+    const [sectionId, setSectionId] = React.useState<number | null>(null);
 
-    const { data, isLoading, isError, error } = useGetClassesQuery();
-    const [deleteClass, { isLoading: isDeletingClass }] = useDeleteClassMutation();
+    const { data, isLoading, isError, error } = useGetSectionsQuery();
+    const [deleteSection, { isLoading: isDeletingSection }] = useDeleteSectionMutation();
 
     const handleDelete = (id: number) => () => {
-        setClassId(id);
+        setSectionId(id);
         setModalOpen(true);
     }
 
@@ -44,21 +40,20 @@ export const ClassDataTable = () => {
         content = <TableRowWithColSpan colSpan={3} text="loading..." />
     } else if (isError) {
         content = <TableRowWithColSpan colSpan={4} text={getErrorMsg(error).message} />
-    } else if (!Array.isArray(data?.classes) || data.classes.length <= 0) {
+    } else if (!Array.isArray(data?.sections) || data.sections.length <= 0) {
         content = <TableRowWithColSpan colSpan={3} />
     } else {
         content = <>
             {
-                data.classes.map(c => (
+                data.sections.map(c => (
                     <TableRow hover key={c.id}>
                         <TableCell>{c.name}</TableCell>
-                        <TableCell>{c.sections}</TableCell>
                         <TableCell>
                             <Stack direction="row" spacing={1}>
-                                <IconButton title="Edit Class" color="primary" component={Link} to={`/app/classes/edit/${c.id}`}>
+                                <IconButton title="Edit Section" color="primary" component={Link} to={`/app/sections/edit/${c.id}`}>
                                     <Edit />
                                 </IconButton>
-                                <IconButton title="Delete Class" color="error" onClick={handleDelete(c.id)}>
+                                <IconButton title="Delete Section" color="error" onClick={handleDelete(c.id)}>
                                     <Delete />
                                 </IconButton>
                             </Stack>
@@ -71,9 +66,9 @@ export const ClassDataTable = () => {
     const handleModalClose = () => {
         setModalOpen(false);
     }
-    const onDeleteClass = async () => {
+    const onDeleteSection = async () => {
         try {
-            const result = await deleteClass(classId!).unwrap();
+            const result = await deleteSection(sectionId!).unwrap();
             toast.info(result.message);
             handleModalClose();
         } catch (error) {
@@ -103,15 +98,15 @@ export const ClassDataTable = () => {
             </Box>
 
             <DialogModal
-                isSaving={isDeletingClass}
+                isSaving={isDeletingSection}
                 actionFooterCancelText="No"
                 actionFooterSaveText="Yes"
                 isOpen={modalOpen}
                 closeModal={handleModalClose}
-                handleSave={onDeleteClass}
-                titleText="Delete Class"
+                handleSave={onDeleteSection}
+                titleText="Delete Section"
             >
-                <Typography variant="body1">Are you sure you want to delete this class?</Typography>
+                <Typography variant="body1">Are you sure you want to delete this section?</Typography>
             </DialogModal>
         </>
     );

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { NameIdType } from "@/utils/type/misc";
-import { NoticeFormSchema, RecipientDetailSchema } from "./notice-schema";
+import { NoticeFormSchema, NoticeRecipientSchema, RecipientDetailSchema } from "./notice-schema";
 
 export type Section = {
     [key: number]: NameIdType[]
@@ -29,12 +29,11 @@ export type NoticeDetailProps = NoticeFormProps & {
     createdDate: Date;
 };
 
-export type RecipientData = z.infer<typeof RecipientDetailSchema>[];
+export type RecipientListData = z.infer<typeof RecipientDetailSchema>[];
 
 export type RecipientResponse = {
-    noticeRecipients: RecipientData;
+    noticeRecipients: RecipientListData;
 }
-
 export type NoticeFormPropsWithId = NoticeFormProps & { id: string };
 
 export type NoticeData = {
@@ -45,3 +44,10 @@ export type ReviewNotice = {
     id: number;
     status: number;
 };
+
+export type NoticeRecipient = z.infer<typeof NoticeRecipientSchema>;
+export type NoticeRecipientWithId = NoticeRecipient & { id: number };
+export type NoticeRecipientWithIdAndRoleName = NoticeRecipient & { id: number, roleName: string };
+export type RecipientData = {
+    noticeRecipients: NoticeRecipientWithIdAndRoleName[];
+}
