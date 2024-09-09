@@ -59,7 +59,7 @@ export const LoginPage = () => {
                 }}
             >
                 <Typography component="div" variant="h6">
-                    Welcome!
+                    Welcome to School Admin !
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
                     Sign in to continue.
