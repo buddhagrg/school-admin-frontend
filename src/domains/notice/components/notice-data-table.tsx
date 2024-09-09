@@ -67,6 +67,7 @@ const MenuTableCell: React.FC<MenuTableCellProps> = ({
                     disabled={
                         isEditPermissionAvailable(
                             notice.authorId,
+                            notice.statusId,
                             currentUserId
                         )
                     }
@@ -82,7 +83,7 @@ const MenuTableCell: React.FC<MenuTableCellProps> = ({
                     onClick={() => onNoticeMenuItemClick("REJECT_NOTICE")}
                 >Reject</MenuItem>
                 <MenuItem
-                    disabled={isDeletePermissionAvailable(notice.statusId)}
+                    disabled={isDeletePermissionAvailable(notice.authorId, notice.statusId, currentUserId)}
                     onClick={() => onNoticeMenuItemClick("DELETE_NOTICE")}
                 >Delete</MenuItem>
             </Menu>
@@ -145,20 +146,24 @@ export const NoticeDataTable: React.FC<NoticeDataTableProps> = ({
                     <IconButton
                         color="primary"
                         component={Link} to={`/app/notices/edit/${notice.id}`}
-                        sx={{
-                            display: notice.authorId !== currentUserId
-                                ? 'none'
-                                : ''
-                        }}
+                        disabled={
+                            isEditPermissionAvailable(
+                                notice.authorId,
+                                notice.statusId,
+                                currentUserId
+                            )
+                        }
                     >
                         <Edit />
                     </IconButton>
                     <IconButton
-                        sx={{
-                            display: notice.authorId !== currentUserId
-                                ? 'none'
-                                : ''
-                        }}
+                        disabled={
+                            isDeletePermissionAvailable(
+                                notice.authorId,
+                                notice.statusId,
+                                currentUserId
+                            )
+                        }
                         color="error"
                         onClick={() => onNoticeIconClick(notice.id, "DELETE_NOTICE_BY_SELF")}
                     >
