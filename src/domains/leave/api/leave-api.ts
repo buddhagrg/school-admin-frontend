@@ -136,7 +136,6 @@ export const leaveApi = api.injectEndpoints({
 export const {
     useGetMyLeaveHistoryQuery,
     useGetLeavePendingQuery,
-    useLazyGetLeavePoliciesQuery,
     useGetLeavePoliciesQuery,
     useGetEligibleLeavePolicyUsersQuery,
     useGetLeavePolicyUsersQuery,
