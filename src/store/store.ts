@@ -10,7 +10,7 @@ import {
     PURGE,
     REGISTER,
 } from "redux-persist";
-import { api } from "./api";
+import { api } from "../api";
 import { appReducer } from "./app-reducer";
 import { purgeMiddleware } from "./middleware";
 
@@ -34,5 +34,5 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-export default store;
+export { store };
 export type RootState = ReturnType<typeof store.getState>;

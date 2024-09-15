@@ -1,5 +1,4 @@
-import { api } from "@/app/api";
-import { Tag } from "@/app/tag-types";
+import { api, Tag } from "@/api";
 import { getQueryString } from "@/utils/helpers/get-query-string";
 import { StaffData, StaffFilter, StaffFormProps, StaffFormPropsWithId, StaffStatusRequest, } from "../types";
 

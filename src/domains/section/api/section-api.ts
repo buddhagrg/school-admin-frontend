@@ -1,6 +1,5 @@
-import { api } from "@/app/api";
+import { api, Tag } from "@/api";
 import { SectionData, SectionFormWithId, SectionForm } from "../types";
-import { Tag } from "@/app/tag-types";
 
 const sectionApi = api.injectEndpoints({
     endpoints: (builder) => ({

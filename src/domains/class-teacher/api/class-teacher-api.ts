@@ -1,5 +1,4 @@
-import { api } from "@/app/api";
-import { Tag } from "@/app/tag-types";
+import { api, Tag } from "@/api";
 import { ClassTeacherData, ClassTeacherProps, ClassTeacherPropsWithId, TeachersData } from "../../class/types";
 
 export const classTeacherApi = api.injectEndpoints({

@@ -1,4 +1,4 @@
-import { api } from "@/app/api";
+import { api } from "@/api";
 import { LoginRequest, PasswordProps, SetupPasswordProps, User, UserId } from "../types";
 
 export const authApi = api.injectEndpoints({

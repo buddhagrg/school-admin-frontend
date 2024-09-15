@@ -1,5 +1,4 @@
-import { api } from "@/app/api";
-import { Tag } from "@/app/tag-types";
+import { api, Tag } from "@/api";
 import { LeavePolicyData, LeaveRequest, PolicyDetail, PolicyUserData, AddUserToPolicy, RemoveUserFromPolicy, EligiblePolicyUsers, PolicyStatus, LeaveRequestHistory, LeaveRequestWithId, MyLeavePolicyData, PendingLeaveRequestHistory, LeaveStatus, } from "../types";
 
 export const leaveApi = api.injectEndpoints({

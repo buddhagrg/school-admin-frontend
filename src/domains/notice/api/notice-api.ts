@@ -1,5 +1,4 @@
-import { api } from "@/app/api";
-import { Tag } from "@/app/tag-types";
+import { api, Tag } from "@/api";
 import { NoticeData, NoticeDetailProps, NoticeFormProps, NoticeFormPropsWithId, NoticeRecipient, NoticeRecipientWithId, RecipientData, RecipientResponse, ReviewNotice } from "../types";
 
 export const noticeApi = api.injectEndpoints({

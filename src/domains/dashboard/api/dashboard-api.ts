@@ -1,5 +1,4 @@
-import { api } from "@/app/api";
-import { Tag } from "@/app/tag-types";
+import { api, Tag } from "@/api";
 import { DashboardProps } from "../types/dashboard-type";
 
 export const dashboardApi = api.injectEndpoints({

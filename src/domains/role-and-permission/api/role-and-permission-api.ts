@@ -1,5 +1,4 @@
-import { api } from "@/app/api";
-import { Tag } from "@/app/tag-types";
+import { api, Tag } from "@/api";
 import { AddEditRoleProps, MenuData, RolePermission, RolePermissionsData, RolesData, HandleRoleStatus, RoleUsersData, UserRole } from "../types";
 
 export const rolesAndPermissionsApi = api.injectEndpoints({
