@@ -8,9 +8,6 @@
 - [ ] New feature add and enhancement
 
 ## Table of Contents:
-
-- [Todos](#todos)
-- [Table of Contents:](#table-of-contents)
 - [Application Overview](#application-overview)
 - [Project Standards](#project-standards)
 - [Project Structure](#project-structure)
