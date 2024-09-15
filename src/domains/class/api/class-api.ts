@@ -1,5 +1,5 @@
-import { api, Tag } from "@/api";
-import { ClassData, ClassDataProps, ClassDataPropsWithId } from "../types";
+import { api, Tag } from '@/api';
+import { ClassData, ClassDataProps, ClassDataPropsWithId } from '../types';
 
 export const classApi = api.injectEndpoints({
   endpoints: (builder) => ({

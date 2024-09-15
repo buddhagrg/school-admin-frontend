@@ -1,6 +1,12 @@
-import { api, Tag } from "@/api";
-import { getQueryString } from "@/utils/helpers/get-query-string";
-import { StaffData, StaffFilter, StaffFormProps, StaffFormPropsWithId, StaffStatusRequest, } from "../types";
+import { api, Tag } from '@/api';
+import { getQueryString } from '@/utils/helpers/get-query-string';
+import {
+  StaffData,
+  StaffFilter,
+  StaffFormProps,
+  StaffFormPropsWithId,
+  StaffStatusRequest
+} from '../types';
 
 export const staffApi = api.injectEndpoints({
   endpoints: (builder) => ({

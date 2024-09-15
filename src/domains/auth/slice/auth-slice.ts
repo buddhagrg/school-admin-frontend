@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { User } from "../types";
-import { RootState } from "@/store";
+import { createSlice } from '@reduxjs/toolkit';
+import { User } from '../types';
+import { RootState } from '@/store';
 
 export type AuthState = {
   isAuthenticated: boolean;

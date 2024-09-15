@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Menu } from "../types";
-import { RootState } from "@/store";
+import { createSlice } from '@reduxjs/toolkit';
+import { Menu } from '../types';
+import { RootState } from '@/store';
 
 type State = {
   menuList: Menu[] | [];

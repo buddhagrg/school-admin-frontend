@@ -1,5 +1,5 @@
-import { api, Tag } from "@/api";
-import { SectionData, SectionFormWithId, SectionForm } from "../types";
+import { api, Tag } from '@/api';
+import { SectionData, SectionFormWithId, SectionForm } from '../types';
 
 const sectionApi = api.injectEndpoints({
   endpoints: (builder) => ({

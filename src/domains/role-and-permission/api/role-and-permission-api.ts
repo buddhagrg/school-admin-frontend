@@ -1,5 +1,14 @@
-import { api, Tag } from "@/api";
-import { AddEditRoleProps, MenuData, RolePermission, RolePermissionsData, RolesData, HandleRoleStatus, RoleUsersData, UserRole } from "../types";
+import { api, Tag } from '@/api';
+import {
+  AddEditRoleProps,
+  MenuData,
+  RolePermission,
+  RolePermissionsData,
+  RolesData,
+  HandleRoleStatus,
+  RoleUsersData,
+  UserRole
+} from '../types';
 
 export const rolesAndPermissionsApi = api.injectEndpoints({
   endpoints: (builder) => ({

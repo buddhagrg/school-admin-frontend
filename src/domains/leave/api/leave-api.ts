@@ -41,9 +41,9 @@ export const leaveApi = api.injectEndpoints({
       invalidatesTags: (result, _error, { id }) =>
         result
           ? [
-            { type: Tag.LEAVE_HISTORY, id },
-            { type: Tag.PENDING_LEAVES, id }
-          ]
+              { type: Tag.LEAVE_HISTORY, id },
+              { type: Tag.PENDING_LEAVES, id }
+            ]
           : []
     }),
     deleteLeaveRequest: builder.mutation<{ message: string }, number | undefined>({
@@ -54,9 +54,9 @@ export const leaveApi = api.injectEndpoints({
       invalidatesTags: (result, _error, id) =>
         result
           ? [
-            { type: Tag.LEAVE_HISTORY, id },
-            { type: Tag.PENDING_LEAVES, id }
-          ]
+              { type: Tag.LEAVE_HISTORY, id },
+              { type: Tag.PENDING_LEAVES, id }
+            ]
           : []
     }),
 
@@ -76,9 +76,9 @@ export const leaveApi = api.injectEndpoints({
       invalidatesTags: (result, _error, { id }) =>
         result
           ? [
-            { type: Tag.LEAVE_HISTORY, id },
-            { type: Tag.PENDING_LEAVES, id }
-          ]
+              { type: Tag.LEAVE_HISTORY, id },
+              { type: Tag.PENDING_LEAVES, id }
+            ]
           : []
     }),
     getLeavePolicies: builder.query<LeavePolicyData, void>({
@@ -137,11 +137,11 @@ export const leaveApi = api.injectEndpoints({
       invalidatesTags: (result) =>
         result
           ? [
-            Tag.LEAVE_POLICY_USERS,
-            Tag.LEAVE_ELIGIBLE_USERS,
-            Tag.LEAVE_POLICIES,
-            Tag.MY_LEAVE_POLICIES
-          ]
+              Tag.LEAVE_POLICY_USERS,
+              Tag.LEAVE_ELIGIBLE_USERS,
+              Tag.LEAVE_POLICIES,
+              Tag.MY_LEAVE_POLICIES
+            ]
           : []
     }),
     removeUserFromPolicy: builder.mutation<{ message: string }, RemoveUserFromPolicy>({
