@@ -1,1 +1,1 @@
-export * from "./dialog-modal";
+export * from './dialog-modal';

@@ -1,1 +1,1 @@
-export * from "./role-and-permission-page";
+export * from './role-and-permission-page';

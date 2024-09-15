@@ -1,2 +1,2 @@
-export * from "./edit-class-page";
-export * from "./list/list-class-page";
+export * from './edit-class-page';
+export * from './list/list-class-page';

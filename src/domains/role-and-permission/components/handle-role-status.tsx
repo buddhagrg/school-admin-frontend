@@ -1,55 +1,53 @@
-import * as React from "react";
-import { Typography } from "@mui/material";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { SerializedError } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import * as React from 'react';
+import { Typography } from '@mui/material';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
-import { DialogModal } from "@/components/dialog-modal";
-import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { useHandleRoleStatusMutation } from "../api/role-and-permission-api";
+import { DialogModal } from '@/components/dialog-modal';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useHandleRoleStatusMutation } from '../api/role-and-permission-api';
 
 type RoleStatusProps = {
-    roleStatus: boolean;
-    isOpen: boolean;
-    roleId: number;
-    closeModals: () => void;
-    title: string;
-    bodyText: string;
+  roleStatus: boolean;
+  isOpen: boolean;
+  roleId: number;
+  closeModals: () => void;
+  title: string;
+  bodyText: string;
 };
 
 export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
-    isOpen,
-    roleId,
-    closeModals,
-    roleStatus,
-    title,
-    bodyText
+  isOpen,
+  roleId,
+  closeModals,
+  roleStatus,
+  title,
+  bodyText
 }) => {
-    const [handleRoleStatus, { isLoading: isDisablingRole }] = useHandleRoleStatusMutation();
+  const [handleRoleStatus, { isLoading: isDisablingRole }] = useHandleRoleStatusMutation();
 
-    const onSave = async () => {
-        try {
-            const result = await handleRoleStatus({ id: roleId, status: roleStatus }).unwrap();
-            toast.info(result.message);
-            closeModals();
-        } catch (error) {
-            toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
-        }
+  const onSave = async () => {
+    try {
+      const result = await handleRoleStatus({ id: roleId, status: roleStatus }).unwrap();
+      toast.info(result.message);
+      closeModals();
+    } catch (error) {
+      toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }
+  };
 
-    return (
-        <DialogModal
-            isSaving={isDisablingRole}
-            actionFooterCancelText="No"
-            actionFooterSaveText="Yes"
-            isOpen={isOpen}
-            titleText={title}
-            closeModal={closeModals}
-            handleSave={onSave}
-        >
-            <Typography variant="body1">
-                {bodyText}
-            </Typography>
-        </DialogModal>
-    );
-}
+  return (
+    <DialogModal
+      isSaving={isDisablingRole}
+      actionFooterCancelText='No'
+      actionFooterSaveText='Yes'
+      isOpen={isOpen}
+      titleText={title}
+      closeModal={closeModals}
+      handleSave={onSave}
+    >
+      <Typography variant='body1'>{bodyText}</Typography>
+    </DialogModal>
+  );
+};

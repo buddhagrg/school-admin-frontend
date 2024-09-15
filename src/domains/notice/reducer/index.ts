@@ -1,1 +1,1 @@
-export * from "./notice-reducer";
+export * from './notice-reducer';

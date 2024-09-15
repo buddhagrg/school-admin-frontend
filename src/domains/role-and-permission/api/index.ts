@@ -1,1 +1,1 @@
-export * from "./role-and-permission-api";
+export * from './role-and-permission-api';

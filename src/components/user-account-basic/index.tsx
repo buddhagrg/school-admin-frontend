@@ -1,2 +1,2 @@
-export * from "./user-account-basic";
-export * from "./user-account-basic-type";
+export * from './user-account-basic';
+export * from './user-account-basic-type';
