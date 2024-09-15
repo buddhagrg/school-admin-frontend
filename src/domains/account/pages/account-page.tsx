@@ -17,7 +17,7 @@ export const AccountPage = () => {
         setTab(0);
     }, []);
 
-    const handleTabChange = (_event: any, index: number) => {
+    const handleTabChange = (_event: React.SyntheticEvent, index: number) => {
         setTab(index);
     }
 

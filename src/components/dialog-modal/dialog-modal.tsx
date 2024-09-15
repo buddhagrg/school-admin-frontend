@@ -15,7 +15,6 @@ type DialogModalProps = {
     handleSave: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-//@ts-ignore
 function PaperComponent(props: PaperProps) {
     return (
         <Draggable
@@ -47,7 +46,7 @@ export const DialogModal: React.FC<DialogModalProps> = ({
             onClose={handleClose}
             fullWidth
             maxWidth="xs"
-        // PaperComponent={PaperComponent}
+            PaperComponent={PaperComponent}
         >
             <DialogTitle id="draggable-dialog-title">{titleText}</DialogTitle>
             <DialogContent>{children}</DialogContent>

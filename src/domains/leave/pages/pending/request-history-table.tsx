@@ -14,7 +14,7 @@ import { DialogModal } from "@/components/dialog-modal";
 import { LeaveForm } from "../../components/leave-form";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { LeaveStatus } from "../../components/leave-status";
-import { LeaveRequest, LeaveRequestSchema, MyLeaveRequestDetail } from "../../types";
+import { LeaveRequestForm, LeaveRequestFormSchema, MyLeaveRequestDetail } from "../../types";
 import { useDeleteLeaveRequestMutation, useGetLeavePoliciesQuery, useUpdateLeaveRequestMutation } from "../../api";
 
 type Column = {
@@ -49,8 +49,8 @@ export const RequestHistoryTable = ({ requests }: { requests: MyLeaveRequestDeta
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [editModalOpen, setEditModalOpen] = React.useState(false);
 
-    const methods = useForm<LeaveRequest>({
-        resolver: zodResolver(LeaveRequestSchema)
+    const methods = useForm<LeaveRequestForm>({
+        resolver: zodResolver(LeaveRequestFormSchema)
     });
 
     const handleMenuClick = (id: number) => (event: React.MouseEvent<HTMLElement>) => {
@@ -91,7 +91,7 @@ export const RequestHistoryTable = ({ requests }: { requests: MyLeaveRequestDeta
             toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
         }
     }
-    const editLeave = async (data: LeaveRequest) => {
+    const editLeave = async (data: LeaveRequestForm) => {
         try {
             const { policy, from, to, note } = data;
             const payload = {

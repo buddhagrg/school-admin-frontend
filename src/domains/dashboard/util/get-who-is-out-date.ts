@@ -1,6 +1,6 @@
 import { format, isSameMonth, isToday, isTomorrow, isYesterday } from "date-fns";
 
-export const getFormattedLeaveDate = (fromDate: any, toDate: any): string => {
+export const getFormattedLeaveDate = (fromDate: string, toDate: string): string => {
     if (!fromDate || !toDate) return "";
 
     if (isYesterday(fromDate) && isYesterday(toDate)) {

@@ -12,5 +12,5 @@ export type UserAccountBasicProps = {
     email: string;
     role: string;
     systemAccess: boolean;
-    lastLogin: Date | null;
+    lastLogin: string;
 };

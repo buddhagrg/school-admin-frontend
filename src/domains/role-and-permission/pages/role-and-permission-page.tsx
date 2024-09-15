@@ -97,7 +97,7 @@ export const RoleAndPermission = () => {
         { state.roleTab > 0 && fetchRolePermissions() }
     }, [state.secondaryTab]);
 
-    const handleRoleTabChange = (_event: any, index: number) => {
+    const handleRoleTabChange = (_event: React.SyntheticEvent, index: number) => {
         let selctedRoleId: number | null = null;
         if (index > 0) {
             selctedRoleId = roles[index - 1].id || null;

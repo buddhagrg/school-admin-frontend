@@ -1,7 +1,8 @@
 import { Middleware } from "@reduxjs/toolkit";
 import { persistor } from "./store";
 
-export const purgeMiddleware: Middleware = (_store) => next => async (action: any) => {
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const purgeMiddleware: Middleware = () => next => async (action: any) => {
     if (action.type === "auth/resetUser") {
         persistor.pause();
         await persistor.flush();

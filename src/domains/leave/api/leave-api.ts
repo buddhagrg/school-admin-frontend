@@ -1,6 +1,6 @@
 import { api } from "@/app/api";
 import { Tag } from "@/app/tag-types";
-import { LeavePolicyData, LeaveRequest, PolicyDetail, PolicyUserData, AddUserToPolicy, RemoveUserFromPolicy, EligiblePolicyUsers, PolicyStatus, LeaveRequestHistory, LeaveRequestWithId, MyLeavePolicyData, PendingLeaveRequestHistory, LeaveStatus, } from "../types";
+import { LeavePolicyData, LeaveRequestApi, PolicyDetail, PolicyUserData, AddUserToPolicy, RemoveUserFromPolicy, EligiblePolicyUsers, PolicyStatus, LeaveRequestHistory, LeaveRequestApiWithId, MyLeavePolicyData, PendingLeaveRequestHistory, LeaveStatus, } from "../types";
 
 export const leaveApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -10,7 +10,7 @@ export const leaveApi = api.injectEndpoints({
                 return { type: Tag.LEAVE_HISTORY, id }
             }) || [{ type: Tag.LEAVE_HISTORY }]
         }),
-        applyLeaveRequest: builder.mutation<{ message: string }, LeaveRequest>({
+        applyLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApi>({
             query: (payload) => ({
                 url: `/leave/request`,
                 method: "POST",
@@ -20,7 +20,7 @@ export const leaveApi = api.injectEndpoints({
                 ? [Tag.LEAVE_HISTORY, Tag.PENDING_LEAVES]
                 : []
         }),
-        updateLeaveRequest: builder.mutation<{ message: string }, LeaveRequestWithId>({
+        updateLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApiWithId>({
             query: ({ id, ...restPayload }) => ({
                 url: `/leave/request/${id}`,
                 method: "PUT",

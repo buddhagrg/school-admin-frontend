@@ -5,10 +5,10 @@ import { Controller, UseFormReturn } from "react-hook-form";
 import { parseISO } from "date-fns";
 
 import { DATE_FORMAT } from "@/utils/helpers/date";
-import { LeavePolicy, LeaveRequest, MyLeavePolicy } from "../types";
+import { LeavePolicy, LeaveRequestForm, MyLeavePolicy } from "../types";
 
 type LeaveFormProps = {
-    methods: UseFormReturn<LeaveRequest>;
+    methods: UseFormReturn<LeaveRequestForm>;
     leavePolicies: MyLeavePolicy[] | LeavePolicy[]
 };
 

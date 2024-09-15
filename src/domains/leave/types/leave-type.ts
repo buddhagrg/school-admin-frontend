@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { LeaveRequestSchema, PolicyUsersSchema } from "./leave-schema";
+import { LeaveRequestApiSchema, LeaveRequestFormSchema, PolicyUsersSchema } from "./leave-schema";
 import { User } from "@/domains/auth/types";
 
 export type LeavePolicy = {
@@ -49,8 +49,9 @@ export type PolicyDetail = {
 
 export type PolicyUsers = z.infer<typeof PolicyUsersSchema>;
 
-export type LeaveRequest = z.infer<typeof LeaveRequestSchema>;
-export type LeaveRequestWithId = LeaveRequest & { id: number | undefined };
+export type LeaveRequestForm = z.infer<typeof LeaveRequestFormSchema>;
+export type LeaveRequestApi = z.infer<typeof LeaveRequestApiSchema>;
+export type LeaveRequestApiWithId = LeaveRequestApi & { id: number | undefined };
 export type LeaveRequestHistory = {
     leaveHistory: MyLeaveRequestDetail[];
 };

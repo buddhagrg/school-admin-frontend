@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { DialogModal } from "@/components/dialog-modal";
 import { API_DATE_FORMAT, getFormattedDate } from "@/utils/helpers/date";
 import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from "../../api/leave-api";
-import { LeaveRequest, LeaveRequestSchema } from "../../types";
+import { LeaveRequestForm, LeaveRequestFormSchema } from "../../types";
 import { LeaveDetail, LeaveForm } from "../../components";
 
 export const LeavePolicyDetail = () => {
@@ -18,14 +18,14 @@ export const LeavePolicyDetail = () => {
     const [modalOpen, setModalOpen] = React.useState(false);
     const leavePolicies = data?.leavePolicies ?? [];
 
-    const methods = useForm<LeaveRequest>({
+    const methods = useForm<LeaveRequestForm>({
         defaultValues: {
             policy: leavePolicies.length > 0 ? leavePolicies[0].id : 0,
             from: new Date(),
             to: new Date(),
             note: ""
         },
-        resolver: zodResolver(LeaveRequestSchema)
+        resolver: zodResolver(LeaveRequestFormSchema)
     });
 
     const handleRequest = () => {
@@ -34,7 +34,7 @@ export const LeavePolicyDetail = () => {
     const closeModal = () => {
         setModalOpen(false);
     }
-    const submitRequest = async (data: LeaveRequest) => {
+    const submitRequest = async (data: LeaveRequestForm) => {
         try {
             const { policy, from, to, note } = data;
             const payload = {

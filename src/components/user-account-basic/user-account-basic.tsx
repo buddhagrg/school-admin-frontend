@@ -73,7 +73,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
         try {
             dispatch({ type: "SET_LOADER" });
             const { selectedUserId, menuItemValue } = state;
-            let result = await handleAction(menuItemValue, selectedUserId);
+            const result = await handleAction(menuItemValue, selectedUserId);
             toast.info(result.message);
             toggleModal();
         } catch (error) {

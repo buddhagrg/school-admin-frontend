@@ -11,7 +11,7 @@ import { ScheduleSend } from "@mui/icons-material";
 import { DialogModal } from "@/components/dialog-modal";
 import { getErrorMsg } from "@/utils/helpers/get-error-message";
 import { API_DATE_FORMAT, getFormattedDate } from "@/utils/helpers/date";
-import { LeaveRequest, LeaveRequestSchema, MyLeavePolicy } from "@/domains/leave/types";
+import { LeaveRequestForm, LeaveRequestFormSchema, MyLeavePolicy } from "@/domains/leave/types";
 import { LeaveDetail, LeaveForm } from "@/domains/leave/components";
 import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from "@/domains/leave/api";
 
@@ -29,14 +29,14 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
     const { data } = useGetMyLeavePoliciesQuery();
     const myLeavePolicies = data?.leavePolicies ?? [];
 
-    const methods = useForm<LeaveRequest>({
+    const methods = useForm<LeaveRequestForm>({
         defaultValues: {
             policy: 0,
             from: new Date(),
             to: new Date(),
             note: ""
         },
-        resolver: zodResolver(LeaveRequestSchema)
+        resolver: zodResolver(LeaveRequestFormSchema)
     });
 
     const onBtnClick = (id: number) => {
@@ -47,7 +47,7 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
     const toggleModal = () => {
         setModalOpen(!modalOpen);
     }
-    const onLeaveSubmit = async (data: LeaveRequest) => {
+    const onLeaveSubmit = async (data: LeaveRequestForm) => {
         try {
             const { policy, from, to, note } = data;
             const payload = {
