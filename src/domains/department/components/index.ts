@@ -1,1 +1,1 @@
-export * from "./manage-department";
+export * from './manage-department';

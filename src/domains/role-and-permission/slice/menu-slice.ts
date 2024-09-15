@@ -3,21 +3,21 @@ import { Menu } from "../types";
 import { RootState } from "@/store";
 
 type State = {
-    menuList: Menu[] | [];
+  menuList: Menu[] | [];
 };
 
 const initialState: State = {
-    menuList: [],
+  menuList: []
 };
 
 const menuSlice = createSlice({
-    name: "menu",
-    initialState,
-    reducers: {
-        setMenus: (state, action) => {
-            state.menuList = action.payload.menuList || [];
-        }
+  name: 'menu',
+  initialState,
+  reducers: {
+    setMenus: (state, action) => {
+      state.menuList = action.payload.menuList || [];
     }
+  }
 });
 
 export const { setMenus } = menuSlice.actions;

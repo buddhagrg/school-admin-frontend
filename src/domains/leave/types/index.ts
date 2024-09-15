@@ -1,2 +1,2 @@
-export * from "./leave-schema";
-export * from "./leave-type";
+export * from './leave-schema';
+export * from './leave-type';

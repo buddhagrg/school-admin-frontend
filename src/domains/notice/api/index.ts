@@ -1,1 +1,1 @@
-export * from "./notice-api";
+export * from './notice-api';

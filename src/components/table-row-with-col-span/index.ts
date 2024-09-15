@@ -1,1 +1,1 @@
-export * from "./table-row.tsx";
+export * from './table-row.tsx';

@@ -1,1 +1,1 @@
-export * from "./class-teacher-api";
+export * from './class-teacher-api';

@@ -1,5 +1,5 @@
-import { configureStore, } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
+import { configureStore } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
 import {
     persistReducer,
     persistStore,
@@ -15,22 +15,23 @@ import { appReducer } from "./app-reducer";
 import { purgeMiddleware } from "./middleware";
 
 const persistConfig = {
-    key: "root",
-    storage,
-    blacklist: [api.reducerPath]
+  key: 'root',
+  storage,
+  blacklist: [api.reducerPath]
 };
 
 const persistedRootReducer = persistReducer(persistConfig, appReducer);
 
 const store = configureStore({
-    reducer: persistedRootReducer,
-    middleware: (getDefaultMiddleware) => (
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }).concat(api.middleware).concat(purgeMiddleware)
-    )
+  reducer: persistedRootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
+    })
+      .concat(api.middleware)
+      .concat(purgeMiddleware)
 });
 
 export const persistor = persistStore(store);

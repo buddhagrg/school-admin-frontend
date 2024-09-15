@@ -1,1 +1,1 @@
-export * from "./manage-class-teacher";
+export * from './manage-class-teacher';

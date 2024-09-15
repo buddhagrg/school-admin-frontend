@@ -1,50 +1,46 @@
-import * as React from "react";
-import { useParams } from "react-router-dom"
-import { Grid } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import * as React from 'react';
+import { useParams } from 'react-router-dom';
+import { Grid } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { getErrorMsg } from "@/utils/helpers/get-error-message";
-import { useGetSectionQuery } from "../api";
-import { SectionForm, SectionFormSchema } from "../types";
-import { ManageSection } from "../components";
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useGetSectionQuery } from '../api';
+import { SectionForm, SectionFormSchema } from '../types';
+import { ManageSection } from '../components';
 
 export const EditSectionPage = () => {
-    const { id } = useParams();
-    const { data: sectionDetail, isLoading, isError, error } = useGetSectionQuery(Number(id));
+  const { id } = useParams();
+  const { data: sectionDetail, isLoading, isError, error } = useGetSectionQuery(Number(id));
 
-    const methods = useForm<SectionForm>({
-        defaultValues: { name: "" },
-        resolver: zodResolver(SectionFormSchema)
-    });
+  const methods = useForm<SectionForm>({
+    defaultValues: { name: '' },
+    resolver: zodResolver(SectionFormSchema)
+  });
 
-    React.useEffect(() => {
-        if (sectionDetail) {
-            const { name } = sectionDetail;
-            methods.setValue("name", name);
-        }
-    }, [sectionDetail]);
-
-    let content: React.ReactNode | null = null;
-    if (isLoading) {
-        content = <>loading...</>
-    } else if (isError) {
-        content = <>{getErrorMsg(error)}</>
-    } else if (!sectionDetail) {
-        content = <>Record not found</>
-    } else {
-        content = <ManageSection
-            operation="Edit"
-            id={Number(id)}
-            methods={methods}
-        />
+  React.useEffect(() => {
+    if (sectionDetail) {
+      const { name } = sectionDetail;
+      methods.setValue('name', name);
     }
+  }, [sectionDetail, methods]);
 
-    return (
-        <Grid container>
-            <Grid item xs={12} md={4}>
-                {content}
-            </Grid>
-        </Grid>
-    );
-}
+  let content: React.ReactNode | null = null;
+  if (isLoading) {
+    content = <>loading...</>;
+  } else if (isError) {
+    content = <>{getErrorMsg(error)}</>;
+  } else if (!sectionDetail) {
+    content = <>Record not found</>;
+  } else {
+    content = <ManageSection operation='Edit' id={Number(id)} methods={methods} />;
+  }
+
+  return (
+    <Grid container>
+      <Grid item xs={12} md={4}>
+        {content}
+      </Grid>
+    </Grid>
+  );
+};

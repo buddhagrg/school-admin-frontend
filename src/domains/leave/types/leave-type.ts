@@ -1,94 +1,95 @@
-import { z } from "zod";
-import { LeaveRequestSchema, PolicyUsersSchema } from "./leave-schema";
-import { User } from "@/domains/auth/types";
+import { z } from 'zod';
+import { LeaveRequestApiSchema, LeaveRequestFormSchema, PolicyUsersSchema } from './leave-schema';
+import { User } from '@/domains/auth/types';
 
 export type LeavePolicy = {
-    id: number;
-    name: string;
-    icon: string;
-    isActive: boolean;
-    totalUsersAssociated: number;
+  id: number;
+  name: string;
+  icon: string;
+  isActive: boolean;
+  totalUsersAssociated: number;
 };
 
 export type MyLeavePolicy = {
-    id: number;
-    name: string;
-    icon: string;
-    totalDaysUsed: number;
+  id: number;
+  name: string;
+  icon: string;
+  totalDaysUsed: number;
 };
 
 export type MyLeaveRequestDetail = {
-    id: number;
-    user: string;
-    from: string;
-    status: string;
-    statusId: number;
-    to: string;
-    note: string;
-    policy: string;
-    policyId: number;
-    days: number;
-    submitted: string;
-    updated: string;
-    approved: string;
-    approver: string;
+  id: number;
+  user: string;
+  from: string;
+  status: string;
+  statusId: number;
+  to: string;
+  note: string;
+  policy: string;
+  policyId: number;
+  days: number;
+  submitted: string;
+  updated: string;
+  approved: string;
+  approver: string;
 };
 
 export type PolicyUser = {
-    id: number;
-    name: string;
-    role: string;
-    totalDaysUsed: number;
+  id: number;
+  name: string;
+  role: string;
+  totalDaysUsed: number;
 };
 
 export type PolicyDetail = {
-    id: number;
-    name: string;
-    operation: string;
+  id: number;
+  name: string;
+  operation: string;
 };
 
 export type PolicyUsers = z.infer<typeof PolicyUsersSchema>;
 
-export type LeaveRequest = z.infer<typeof LeaveRequestSchema>;
-export type LeaveRequestWithId = LeaveRequest & { id: number | undefined };
+export type LeaveRequestForm = z.infer<typeof LeaveRequestFormSchema>;
+export type LeaveRequestApi = z.infer<typeof LeaveRequestApiSchema>;
+export type LeaveRequestApiWithId = LeaveRequestApi & { id: number | undefined };
 export type LeaveRequestHistory = {
-    leaveHistory: MyLeaveRequestDetail[];
+  leaveHistory: MyLeaveRequestDetail[];
 };
 export type PendingLeaveRequestHistory = {
-    pendingLeaves: MyLeaveRequestDetail[];
+  pendingLeaves: MyLeaveRequestDetail[];
 };
 export type LeavePolicyData = {
-    leavePolicies: LeavePolicy[],
+  leavePolicies: LeavePolicy[];
 };
 
 export type EligiblePolicyUsers = {
-    users: Omit<User, "lastLogin">[]
+  users: Omit<User, 'lastLogin'>[];
 };
 
 export type PolicyUserData = {
-    users: PolicyUser[]
+  users: PolicyUser[];
 };
 
 export type AddUserToPolicy = {
-    userList: string;
-    id: number;
+  userList: string;
+  id: number;
 };
 
 export type RemoveUserFromPolicy = {
-    userId: number;
-    policyId: number;
+  userId: number;
+  policyId: number;
 };
 
 export type PolicyStatus = {
-    id: number;
-    status: boolean;
+  id: number;
+  status: boolean;
 };
 
 export type LeaveStatus = {
-    id: number;
-    status: number;
+  id: number;
+  status: number;
 };
 
 export type MyLeavePolicyData = {
-    leavePolicies: MyLeavePolicy[]
+  leavePolicies: MyLeavePolicy[];
 };

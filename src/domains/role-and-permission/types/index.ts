@@ -1,2 +1,2 @@
-export * from "./rp-schema";
-export * from "./rp-type";
+export * from './rp-schema';
+export * from './rp-type';

@@ -1,2 +1,2 @@
-export * from "./section-type";
-export * from "./section-schema";
+export * from './section-type';
+export * from './section-schema';

@@ -1,1 +1,1 @@
-export * from "./menu-slice";
+export * from './menu-slice';
