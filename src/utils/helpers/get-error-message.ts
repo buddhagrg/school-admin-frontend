@@ -4,12 +4,13 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 const unknownError: string = 'Unknown Error';
 
 type Detail = {
-  [key: string]: string;
+  path: string;
+  message: string;
 };
 
 type ErrorResponse = {
   message: string;
-  detail?: Detail | null;
+  detail?: Detail[];
 };
 
 export const getErrorMsg = (
@@ -22,7 +23,7 @@ export const getErrorMsg = (
   if ('status' in error) {
     const fetchError = error as FetchBaseQueryError;
 
-    const apiError = fetchError.data as { error: string; detail: Detail };
+    const apiError = fetchError.data as { error: string; detail: Detail[] };
 
     if (apiError?.error) {
       const { error, detail } = apiError;

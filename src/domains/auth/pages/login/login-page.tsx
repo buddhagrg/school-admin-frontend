@@ -7,17 +7,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { LoginRequest, LoginSchema } from '../../types';
 import { LoginForm } from './login-form';
 import { useLoginMutation } from '../../api/auth-api';
 import { setUser } from '../../slice/auth-slice';
+import { formatApiError } from '@/utils/helpers/format-api-error';
+import { ApiError } from '@/components/api-error';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const methods = useForm<LoginRequest>({ resolver: zodResolver(LoginSchema) });
-  const [apiError, setApiError] = React.useState('');
+  const [apiErrors, setApiErrors] = React.useState<string[]>([]);
 
   const [login, { isLoading }] = useLoginMutation();
 
@@ -29,14 +30,8 @@ export const LoginPage = () => {
         navigate('/app');
       }
     } catch (error) {
-      const { detail, message } = getErrorMsg(error as FetchBaseQueryError | SerializedError);
-      if (detail) {
-        Object.entries(detail).map(([name, value]) =>
-          methods.setError(name as keyof LoginRequest, { type: 'string', message: value })
-        );
-      } else {
-        setApiError(message);
-      }
+      const apiErrors = formatApiError(error as FetchBaseQueryError | SerializedError);
+      setApiErrors(apiErrors);
     }
   };
 
@@ -70,11 +65,7 @@ export const LoginPage = () => {
           onSubmit={methods.handleSubmit(onSubmit)}
           isFetching={isLoading}
         />
-        {apiError && (
-          <Box>
-            <Typography sx={{ mt: 2, color: 'red', fontSize: '15px' }}>{apiError}</Typography>
-          </Box>
-        )}
+        <ApiError messages={apiErrors} />
       </Box>
     </Box>
   );
