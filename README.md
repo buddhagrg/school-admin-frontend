@@ -1,5 +1,9 @@
-## Todos
+## Demo
+https://www.school-admin.xyz \
+Username- <mark>`admin@gmail.com`</mark> \
+Password- <mark>`3OU4zn3q6Zh9`</mark>
 
+## Todos
 - [x] Live deployment
 - [ ] System stabilization
 - [ ] Unit Testing
@@ -35,11 +39,6 @@ Below are the features that are available in the system upto now. Other features
 - staff (add/edit/list staffs)
 - departments (add/edit/list/delete)
 - roles and permissions (add/edit/enable/disable roles, assign permissions to user)
-
-> **Demo** \
-> [App](https://www.school-admin.xyz) \
-> Username- <mark>`admin@gmail.com`</mark> \
-> Password- <mark>`3OU4zn3q6Zh9`</mark>
 
 ## Project Standards
 
