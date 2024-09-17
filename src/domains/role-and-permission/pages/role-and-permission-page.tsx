@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { Box, Tab, Tabs } from '@mui/material';
 import { AdminPanelSettings } from '@mui/icons-material';
 
@@ -8,11 +7,11 @@ import { TabPanel } from '@/components/tab-panel';
 import { Menu, Permission, RolesAndPermissionState } from '../types';
 import { roleAndPermissionReducer } from '../reducer';
 import {
+  useGetMenusQuery,
   useGetRolesQuery,
   useLazyGetRolePermissionsQuery,
   useLazyGetRoleUsersQuery
 } from '../api/role-and-permission-api';
-import { getMenuList } from '../slice/menu-slice';
 import { MenuAccess, Overview, RoleManage, RoleUsers } from '../components';
 
 const initializePermissions = (menus: Menu[]): Permission[] => {
@@ -59,7 +58,7 @@ export const RoleAndPermission = () => {
   const [state, dispatch] = React.useReducer(roleAndPermissionReducer, initialState);
   const { data } = useGetRolesQuery();
   const roles = data?.roles ?? [];
-  const menus = useSelector(getMenuList);
+  const { data: menuData } = useGetMenusQuery();
 
   const [getRoleUsers] = useLazyGetRoleUsersQuery();
   const [getRolePermissions] = useLazyGetRolePermissionsQuery();
@@ -70,8 +69,13 @@ export const RoleAndPermission = () => {
   }, []);
 
   React.useEffect(() => {
-    dispatch({ type: 'SET_PERMISSIONS', payload: initializePermissions(menus) });
-  }, [menus]);
+    if (menuData) {
+      dispatch({
+        type: 'SET_PERMISSIONS',
+        payload: initializePermissions(menuData.menus)
+      });
+    }
+  }, [menuData, dispatch]);
 
   React.useEffect(() => {
     const fetchRoleUsers = async () => {

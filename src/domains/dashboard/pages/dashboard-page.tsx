@@ -1,26 +1,15 @@
-import * as React from 'react';
 import { Grid } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetDashboardDataQuery } from '../api/dashboard-api';
 import { Celebrations, GridCard, LeavePolicyDetail, Notices, WhoIsOut } from '../components';
 import { getUserRole } from '@/domains/auth/slice';
-import { useGetMenusQuery } from '@/domains/role-and-permission/api';
-import { setMenus } from '@/domains/role-and-permission/slice';
 import { DashboardProps } from '../types';
 
 export const DashboardPage = () => {
   const currentUserRole = useSelector(getUserRole);
   const { data, isLoading, isError, error } = useGetDashboardDataQuery();
-  const { data: menusData } = useGetMenusQuery();
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (menusData) {
-      dispatch(setMenus({ menuList: menusData.menus }));
-    }
-  }, [menusData, dispatch]);
 
   if (isLoading) {
     return <>loading...</>;
