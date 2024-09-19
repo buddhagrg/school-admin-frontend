@@ -41,7 +41,7 @@ export const ViewNotice = () => {
   if (isLoading) {
     content = <>loading...</>;
   } else if (isError) {
-    content = <>{error}</>;
+    content = <>{getErrorMsg(error).message}</>;
   } else if (!noticeDetail) {
     content = <>Record not found</>;
   } else {
