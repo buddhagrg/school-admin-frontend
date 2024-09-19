@@ -26,7 +26,7 @@ import { EditDepartmentPage, ListDepartmentsPage } from '@/domains/department/pa
 import { ErrorPage, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
 
-export const router = createBrowserRouter([
+export const routes = [
   {
     path: '/',
     element: <Navigate to='/app' replace />
@@ -91,4 +91,6 @@ export const router = createBrowserRouter([
     element: <NotFound />,
     errorElement: <ErrorPage />
   }
-]);
+];
+
+export const router = createBrowserRouter(routes);
