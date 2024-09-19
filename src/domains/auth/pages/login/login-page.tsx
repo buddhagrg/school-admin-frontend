@@ -12,7 +12,7 @@ import { LoginForm } from './login-form';
 import { useLoginMutation } from '../../api/auth-api';
 import { setUser } from '../../slice/auth-slice';
 import { formatApiError } from '@/utils/helpers/format-api-error';
-import { ApiError } from '@/components/api-error';
+import { ApiError } from '@/components/errors';
 
 export const LoginPage = () => {
   const navigate = useNavigate();

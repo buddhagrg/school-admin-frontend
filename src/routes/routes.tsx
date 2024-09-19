@@ -2,7 +2,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './protected-route';
-import { AppRoot } from './root';
+import { AppRoot } from './app-root';
 import { LoginPage, SetupPasswordPage } from '@/domains/auth/pages';
 import { DashboardPage } from '@/domains/dashboard/pages';
 import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/domains/leave/pages';
@@ -23,6 +23,8 @@ import { RoleAndPermission } from '@/domains/role-and-permission/pages';
 import { AccountPage } from '@/domains/account/pages';
 import { EditSectionPage, ListSectionPage } from '@/domains/section/pages';
 import { EditDepartmentPage, ListDepartmentsPage } from '@/domains/department/pages';
+import { ErrorPage, NotFound } from '@/components/errors';
+import { MainLayout } from '@/components/layout';
 
 export const router = createBrowserRouter([
   {
@@ -31,11 +33,13 @@ export const router = createBrowserRouter([
   },
   {
     path: '/auth/login',
-    element: <LoginPage />
+    element: <LoginPage />,
+    errorElement: <ErrorPage message='Error loading login page' />
   },
   {
     path: '/auth/setup-password/:token',
-    element: <SetupPasswordPage />
+    element: <SetupPasswordPage />,
+    errorElement: <ErrorPage message='Error loading password setup page' />
   },
   {
     path: '/app',
@@ -44,10 +48,13 @@ export const router = createBrowserRouter([
         <AppRoot />
       </ProtectedRoute>
     ),
-    errorElement: <>/app Error</>,
+    errorElement: (
+      <MainLayout>
+        <ErrorPage message='Error loading the app' />
+      </MainLayout>
+    ),
     children: [
       { index: true, element: <DashboardPage /> },
-      { path: 'dashboard', element: <DashboardPage /> },
       { path: 'account', element: <AccountPage /> },
       { path: 'leave/define', element: <LeaveDefine /> },
       { path: 'leave/request', element: <MyLeaveRequest /> },
@@ -75,11 +82,13 @@ export const router = createBrowserRouter([
       { path: 'departments', element: <ListDepartmentsPage /> },
       { path: 'departments/edit/:id', element: <EditDepartmentPage /> },
       { path: 'notices/recipients', element: <ListNoticeRecipients /> },
-      { path: 'notices/recipients/edit/:id', element: <EditNoticeRecipientPage /> }
+      { path: 'notices/recipients/edit/:id', element: <EditNoticeRecipientPage /> },
+      { path: '*', element: <NotFound /> }
     ]
   },
   {
     path: '*',
-    element: <>Application Error</>
+    element: <NotFound />,
+    errorElement: <ErrorPage />
   }
 ]);

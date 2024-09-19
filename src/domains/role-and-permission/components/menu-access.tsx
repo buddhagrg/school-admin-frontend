@@ -17,28 +17,32 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { Action, Permission, SubPermission } from '../types';
+import { Action, ExtendedPermission } from '../types';
 import { useUpdateRolePermissionMutation } from '../api/role-and-permission-api';
 
 type MenuAccessProps = {
   roleId: number | null;
-  currentRoleMenus: Permission[] | [];
+  currentRolePermissions: ExtendedPermission[] | [];
   dispatch: React.Dispatch<Action>;
 };
 
-export const MenuAccess: React.FC<MenuAccessProps> = ({ roleId, currentRoleMenus, dispatch }) => {
+export const MenuAccess: React.FC<MenuAccessProps> = ({
+  roleId,
+  currentRolePermissions,
+  dispatch
+}) => {
   const [updatePermissions, { isLoading: isUpdatingPermissions }] =
     useUpdateRolePermissionMutation();
 
   const togglePermission = (
     isChecked: boolean,
-    currentRoleMenus: Permission[],
+    currentRolePermissions: ExtendedPermission[],
     menuId: number,
     subMenuId: number | null
-  ): Permission[] => {
-    return currentRoleMenus.map((menu) => {
+  ): ExtendedPermission[] => {
+    return currentRolePermissions.map((menu) => {
       if (menuId === menu.id) {
-        let newSubMenus: [] | SubPermission[] = [];
+        let newSubMenus: ExtendedPermission[] = [];
         if (subMenuId === null) {
           return { ...menu, isPermissionAvailable: isChecked };
         } else if (menu.subMenus) {
@@ -68,13 +72,13 @@ export const MenuAccess: React.FC<MenuAccessProps> = ({ roleId, currentRoleMenus
   ) => {
     dispatch({
       type: 'SET_ROLE_PERMISSIONS',
-      payload: togglePermission(event.target.checked, currentRoleMenus, menuId, subMenuId)
+      payload: togglePermission(event.target.checked, currentRolePermissions, menuId, subMenuId)
     });
   };
   const handleSave = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     try {
-      const ids = currentRoleMenus.flatMap((menu) => {
+      const ids = currentRolePermissions.flatMap((menu) => {
         const subMenuIds =
           menu?.subMenus
             ?.filter((subMenu) => subMenu.isPermissionAvailable)
@@ -91,70 +95,72 @@ export const MenuAccess: React.FC<MenuAccessProps> = ({ roleId, currentRoleMenus
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }
   };
-  const menuHasAnySubmenus = (subMenus?: SubPermission[] | []) => {
+  const menuHasAnySubmenus = (subMenus?: ExtendedPermission[] | []) => {
     return !subMenus || !Array.isArray(subMenus) || subMenus.length <= 0;
   };
 
   return (
     <>
-      {currentRoleMenus &&
-        currentRoleMenus.map(({ id: menuId, name, subMenus, isPermissionAvailable }) => (
-          <Accordion key={menuId}>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingLeft: 1,
-                backgroundColor: '#f3f6f999'
-              }}
-            >
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    onChange={(event) => handlePermissionToggle(event, menuId, null)}
-                    checked={isPermissionAvailable}
-                    icon={<RadioButtonUnchecked />}
-                    checkedIcon={<CheckCircleOutlined />}
-                  />
-                }
-                label={name}
-              />
-              <Box sx={{ flexGrow: 1 }}>
-                <AccordionSummary
-                  expandIcon={<ArrowRight />}
-                  sx={{ display: menuHasAnySubmenus(subMenus) ? 'none' : '' }}
+      {currentRolePermissions &&
+        currentRolePermissions.map(
+          ({ id: menuId, name, type, method, subMenus, isPermissionAvailable }) => (
+            <Accordion key={menuId}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingLeft: 1,
+                  backgroundColor: '#f3f6f999'
+                }}
+              >
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      onChange={(event) => handlePermissionToggle(event, menuId, null)}
+                      checked={isPermissionAvailable}
+                      icon={<RadioButtonUnchecked />}
+                      checkedIcon={<CheckCircleOutlined />}
+                    />
+                  }
+                  label={`${name} (${type === 'api' ? `${type}/${method}` : `${type}`})`}
                 />
+                <Box sx={{ flexGrow: 1 }}>
+                  <AccordionSummary
+                    expandIcon={<ArrowRight />}
+                    sx={{ display: menuHasAnySubmenus(subMenus) ? 'none' : '' }}
+                  />
+                </Box>
               </Box>
-            </Box>
-            <AccordionDetails>
-              <Grid container>
-                {subMenus &&
-                  subMenus.map(({ id: subMenuId, name, isPermissionAvailable }) => (
-                    <Grid xs={6} md={4} item key={subMenuId}>
-                      <List>
-                        <ListItem>
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                onChange={(event) =>
-                                  handlePermissionToggle(event, menuId, subMenuId)
-                                }
-                                checked={isPermissionAvailable}
-                                icon={<RadioButtonUnchecked />}
-                                checkedIcon={<CheckCircleOutlined />}
-                              />
-                            }
-                            label={name}
-                          />
-                        </ListItem>
-                      </List>
-                    </Grid>
-                  ))}
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-        ))}
+              <AccordionDetails>
+                <Grid container>
+                  {subMenus &&
+                    subMenus.map(({ id: subMenuId, name, type, method, isPermissionAvailable }) => (
+                      <Grid xs={6} md={4} item key={subMenuId}>
+                        <List>
+                          <ListItem>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  onChange={(event) =>
+                                    handlePermissionToggle(event, menuId, subMenuId)
+                                  }
+                                  checked={isPermissionAvailable}
+                                  icon={<RadioButtonUnchecked />}
+                                  checkedIcon={<CheckCircleOutlined />}
+                                />
+                              }
+                              label={`${name} (${type === 'api' ? `${type}/${method}` : `${type}`})`}
+                            />
+                          </ListItem>
+                        </List>
+                      </Grid>
+                    ))}
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
+          )
+        )}
       <LoadingButton
         loading={isUpdatingPermissions}
         sx={{ marginTop: '20px' }}

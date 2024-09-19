@@ -1,21 +1,22 @@
 import { api, Tag } from '@/api';
 import {
   AddEditRoleProps,
-  MenuData,
+  PermissionData,
   RolePermission,
   RolePermissionsData,
   RolesData,
   HandleRoleStatus,
   RoleUsersData,
-  UserRole
+  UserRole,
+  MyPermissionData
 } from '../types';
 
 export const rolesAndPermissionsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getMenus: builder.query<MenuData, void>({
-      query: () => `/menus`,
+    getPermissions: builder.query<PermissionData, void>({
+      query: () => `/permissions/all`,
       providesTags: (result) =>
-        result?.menus.map(({ id }) => {
+        result?.permissions.map(({ id }) => {
           return { type: Tag.MENUS, id };
         }) || [{ type: Tag.MENUS }]
     }),
@@ -83,12 +84,15 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
         }
       }),
       invalidatesTags: [Tag.ROLE_USERS, Tag.ROLES]
+    }),
+    getMyPermissions: builder.query<MyPermissionData, void>({
+      query: () => `/permissions/me`
     })
   })
 });
 
 export const {
-  useGetMenusQuery,
+  useGetPermissionsQuery,
   useLazyGetRolesQuery,
   useGetRolesQuery,
   useLazyGetRoleUsersQuery,
@@ -97,5 +101,6 @@ export const {
   useUpdateRoleMutation,
   useHandleRoleStatusMutation,
   useUpdateRolePermissionMutation,
-  useSwitchUserRoleMutation
+  useSwitchUserRoleMutation,
+  useGetMyPermissionsQuery
 } = rolesAndPermissionsApi;

@@ -1,18 +1,6 @@
 import { z } from 'zod';
 import { AddEditRoleSchema } from './rp-schema';
-
-export type SubPermission = {
-  id: number;
-  name: string;
-  isPermissionAvailable?: boolean;
-};
-
-export type Permission = {
-  id: number;
-  name: string;
-  isPermissionAvailable?: boolean;
-  subMenus?: [] | SubPermission[];
-};
+import { BasePermission, Permission } from '@/utils/type/misc';
 
 export type Role = {
   id: number;
@@ -44,11 +32,11 @@ export type RoleUsersData = {
 export type CurrentRole = {
   id: number | null;
   users: User[] | [];
-  permissions: Permission[] | [];
+  permissions: ExtendedPermission[] | [];
 };
 
 export type RolesAndPermissionState = {
-  permissions: Permission[] | [];
+  permissions: ExtendedPermission[] | [];
   roleTab: number;
   secondaryTab: number;
   anchorElement: HTMLElement | null;
@@ -56,12 +44,12 @@ export type RolesAndPermissionState = {
 };
 
 export type Action =
-  | { type: 'SET_PERMISSIONS'; payload: Permission[] | [] }
+  | { type: 'SET_PERMISSIONS'; payload: ExtendedPermission[] }
   | { type: 'SET_ROLE_TAB'; payload: number }
   | { type: 'SET_SECONDARY_TAB'; payload: number }
   | { type: 'SET_ROLE_USERS'; payload: User[] | [] }
   | { type: 'SET_ROLE_ID'; payload: number | null }
-  | { type: 'SET_ROLE_PERMISSIONS'; payload: Permission[] | [] };
+  | { type: 'SET_ROLE_PERMISSIONS'; payload: ExtendedPermission[] | [] };
 
 export type AddEditRoleProps = z.infer<typeof AddEditRoleSchema>;
 
@@ -74,22 +62,22 @@ export type UserRole = {
   id: number;
   roleId: number;
 };
-
-export type Menu = {
-  id: number;
-  name: string;
-  subMenus?: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
+export type ExtendedPermission = BasePermission & {
+  isPermissionAvailable?: boolean;
+  subMenus?: ExtendedPermission[];
 };
-
-export type MenuData = {
-  menus: Menu[];
+export type PermissionData = {
+  permissions: Permission[];
 };
 export type HandleRoleStatus = {
   id: number;
   status: boolean;
+};
+
+export type MyPermissionData = {
+  permissions: {
+    menus: BasePermission;
+    apis: BasePermission[];
+    uis: BasePermission[];
+  };
 };

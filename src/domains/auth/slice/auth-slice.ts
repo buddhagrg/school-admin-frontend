@@ -23,11 +23,21 @@ const authSlice = createSlice({
     resetUser(state) {
       state.user = null;
       state.isAuthenticated = false;
+    },
+    setUserPermissions(state, action) {
+      if (state.user) {
+        state.user = {
+          ...state.user,
+          menus: action.payload.menus,
+          apis: action.payload.apis,
+          uis: action.payload.uis
+        };
+      }
     }
   }
 });
 
-export const { setUser, resetUser } = authSlice.actions;
+export const { setUser, resetUser, setUserPermissions } = authSlice.actions;
 export const authReducer = authSlice.reducer;
 
 export const isUserAuthenticated = (state: RootState) => state.auth.isAuthenticated;
@@ -36,3 +46,4 @@ export const getUserName = (state: RootState) => state.auth.user?.name;
 export const getUserEmail = (state: RootState) => state.auth.user?.email;
 export const getUserRole = (state: RootState) => state.auth.user?.role;
 export const getUserMenus = (state: RootState) => state.auth.user?.menus;
+export const getUserScreens = (state: RootState) => state.auth.user?.uis;

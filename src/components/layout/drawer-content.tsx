@@ -30,7 +30,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
 
   return (
     <div>
-      <Toolbar>
+      <Toolbar sx={{ textDecoration: 'none' }} component={Link} to='/app'>
         <AcUnitOutlined color='primary' fontSize='large' />
         <Typography variant='h6' sx={{ ml: 2, color: blue[800] }}>
           School Admin

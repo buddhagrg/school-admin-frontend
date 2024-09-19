@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { z } from 'zod';
 import { LoginSchema, PasswordSchema, SetupPasswordSchema } from './auth-schema';
+import { BasePermission, Permission } from '@/utils/type/misc';
 
 export type SubMenu = {
   id: number;
   name: string;
   path: string;
-  actions: string[];
 };
 
 export type Menu = {
@@ -22,7 +22,9 @@ export type User = {
   name: string;
   email: string;
   role: string;
-  menus: Menu[];
+  menus: Permission[];
+  apis: BasePermission[];
+  uis: BasePermission[];
 };
 
 export type LoginRequest = z.infer<typeof LoginSchema>;

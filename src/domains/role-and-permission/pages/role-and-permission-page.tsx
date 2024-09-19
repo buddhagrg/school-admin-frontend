@@ -4,17 +4,18 @@ import { AdminPanelSettings } from '@mui/icons-material';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { TabPanel } from '@/components/tab-panel';
-import { Menu, Permission, RolesAndPermissionState } from '../types';
+import { RolesAndPermissionState, ExtendedPermission } from '../types';
 import { roleAndPermissionReducer } from '../reducer';
 import {
-  useGetMenusQuery,
+  useGetPermissionsQuery,
   useGetRolesQuery,
   useLazyGetRolePermissionsQuery,
   useLazyGetRoleUsersQuery
 } from '../api/role-and-permission-api';
 import { MenuAccess, Overview, RoleManage, RoleUsers } from '../components';
+import { Permission } from '@/utils/type/misc';
 
-const initializePermissions = (menus: Menu[]): Permission[] => {
+const initializePermissions = (menus: ExtendedPermission[]): ExtendedPermission[] => {
   return menus.map((menu) => ({
     ...menu,
     isPermissionAvailable: false,
@@ -23,15 +24,15 @@ const initializePermissions = (menus: Menu[]): Permission[] => {
 };
 
 const updatePermissions = (
-  permissions: Permission[],
+  permissions: ExtendedPermission[],
   currentRolePermissions: Permission[]
-): Permission[] => {
+): ExtendedPermission[] => {
   return permissions.map((permission) => {
     const rolePermission = currentRolePermissions.find((p) => p.id === permission.id);
 
     const updatedSubPermissions =
       permission?.subMenus && permission.subMenus.length > 0
-        ? updatePermissions(permission.subMenus as Permission[], currentRolePermissions)
+        ? updatePermissions(permission.subMenus as ExtendedPermission[], currentRolePermissions)
         : [];
 
     return {
@@ -58,7 +59,7 @@ export const RoleAndPermission = () => {
   const [state, dispatch] = React.useReducer(roleAndPermissionReducer, initialState);
   const { data } = useGetRolesQuery();
   const roles = data?.roles ?? [];
-  const { data: menuData } = useGetMenusQuery();
+  const { data: permissionData } = useGetPermissionsQuery();
 
   const [getRoleUsers] = useLazyGetRoleUsersQuery();
   const [getRolePermissions] = useLazyGetRolePermissionsQuery();
@@ -69,13 +70,13 @@ export const RoleAndPermission = () => {
   }, []);
 
   React.useEffect(() => {
-    if (menuData) {
+    if (permissionData) {
       dispatch({
         type: 'SET_PERMISSIONS',
-        payload: initializePermissions(menuData.menus)
+        payload: initializePermissions(permissionData.permissions)
       });
     }
-  }, [menuData, dispatch]);
+  }, [permissionData, dispatch]);
 
   React.useEffect(() => {
     const fetchRoleUsers = async () => {
@@ -180,7 +181,7 @@ export const RoleAndPermission = () => {
               <TabPanel value={state.secondaryTab} index={1}>
                 <MenuAccess
                   roleId={state.currentRole.id}
-                  currentRoleMenus={state.currentRole.permissions}
+                  currentRolePermissions={state.currentRole.permissions}
                   dispatch={dispatch}
                 />
               </TabPanel>
