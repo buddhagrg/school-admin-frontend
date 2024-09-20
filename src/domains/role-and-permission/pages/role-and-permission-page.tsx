@@ -15,7 +15,7 @@ import {
 import { MenuAccess, Overview, RoleManage, RoleUsers } from '../components';
 import { Permission } from '@/utils/type/misc';
 
-const initializePermissions = (menus: ExtendedPermission[]): ExtendedPermission[] => {
+const initializePermissions = (menus: Permission[]): ExtendedPermission[] => {
   return menus.map((menu) => ({
     ...menu,
     isPermissionAvailable: false,
@@ -182,7 +182,6 @@ export const RoleAndPermission = () => {
                 <MenuAccess
                   roleId={state.currentRole.id}
                   currentRolePermissions={state.currentRole.permissions}
-                  dispatch={dispatch}
                 />
               </TabPanel>
             </TabPanel>

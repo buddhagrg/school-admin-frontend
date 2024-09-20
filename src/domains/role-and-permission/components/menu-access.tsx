@@ -1,91 +1,62 @@
 import * as React from 'react';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  List,
-  ListItem
-} from '@mui/material';
-import { ArrowRight, CheckCircleOutlined, RadioButtonUnchecked } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { Action, ExtendedPermission } from '../types';
+import { ExtendedPermission } from '../types';
 import { useUpdateRolePermissionMutation } from '../api/role-and-permission-api';
+import {
+  MaterialReactTable,
+  MRT_ColumnDef,
+  MRT_RowSelectionState,
+  useMaterialReactTable
+} from 'material-react-table';
+import { Box } from '@mui/material';
 
 type MenuAccessProps = {
   roleId: number | null;
   currentRolePermissions: ExtendedPermission[] | [];
-  dispatch: React.Dispatch<Action>;
 };
 
-export const MenuAccess: React.FC<MenuAccessProps> = ({
-  roleId,
-  currentRolePermissions,
-  dispatch
-}) => {
+export const MenuAccess: React.FC<MenuAccessProps> = ({ roleId, currentRolePermissions }) => {
+  const initialSelected = () =>
+    currentRolePermissions.reduce((acc, menu) => {
+      if (menu.isPermissionAvailable) {
+        acc[menu.id.toString()] = true;
+      }
+      menu.subMenus?.forEach((subMenu) => {
+        if (subMenu.isPermissionAvailable) {
+          acc[subMenu.id.toString()] = true;
+        }
+      });
+      return acc;
+    }, {} as MRT_RowSelectionState);
+
+  const [rowSelection, setRowSelection] = React.useState<MRT_RowSelectionState>(initialSelected());
+  const columns: MRT_ColumnDef<ExtendedPermission>[] = [
+    {
+      accessorKey: 'name',
+      header: 'Name'
+    },
+    {
+      accessorKey: 'type',
+      header: 'Type'
+    },
+    {
+      accessorKey: 'method',
+      header: 'Method'
+    }
+  ];
+
   const [updatePermissions, { isLoading: isUpdatingPermissions }] =
     useUpdateRolePermissionMutation();
 
-  const togglePermission = (
-    isChecked: boolean,
-    currentRolePermissions: ExtendedPermission[],
-    menuId: number,
-    subMenuId: number | null
-  ): ExtendedPermission[] => {
-    return currentRolePermissions.map((menu) => {
-      if (menuId === menu.id) {
-        let newSubMenus: ExtendedPermission[] = [];
-        if (subMenuId === null) {
-          return { ...menu, isPermissionAvailable: isChecked };
-        } else if (menu.subMenus) {
-          newSubMenus = menu.subMenus?.map((subMenu) =>
-            subMenuId === subMenu.id
-              ? {
-                  ...subMenu,
-                  isPermissionAvailable: !subMenu.isPermissionAvailable
-                }
-              : subMenu
-          );
-        }
-
-        return {
-          ...menu,
-          subMenus: newSubMenus
-        };
-      }
-
-      return menu;
-    });
-  };
-  const handlePermissionToggle = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    menuId: number,
-    subMenuId: number | null
-  ) => {
-    dispatch({
-      type: 'SET_ROLE_PERMISSIONS',
-      payload: togglePermission(event.target.checked, currentRolePermissions, menuId, subMenuId)
-    });
-  };
   const handleSave = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     try {
-      const ids = currentRolePermissions.flatMap((menu) => {
-        const subMenuIds =
-          menu?.subMenus
-            ?.filter((subMenu) => subMenu.isPermissionAvailable)
-            .map((subMenu) => subMenu.id) || [];
-        return menu.isPermissionAvailable ? [menu.id, ...subMenuIds] : [];
-      });
-
+      const ids = Object.keys(rowSelection);
       const result = await updatePermissions({
         id: roleId!,
         permissions: ids.length > 0 ? ids.join(',') : ''
@@ -95,72 +66,28 @@ export const MenuAccess: React.FC<MenuAccessProps> = ({
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }
   };
-  const menuHasAnySubmenus = (subMenus?: ExtendedPermission[] | []) => {
-    return !subMenus || !Array.isArray(subMenus) || subMenus.length <= 0;
-  };
+
+  const table = useMaterialReactTable({
+    columns,
+    data: currentRolePermissions,
+    enableExpanding: true,
+    getRowId: (row) => row.id.toString(),
+    getSubRows: (row) => row.subMenus,
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      density: 'compact',
+      rowSelection
+    },
+    enablePagination: false,
+    enableDensityToggle: false,
+    enableColumnFilters: true,
+    filterFromLeafRows: true
+  });
 
   return (
-    <>
-      {currentRolePermissions &&
-        currentRolePermissions.map(
-          ({ id: menuId, name, type, method, subMenus, isPermissionAvailable }) => (
-            <Accordion key={menuId}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingLeft: 1,
-                  backgroundColor: '#f3f6f999'
-                }}
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={(event) => handlePermissionToggle(event, menuId, null)}
-                      checked={isPermissionAvailable}
-                      icon={<RadioButtonUnchecked />}
-                      checkedIcon={<CheckCircleOutlined />}
-                    />
-                  }
-                  label={`${name} (${type === 'api' ? `${type}/${method}` : `${type}`})`}
-                />
-                <Box sx={{ flexGrow: 1 }}>
-                  <AccordionSummary
-                    expandIcon={<ArrowRight />}
-                    sx={{ display: menuHasAnySubmenus(subMenus) ? 'none' : '' }}
-                  />
-                </Box>
-              </Box>
-              <AccordionDetails>
-                <Grid container>
-                  {subMenus &&
-                    subMenus.map(({ id: subMenuId, name, type, method, isPermissionAvailable }) => (
-                      <Grid xs={6} md={4} item key={subMenuId}>
-                        <List>
-                          <ListItem>
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  onChange={(event) =>
-                                    handlePermissionToggle(event, menuId, subMenuId)
-                                  }
-                                  checked={isPermissionAvailable}
-                                  icon={<RadioButtonUnchecked />}
-                                  checkedIcon={<CheckCircleOutlined />}
-                                />
-                              }
-                              label={`${name} (${type === 'api' ? `${type}/${method}` : `${type}`})`}
-                            />
-                          </ListItem>
-                        </List>
-                      </Grid>
-                    ))}
-                </Grid>
-              </AccordionDetails>
-            </Accordion>
-          )
-        )}
+    <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }}>
+      <MaterialReactTable table={table} />
       <LoadingButton
         loading={isUpdatingPermissions}
         sx={{ marginTop: '20px' }}
@@ -170,6 +97,6 @@ export const MenuAccess: React.FC<MenuAccessProps> = ({
       >
         Save
       </LoadingButton>
-    </>
+    </Box>
   );
 };
