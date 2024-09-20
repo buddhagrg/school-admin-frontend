@@ -205,7 +205,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
   }
 
   return (
-    <Box sx={{ p: 2 }} component={Paper}>
+    <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }} component={Paper}>
       <TableContainer sx={{ height: '80vh' }}>
         <Table>
           <TableHead>

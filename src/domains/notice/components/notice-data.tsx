@@ -63,7 +63,7 @@ export const NoticeData: React.FC<NoticeDataProps> = ({
   }
 
   return (
-    <Box sx={{ p: 2 }} component={Paper}>
+    <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }} component={Paper}>
       <TableContainer>
         <Table stickyHeader>
           <TableHead>
