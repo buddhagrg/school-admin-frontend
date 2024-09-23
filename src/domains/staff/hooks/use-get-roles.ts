@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Role } from '@/domains/role-and-permission/types';
 import { useLazyGetRolesQuery } from '@/domains/role-and-permission/api';
+import { Role } from '@/domains/role-and-permission/types';
+import * as React from 'react';
 
 export const useGetRoles = () => {
   const [roles, setRoles] = React.useState<Role[]>([]);

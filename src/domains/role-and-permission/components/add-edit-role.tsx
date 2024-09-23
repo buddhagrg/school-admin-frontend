@@ -9,13 +9,12 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { AddEditRoleProps, AddEditRoleSchema } from '../types';
-import { useAddNewRoleMutation, useUpdateRoleMutation } from '../api/role-and-permission-api';
+import { useAddNewRoleMutation, useUpdateRoleMutation } from '../api';
 
 type ModalProps = {
   roleId?: number;
   roleName: string;
   titleText: string;
-  isOpen: boolean;
   closeAddEditRoleModalOpen: () => void;
 };
 
@@ -27,7 +26,6 @@ const initValues = {
 export const AddEditRole: React.FC<ModalProps> = ({
   roleId,
   roleName,
-  isOpen,
   titleText,
   closeAddEditRoleModalOpen
 }) => {
@@ -68,7 +66,7 @@ export const AddEditRole: React.FC<ModalProps> = ({
   return (
     <DialogModal
       isSaving={isAddingRole || isUpdatingRole}
-      isOpen={isOpen}
+      isOpen={true}
       titleText={titleText}
       closeModal={closeAddEditRoleModalOpen}
       handleSave={handleSubmit(handleSave)}

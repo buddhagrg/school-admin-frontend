@@ -19,12 +19,12 @@ import {
   ViewNotice
 } from '@/domains/notice/pages';
 import { AddStaff, EditStaff, ListStaffs, ViewStaff } from '@/domains/staff/pages';
-import { RoleAndPermission } from '@/domains/role-and-permission/pages';
 import { AccountPage } from '@/domains/account/pages';
 import { EditSectionPage, ListSectionPage } from '@/domains/section/pages';
 import { EditDepartmentPage, ListDepartmentsPage } from '@/domains/department/pages';
 import { ErrorPage, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
+import { RoleAndPermission } from '@/domains/role-and-permission/pages';
 
 export const routes = [
   {

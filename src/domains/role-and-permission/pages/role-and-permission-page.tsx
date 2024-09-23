@@ -4,142 +4,49 @@ import { AdminPanelSettings } from '@mui/icons-material';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { TabPanel } from '@/components/tab-panel';
-import { RolesAndPermissionState, ExtendedPermission } from '../types';
-import { roleAndPermissionReducer } from '../reducer';
-import {
-  useGetPermissionsQuery,
-  useGetRolesQuery,
-  useLazyGetRolePermissionsQuery,
-  useLazyGetRoleUsersQuery
-} from '../api/role-and-permission-api';
-import { MenuAccess, Overview, RoleManage, RoleUsers } from '../components';
+import { useGetPermissionsQuery, useGetRolesQuery } from '../api/role-and-permission-api';
+import { RoleTabs } from '../components/roles-tab/roles-tab';
 import { Permission } from '@/utils/type/misc';
+import { ExtendedPermission } from '../types';
+import { RolePermissionProvider, useRolePermission } from '../context/role-permission-provider';
+import { OverviewTab } from '../components/overview-tab/overview-tab';
 
-const initializePermissions = (menus: Permission[]): ExtendedPermission[] => {
-  return menus.map((menu) => ({
-    ...menu,
-    isPermissionAvailable: false,
-    subMenus: menu?.subMenus ? initializePermissions(menu.subMenus) : []
-  }));
-};
+const RoleAndPermissionPage = () => {
+  const { data: rolesData } = useGetRolesQuery();
+  const { data: permissionsData } = useGetPermissionsQuery();
+  const { state, dispatch } = useRolePermission();
 
-const updatePermissions = (
-  permissions: ExtendedPermission[],
-  currentRolePermissions: Permission[]
-): ExtendedPermission[] => {
-  return permissions.map((permission) => {
-    const rolePermission = currentRolePermissions.find((p) => p.id === permission.id);
-
-    const updatedSubPermissions =
-      permission?.subMenus && permission.subMenus.length > 0
-        ? updatePermissions(permission.subMenus as ExtendedPermission[], currentRolePermissions)
-        : [];
-
-    return {
-      ...permission,
-      isPermissionAvailable: rolePermission ? true : false,
-      subMenus: updatedSubPermissions
-    };
-  });
-};
-
-const initialState: RolesAndPermissionState = {
-  permissions: [],
-  roleTab: 0,
-  secondaryTab: 0,
-  anchorElement: null,
-  currentRole: {
-    id: null,
-    users: [],
-    permissions: []
-  }
-};
-
-export const RoleAndPermission = () => {
-  const [state, dispatch] = React.useReducer(roleAndPermissionReducer, initialState);
-  const { data } = useGetRolesQuery();
-  const roles = data?.roles ?? [];
-  const { data: permissionData } = useGetPermissionsQuery();
-
-  const [getRoleUsers] = useLazyGetRoleUsersQuery();
-  const [getRolePermissions] = useLazyGetRolePermissionsQuery();
+  const initializePermissions = React.useCallback(
+    (menus: Permission[]): ExtendedPermission[] => {
+      return menus.map((menu) => ({
+        ...menu,
+        isPermissionAvailable: false,
+        subMenus: menu?.subMenus ? initializePermissions(menu.subMenus) : []
+      }));
+    },
+    [permissionsData?.permissions]
+  );
 
   React.useEffect(() => {
-    dispatch({ type: 'SET_ROLE_TAB', payload: 0 });
-    dispatch({ type: 'SET_SECONDARY_TAB', payload: 0 });
-  }, []);
-
-  React.useEffect(() => {
-    if (permissionData) {
+    if (permissionsData?.permissions) {
       dispatch({
         type: 'SET_PERMISSIONS',
-        payload: initializePermissions(permissionData.permissions)
+        payload: initializePermissions(permissionsData.permissions)
       });
     }
-  }, [permissionData, dispatch]);
-
+  }, [permissionsData?.permissions]);
   React.useEffect(() => {
-    const fetchRoleUsers = async () => {
-      try {
-        const result = await getRoleUsers(state.currentRole.id).unwrap();
-        dispatch({
-          type: 'SET_ROLE_USERS',
-          payload: Array.isArray(result.users) ? result.users : []
-        });
-      } catch (error) {
-        dispatch({ type: 'SET_ROLE_USERS', payload: [] });
-      }
-    };
-
-    {
-      state.roleTab > 0 && fetchRoleUsers();
+    if (rolesData) {
+      dispatch({ type: 'SET_ROLES', payload: rolesData.roles ?? [] });
+      dispatch({ type: 'SET_ROLE_TAB', payload: 0 });
     }
-  }, [state.roleTab, getRoleUsers, state.currentRole.id]);
-
-  React.useEffect(() => {
-    const fetchRolePermissions = async () => {
-      try {
-        const result = await getRolePermissions(state.currentRole.id).unwrap();
-        dispatch({
-          type: 'SET_ROLE_PERMISSIONS',
-          payload: Array.isArray(result.permissions)
-            ? updatePermissions(state.permissions, result.permissions)
-            : []
-        });
-      } catch (error) {
-        dispatch({
-          type: 'SET_ROLE_PERMISSIONS',
-          payload: updatePermissions(state.permissions, [])
-        });
-      }
-    };
-
-    {
-      state.roleTab > 0 && fetchRolePermissions();
-    }
-  }, [
-    state.secondaryTab,
-    getRolePermissions,
-    state.currentRole.id,
-    state.permissions,
-    state.roleTab
-  ]);
+  }, [rolesData]);
 
   const handleRoleTabChange = (_event: React.SyntheticEvent, index: number) => {
-    let selctedRoleId: number | null = null;
-    if (index > 0) {
-      selctedRoleId = roles[index - 1].id || null;
-    }
     dispatch({ type: 'SET_ROLE_TAB', payload: index });
-    dispatch({ type: 'SET_ROLE_ID', payload: selctedRoleId });
-    dispatch({ type: 'SET_SECONDARY_TAB', payload: 0 });
-    dispatch({ type: 'SET_ROLE_USERS', payload: [] });
   };
 
-  const handleSecondaryTabChange = (_event: React.SyntheticEvent, index: number) => {
-    dispatch({ type: 'SET_SECONDARY_TAB', payload: index });
-  };
-
+  const { roleTab, roles } = state;
   return (
     <>
       <PageContentHeader
@@ -151,7 +58,7 @@ export const RoleAndPermission = () => {
           <Tabs
             orientation='vertical'
             variant='scrollable'
-            value={state.roleTab}
+            value={roleTab}
             onChange={handleRoleTabChange}
             sx={{ borderRight: 1, borderColor: 'divider' }}
           >
@@ -162,31 +69,19 @@ export const RoleAndPermission = () => {
               ))}
           </Tabs>
         </Box>
-        <TabPanel value={state.roleTab} index={0}>
-          <Overview />
+        <TabPanel value={roleTab} index={0}>
+          <OverviewTab />
         </TabPanel>
-        {roles &&
-          roles.map(({ id, name }, index) => (
-            <TabPanel value={state.roleTab} index={index + 1} key={id}>
-              <RoleManage id={id} name={name} />
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={state.secondaryTab} onChange={handleSecondaryTabChange}>
-                  <Tab label='People' />
-                  <Tab label='Permissions' />
-                </Tabs>
-              </Box>
-              <TabPanel value={state.secondaryTab} index={0}>
-                <RoleUsers users={state.currentRole.users} />
-              </TabPanel>
-              <TabPanel value={state.secondaryTab} index={1}>
-                <MenuAccess
-                  roleId={state.currentRole.id}
-                  currentRolePermissions={state.currentRole.permissions}
-                />
-              </TabPanel>
-            </TabPanel>
-          ))}
+        <RoleTabs />
       </Box>
     </>
+  );
+};
+
+export const RoleAndPermission = () => {
+  return (
+    <RolePermissionProvider>
+      <RoleAndPermissionPage />
+    </RolePermissionProvider>
   );
 };

@@ -1,68 +1,58 @@
 import * as React from 'react';
 import { Block, Edit } from '@mui/icons-material';
-import { IconButton, Stack, Typography } from '@mui/material';
-import { AddEditRole } from './add-edit-role';
+import { Box, IconButton, Stack, Typography } from '@mui/material';
 import { HandleRoleStatus } from './handle-role-status';
+import { AddEditRole } from './add-edit-role';
 
 export const RoleManage = ({ id, name }: { id: number; name: string }) => {
-  const [addEditModalOpen, setAddEditModalOpen] = React.useState(false);
-  const [disableModalOpen, setDisableModalOpen] = React.useState(false);
+  const [action, setAction] = React.useState<string>('');
 
-  const openAddEditModal = () => {
-    setAddEditModalOpen(true);
+  const handleAction = (action: string) => {
+    setAction(action);
   };
-  const openDisableModal = () => {
-    setDisableModalOpen(true);
-  };
-  const closeModals = () => {
-    setAddEditModalOpen(false);
-    setDisableModalOpen(false);
-  };
-
-  const handleEditRole = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    openAddEditModal();
-  };
-  const handleDisableRole = () => {
-    openDisableModal();
-  };
-  const closeDisableRoleModal = () => {
-    closeModals();
+  const closeModal = () => {
+    setAction('');
   };
 
   return (
     <>
-      <Stack direction='row' sx={{ display: 'flex', paddingBottom: 1 }}>
+      <Stack direction='row' sx={{ display: 'flex', paddingBottom: 1, alignItems: 'center' }}>
         <Typography variant='body1' sx={{ fontSize: '18px', fontWeight: 500 }}>
           {name}
         </Typography>
-        <div style={{ marginLeft: 'auto' }}>
+        <Box sx={{ marginLeft: 'auto' }}>
           <Stack spacing={1} direction='row'>
-            <IconButton aria-label='Edit policy' onClick={handleEditRole} color='info'>
+            <IconButton aria-label='Edit policy' onClick={() => handleAction('edit')} color='info'>
               <Edit />
             </IconButton>
-            <IconButton aria-label='Block policy' onClick={handleDisableRole} color='error'>
+            <IconButton
+              aria-label='Block policy'
+              onClick={() => handleAction('block')}
+              color='error'
+            >
               <Block />
             </IconButton>
           </Stack>
-        </div>
+        </Box>
       </Stack>
 
-      <AddEditRole
-        roleId={id}
-        roleName={name}
-        titleText={'Edit Role'}
-        isOpen={addEditModalOpen}
-        closeAddEditRoleModalOpen={closeModals}
-      />
-      <HandleRoleStatus
-        title='Disable Role'
-        bodyText='Are you sure you want to disable this role?'
-        roleStatus={false}
-        roleId={id}
-        isOpen={disableModalOpen}
-        closeModals={closeDisableRoleModal}
-      />
+      {action === 'edit' && (
+        <AddEditRole
+          roleId={id}
+          roleName={name}
+          titleText={'Edit Role'}
+          closeAddEditRoleModalOpen={closeModal}
+        />
+      )}
+      {action === 'block' && (
+        <HandleRoleStatus
+          title='Disable Role'
+          bodyText='Are you sure you want to disable this role?'
+          roleStatus={false}
+          roleId={id}
+          closeModals={closeModal}
+        />
+      )}
     </>
   );
 };

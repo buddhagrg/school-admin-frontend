@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { getUserScreens, setUserPermissions } from '@/domains/auth/slice';
-import { useGetMyPermissionsQuery } from '@/domains/role-and-permission/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useGetMyPermissionsQuery } from '@/domains/role-and-permission/api';
 
 export const usePermission = () => {
   const dispatch = useDispatch();

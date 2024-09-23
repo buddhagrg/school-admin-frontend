@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { AddEditRoleSchema } from './rp-schema';
+import { AddEditPermissionSchema, AddEditRoleSchema } from './rp-schema';
 import { BasePermission, Permission } from '@/utils/type/misc';
 
 export type Role = {
@@ -81,3 +81,6 @@ export type MyPermissionData = {
     uis: BasePermission[];
   };
 };
+
+export type AddEditPermissionProps = z.infer<typeof AddEditPermissionSchema>;
+export type AddEditPermissionWithId = AddEditPermissionProps & { id: number };

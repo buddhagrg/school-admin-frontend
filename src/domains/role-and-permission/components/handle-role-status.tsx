@@ -6,11 +6,10 @@ import { toast } from 'react-toastify';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useHandleRoleStatusMutation } from '../api/role-and-permission-api';
+import { useHandleRoleStatusMutation } from '../api';
 
 type RoleStatusProps = {
   roleStatus: boolean;
-  isOpen: boolean;
   roleId: number;
   closeModals: () => void;
   title: string;
@@ -18,7 +17,6 @@ type RoleStatusProps = {
 };
 
 export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
-  isOpen,
   roleId,
   closeModals,
   roleStatus,
@@ -42,7 +40,7 @@ export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
       isSaving={isDisablingRole}
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
-      isOpen={isOpen}
+      isOpen={true}
       titleText={title}
       closeModal={closeModals}
       handleSave={onSave}

@@ -8,17 +8,18 @@ import {
   HandleRoleStatus,
   RoleUsersData,
   UserRole,
-  MyPermissionData
+  MyPermissionData,
+  AddEditPermissionWithId
 } from '../types';
 
 export const rolesAndPermissionsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getPermissions: builder.query<PermissionData, void>({
-      query: () => `/permissions/all`,
+      query: () => `/access-controls`,
       providesTags: (result) =>
-        result?.permissions.map(({ id }) => {
-          return { type: Tag.MENUS, id };
-        }) || [{ type: Tag.MENUS }]
+        result?.permissions?.map(({ id }) => {
+          return { type: Tag.PERMISSIONS, id };
+        }) || [{ type: Tag.PERMISSIONS }]
     }),
     getRoles: builder.query<RolesData, void>({
       query: () => `/roles`,
@@ -27,14 +28,14 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
           return { type: Tag.ROLES, id };
         }) || [{ type: Tag.ROLES }]
     }),
-    getRoleUsers: builder.query<RoleUsersData, number | null>({
+    getRoleUsers: builder.query<RoleUsersData, number>({
       query: (id) => `/roles/${id}/users`,
       providesTags: (result) =>
         result?.users.map(({ id }) => {
           return { type: Tag.ROLE_USERS, id };
         }) || [{ type: Tag.ROLE_USERS }]
     }),
-    getRolePermissions: builder.query<RolePermissionsData, number | null>({
+    getRolePermissions: builder.query<RolePermissionsData, number>({
       query: (id) => `/roles/${id}/permissions`,
       providesTags: (result) =>
         result?.permissions.map(({ id }) => {
@@ -86,7 +87,32 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
       invalidatesTags: [Tag.ROLE_USERS, Tag.ROLES]
     }),
     getMyPermissions: builder.query<MyPermissionData, void>({
-      query: () => `/permissions/me`
+      query: () => `/access-controls/me`,
+      providesTags: () => [Tag.MY_PERMISSIONS]
+    }),
+    deletePermission: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `/access-controls/${id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: [Tag.PERMISSIONS, Tag.MY_PERMISSIONS]
+    }),
+    addPermission: builder.mutation<{ message: string }, AddEditPermissionWithId>({
+      query: (payload) => ({
+        url: `/access-controls`,
+        method: 'POST',
+        body: payload
+      }),
+      invalidatesTags: [Tag.PERMISSIONS, Tag.MY_PERMISSIONS]
+    }),
+    updatePermission: builder.mutation<{ message: string }, AddEditPermissionWithId>({
+      query: ({ id, ...payload }) => ({
+        url: `/access-controls/${id}`,
+        method: 'PUT',
+        body: payload
+      }),
+      invalidatesTags: (result, _error, { id }) =>
+        result ? [{ type: Tag.PERMISSIONS, id }, Tag.MY_PERMISSIONS] : []
     })
   })
 });
@@ -95,12 +121,15 @@ export const {
   useGetPermissionsQuery,
   useLazyGetRolesQuery,
   useGetRolesQuery,
-  useLazyGetRoleUsersQuery,
-  useLazyGetRolePermissionsQuery,
+  useGetRoleUsersQuery,
+  useGetRolePermissionsQuery,
   useAddNewRoleMutation,
   useUpdateRoleMutation,
   useHandleRoleStatusMutation,
   useUpdateRolePermissionMutation,
   useSwitchUserRoleMutation,
-  useGetMyPermissionsQuery
+  useGetMyPermissionsQuery,
+  useDeletePermissionMutation,
+  useAddPermissionMutation,
+  useUpdatePermissionMutation
 } = rolesAndPermissionsApi;
