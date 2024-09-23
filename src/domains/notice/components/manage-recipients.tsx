@@ -103,9 +103,7 @@ export const ManageNoticeRecipients: React.FC<ManageNoticeRecipientsProps> = ({
             size='small'
             error={!!errors.primaryDependentName}
             helperText={errors.primaryDependentName?.message}
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
         </FormControl>
         <FormControl fullWidth sx={{ mt: 2 }} size='small'>
@@ -116,9 +114,7 @@ export const ManageNoticeRecipients: React.FC<ManageNoticeRecipientsProps> = ({
             size='small'
             error={!!errors.primaryDependentSelect}
             helperText={errors.primaryDependentSelect?.message}
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
         </FormControl>
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { Box, Button, Grid2, TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { SetupPasswordProps } from '../../types';
 
@@ -24,8 +24,8 @@ export const SetupPasswordForm: React.FC<SetupPasswordFormProps> = ({
 
   return (
     <form onSubmit={onSubmit}>
-      <Grid container spacing={2} sx={{ mt: 3 }}>
-        <Grid item xs={12} md={6}>
+      <Grid2 container spacing={2} sx={{ mt: 3 }}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <TextField
             size='small'
             label='Username'
@@ -34,10 +34,10 @@ export const SetupPasswordForm: React.FC<SetupPasswordFormProps> = ({
             error={!!errors.username}
             helperText={errors.username?.message}
           />
-        </Grid>
-        <Grid item xs={12} md={6} />
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 6 }} />
 
-        <Grid item xs={12} md={6}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <TextField
             size='small'
             type='password'
@@ -47,8 +47,8 @@ export const SetupPasswordForm: React.FC<SetupPasswordFormProps> = ({
             error={!!errors.password}
             helperText={errors.password?.message}
           />
-        </Grid>
-        <Grid item xs={12} md={6}>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <TextField
             size='small'
             type='password'
@@ -58,8 +58,8 @@ export const SetupPasswordForm: React.FC<SetupPasswordFormProps> = ({
             error={!!errors.confirmPassword}
             helperText={errors.confirmPassword?.message}
           />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
       <Box sx={{ mt: 4 }}>
         <Button
           type='button'

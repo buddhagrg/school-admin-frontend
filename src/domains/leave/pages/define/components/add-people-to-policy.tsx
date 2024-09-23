@@ -121,12 +121,14 @@ export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({
                   autoFocus
                   placeholder='Type to search...'
                   fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position='start'>
-                        <Search />
-                      </InputAdornment>
-                    )
+                  slotProps={{
+                    input: {
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <Search />
+                        </InputAdornment>
+                      )
+                    }
                   }}
                   onChange={(e) => setSearchText(e.target.value)}
                   onKeyDown={(e) => {

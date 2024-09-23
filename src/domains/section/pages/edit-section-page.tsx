@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { Grid2 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -37,10 +37,8 @@ export const EditSectionPage = () => {
   }
 
   return (
-    <Grid container>
-      <Grid item xs={12} md={4}>
-        {content}
-      </Grid>
-    </Grid>
+    <Grid2 container>
+      <Grid2 size={{ xs: 12, md: 4 }}>{content}</Grid2>
+    </Grid2>
   );
 };

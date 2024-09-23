@@ -101,9 +101,7 @@ export const AcademicInformation = () => {
             helperText={errors.roll?.message}
             label='Roll'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
         </Box>
         <Box>

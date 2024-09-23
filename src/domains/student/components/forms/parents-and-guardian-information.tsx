@@ -1,5 +1,5 @@
 import { Call, ContactPhone } from '@mui/icons-material';
-import { Box, Grid, InputAdornment, TextField, Typography } from '@mui/material';
+import { Box, Grid2, InputAdornment, TextField, Typography } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { NameIdType } from '@/utils/type/misc';
 import { ParentsAndGuardianInfo, StudentProps } from '../../types';
@@ -26,9 +26,9 @@ export const ParentsAndGuardianInformation = () => {
         <ContactPhone sx={{ mr: 1 }} />
         <Typography variant='body1'>Parents & Guardian Information</Typography>
       </Box>
-      <Grid container spacing={2} sx={{ mt: 1 }}>
+      <Grid2 container spacing={2} sx={{ mt: 1 }}>
         {fields.map((field) => (
-          <Grid item xs={12} md={6} key={field.id}>
+          <Grid2 size={{ xs: 12, md: 6 }} key={field.id}>
             <TextField
               {...register(`${field.id}`)}
               error={Boolean(errors?.[field.id])}
@@ -36,9 +36,7 @@ export const ParentsAndGuardianInformation = () => {
               fullWidth
               label={field.name}
               size='small'
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
               {...(field.id.includes('Phone')
                 ? {
                     InputProps: {
@@ -51,9 +49,9 @@ export const ParentsAndGuardianInformation = () => {
                   }
                 : {})}
             />
-          </Grid>
+          </Grid2>
         ))}
-      </Grid>
+      </Grid2>
     </>
   );
 };

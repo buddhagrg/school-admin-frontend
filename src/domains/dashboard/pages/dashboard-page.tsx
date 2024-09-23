@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid2 } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -24,38 +24,38 @@ export const DashboardPage = () => {
   const { students, teachers, parents, notices, leavePolicies, celebrations, oneMonthLeave } =
     data as DashboardProps;
   return (
-    <Grid container spacing={4}>
+    <Grid2 container spacing={4}>
       {currentUserRole === 'admin' && (
         <>
-          <Grid item xs={12} md={4}>
+          <Grid2 size={{ xs: 12, md: 4 }}>
             <GridCard {...students} heading='Total Students' />
-          </Grid>
-          <Grid item xs={12} md={4}>
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 4 }}>
             <GridCard {...teachers} heading='Total Teachers' />
-          </Grid>
-          <Grid item xs={12} md={4}>
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 4 }}>
             <GridCard {...parents} heading='Total Parents' />
-          </Grid>
+          </Grid2>
         </>
       )}
 
-      <Grid container item xs={12} spacing={3}>
-        <Grid item xs={12} md={4}>
+      <Grid2 container size={{ xs: 12 }} spacing={3}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
           <LeavePolicyDetail leavePolicies={leavePolicies} />
-        </Grid>
-        <Grid item xs={12} md={8}>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 8 }}>
           <Notices notices={notices} />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
-      <Grid container item xs={12} spacing={3}>
-        <Grid item xs={12} md={6}>
+      <Grid2 container size={{ xs: 12 }} spacing={3}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Celebrations celebrations={celebrations} />
-        </Grid>
-        <Grid item xs={12} md={6}>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <WhoIsOut whoIsOut={oneMonthLeave} />
-        </Grid>
-      </Grid>
-    </Grid>
+        </Grid2>
+      </Grid2>
+    </Grid2>
   );
 };

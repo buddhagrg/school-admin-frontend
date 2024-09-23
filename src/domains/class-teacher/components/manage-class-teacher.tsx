@@ -99,9 +99,7 @@ export const ManageClassTeacher: React.FC<ManageClassTeacherProps> = ({
             label='Class Name'
             fullWidth
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
 
           <FormControl>

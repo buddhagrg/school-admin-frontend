@@ -5,7 +5,7 @@ import {
   FormControlLabel,
   FormHelperText,
   FormLabel,
-  Grid,
+  Grid2,
   InputLabel,
   MenuItem,
   Radio,
@@ -156,8 +156,8 @@ export const NoticeForm: React.FC<Props> = ({
       </Box>
 
       {recipientWatch === 'SP' && (
-        <Grid container spacing={2} sx={{ mt: 1 }}>
-          <Grid xs={12} lg={4} item>
+        <Grid2 container spacing={2} sx={{ mt: 1 }}>
+          <Grid2 size={{ xs: 12, lg: 4 }}>
             <FormControl size='small' fullWidth error={Boolean(errors.recipientRole)}>
               <InputLabel id='role' shrink>
                 Role
@@ -188,8 +188,8 @@ export const NoticeForm: React.FC<Props> = ({
                 )}
               />
             </FormControl>
-          </Grid>
-          <Grid xs={12} lg={4} item>
+          </Grid2>
+          <Grid2 size={{ xs: 12, lg: 4 }}>
             {primaryDependents.length > 0 && (
               <FormControl
                 sx={{ minWidth: { xs: '100%', md: '350px' } }}
@@ -228,8 +228,8 @@ export const NoticeForm: React.FC<Props> = ({
                 />
               </FormControl>
             )}
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       )}
 
       <LoadingButton

@@ -1,5 +1,5 @@
 import { Home } from '@mui/icons-material';
-import { Box, Grid, TextField, Typography } from '@mui/material';
+import { Box, Grid2, TextField, Typography } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { StaffFormProps } from '../../types';
 
@@ -15,8 +15,8 @@ export const Address = () => {
         <Home sx={{ mr: 1 }} />
         <Typography variant='body1'>Address</Typography>
       </Box>
-      <Grid container spacing={2} sx={{ marginTop: '0px' }}>
-        <Grid item xs={12} md={6}>
+      <Grid2 container spacing={2} sx={{ marginTop: '0px' }}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <TextField
             {...register('currentAddress')}
             error={Boolean(errors?.currentAddress)}
@@ -26,12 +26,10 @@ export const Address = () => {
             fullWidth
             label='Current Address'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
-        </Grid>
-        <Grid item xs={12} md={6}>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <TextField
             {...register('permanentAddress')}
             error={Boolean(errors?.permanentAddress)}
@@ -41,12 +39,10 @@ export const Address = () => {
             fullWidth
             label='Permanent Address'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </>
   );
 };

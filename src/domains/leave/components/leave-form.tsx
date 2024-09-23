@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   FormControl,
   FormHelperText,
-  Grid,
+  Grid2,
   InputLabel,
   MenuItem,
   Select,
@@ -46,8 +46,8 @@ export const LeaveForm: React.FC<LeaveFormProps> = ({ methods, leavePolicies }) 
         />
         <FormHelperText>{errors.policy?.message}</FormHelperText>
       </FormControl>
-      <Grid container spacing={4} sx={{ mt: 1 }}>
-        <Grid item xs={12} md={6}>
+      <Grid2 container spacing={4} sx={{ mt: 1 }}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Controller
             name='from'
             control={control}
@@ -66,8 +66,8 @@ export const LeaveForm: React.FC<LeaveFormProps> = ({ methods, leavePolicies }) 
               />
             )}
           />
-        </Grid>
-        <Grid item xs={12} md={6}>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Controller
             name='to'
             control={control}
@@ -86,8 +86,8 @@ export const LeaveForm: React.FC<LeaveFormProps> = ({ methods, leavePolicies }) 
               />
             )}
           />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
       <TextField
         {...register('note')}
         sx={{ mt: 3 }}

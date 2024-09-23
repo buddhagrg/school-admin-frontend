@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Card, CardContent, Grid2, Typography } from '@mui/material';
 
 type LeaveDetailType = {
   name: string;
@@ -9,7 +9,7 @@ type LeaveDetailType = {
 
 export const LeaveDetail: React.FC<LeaveDetailType> = ({ name, totalDaysUsed }) => {
   return (
-    <Grid>
+    <Grid2>
       <Card sx={{ textAlign: 'center' }}>
         <CardContent>
           <Typography variant='h6' component='div' gutterBottom>
@@ -20,6 +20,6 @@ export const LeaveDetail: React.FC<LeaveDetailType> = ({ name, totalDaysUsed }) 
           </Typography>
         </CardContent>
       </Card>
-    </Grid>
+    </Grid2>
   );
 };

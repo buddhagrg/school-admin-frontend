@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CalendarMonth } from '@mui/icons-material';
-import { Box, Button, Grid, Paper } from '@mui/material';
+import { Box, Button, Grid2, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
@@ -55,19 +55,19 @@ export const LeavePolicyDetail = () => {
   let content: null | React.ReactElement = null;
   if (!Array.isArray(leavePolicies) || leavePolicies.length <= 0) {
     content = (
-      <Grid xs={12} item>
+      <Grid2 size={{ xs: 12 }}>
         <Box component={Paper} sx={{ p: 2 }}>
           Record not found.
         </Box>
-      </Grid>
+      </Grid2>
     );
   } else {
     content = (
       <>
         {leavePolicies.map((leave) => (
-          <Grid xs={12} md={4} item key={leave.id}>
+          <Grid2 size={{ xs: 12, md: 4 }} key={leave.id}>
             <LeaveDetail key={leave.id} {...leave} />
-          </Grid>
+          </Grid2>
         ))}
       </>
     );
@@ -84,9 +84,9 @@ export const LeavePolicyDetail = () => {
       >
         Request Leave
       </Button>
-      <Grid container columnSpacing={2} rowSpacing={2}>
+      <Grid2 container columnSpacing={2} rowSpacing={2}>
         {content}
-      </Grid>
+      </Grid2>
 
       <DialogModal
         isSaving={isApplyingLeave}

@@ -3,7 +3,7 @@ import {
   Box,
   FormControl,
   FormHelperText,
-  Grid,
+  Grid2,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -43,9 +43,7 @@ export const BasicInformation = () => {
             helperText={errors?.name?.message}
             label='Full Name'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
         </Box>
         <FormControl size='small' sx={{ width: '150px' }} error={Boolean(errors?.role)}>
@@ -136,15 +134,15 @@ export const BasicInformation = () => {
             helperText={errors?.gender?.message}
             label='Phone Number'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <Call fontSize='small' />
-                </InputAdornment>
-              )
+            slotProps={{
+              inputLabel: { shrink: true },
+              input: {
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <Call fontSize='small' />
+                  </InputAdornment>
+                )
+              }
             }}
           />
         </Box>
@@ -155,15 +153,15 @@ export const BasicInformation = () => {
             helperText={errors?.email?.message}
             label='Email'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <Email fontSize='small' />
-                </InputAdornment>
-              )
+            slotProps={{
+              inputLabel: { shrink: true },
+              input: {
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <Email fontSize='small' />
+                  </InputAdornment>
+                )
+              }
             }}
           />
         </Box>
@@ -209,8 +207,8 @@ export const BasicInformation = () => {
             )}
           />
         </Box>
-        <Grid container rowSpacing={2}>
-          <Grid item xs={12} md={8}>
+        <Grid2 container rowSpacing={2}>
+          <Grid2 size={{ xs: 12, md: 8 }}>
             <TextField
               {...register('qualification')}
               error={Boolean(errors?.qualification)}
@@ -220,12 +218,10 @@ export const BasicInformation = () => {
               fullWidth
               label='Qualification'
               size='small'
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
             />
-          </Grid>
-          <Grid item xs={12} md={8}>
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 8 }}>
             <TextField
               {...register('experience')}
               error={Boolean(errors?.experience)}
@@ -235,12 +231,10 @@ export const BasicInformation = () => {
               fullWidth
               label='Experience'
               size='small'
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
             />
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Stack>
     </>
   );

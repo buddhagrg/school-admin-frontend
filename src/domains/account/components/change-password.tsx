@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, Grid, Paper, TextField } from '@mui/material';
+import { Box, Button, Grid2, Paper, TextField } from '@mui/material';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { useForm } from 'react-hook-form';
@@ -44,8 +44,8 @@ export const ChangePassword = () => {
   return (
     <form onSubmit={handleSubmit(onSave)}>
       <Paper sx={{ p: 2 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
+        <Grid2 container spacing={2}>
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <TextField
               size='small'
               type='password'
@@ -55,10 +55,10 @@ export const ChangePassword = () => {
               error={!!errors.oldPassword}
               helperText={errors.oldPassword?.message}
             />
-          </Grid>
-          <Grid item xs={12} md={6} />
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 6 }} />
 
-          <Grid item xs={12} md={6}>
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <TextField
               size='small'
               type='password'
@@ -68,8 +68,8 @@ export const ChangePassword = () => {
               error={!!errors.newPassword}
               helperText={errors.newPassword?.message}
             />
-          </Grid>
-          <Grid item xs={12} md={6}>
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <TextField
               size='small'
               type='password'
@@ -79,8 +79,8 @@ export const ChangePassword = () => {
               error={!!errors.confirmPassword}
               helperText={errors.confirmPassword?.message}
             />
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
         <Box sx={{ mt: 4 }}>
           <Button
             type='button'

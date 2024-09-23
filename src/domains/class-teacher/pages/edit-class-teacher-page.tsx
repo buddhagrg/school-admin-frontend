@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid } from '@mui/material';
+import { Grid2 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -43,10 +43,8 @@ export const EditClassTeacher = () => {
   }
 
   return (
-    <Grid container columnSpacing={5} rowSpacing={2}>
-      <Grid item xs={12} md={4}>
-        {content}
-      </Grid>
-    </Grid>
+    <Grid2 container columnSpacing={5} rowSpacing={2}>
+      <Grid2 size={{ xs: 12, md: 4 }}>{content}</Grid2>
+    </Grid2>
   );
 };

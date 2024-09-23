@@ -6,7 +6,7 @@ import {
   Card,
   CardContent,
   Divider,
-  Grid,
+  Grid2,
   IconButton,
   Menu,
   MenuItem,
@@ -92,11 +92,11 @@ export const Overview = ({ leavePolicies }: { leavePolicies: LeavePolicy[] | und
         </Button>
       </Stack>
       <Divider sx={{ my: '10px' }} />
-      <Grid container spacing={3}>
+      <Grid2 container spacing={3}>
         {leavePolicies &&
           leavePolicies.length > 0 &&
           leavePolicies.map(({ id, name, totalUsersAssociated, isActive }) => (
-            <Grid item xs={12} md={4} key={id}>
+            <Grid2 size={{ xs: 12, md: 4 }} key={id}>
               <Card variant='outlined'>
                 <CardContent sx={{ backgroundColor: '#f3f6f999' }}>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -152,9 +152,9 @@ export const Overview = ({ leavePolicies }: { leavePolicies: LeavePolicy[] | und
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
+            </Grid2>
           ))}
-      </Grid>
+      </Grid2>
 
       <AddEditPolicy
         policyId={state.policyId}

@@ -40,9 +40,7 @@ export const BasicInformation = () => {
             helperText={errors.name?.message}
             label='Full Name'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
         </Box>
         <Box>
@@ -52,15 +50,15 @@ export const BasicInformation = () => {
             helperText={errors.phone?.message}
             label='Phone Number'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <Call fontSize='small' />
-                </InputAdornment>
-              )
+            slotProps={{
+              inputLabel: { shrink: true },
+              input: {
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <Call fontSize='small' />
+                  </InputAdornment>
+                )
+              }
             }}
           />
         </Box>
@@ -71,15 +69,15 @@ export const BasicInformation = () => {
             helperText={errors.email?.message}
             label='Email'
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <Email fontSize='small' />
-                </InputAdornment>
-              )
+            slotProps={{
+              inputLabel: { shrink: true },
+              input: {
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <Email fontSize='small' />
+                  </InputAdornment>
+                )
+              }
             }}
           />
         </Box>

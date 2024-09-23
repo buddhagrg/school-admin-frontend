@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid2 } from '@mui/material';
 import { Info } from '@mui/icons-material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -22,14 +22,14 @@ export const ListClassTeachers = () => {
   return (
     <>
       <PageContentHeader icon={<Info sx={{ mr: 1 }} />} heading='Class Teacher Information' />
-      <Grid container columnSpacing={5} rowSpacing={2}>
-        <Grid item xs={12} md={4}>
+      <Grid2 container columnSpacing={5} rowSpacing={2}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
           <ManageClassTeacher operation='Add' methods={methods} />
-        </Grid>
-        <Grid item xs={12} md={8}>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 8 }}>
           <ClassTeacherDataTable />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </>
   );
 };

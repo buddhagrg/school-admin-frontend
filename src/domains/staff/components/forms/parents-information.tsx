@@ -31,9 +31,7 @@ export const ParentsInformation = () => {
               helperText={errors?.[field.id]?.message}
               label={field.name}
               size='small'
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
               {...(field.id.includes('Phone')
                 ? {
                     InputProps: {

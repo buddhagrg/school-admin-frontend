@@ -1,4 +1,4 @@
-import { Box, Grid, TextField, Typography } from '@mui/material';
+import { Box, Grid2, TextField, Typography } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { Home } from '@mui/icons-material';
 
@@ -22,9 +22,9 @@ export const AddressInformation = () => {
         <Home sx={{ mr: 1 }} />
         <Typography variant='body1'>Address</Typography>
       </Box>
-      <Grid container spacing={2} sx={{ marginTop: '0px' }}>
+      <Grid2 container spacing={2} sx={{ marginTop: '0px' }}>
         {fields.map((field) => (
-          <Grid item xs={12} md={6} key={field.id}>
+          <Grid2 size={{ xs: 12, md: 6 }} key={field.id}>
             <TextField
               {...register(`${field.id}`)}
               error={Boolean(errors?.[field.id])}
@@ -34,13 +34,11 @@ export const AddressInformation = () => {
               fullWidth
               label={field.name}
               size='small'
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
             />
-          </Grid>
+          </Grid2>
         ))}
-      </Grid>
+      </Grid2>
     </>
   );
 };

@@ -5,7 +5,7 @@ import {
   PersonalDetail
 } from '@/domains/staff/components/views';
 import { useGetStaffDetail } from '@/domains/staff/hooks';
-import { Grid } from '@mui/material';
+import { Grid2 } from '@mui/material';
 
 type StaffProfileProps = {
   id?: string;
@@ -35,11 +35,11 @@ export const StaffProfile: React.FC<StaffProfileProps> = ({ id }) => {
   } = staffDetail;
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} md={5}>
+    <Grid2 container spacing={3}>
+      <Grid2 size={{ xs: 12, md: 5 }}>
         <MiniAvatar name={name} roleName={roleName} email={email} phone={phone} />
-      </Grid>
-      <Grid item xs={12} md={7}>
+      </Grid2>
+      <Grid2 size={{ xs: 12, md: 7 }}>
         <PersonalDetail
           gender={gender}
           dob={dob}
@@ -50,19 +50,19 @@ export const StaffProfile: React.FC<StaffProfileProps> = ({ id }) => {
           currentAddress={currentAddress}
           permanentAddress={permanentAddress}
         />
-      </Grid>
-      <Grid item xs={12} md={5}></Grid>
-      <Grid item xs={12} md={7}>
+      </Grid2>
+      <Grid2 size={{ xs: 12, md: 5 }}></Grid2>
+      <Grid2 size={{ xs: 12, md: 7 }}>
         <ParentsInformation
           fatherName={fatherName}
           motherName={motherName}
           emergencyPhone={emergencyPhone}
         />
-      </Grid>
-      <Grid item xs={12} md={5}></Grid>
-      <Grid item xs={12} md={7}>
+      </Grid2>
+      <Grid2 size={{ xs: 12, md: 5 }}></Grid2>
+      <Grid2 size={{ xs: 12, md: 7 }}>
         <Others systemAccess={systemAccess} reporterName={reporterName} />
-      </Grid>
-    </Grid>
+      </Grid2>
+    </Grid2>
   );
 };

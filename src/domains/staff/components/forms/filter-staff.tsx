@@ -3,7 +3,7 @@ import {
   Box,
   FormControl,
   FormHelperText,
-  Grid,
+  Grid2,
   InputLabel,
   MenuItem,
   Paper,
@@ -36,8 +36,8 @@ export const FilterStaff: React.FC<FilterStaffProps> = ({ searchStaff, methods, 
       <Typography variant='body1' sx={{ mb: 3 }}>
         Filter Criteria
       </Typography>
-      <Grid container spacing={2}>
-        <Grid item md={4} xs={8}>
+      <Grid2 container spacing={2}>
+        <Grid2 size={{ xs: 8, md: 4 }}>
           <FormControl fullWidth size='small' error={Boolean(errors.roleId)}>
             <InputLabel id='staff-role' shrink>
               Staff Role
@@ -65,8 +65,8 @@ export const FilterStaff: React.FC<FilterStaffProps> = ({ searchStaff, methods, 
               )}
             />
           </FormControl>
-        </Grid>
-        <Grid item md={4} xs={8}>
+        </Grid2>
+        <Grid2 size={{ xs: 8, md: 4 }}>
           <TextField
             {...register('staffId')}
             error={Boolean(errors.staffId)}
@@ -74,12 +74,10 @@ export const FilterStaff: React.FC<FilterStaffProps> = ({ searchStaff, methods, 
             label='Staff ID'
             fullWidth
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
-        </Grid>
-        <Grid item md={4} xs={8}>
+        </Grid2>
+        <Grid2 size={{ xs: 8, md: 4 }}>
           <TextField
             {...register('staffName')}
             error={Boolean(errors.staffName)}
@@ -87,12 +85,10 @@ export const FilterStaff: React.FC<FilterStaffProps> = ({ searchStaff, methods, 
             label='Staff Name'
             fullWidth
             size='small'
-            InputLabelProps={{
-              shrink: true
-            }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ marginLeft: 'auto', mt: 2 }}>
           <LoadingButton
