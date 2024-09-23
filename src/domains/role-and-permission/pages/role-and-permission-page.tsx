@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import { AdminPanelSettings } from '@mui/icons-material';
 
 import { PageContentHeader } from '@/components/page-content-header';
@@ -15,6 +15,8 @@ const RoleAndPermissionPage = () => {
   const { data: rolesData } = useGetRolesQuery();
   const { data: permissionsData } = useGetPermissionsQuery();
   const { state, dispatch } = useRolePermission();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const initializePermissions = React.useCallback(
     (menus: Permission[]): ExtendedPermission[] => {
@@ -53,26 +55,30 @@ const RoleAndPermissionPage = () => {
         icon={<AdminPanelSettings sx={{ mr: 1 }} />}
         heading='Roles & Permissions Setting'
       />
-      <Box sx={{ display: 'flex', bgcolor: 'background.paper', flexGrow: 1 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Tabs
-            orientation='vertical'
-            variant='scrollable'
-            value={roleTab}
-            onChange={handleRoleTabChange}
-            sx={{ borderRight: 1, borderColor: 'divider' }}
-          >
-            <Tab label='Overview' sx={{ borderBottom: 1, borderColor: 'divider' }} />
-            {roles &&
-              roles.map(({ id, name, usersAssociated }) => (
-                <Tab key={id} label={`${name} (${usersAssociated})`} />
-              ))}
-          </Tabs>
+      <Box
+        flexDirection={isSmallScreen ? 'column' : 'row'}
+        sx={{ display: 'flex', bgcolor: 'background.paper', flexGrow: 1 }}
+      >
+        <Tabs
+          orientation={isSmallScreen ? 'horizontal' : 'vertical'}
+          variant='scrollable'
+          value={roleTab}
+          onChange={handleRoleTabChange}
+          sx={{ borderRight: 1, borderColor: 'divider' }}
+        >
+          <Tab label='Overview' sx={{ borderBottom: 1, borderColor: 'divider' }} />
+          {roles &&
+            roles.map(({ id, name, usersAssociated }) => (
+              <Tab key={id} label={`${name} (${usersAssociated})`} />
+            ))}
+        </Tabs>
+
+        <Box sx={{ flexGrow: 1, p: 1 }}>
+          <TabPanel value={roleTab} index={0}>
+            <OverviewTab />
+          </TabPanel>
+          <RoleTabs />
         </Box>
-        <TabPanel value={roleTab} index={0}>
-          <OverviewTab />
-        </TabPanel>
-        <RoleTabs />
       </Box>
     </>
   );

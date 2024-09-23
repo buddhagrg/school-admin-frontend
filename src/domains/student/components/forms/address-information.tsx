@@ -22,7 +22,7 @@ export const AddressInformation = () => {
         <Home sx={{ mr: 1 }} />
         <Typography variant='body1'>Address</Typography>
       </Box>
-      <Grid2 container spacing={2} sx={{ marginTop: '0px' }}>
+      <Grid2 container spacing={2} sx={{ marginTop: '10px' }}>
         {fields.map((field) => (
           <Grid2 size={{ xs: 12, md: 6 }} key={field.id}>
             <TextField
