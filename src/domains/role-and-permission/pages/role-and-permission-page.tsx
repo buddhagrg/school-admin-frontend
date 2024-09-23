@@ -73,12 +73,10 @@ const RoleAndPermissionPage = () => {
             ))}
         </Tabs>
 
-        <Box sx={{ flexGrow: 1, p: 1 }}>
-          <TabPanel value={roleTab} index={0}>
-            <OverviewTab />
-          </TabPanel>
-          <RoleTabs />
-        </Box>
+        <TabPanel value={roleTab} index={0}>
+          <OverviewTab />
+        </TabPanel>
+        <RoleTabs />
       </Box>
     </>
   );
