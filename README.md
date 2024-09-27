@@ -1,10 +1,10 @@
-## Demo
+### Demo
 
 https://www.school-admin.xyz \
-Username- <mark>`admin@gmail.com`</mark> \
+Username- <mark>`admin@school-admin.com`</mark> \
 Password- <mark>`3OU4zn3q6Zh9`</mark>
 
-## Todos
+### Todos
 
 - [x] Live deployment
 - [ ] System stabilization
@@ -15,11 +15,12 @@ Password- <mark>`3OU4zn3q6Zh9`</mark>
 
 ## Table of Contents:
 
+- [Table of Contents:](#table-of-contents)
 - [Application Overview](#application-overview)
 - [Project Standards](#project-standards)
 - [Project Structure](#project-structure)
 - [State management](#state-management)
-- [Other dependent repos](#other-dependent-repos)
+- [Other Dependent Repos](#other-dependent-repos)
 
 ## Application Overview
 
