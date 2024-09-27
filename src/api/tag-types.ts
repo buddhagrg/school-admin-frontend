@@ -19,5 +19,6 @@ export enum Tag {
   ROLE_USERS = 'RoleUsers',
   ROLE_PERMISSIONS = 'RolePermissions',
   SECTIONS = 'Sections',
-  DEPARTMENTS = 'Departments'
+  DEPARTMENTS = 'Departments',
+  PENDING_NOTICES = 'PendingNotices'
 }

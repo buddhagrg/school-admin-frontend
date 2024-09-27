@@ -1,9 +1,11 @@
 ## Demo
+
 https://www.school-admin.xyz \
 Username- <mark>`admin@gmail.com`</mark> \
 Password- <mark>`3OU4zn3q6Zh9`</mark>
 
 ## Todos
+
 - [x] Live deployment
 - [ ] System stabilization
 - [ ] Unit Testing
@@ -12,6 +14,7 @@ Password- <mark>`3OU4zn3q6Zh9`</mark>
 - [ ] New feature add and enhancement
 
 ## Table of Contents:
+
 - [Application Overview](#application-overview)
 - [Project Standards](#project-standards)
 - [Project Structure](#project-structure)
@@ -93,11 +96,12 @@ Component's own state are managed by the `useState` and `useReducer` hooks.
 
 As the requirement of app grows, `redux-toolkit` is used for global store and `redux-persist` for store state persistence. `redux tookit query` has been a really game changer in the RTK family which has some really cool feature regarding auto hooks for the endpoints too.
 
-**Form handling** 
+**Form handling**
 
 `react-hook-form` is used for form handling with `zod` integration for runtime validation.
 
 ## Other Dependent Repos
+
 There are separate repos for api and database. \
 API- https://github.com/buddhagrg/school-admin-api \
 DB- https://github.com/buddhagrg/school-admin-db

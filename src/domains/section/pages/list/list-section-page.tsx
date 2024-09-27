@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { PageContentHeader } from '@/components/page-content-header';
 import { ManageSection } from '../../components';
 import { SectionForm, SectionFormSchema } from '../../types';
-import { SectionDataTable } from './section-data-table';
+import { SectionData } from './section-data';
 
 export const ListSectionPage = () => {
   const methods = useForm<SectionForm>({
@@ -22,7 +22,7 @@ export const ListSectionPage = () => {
           <ManageSection operation='Add' methods={methods} />
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
-          <SectionDataTable />
+          <SectionData />
         </Grid2>
       </Grid2>
     </>

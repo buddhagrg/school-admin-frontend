@@ -2,10 +2,11 @@ import { Grid2 } from '@mui/material';
 import { Info } from '@mui/icons-material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+
 import { PageContentHeader } from '@/components/page-content-header';
 import { ClassTeacherProps, ClassTeacherSchema } from '@/domains/class/types';
 import { ManageClassTeacher } from '../../components';
-import { ClassTeacherDataTable } from './class-teacher-data-table';
+import { ClassTeacherData } from './class-teacher-data';
 
 const initialState = {
   class: '',
@@ -27,7 +28,7 @@ export const ListClassTeachers = () => {
           <ManageClassTeacher operation='Add' methods={methods} />
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
-          <ClassTeacherDataTable />
+          <ClassTeacherData />
         </Grid2>
       </Grid2>
     </>

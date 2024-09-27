@@ -17,8 +17,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useLogoutMutation } from '@/domains/auth/api';
 import { getUserEmail, getUserName, getUserRole, resetUser } from '@/domains/auth/slice';

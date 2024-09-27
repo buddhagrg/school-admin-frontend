@@ -1,12 +1,13 @@
 import { Box, Button } from '@mui/material';
 import { Add, Settings } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+
 import { PageContentHeader } from '@/components/page-content-header';
-import { useGetNoticesQuery } from '../api/notice-api';
+import { useGetAllPendingNoticesQuery } from '../api/notice-api';
 import { NoticeData } from '../components';
 
 export const ManageNotices = () => {
-  const { data, isLoading, isError, error } = useGetNoticesQuery();
+  const { data, isLoading, isError, error } = useGetAllPendingNoticesQuery();
 
   return (
     <>
@@ -23,11 +24,11 @@ export const ManageNotices = () => {
       </Button>
       <Box sx={{ mb: 2 }} />
       <NoticeData
-        notices={data?.notices ?? []}
+        notices={isError ? [] : data?.notices || []}
         isLoading={isLoading}
         isError={isError}
         error={error}
-        actionCellType='menu'
+        actionCellType='reviewer'
       />
     </>
   );

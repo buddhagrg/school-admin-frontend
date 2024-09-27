@@ -10,6 +10,7 @@ import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetNoticeDetailQuery, useHandleNoticeStatusMutation } from '../api/notice-api';
+import { ViewNoticeSkeleton } from '../components';
 
 export const ViewNotice = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ export const ViewNotice = () => {
 
   let content: null | React.ReactElement = null;
   if (isLoading) {
-    content = <>loading...</>;
+    content = <ViewNoticeSkeleton />;
   } else if (isError) {
     content = <>{getErrorMsg(error).message}</>;
   } else if (!noticeDetail) {

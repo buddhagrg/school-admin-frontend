@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { PageContentHeader } from '@/components/page-content-header';
 import { DepartmentForm, DepartmentSchema } from '../../types';
 import { ManageDepartment } from '../../components';
-import { DepartmentDataTable } from './department-data-table';
+import { DepartmentData } from './department-data';
 
 export const ListDepartmentsPage = () => {
   const methods = useForm<DepartmentForm>({
@@ -22,7 +22,7 @@ export const ListDepartmentsPage = () => {
           <ManageDepartment operation='Add' methods={methods} />
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
-          <DepartmentDataTable />
+          <DepartmentData />
         </Grid2>
       </Grid2>
     </>

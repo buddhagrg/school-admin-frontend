@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
-
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+
 import { ProtectedRoute } from './protected-route';
 import { AppRoot } from './app-root';
 import { LoginPage, SetupPasswordPage } from '@/domains/auth/pages';

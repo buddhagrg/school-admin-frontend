@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Paper, Tab, Tabs } from '@mui/material';
 import { useParams } from 'react-router-dom';
+
 import { TabPanel } from '@/components/tab-panel';
 import { PageContentHeader } from '@/components/page-content-header';
 import { StudentProfile } from '@/components/user-account-profile';

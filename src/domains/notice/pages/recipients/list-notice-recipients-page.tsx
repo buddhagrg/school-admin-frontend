@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { PageContentHeader } from '@/components/page-content-header';
 import { NoticeRecipient, NoticeRecipientSchema } from '../../types';
 import { ManageNoticeRecipients } from '../../components';
-import { RecipientDataTable } from './notice-recipients-data-table';
+import { RecipientData } from './notice-recipients-data';
 
 const initialState = {
   roleId: 0,
@@ -28,7 +28,7 @@ export const ListNoticeRecipients = () => {
           <ManageNoticeRecipients operation='Add' methods={methods} />
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
-          <RecipientDataTable />
+          <RecipientData />
         </Grid2>
       </Grid2>
     </>

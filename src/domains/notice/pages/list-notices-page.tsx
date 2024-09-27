@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material';
 import { Add, Campaign } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+
 import { PageContentHeader } from '@/components/page-content-header';
 import { useGetNoticesQuery } from '../api/notice-api';
 import { NoticeData } from '../components';
@@ -23,11 +24,11 @@ export const ListNotices = () => {
       </Button>
       <Box sx={{ mb: 2 }} />
       <NoticeData
-        notices={data?.notices ?? []}
+        notices={isError ? [] : data?.notices || []}
         isLoading={isLoading}
         isError={isError}
         error={error}
-        actionCellType='icon'
+        actionCellType='user'
       />
     </>
   );

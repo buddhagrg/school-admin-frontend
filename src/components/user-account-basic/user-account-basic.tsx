@@ -1,235 +1,194 @@
 import * as React from 'react';
-import {
-  Box,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography
-} from '@mui/material';
-import {
-  Block,
-  CheckCircle,
-  Edit,
-  Email,
-  Key,
-  LockReset,
-  MoreHoriz,
-  Visibility
-} from '@mui/icons-material';
+import { Box, ListItemIcon, ListItemText, MenuItem, Paper, Typography } from '@mui/material';
+import { Block, CheckCircle, Edit, Email, Key, LockReset, Visibility } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 
-import { NameIdType } from '@/utils/type/misc';
-import { TableRowWithColSpan } from '@/components/table-row-with-col-span';
 import { DialogModal } from '@/components/dialog-modal';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { UserAccountBasicDataProps } from './user-account-basic-type';
-import { userAccountBasicReducer } from './user-account-basic-reducer';
+import { UserAccountBasicDataProps, UserAccountBasicProps } from './user-account-basic-type';
 import { useHandleMenuAction } from '../../hooks';
 import { menuItemTexts } from '@/constants';
 
-const columns: NameIdType[] = [
-  { id: 'action', name: 'Action' },
-  { id: 'id', name: 'ID' },
-  { id: 'name', name: 'Name' },
-  { id: 'email', name: 'Email' },
-  { id: 'role', name: 'Role' },
-  { id: 'systemAccess', name: 'System Access' },
-  { id: 'lastLogin', name: 'Last Login' }
-];
-
+type State = {
+  isSaving: boolean;
+  isModalOpen: boolean;
+  modalTitle: string;
+  modalBodyText: string;
+  userId: number;
+  menuAction: string;
+};
 const initialState = {
   isSaving: false,
-  anchorEl: null,
-  openRowUserId: null,
   isModalOpen: false,
   modalTitle: '',
   modalBodyText: '',
-  selectedUserId: 0,
-  menuItemValue: ''
+  userId: 0,
+  menuAction: ''
 };
 
 export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) => {
-  const [state, dispatch] = React.useReducer(userAccountBasicReducer, initialState);
+  const [state, setState] = React.useState<State>(initialState);
   const { handleAction } = useHandleMenuAction();
+  const { users, userType, isLoading, isError, error } = data;
 
-  const handleMenuClick = (id: number) => (event: React.MouseEvent<HTMLElement>) => {
-    dispatch({
-      type: 'SET_MENU_CLICK',
-      payload: {
-        selectedUserId: id,
-        anchorEl: event.currentTarget
+  const columns: MRT_ColumnDef<UserAccountBasicProps>[] = React.useMemo(
+    () => [
+      { accessorKey: 'id', header: 'ID' },
+      { accessorKey: 'name', header: 'Name' },
+      { accessorKey: 'email', header: 'Email' },
+      { accessorKey: 'role', header: 'Role' },
+      {
+        accessorKey: 'systemAccess',
+        header: 'System Access',
+        Cell: ({ cell }) => <>{cell.getValue<boolean>().toString()}</>
+      },
+      {
+        accessorKey: 'lastLogin',
+        header: 'Last Login',
+        Cell: ({ cell }) => <>{getFormattedDate(cell.getValue<string>(), DATE_TIME_24_HR_FORMAT)}</>
       }
-    });
-  };
-  const handleMenuClose = () => {
-    dispatch({ type: 'SET_MENU_CLOSE' });
-  };
-  const onMenuItemClick = (menuItemValue: string) => {
-    const stsText = menuItemTexts[menuItemValue] || '';
-
-    dispatch({
-      type: 'SET_MENU_ITEM_CLICK',
-      payload: {
-        menuItemValue,
-        modalTitle: stsText,
-        modalBodyText: `Are you sure you want to ${stsText}?`
-      }
-    });
+    ],
+    []
+  );
+  const onMenuItemClick = (menuAction: string, userId: number) => {
+    const modalTitle = menuItemTexts[menuAction] || '';
+    const modalBodyText = `Are you sure you want to ${modalTitle}?`;
+    setState((prevState) => ({
+      ...prevState,
+      modalTitle,
+      modalBodyText,
+      userId,
+      isModalOpen: !prevState.isModalOpen,
+      menuAction
+    }));
   };
   const toggleModal = () => {
-    dispatch({ type: 'SET_MODAL_FALSE' });
+    setState((prevState) => ({ ...prevState, isModalOpen: !prevState.isModalOpen }));
   };
-
   const onSave = async () => {
     try {
-      dispatch({ type: 'SET_LOADER' });
-      const { selectedUserId, menuItemValue } = state;
-      const result = await handleAction(menuItemValue, selectedUserId);
+      setState((prevState) => ({ ...prevState, isSaving: !prevState.isSaving }));
+      const { userId, menuAction } = state;
+      const result = await handleAction(menuAction, userId);
       toast.info(result?.message);
       toggleModal();
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     } finally {
-      dispatch({ type: 'SET_LOADER' });
+      setState((prevState) => ({ ...prevState, isSaving: !prevState.isSaving }));
     }
   };
 
-  const { users, isLoading, isError, error, userType } = data;
-  let content: React.ReactNode | null = null;
-  if (isLoading) {
-    content = <TableRowWithColSpan colSpan={4} text='loading...' />;
-  } else if (isError) {
-    content = <TableRowWithColSpan colSpan={4} text={error} />;
-  } else if (!Array.isArray(users) || users.length <= 0) {
-    content = <TableRowWithColSpan colSpan={8} />;
-  } else {
-    content = users.map((user) => {
-      const isMenuOpen = state.openRowUserId === user.id;
-      return (
-        <TableRow hover key={user.id}>
-          <TableCell>
-            <IconButton onClick={handleMenuClick(user.id)}>
-              <MoreHoriz />
-            </IconButton>
-            <Menu open={isMenuOpen} anchorEl={state.anchorEl} onClose={handleMenuClose}>
-              <MenuItem
-                component={Link}
-                to={userType === 'staff' ? `/app/staffs/${user.id}` : `/app/students/${user.id}`}
-              >
-                <ListItemIcon>
-                  <Visibility fontSize='small' />
-                </ListItemIcon>
-                <ListItemText>View</ListItemText>
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                to={
-                  userType === 'staff'
-                    ? `/app/staffs/edit/${user.id}`
-                    : `/app/students/edit/${user.id}`
-                }
-              >
-                <ListItemIcon>
-                  <Edit fontSize='small' />
-                </ListItemIcon>
-                <ListItemText>Edit</ListItemText>
-              </MenuItem>
-              <MenuItem
-                disabled={!user.systemAccess}
-                onClick={() =>
-                  onMenuItemClick(
-                    userType === 'staff' ? 'DISABLE_STAFF_STATUS' : 'DISABLE_STUDENT_STATUS'
-                  )
-                }
-              >
-                <ListItemIcon>
-                  <Block fontSize='small' />
-                </ListItemIcon>
-                <ListItemText>Disable</ListItemText>
-              </MenuItem>
-              <MenuItem
-                disabled={user.systemAccess}
-                onClick={() =>
-                  onMenuItemClick(
-                    userType === 'staff' ? 'ENABLE_STAFF_STATUS' : 'ENABLE_STUDENT_STATUS'
-                  )
-                }
-              >
-                <ListItemIcon>
-                  <CheckCircle fontSize='small' />
-                </ListItemIcon>
-                <ListItemText>Enable</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={() => onMenuItemClick('RESEND_VERIFICATION_EMAIL_TO_USER')}>
-                <ListItemIcon>
-                  <Email fontSize='small' />
-                </ListItemIcon>
-                <ListItemText>Resend Verification Email</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={() => onMenuItemClick('RESEND_PWD_LINK_EMAIL_TO_USER')}>
-                <ListItemIcon>
-                  <Key fontSize='small' />
-                </ListItemIcon>
-                <ListItemText>Resend Password Setup Link</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={() => onMenuItemClick('RESET_USER_PWD')}>
-                <ListItemIcon>
-                  <LockReset fontSize='small' />
-                </ListItemIcon>
-                <ListItemText>Reset Password</ListItemText>
-              </MenuItem>
-            </Menu>
-          </TableCell>
-          <TableCell>{user.id}</TableCell>
-          <TableCell>{user.name}</TableCell>
-          <TableCell>{user.email}</TableCell>
-          <TableCell>{user.role}</TableCell>
-          <TableCell>{user.systemAccess.toString()}</TableCell>
-          <TableCell>{getFormattedDate(user.lastLogin, DATE_TIME_24_HR_FORMAT)}</TableCell>
-        </TableRow>
-      );
-    });
-  }
+  const menuActions = [
+    {
+      action: userType === 'staff' ? 'DISABLE_STAFF_STATUS' : 'DISABLE_STUDENT_STATUS',
+      icon: <Block />,
+      text: 'Disable'
+    },
+    {
+      action: userType === 'staff' ? 'ENABLE_STAFF_STATUS' : 'ENABLE_STUDENT_STATUS',
+      icon: <CheckCircle />,
+      text: 'Enable'
+    },
+    {
+      action: 'RESEND_VERIFICATION_EMAIL_TO_USER',
+      icon: <Email />,
+      text: 'Resend Verification Email'
+    },
+    {
+      action: 'RESEND_PWD_LINK_EMAIL_TO_USER',
+      icon: <Key />,
+      text: 'Resend Password Setup Link'
+    },
+    {
+      action: 'RESET_USER_PWD',
+      icon: <LockReset />,
+      text: 'Reset Password'
+    }
+  ];
+  const table = useMaterialReactTable({
+    data: isError ? [] : users || [],
+    columns,
+    state: {
+      isLoading,
+      density: 'compact'
+    },
+    enableDensityToggle: false,
+    getRowId: (row) => row?.id?.toString(),
+    enableRowActions: true,
+    renderRowActionMenuItems: ({ row, closeMenu }) => {
+      const {
+        original: { id }
+      } = row;
+      const staticAction = [
+        <MenuItem
+          key={0}
+          onClick={() => closeMenu()}
+          component={Link}
+          to={userType === 'staff' ? `/app/staffs/${id}` : `/app/students/${id}`}
+        >
+          <ListItemIcon>
+            <Visibility fontSize='small' />
+          </ListItemIcon>
+          <ListItemText>View</ListItemText>
+        </MenuItem>,
+        <MenuItem
+          key={1}
+          onClick={() => closeMenu()}
+          component={Link}
+          to={userType === 'staff' ? `/app/staffs/edit/${id}` : `/app/students/edit/${id}`}
+        >
+          <ListItemIcon>
+            <Edit fontSize='small' />
+          </ListItemIcon>
+          <ListItemText>Edit</ListItemText>
+        </MenuItem>
+      ];
+      return [
+        ...staticAction,
+        menuActions.map(({ action, icon, text }) => (
+          <MenuItem
+            onClick={() => {
+              closeMenu();
+              onMenuItemClick(action, id);
+            }}
+            key={action}
+          >
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText>{text}</ListItemText>
+          </MenuItem>
+        ))
+      ];
+    },
+    renderEmptyRowsFallback: () => {
+      const errorMsg = isError ? error : 'No records to display';
+      return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
+    }
+  });
 
+  const { modalTitle, modalBodyText, isModalOpen, isSaving } = state;
   return (
-    <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }} component={Paper}>
-      <TableContainer sx={{ height: '80vh' }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {columns.map(({ id, name }) => (
-                <TableCell key={id}>{name}</TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>{content}</TableBody>
-        </Table>
-      </TableContainer>
+    <>
+      <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }} component={Paper}>
+        <MaterialReactTable table={table} />
+      </Box>
 
       <DialogModal
-        isSaving={state.isSaving}
-        titleText={state.modalTitle}
+        isSaving={isSaving}
+        titleText={modalTitle}
         actionFooterCancelText='No'
         actionFooterSaveText='Yes'
-        isOpen={state.isModalOpen}
+        isOpen={isModalOpen}
         closeModal={toggleModal}
         handleSave={onSave}
       >
-        <Typography variant='body1'>{state.modalBodyText}</Typography>
+        <Typography variant='body1'>{modalBodyText}</Typography>
       </DialogModal>
-    </Box>
+    </>
   );
 };

@@ -1,3 +1,11 @@
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TextField } from '@mui/material';
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+
 import { DialogModal } from '@/components/dialog-modal';
 import {
   useAddPermissionMutation,
@@ -8,13 +16,6 @@ import {
   AddEditPermissionSchema
 } from '@/domains/role-and-permission/types';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { TextField } from '@mui/material';
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import * as React from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { FormInitialState } from './permission-list';
 
 type Props = {
@@ -45,7 +46,7 @@ export const AddEditPermission: React.FC<Props> = ({ formData, closeModal }) => 
 
   React.useEffect(() => {
     reset(state);
-  }, [closeModal]);
+  }, [state, reset]);
 
   const onSave = async (data: AddEditPermissionProps) => {
     try {

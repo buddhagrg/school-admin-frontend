@@ -1,3 +1,4 @@
+import { Grid2 } from '@mui/material';
 import {
   MiniAvatar,
   Others,
@@ -5,7 +6,6 @@ import {
   PersonalDetail
 } from '@/domains/staff/components/views';
 import { useGetStaffDetail } from '@/domains/staff/hooks';
-import { Grid2 } from '@mui/material';
 
 type StaffProfileProps = {
   id?: string;

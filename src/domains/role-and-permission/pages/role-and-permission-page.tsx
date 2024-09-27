@@ -18,16 +18,13 @@ const RoleAndPermissionPage = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const initializePermissions = React.useCallback(
-    (menus: Permission[]): ExtendedPermission[] => {
-      return menus.map((menu) => ({
-        ...menu,
-        isPermissionAvailable: false,
-        subMenus: menu?.subMenus ? initializePermissions(menu.subMenus) : []
-      }));
-    },
-    [permissionsData?.permissions]
-  );
+  const initializePermissions = React.useCallback((menus: Permission[]): ExtendedPermission[] => {
+    return menus.map((menu) => ({
+      ...menu,
+      isPermissionAvailable: false,
+      subMenus: menu?.subMenus ? initializePermissions(menu.subMenus) : []
+    }));
+  }, []);
 
   React.useEffect(() => {
     if (permissionsData?.permissions) {
@@ -36,13 +33,13 @@ const RoleAndPermissionPage = () => {
         payload: initializePermissions(permissionsData.permissions)
       });
     }
-  }, [permissionsData?.permissions]);
+  }, [permissionsData?.permissions, dispatch, initializePermissions]);
   React.useEffect(() => {
     if (rolesData) {
       dispatch({ type: 'SET_ROLES', payload: rolesData.roles ?? [] });
       dispatch({ type: 'SET_ROLE_TAB', payload: 0 });
     }
-  }, [rolesData]);
+  }, [rolesData, dispatch]);
 
   const handleRoleTabChange = (_event: React.SyntheticEvent, index: number) => {
     dispatch({ type: 'SET_ROLE_TAB', payload: index });

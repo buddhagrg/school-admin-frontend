@@ -150,8 +150,15 @@ export const leaveApi = api.injectEndpoints({
         method: 'DELETE',
         body: { user: userId }
       }),
-      invalidatesTags: (result, _error, { userId }) =>
-        result ? [{ type: Tag.LEAVE_POLICY_USERS, id: userId }] : []
+      invalidatesTags: (result, _error, { userId }) => {
+        return result
+          ? [
+              { type: Tag.LEAVE_POLICY_USERS, id: userId },
+              Tag.MY_LEAVE_POLICIES,
+              Tag.LEAVE_POLICY_USERS
+            ]
+          : [];
+      }
     }),
     getMyLeavePolicies: builder.query<MyLeavePolicyData, void>({
       query: () => `/leave/policies/me`,

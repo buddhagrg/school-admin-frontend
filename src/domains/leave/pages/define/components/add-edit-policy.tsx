@@ -15,7 +15,6 @@ type AddEditPolicyProps = {
   policyId: number;
   policyName: string;
   title: string;
-  isOpen: boolean;
   closeModal: () => void;
 };
 
@@ -23,7 +22,6 @@ export const AddEditPolicy: React.FC<AddEditPolicyProps> = ({
   policyId,
   policyName,
   title,
-  isOpen,
   closeModal
 }) => {
   const [addNewPolicy, { isLoading: isAddingPolicy }] = useAddLeavePolicyMutation();
@@ -58,7 +56,7 @@ export const AddEditPolicy: React.FC<AddEditPolicyProps> = ({
   return (
     <DialogModal
       isSaving={isAddingPolicy || isUpdatingPolicy}
-      isOpen={isOpen}
+      isOpen={true}
       titleText={title}
       closeModal={closeModal}
       handleSave={handleSubmit(handleAddEditPolicySubmit)}

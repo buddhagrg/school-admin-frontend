@@ -29,15 +29,10 @@ import {
 
 type AddPeopleToPolicyProps = {
   policyId: number;
-  isOpen: boolean;
   closeModal: () => void;
 };
 
-export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({
-  policyId,
-  isOpen,
-  closeModal
-}) => {
+export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({ policyId, closeModal }) => {
   const { data } = useGetEligibleLeavePolicyUsersQuery();
   const [addUsersToPolicy, { isLoading: isAddingUsersToPolicy }] = useAddUserToPolicyMutation();
 
@@ -59,7 +54,7 @@ export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({
 
   React.useEffect(() => {
     setValue('users', []);
-  }, [isOpen, setValue]);
+  }, [setValue]);
 
   const handleAddPeopleSubmit = async (data: PolicyUsers) => {
     try {
@@ -77,7 +72,7 @@ export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({
     <DialogModal
       isSaving={isAddingUsersToPolicy}
       isModalClosedOnOutClick={false}
-      isOpen={isOpen}
+      isOpen={true}
       titleText='Add People'
       closeModal={closeModal}
       handleSave={handleSubmit(handleAddPeopleSubmit)}

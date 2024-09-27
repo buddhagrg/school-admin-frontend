@@ -20,6 +20,13 @@ export const noticeApi = api.injectEndpoints({
           return { type: Tag.NOTICES, id };
         }) || [{ type: Tag.NOTICES }]
     }),
+    getAllPendingNotices: builder.query<NoticeData, void>({
+      query: () => `/notices/pending`,
+      providesTags: (result) =>
+        result?.notices?.map(({ id }) => {
+          return { type: Tag.PENDING_NOTICES, id };
+        }) || [{ type: Tag.PENDING_NOTICES }]
+    }),
     getNoticeDetail: builder.query<NoticeDetailProps, string | undefined>({
       query: (id) => `/notices/${id}`,
       providesTags: (result) => (result ? [{ type: Tag.NOTICES, id: result.id }] : [])
@@ -37,7 +44,7 @@ export const noticeApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: [Tag.NOTICES]
+      invalidatesTags: [Tag.NOTICES, Tag.PENDING_NOTICES]
     }),
     updateNotice: builder.mutation<{ message: string }, NoticeFormPropsWithId>({
       query: ({ id, ...payload }) => ({
@@ -45,7 +52,10 @@ export const noticeApi = api.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: Tag.NOTICES, id }]
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: Tag.NOTICES, id },
+        { type: Tag.PENDING_NOTICES, id }
+      ]
     }),
     handleNoticeStatus: builder.mutation<{ message: string }, ReviewNotice>({
       query: ({ id, status }) => ({
@@ -53,7 +63,7 @@ export const noticeApi = api.injectEndpoints({
         method: 'POST',
         body: { status }
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: Tag.NOTICES, id }]
+      invalidatesTags: [Tag.NOTICES, Tag.PENDING_NOTICES]
     }),
     getNoticeRecipientList: builder.query<RecipientResponse, void>({
       query: () => `/notices/recipients/list`,
@@ -102,7 +112,6 @@ export const noticeApi = api.injectEndpoints({
 
 export const {
   useGetNoticesQuery,
-  useLazyGetNoticesQuery,
   useGetNoticeDetailQuery,
   useGetMyNoticesQuery,
   useLazyGetNoticeRecipientListQuery,
@@ -113,5 +122,6 @@ export const {
   useGetNoticeRecipientQuery,
   useAddNoticeRecipientMutation,
   useUpdateNoticeRecipientMutation,
-  useDeleteNoticeRecipientMutation
+  useDeleteNoticeRecipientMutation,
+  useGetAllPendingNoticesQuery
 } = noticeApi;

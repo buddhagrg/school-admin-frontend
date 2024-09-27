@@ -11,8 +11,8 @@ import {
   Stack,
   Typography
 } from '@mui/material';
-import { CelebrationProps } from '../types/dashboard-type';
 import { getFormattedCelebrationDate } from '../util';
+import { CelebrationProps } from '../types';
 
 export const Celebrations = ({ celebrations }: { celebrations: CelebrationProps[] }) => {
   return (

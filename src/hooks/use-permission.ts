@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { getUserScreens, setUserPermissions } from '@/domains/auth/slice';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { getUserScreens, setUserPermissions } from '@/domains/auth/slice';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetMyPermissionsQuery } from '@/domains/role-and-permission/api';
 
@@ -22,9 +23,12 @@ export const usePermission = () => {
     }
   }, [dispatch, data?.permissions]);
 
-  const doesRouteExist = (route: string) => {
-    return routes?.some((r) => r.path === route);
-  };
+  const doesRouteExist = React.useCallback(
+    (route: string) => {
+      return routes?.some((r) => r.path === route);
+    },
+    [routes]
+  );
 
   const permissionState = React.useMemo(() => {
     return {
@@ -34,7 +38,7 @@ export const usePermission = () => {
       hasData: Boolean(data),
       doesRouteExist
     };
-  }, [isLoading, isError, error, data, routes]);
+  }, [isLoading, isError, error, data, doesRouteExist]);
 
   return permissionState;
 };

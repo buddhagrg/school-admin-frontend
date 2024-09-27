@@ -11,8 +11,8 @@ import {
   Stack,
   Typography
 } from '@mui/material';
-import { WhoIsOutProps } from '../types/dashboard-type';
 import { getFormattedLeaveDate } from '../util';
+import { WhoIsOutProps } from '../types';
 
 export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {
   return (

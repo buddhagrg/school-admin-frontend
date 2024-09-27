@@ -9,8 +9,9 @@ import {
   MenuItem,
   Typography
 } from '@mui/material';
-import { useRolePermission } from '../../context/role-permission-provider';
 import { Circle, MoreVert } from '@mui/icons-material';
+
+import { useRolePermission } from '../../context/role-permission-provider';
 import { AddEditRole } from '../add-edit-role';
 import { HandleRoleStatus } from '../handle-role-status';
 
@@ -30,11 +31,6 @@ type InitialStateProps = {
   action?: string;
   modalTitleText: string;
 };
-const menuItems: Array<{ action: string; name: string; status: boolean }> = [
-  { action: 'edit', name: 'Edit Role', status: false },
-  { action: 'disable', name: 'Disable Role', status: false },
-  { action: 'enable', name: 'Enable Role', status: true }
-];
 
 export const ListRoles = () => {
   const {
@@ -42,19 +38,29 @@ export const ListRoles = () => {
   } = useRolePermission();
   const [state, setState] = React.useState<InitialStateProps>(initialState);
 
+  const menuItems: Array<{ action: string; name: string; status: boolean }> = React.useMemo(
+    () => [
+      { action: 'edit', name: 'Edit Role', status: false },
+      { action: 'disable', name: 'Disable Role', status: false },
+      { action: 'enable', name: 'Enable Role', status: true }
+    ],
+    []
+  );
+
   const handleMenuClick = (
     event: React.MouseEvent<HTMLElement>,
     id: number,
     name: string,
     status: boolean
   ) => {
-    setState({
+    setState((prevState) => ({
+      ...prevState,
       anchorElement: event.currentTarget,
       id,
       name,
       status,
       modalTitleText: ''
-    });
+    }));
   };
   const handleAnchorElementClose = () => {
     setState((prevState) => ({ ...prevState, anchorElement: null }));

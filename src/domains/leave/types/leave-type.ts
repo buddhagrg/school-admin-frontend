@@ -38,7 +38,7 @@ export type PolicyUser = {
   id: number;
   name: string;
   role: string;
-  totalDaysUsed: number;
+  totalDaysUsed: string;
 };
 
 export type PolicyDetail = {

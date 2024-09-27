@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { useGetRoleUsersQuery } from '@/domains/role-and-permission/api';
-import { User } from '@/domains/role-and-permission/types';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 import { Box, IconButton } from '@mui/material';
-import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { SwapHoriz } from '@mui/icons-material';
+
+import { useGetRoleUsersQuery } from '@/domains/role-and-permission/api';
+import { User } from '@/domains/role-and-permission/types';
+import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { SwitchUserRole } from './switch-user-role';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type UserListProps = {
   roleId: number;
 };
 
 export const UserList: React.FC<UserListProps> = ({ roleId }) => {
-  const { data, isLoading } = useGetRoleUsersQuery(roleId);
+  const { data, isLoading, isError, error } = useGetRoleUsersQuery(roleId);
   const [userId, setUserId] = React.useState<number>(0);
 
   const columns: MRT_ColumnDef<User>[] = [
@@ -29,8 +31,10 @@ export const UserList: React.FC<UserListProps> = ({ roleId }) => {
   const handleRoleSwitch = (userId: number) => {
     setUserId(userId);
   };
+
+  const users = isError ? [] : data?.users || [];
   const table = useMaterialReactTable({
-    data: data?.users ?? [],
+    data: users,
     columns,
     state: {
       isLoading,
@@ -48,7 +52,11 @@ export const UserList: React.FC<UserListProps> = ({ roleId }) => {
       >
         <SwapHoriz />
       </IconButton>
-    )
+    ),
+    renderEmptyRowsFallback: () => {
+      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
+    }
   });
 
   return (

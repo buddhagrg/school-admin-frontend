@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
+
 import { TabPanel } from '@/components/tab-panel';
 import { UserTabs } from './users-tab/users-tab';
 import { PermissionsTabs } from './permissions-tab/permissions-tab';

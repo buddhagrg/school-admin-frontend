@@ -13,7 +13,6 @@ type PolicyStatusProps = {
   bodyText: string;
   policyId: number;
   policyStatus: boolean;
-  isOpen: boolean;
   closeModal: () => void;
 };
 
@@ -21,11 +20,11 @@ export const PolicyStatus: React.FC<PolicyStatusProps> = ({
   title,
   bodyText,
   policyId,
-  isOpen,
   closeModal,
   policyStatus
 }) => {
-  const [handlePolicyStatus, { isLoading: isDisablingPolicy }] = useHandleLeavePolicyMutation();
+  const [handlePolicyStatus, { isLoading: isHandlingPolicyStatus }] =
+    useHandleLeavePolicyMutation();
 
   const handlePolicyStatusSubmit = async () => {
     try {
@@ -39,8 +38,8 @@ export const PolicyStatus: React.FC<PolicyStatusProps> = ({
 
   return (
     <DialogModal
-      isSaving={isDisablingPolicy}
-      isOpen={isOpen}
+      isSaving={isHandlingPolicyStatus}
+      isOpen={true}
       titleText={title}
       closeModal={closeModal}
       handleSave={handlePolicyStatusSubmit}
