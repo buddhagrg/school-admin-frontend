@@ -10,7 +10,7 @@ Password- <mark>`3OU4zn3q6Zh9`</mark>
 - [ ] System stabilization
 - [ ] Unit Testing
 - [ ] Dockerize the project
-- [ ] Role based granular authorisation of CRUD action were possible
+- [x] Role based granular authorisation of CRUD action were possible
 - [ ] New feature add and enhancement
 
 ## Table of Contents:
