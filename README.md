@@ -44,6 +44,12 @@ Below are the features that are available in the system upto now. Other features
 - departments (add/edit/list/delete)
 - roles and permissions (add/edit/enable/disable roles, assign permissions to user)
 
+**Scripts** \
+In the project directory, you can run; \
+`npm install` - Install dependencies \
+`npm run dev` - Runs the app in the development mode. Open http://localhost:5173/ to view it in your browser. \
+`npm run build` - Builds the app for production to the build folder
+
 ## Project Standards
 
 **Prettier** \
@@ -54,6 +60,9 @@ To avoid messy path imports, absolute path is always used for efficient coding p
 
 **File naming conventions** \
 While working with different OS system, `kebab-case` seems to be more efficient. So, we are enforcing `kebab-case` for file naming.
+
+**Husky** \
+This project uses husky. Husky is a tool that uses git hooks that can be used to automate tasks, such as running linters, tests and other code quality checks.
 
 ## Project Structure
 
