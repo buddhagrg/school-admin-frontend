@@ -26,7 +26,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
   openNavMenu
 }) => {
   const menus = useSelector(getUserMenus);
-  const API_URL = import.meta.env.VITE_API_DOMAIN_PORT;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   return (
     <div>
