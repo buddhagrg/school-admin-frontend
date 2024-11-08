@@ -13,7 +13,7 @@ import { parseISO } from 'date-fns';
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetStaffDetail } from '../../hooks';
-import { StaffFormProps, StaffFormSchema } from '../../types';
+import { BasicInfoSchema, StaffFormProps, StaffFormSchema } from '../../types';
 import {
   Address,
   BasicInformation,
@@ -75,7 +75,7 @@ export const StaffAccountEdit: React.FC<StaffAccountEditProps> = ({
       <PageContentHeader icon={<Edit sx={{ mr: 1 }} />} heading={heading} />
       <Paper sx={{ p: 3 }}>
         <FormProvider {...methods}>
-          <BasicInformation />
+          <BasicInformation schema={BasicInfoSchema} />
 
           <hr />
           <Address />
