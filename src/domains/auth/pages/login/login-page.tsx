@@ -27,7 +27,8 @@ export const LoginPage = () => {
       const user = await login(data).unwrap();
       if (user) {
         dispatch(setUser({ user }));
-        navigate('/app');
+        const redirectPath = user.roleId === 1 ? '/schools' : '/app';
+        navigate(redirectPath);
       }
     } catch (error) {
       const apiErrors = formatApiError(error as FetchBaseQueryError | SerializedError);

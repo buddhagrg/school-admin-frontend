@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  AdminStaffSchema,
   BasicInfoSchema,
   ParentsInfoSchema,
   StaffFilterSchema,
@@ -10,6 +11,7 @@ import { UserAccountBasicProps } from '@/components/user-account-basic';
 export type StaffFilter = z.infer<typeof StaffFilterSchema>;
 
 export type StaffFormProps = z.infer<typeof StaffFormSchema>;
+export type AdminStaffProps = z.infer<typeof AdminStaffSchema>;
 export type StaffFormPropsWithId = StaffFormProps & { id: number };
 export type StaffStatusRequest = {
   id: number;

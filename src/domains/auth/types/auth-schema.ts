@@ -27,3 +27,45 @@ export const SetupPasswordSchema = z
     path: ['confirmPassword'],
     message: 'New Password and Confirm Password do not match'
   });
+
+export const SchoolProfileSchema = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+    phone: z.string()
+  })
+  .superRefine((data, ctx) => {
+    const { id, name, email, phone } = data;
+    if (!id && (!name || !email || !phone)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'ID is required',
+        path: ['id']
+      });
+
+      if (!name) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Name is required',
+          path: ['name']
+        });
+      }
+
+      if (!email) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Email is required',
+          path: ['email']
+        });
+      }
+
+      if (!phone) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Phone is required',
+          path: ['phone']
+        });
+      }
+    }
+  });

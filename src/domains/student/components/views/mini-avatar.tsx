@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Class, Email, Grade, Person, Phone } from '@mui/icons-material';
+import { Class, Email, Grade, Person, Phone, School } from '@mui/icons-material';
 import { Box, Card, CardContent, Divider, Grid2, Typography } from '@mui/material';
 
 type MiniAvatarProps = {
@@ -8,6 +8,7 @@ type MiniAvatarProps = {
   email: string;
   selectedClass: string;
   section: string;
+  schoolName?: string;
 };
 
 export const MiniAvatar: React.FC<MiniAvatarProps> = ({
@@ -15,7 +16,8 @@ export const MiniAvatar: React.FC<MiniAvatarProps> = ({
   selectedClass,
   section,
   phone,
-  email
+  email,
+  schoolName
 }) => {
   return (
     <Card variant='outlined'>
@@ -26,6 +28,13 @@ export const MiniAvatar: React.FC<MiniAvatarProps> = ({
         </Box>
         <Divider sx={{ mb: 2 }} />
         <Grid2 container spacing={2}>
+          <Grid2 size={{ xs: 12 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <School sx={{ mr: 1 }} />
+              <Typography variant='subtitle2'>School</Typography>
+            </Box>
+            <Typography variant='body1'>{schoolName}</Typography>
+          </Grid2>
           <Grid2 size={{ xs: 12 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Class sx={{ mr: 1 }} />

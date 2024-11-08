@@ -11,7 +11,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useAddStaffMutation } from '../api/staff-api';
-import { StaffFormProps, StaffFormSchema } from '../types';
+import { BasicInfoSchema, StaffFormProps, StaffFormSchema } from '../types';
 import {
   Address,
   BasicInformation,
@@ -48,7 +48,7 @@ export const AddStaff = () => {
       <PageContentHeader icon={<AddCircleOutline sx={{ mr: 1 }} />} heading='Add Staff' />
       <Paper sx={{ p: 3 }}>
         <FormProvider {...methods}>
-          <BasicInformation />
+          <BasicInformation schema={BasicInfoSchema} />
 
           <hr />
           <Address />

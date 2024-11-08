@@ -34,7 +34,8 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({ id }) => {
     guardianPhone,
     relationOfGuardian,
     systemAccess,
-    reporterName
+    reporterName,
+    schoolName
   } = student;
 
   return (
@@ -46,6 +47,7 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({ id }) => {
           email={email}
           selectedClass={className}
           section={section}
+          schoolName={schoolName}
         />
       </Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>

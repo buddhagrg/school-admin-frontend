@@ -1,5 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 
 import { ProtectedRoute } from './protected-route';
 import { AppRoot } from './app-root';
@@ -25,16 +25,24 @@ import { EditDepartmentPage, ListDepartmentsPage } from '@/domains/department/pa
 import { ErrorPage, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
 import { RoleAndPermission } from '@/domains/role-and-permission/pages';
+import { Home } from '@/domains/landing';
+import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
+import { SignUpPage } from '@/domains/auth/pages/signup/signup-page';
 
 export const routes = [
   {
     path: '/',
-    element: <Navigate to='/app' replace />
+    element: <Home />
   },
   {
     path: '/auth/login',
     element: <LoginPage />,
     errorElement: <ErrorPage message='Error loading login page' />
+  },
+  {
+    path: '/auth/signup',
+    element: <SignUpPage />,
+    errorElement: <ErrorPage message='Error loading signup page' />
   },
   {
     path: '/auth/setup-password/:token',
@@ -85,6 +93,20 @@ export const routes = [
       { path: 'notices/recipients/edit/:id', element: <EditNoticeRecipientPage /> },
       { path: '*', element: <NotFound /> }
     ]
+  },
+  {
+    path: '/schools',
+    element: (
+      <ProtectedSuperAdminRoute>
+        <AppRoot />
+      </ProtectedSuperAdminRoute>
+    ),
+    errorElement: (
+      <MainLayout>
+        <ErrorPage message='Error loading the app' />
+      </MainLayout>
+    ),
+    Children: [{ index: true, element: <>school dashboard page</> }]
   },
   {
     path: '*',

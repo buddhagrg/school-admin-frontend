@@ -31,13 +31,20 @@ export const StaffProfile: React.FC<StaffProfileProps> = ({ id }) => {
     motherName,
     emergencyPhone,
     reporterName,
-    systemAccess
+    systemAccess,
+    schoolName
   } = staffDetail;
 
   return (
     <Grid2 container spacing={3}>
       <Grid2 size={{ xs: 12, md: 5 }}>
-        <MiniAvatar name={name} roleName={roleName} email={email} phone={phone} />
+        <MiniAvatar
+          name={name}
+          roleName={roleName}
+          email={email}
+          phone={phone}
+          schoolName={schoolName}
+        />
       </Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
         <PersonalDetail

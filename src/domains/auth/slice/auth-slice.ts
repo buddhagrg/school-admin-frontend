@@ -42,6 +42,7 @@ export const authReducer = authSlice.reducer;
 
 export const isUserAuthenticated = (state: RootState) => state.auth.isAuthenticated;
 export const getUserId = (state: RootState) => state.auth.user?.id;
+export const getUserRoleId = (state: RootState) => state.auth.user?.roleId;
 export const getUserName = (state: RootState) => state.auth.user?.name;
 export const getUserEmail = (state: RootState) => state.auth.user?.email;
 export const getUserRole = (state: RootState) => state.auth.user?.role;

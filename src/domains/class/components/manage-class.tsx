@@ -60,10 +60,14 @@ export const ManageClass: React.FC<ManageClassProps> = ({ id, operation, methods
     }
   };
 
-  const handleSave = async (data: ClassProps) => {
+  const handleSave = async (submitData: ClassProps) => {
     try {
-      const { name, sections } = data;
-      const sectionString = sections.length > 0 ? sections.join(',') : '';
+      const { name, sections } = submitData;
+      const actualSections =
+        data?.sections
+          .filter((section) => sections.includes(section.name))
+          .map((item) => item.name) || [];
+      const sectionString = actualSections.length > 0 ? actualSections.join(',') : '';
       const result =
         operation === 'Add'
           ? await addNewClass({ name, sections: sectionString }).unwrap()

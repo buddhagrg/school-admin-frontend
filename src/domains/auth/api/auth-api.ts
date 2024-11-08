@@ -1,5 +1,13 @@
 import { api } from '@/api';
-import { LoginRequest, PasswordProps, SetupPasswordProps, User, UserId } from '../types';
+import {
+  LoginRequest,
+  PasswordProps,
+  SchoolProfileProps,
+  SetupPasswordProps,
+  User,
+  UserId
+} from '../types';
+import { AdminStaffProps } from '@/domains/staff/types';
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -50,7 +58,26 @@ export const authApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       })
-    })
+    }),
+    setupAdminProfile: builder.mutation<
+      { message: string },
+      AdminStaffProps & { schoolId: number }
+    >({
+      query: (payload) => ({
+        url: `/auth/admin-profile`,
+        method: 'POST',
+        body: payload
+      })
+    }),
+    setupSchoolProfile: builder.mutation<{ message: string; schoolId: number }, SchoolProfileProps>(
+      {
+        query: (payload) => ({
+          url: `/auth/school-profile`,
+          method: 'POST',
+          body: payload
+        })
+      }
+    )
   })
 });
 
@@ -61,5 +88,7 @@ export const {
   useSetupPasswordMutation,
   useResendVerificationEmailMutation,
   useResendPwdSetupLinkMutation,
-  useResetPwdMutation
+  useResetPwdMutation,
+  useSetupAdminProfileMutation,
+  useSetupSchoolProfileMutation
 } = authApi;

@@ -7,7 +7,6 @@ export const StaffFilterSchema = z
     staffName: z.string()
   })
   .partial();
-
 export const BasicInfoSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   role: z.number().min(1, 'Role is required'),
@@ -19,7 +18,8 @@ export const BasicInfoSchema = z.object({
   dob: z.date(),
   joinDate: z.date(),
   qualification: z.string().optional(),
-  experience: z.string().optional()
+  experience: z.string().optional(),
+  schoolName: z.string().optional()
 });
 export const AddressInfoSchema = z.object({
   currentAddress: z.string().min(1, 'Current address is required'),
@@ -38,3 +38,9 @@ export const OtherInfoSchema = z.object({
 export const StaffFormSchema = BasicInfoSchema.extend(AddressInfoSchema.shape)
   .extend(ParentsInfoSchema.shape)
   .extend(OtherInfoSchema.shape);
+
+export const BasicInfoSchemaWithoutRole = BasicInfoSchema.omit({ role: true, roleName: true });
+
+export const AdminStaffSchema = BasicInfoSchemaWithoutRole.extend(AddressInfoSchema.shape).extend(
+  ParentsInfoSchema.shape
+);

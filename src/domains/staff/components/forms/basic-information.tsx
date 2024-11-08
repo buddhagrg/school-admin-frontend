@@ -14,20 +14,24 @@ import {
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { parseISO } from 'date-fns';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, FieldValues, Path, useFormContext } from 'react-hook-form';
 
 import { useGetRoles } from '../../hooks/use-get-roles';
 import { DATE_FORMAT } from '@/utils/helpers/date';
-import { StaffFormProps } from '../../types';
 import { genders, maritalStatusList } from '@/constants';
+import { z } from 'zod';
 
-export const BasicInformation = () => {
+type BasicInformationProps<T extends FieldValues> = {
+  schema: z.ZodObject<T>;
+};
+
+export const BasicInformation = <T extends FieldValues>({ schema }: BasicInformationProps<T>) => {
   const roles = useGetRoles();
   const {
     register,
     control,
     formState: { errors }
-  } = useFormContext<StaffFormProps>();
+  } = useFormContext<T>();
 
   return (
     <>
@@ -38,47 +42,49 @@ export const BasicInformation = () => {
       <Stack sx={{ my: 2 }} spacing={2}>
         <Box>
           <TextField
-            {...register('name')}
+            {...register('name' as Path<T>)}
             error={Boolean(errors?.name)}
-            helperText={errors?.name?.message}
+            helperText={String(errors?.name?.message || '')}
             label='Full Name'
             size='small'
             slotProps={{ inputLabel: { shrink: true } }}
           />
         </Box>
-        <FormControl size='small' sx={{ width: '150px' }} error={Boolean(errors?.role)}>
-          <InputLabel id='role' shrink>
-            Role
-          </InputLabel>
-          <Controller
-            name='role'
-            control={control}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <>
-                <Select
-                  label='Role'
-                  labelId='role'
-                  value={value}
-                  onChange={(e) => onChange(e.target.value)}
-                  notched
-                >
-                  {roles.map((role) => (
-                    <MenuItem value={role.id} key={role.id}>
-                      {role.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{error?.message}</FormHelperText>
-              </>
-            )}
-          />
-        </FormControl>
-        <FormControl size='small' sx={{ width: '150px' }}>
+        {schema.shape.role && (
+          <FormControl size='small' sx={{ width: '180px' }} error={Boolean(errors?.role)}>
+            <InputLabel id='role' shrink>
+              Role
+            </InputLabel>
+            <Controller
+              name={'role' as Path<T>}
+              control={control}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <>
+                  <Select
+                    label='Role'
+                    labelId='role'
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
+                    notched
+                  >
+                    {roles.map((role) => (
+                      <MenuItem value={role.id} key={role.id}>
+                        {role.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>{error?.message}</FormHelperText>
+                </>
+              )}
+            />
+          </FormControl>
+        )}
+        <FormControl size='small' sx={{ width: '180px' }}>
           <InputLabel id='gender' shrink>
             Gender
           </InputLabel>
           <Controller
-            name='gender'
+            name={'gender' as Path<T>}
             control={control}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <>
@@ -100,12 +106,12 @@ export const BasicInformation = () => {
             )}
           />
         </FormControl>
-        <FormControl size='small' sx={{ width: '150px' }}>
+        <FormControl size='small' sx={{ width: '180px' }}>
           <InputLabel id='maritalStatus' shrink>
-            Mairtal Status
+            Marital Status
           </InputLabel>
           <Controller
-            name='maritalStatus'
+            name={'maritalStatus' as Path<T>}
             control={control}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <>
@@ -129,9 +135,9 @@ export const BasicInformation = () => {
         </FormControl>
         <Box>
           <TextField
-            {...register('phone')}
-            error={Boolean(errors?.gender)}
-            helperText={errors?.gender?.message}
+            {...register('phone' as Path<T>)}
+            error={Boolean(errors?.phone)}
+            helperText={String(errors?.phone?.message || '')}
             label='Phone Number'
             size='small'
             slotProps={{
@@ -148,9 +154,9 @@ export const BasicInformation = () => {
         </Box>
         <Box>
           <TextField
-            {...register('email')}
+            {...register('email' as Path<T>)}
             error={Boolean(errors?.email)}
-            helperText={errors?.email?.message}
+            helperText={String(errors?.email?.message || '')}
             label='Email'
             size='small'
             slotProps={{
@@ -167,7 +173,7 @@ export const BasicInformation = () => {
         </Box>
         <Box>
           <Controller
-            name='dob'
+            name={'dob' as Path<T>}
             control={control}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <DatePicker
@@ -188,7 +194,7 @@ export const BasicInformation = () => {
         </Box>
         <Box>
           <Controller
-            name='joinDate'
+            name={'joinDate' as Path<T>}
             control={control}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <DatePicker
@@ -210,9 +216,9 @@ export const BasicInformation = () => {
         <Grid2 container rowSpacing={2}>
           <Grid2 size={{ xs: 12, md: 8 }}>
             <TextField
-              {...register('qualification')}
+              {...register('qualification' as Path<T>)}
               error={Boolean(errors?.qualification)}
-              helperText={errors?.qualification?.message}
+              helperText={String(errors?.qualification?.message || '')}
               multiline
               rows={3}
               fullWidth
@@ -223,9 +229,9 @@ export const BasicInformation = () => {
           </Grid2>
           <Grid2 size={{ xs: 12, md: 8 }}>
             <TextField
-              {...register('experience')}
+              {...register('experience' as Path<T>)}
               error={Boolean(errors?.experience)}
-              helperText={errors?.experience?.message}
+              helperText={String(errors?.experience?.message || '')}
               multiline
               rows={3}
               fullWidth

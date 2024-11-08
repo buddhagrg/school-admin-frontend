@@ -15,13 +15,17 @@ import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './theme/index.ts';
 import { persistor, store } from './store';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
-          <App />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <App />
+          </LocalizationProvider>
         </ThemeProvider>
         <ToastContainer />
       </PersistGate>

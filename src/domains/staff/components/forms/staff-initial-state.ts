@@ -20,3 +20,12 @@ export const staffInitialState: StaffFormProps = {
   reporterId: 0,
   systemAccess: false
 };
+
+export const {
+  role,
+  roleName,
+  reporterId,
+  reporterName,
+  systemAccess,
+  ...staffInitialStateForAdminProfile
+} = staffInitialState;

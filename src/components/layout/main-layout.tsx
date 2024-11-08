@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Box, Drawer, Toolbar } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { AppBarLayout } from './app-bar-layout';
 import { DrawerContent } from './drawer-content';
 
@@ -81,7 +79,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
         }}
       >
         <Toolbar />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>{children}</LocalizationProvider>
+        <>{children}</>
       </Box>
     </Box>
   );
