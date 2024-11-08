@@ -1,10 +1,8 @@
 ### Demo
 
-https://www.school-admin.xyz \
-Username- <mark>`admin@school-admin.com`</mark> \
-Password- <mark>`3OU4zn3q6Zh9`</mark>
+https://www.school-admin.xyz
 
-### Todos
+### To-Do
 
 - [x] Live deployment
 - [ ] System stabilization
