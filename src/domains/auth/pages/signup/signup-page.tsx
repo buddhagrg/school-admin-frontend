@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -22,6 +23,8 @@ import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { HomeBar } from '@/components/home-bar';
+import { Link } from 'react-router-dom';
 
 const steps = ['School Profile', 'Admin Profile'];
 const schoolProfile = {
@@ -111,40 +114,61 @@ export const SignUpPage = () => {
   };
 
   return (
-    <Container sx={{ p: 2 }}>
-      <Stepper activeStep={activeStep} orientation='vertical'>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-              <Box sx={{ my: 2 }}>{stepperContent(activeStep)}</Box>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button
-                  onClick={handleNext}
-                  variant='contained'
-                  sx={{ mr: 2 }}
-                  disabled={savingSchoolProfile || savingAdminProfile}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Continue'}
-                </Button>
-                <Button disabled={activeStep === 0} onClick={handleBack}>
-                  Back
-                </Button>
-              </Box>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper sx={{ p: 3 }}>
-          <Typography gutterBottom>
-            Profile setup completed. You can <i>close</i> this window now.
-          </Typography>
-          <Typography>
-            Please expect a <strong>verification email</strong> shortly.
-          </Typography>
-        </Paper>
-      )}
-    </Container>
+    <>
+      <HomeBar
+        actions={
+          <Button
+            component={Link}
+            to='/auth/login'
+            sx={{
+              textTransform: 'none',
+              fontSize: 16,
+              color: 'inherit',
+              border: '1px solid lightgray'
+            }}
+          >
+            Sign In
+          </Button>
+        }
+      />
+      <Container sx={{ p: 2 }}>
+        <Alert severity='info' sx={{ my: 2 }}>
+          You're almost there! Just complete these two quick steps to join us.
+        </Alert>
+        <Stepper activeStep={activeStep} orientation='vertical'>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+              <StepContent>
+                <Box sx={{ my: 2 }}>{stepperContent(activeStep)}</Box>
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                  <Button
+                    onClick={handleNext}
+                    variant='contained'
+                    sx={{ mr: 2 }}
+                    disabled={savingSchoolProfile || savingAdminProfile}
+                  >
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Continue'}
+                  </Button>
+                  <Button disabled={activeStep === 0} onClick={handleBack}>
+                    Back
+                  </Button>
+                </Box>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length && (
+          <Paper sx={{ p: 3 }}>
+            <Typography gutterBottom>
+              Profile setup completed. You can <i>close</i> this window now.
+            </Typography>
+            <Typography>
+              Please expect a <strong>verification email</strong> shortly.
+            </Typography>
+          </Paper>
+        )}
+      </Container>
+    </>
   );
 };

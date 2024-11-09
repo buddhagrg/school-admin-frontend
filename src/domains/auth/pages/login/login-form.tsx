@@ -20,9 +20,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, methods, isFetch
     <form onSubmit={onSubmit}>
       <div>
         <TextField
+          variant='standard'
           size='small'
           type='text'
-          label='Username'
+          placeholder='Username'
           sx={{ margin: '30px 0' }}
           fullWidth
           {...register('username')}
@@ -32,9 +33,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, methods, isFetch
       </div>
       <div>
         <TextField
+          variant='standard'
           size='small'
           type='password'
-          label='Password'
+          placeholder='Password'
           sx={{ marginBottom: '30px' }}
           fullWidth
           {...register('password')}

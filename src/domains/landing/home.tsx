@@ -1,4 +1,4 @@
-import { Appbar } from './appbar';
+import { Appbar } from './app-bar';
 import { Hero } from './hero';
 
 export const Home = () => {

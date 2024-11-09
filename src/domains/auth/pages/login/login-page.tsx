@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,8 @@ import { useLoginMutation } from '../../api/auth-api';
 import { setUser } from '../../slice/auth-slice';
 import { formatApiError } from '@/utils/helpers/format-api-error';
 import { ApiError } from '@/components/errors';
+import { Link } from 'react-router-dom';
+import { HomeBar } from '@/components/home-bar';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -37,37 +39,57 @@ export const LoginPage = () => {
   };
 
   return (
-    <Box
-      component={Paper}
-      sx={{
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        overflow: 'auto',
-        maxHeight: 'calc(100vh - 40px)'
-      }}
-    >
+    <>
+      <HomeBar
+        actions={
+          <Button
+            variant='contained'
+            component={Link}
+            to='/auth/signup'
+            sx={{
+              ml: 1,
+              backgroundColor: '#DF5C52',
+              color: 'white',
+              textTransform: 'none',
+              fontSize: 16
+            }}
+          >
+            Sign Up
+          </Button>
+        }
+      />
+
       <Box
         sx={{
-          width: { xs: '300px', md: '400px' },
-          border: '1px solid #f3f6f999',
-          padding: '20px'
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          overflow: 'auto',
+          maxHeight: 'calc(100vh - 40px)'
         }}
       >
-        <Typography component='div' variant='h6'>
-          Welcome to School Admin !
-        </Typography>
-        <Typography variant='subtitle1' color='text.secondary'>
-          Sign in to continue.
-        </Typography>
-        <LoginForm
-          methods={methods}
-          onSubmit={methods.handleSubmit(onSubmit)}
-          isFetching={isLoading}
-        />
-        <ApiError messages={apiErrors} />
+        <Box
+          sx={{
+            width: { xs: '300px', md: '450px' }
+          }}
+        >
+          <Box sx={{ border: '1px solid #f3f6f999', padding: '40px' }} component={Paper}>
+            <Typography component='div' variant='h5' gutterBottom sx={{ fontWeight: 500 }}>
+              Sign In
+            </Typography>
+            <Typography variant='body1' color='text.secondary' gutterBottom>
+              Please signin to your account.
+            </Typography>
+            <LoginForm
+              methods={methods}
+              onSubmit={methods.handleSubmit(onSubmit)}
+              isFetching={isLoading}
+            />
+            <ApiError messages={apiErrors} />
+          </Box>
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
