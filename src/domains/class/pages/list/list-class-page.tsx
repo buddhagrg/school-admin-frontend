@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { PageContentHeader } from '@/components/page-content-header';
 import { ClassProps, ClassSchema } from '../../types';
 import { ManageClass } from '../../components';
-import { ClassData } from './class-data';
+import { DisplayClasses } from './display-classes';
 
 const initialState = {
   class: '',
@@ -27,7 +27,7 @@ export const ListClasses = () => {
           <ManageClass operation='Add' methods={methods} />
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
-          <ClassData />
+          <DisplayClasses />
         </Grid2>
       </Grid2>
     </>

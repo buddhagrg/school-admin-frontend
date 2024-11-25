@@ -8,8 +8,7 @@ import {
   HandleRoleStatus,
   RoleUsersData,
   UserRole,
-  MyPermissionData,
-  AddEditPermissionWithId
+  MyPermissionData
 } from '../types';
 
 export const rolesAndPermissionsApi = api.injectEndpoints({
@@ -89,30 +88,6 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
     getMyPermissions: builder.query<MyPermissionData, void>({
       query: () => `/access-controls/me`,
       providesTags: () => [Tag.MY_PERMISSIONS]
-    }),
-    deletePermission: builder.mutation<{ message: string }, number>({
-      query: (id) => ({
-        url: `/access-controls/${id}`,
-        method: 'DELETE'
-      }),
-      invalidatesTags: [Tag.PERMISSIONS, Tag.MY_PERMISSIONS]
-    }),
-    addPermission: builder.mutation<{ message: string }, AddEditPermissionWithId>({
-      query: (payload) => ({
-        url: `/access-controls`,
-        method: 'POST',
-        body: payload
-      }),
-      invalidatesTags: [Tag.PERMISSIONS, Tag.MY_PERMISSIONS]
-    }),
-    updatePermission: builder.mutation<{ message: string }, AddEditPermissionWithId>({
-      query: ({ id, ...payload }) => ({
-        url: `/access-controls/${id}`,
-        method: 'PUT',
-        body: payload
-      }),
-      invalidatesTags: (result, _error, { id }) =>
-        result ? [{ type: Tag.PERMISSIONS, id }, Tag.MY_PERMISSIONS] : []
     })
   })
 });
@@ -128,8 +103,5 @@ export const {
   useHandleRoleStatusMutation,
   useUpdateRolePermissionMutation,
   useSwitchUserRoleMutation,
-  useGetMyPermissionsQuery,
-  useDeletePermissionMutation,
-  useAddPermissionMutation,
-  useUpdatePermissionMutation
+  useGetMyPermissionsQuery
 } = rolesAndPermissionsApi;

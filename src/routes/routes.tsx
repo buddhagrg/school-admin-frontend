@@ -12,8 +12,6 @@ import { AddStudent, EditStudent, ListStudents, ViewStudent } from '@/domains/st
 import {
   AddNotice,
   EditNotice,
-  EditNoticeRecipientPage,
-  ListNoticeRecipients,
   ListNotices,
   ManageNotices,
   ViewNotice
@@ -28,6 +26,9 @@ import { RoleAndPermission } from '@/domains/role-and-permission/pages';
 import { Home } from '@/domains/landing';
 import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
 import { SignUpPage } from '@/domains/auth/pages/signup/signup-page';
+import { ManageAccessControl } from '@/domains/access-controls/pages/access-control-page';
+import { SuperAdminDashboard } from '@/domains/super-admin-dashboard';
+import { EditSchool, ListSchoolsPage } from '@/domains/schools/pages';
 
 export const routes = [
   {
@@ -89,13 +90,11 @@ export const routes = [
       { path: 'roles-and-permissions', element: <RoleAndPermission /> },
       { path: 'departments', element: <ListDepartmentsPage /> },
       { path: 'departments/edit/:id', element: <EditDepartmentPage /> },
-      { path: 'notices/recipients', element: <ListNoticeRecipients /> },
-      { path: 'notices/recipients/edit/:id', element: <EditNoticeRecipientPage /> },
       { path: '*', element: <NotFound /> }
     ]
   },
   {
-    path: '/schools',
+    path: '/admin',
     element: (
       <ProtectedSuperAdminRoute>
         <AppRoot />
@@ -106,7 +105,13 @@ export const routes = [
         <ErrorPage message='Error loading the app' />
       </MainLayout>
     ),
-    Children: [{ index: true, element: <>school dashboard page</> }]
+    children: [
+      { index: true, element: <SuperAdminDashboard /> },
+      { path: 'account', element: <AccountPage /> },
+      { path: 'schools', element: <ListSchoolsPage /> },
+      { path: 'schools/edit/:id', element: <EditSchool /> },
+      { path: 'access-controls', element: <ManageAccessControl /> }
+    ]
   },
   {
     path: '*',

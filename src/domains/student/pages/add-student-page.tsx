@@ -20,9 +20,12 @@ import {
   BasicInformation,
   ParentsAndGuardianInformation
 } from '../components/forms';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 export const AddStudent = () => {
   const [addStudent, { isLoading }] = useAddStudentMutation();
+  const appBase = useSelector(getAppBase);
 
   const navigate = useNavigate();
 
@@ -47,7 +50,7 @@ export const AddStudent = () => {
 
       const result = await addStudent(payload).unwrap();
       toast.info(result.message);
-      navigate(`/app/students`);
+      navigate(`${appBase}/students`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

@@ -13,6 +13,8 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { NoticeFormProps, NoticeFormSchema } from '../types';
 import { useAddNoticeMutation } from '../api/notice-api';
 import { NoticeForm } from '../components';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 const initialState: NoticeFormProps = {
   title: '',
@@ -27,6 +29,7 @@ export const AddNotice = () => {
   const navigate = useNavigate();
   const [addNotice, { isLoading: addingNotice }] = useAddNoticeMutation();
   const [selectedRoleId, setSelectedRoleId] = React.useState<number>(0);
+  const appBase = useSelector(getAppBase);
 
   const methods = useForm<NoticeFormProps>({
     defaultValues: initialState,
@@ -37,7 +40,7 @@ export const AddNotice = () => {
     try {
       const result = await addNotice(data).unwrap();
       toast.info(result.message);
-      navigate('/app/notices');
+      navigate(`${appBase}/notices`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

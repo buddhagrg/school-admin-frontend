@@ -8,11 +8,14 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetSectionsQuery } from '../../api';
 import { SectionFormWithId } from '../../types';
 import { DeleteSection } from './delete-section';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 export const SectionData = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [sectionId, setSectionId] = React.useState<number>(0);
   const { data, isLoading, isError, error } = useGetSectionsQuery();
+  const appBase = useSelector(getAppBase);
 
   const columns: MRT_ColumnDef<SectionFormWithId>[] = [
     {
@@ -50,7 +53,7 @@ export const SectionData = () => {
             title='Edit class'
             color='info'
             component={Link}
-            to={`/app/sections/edit/${id}`}
+            to={`${appBase}/sections/edit/${id}`}
           >
             <Edit />
           </IconButton>

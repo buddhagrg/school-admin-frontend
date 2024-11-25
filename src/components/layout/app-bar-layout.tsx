@@ -21,7 +21,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useLogoutMutation } from '@/domains/auth/api';
-import { getUserEmail, getUserName, getUserRole, resetUser } from '@/domains/auth/slice';
+import {
+  getAppBase,
+  getUserEmail,
+  getUserName,
+  getUserRole,
+  resetUser
+} from '@/domains/auth/slice';
 
 type AppBarLayoutProps = {
   handleDrawerToggle: () => void;
@@ -41,6 +47,8 @@ export const AppBarLayout: React.FC<AppBarLayoutProps> = ({
   const currentUserEmail = useSelector(getUserEmail);
   const currentUserName = useSelector(getUserName);
   const currentUserRole = useSelector(getUserRole);
+  const appBase = useSelector(getAppBase);
+
   const [logout] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -102,7 +110,7 @@ export const AppBarLayout: React.FC<AppBarLayoutProps> = ({
             </div>
           </MenuItem>
           <Divider />
-          <MenuItem component={Link} to='/app/account' onClick={handleMenuClose}>
+          <MenuItem component={Link} to={`${appBase}/account`} onClick={handleMenuClose}>
             <ListItemIcon>
               <Person fontSize='small' />
             </ListItemIcon>

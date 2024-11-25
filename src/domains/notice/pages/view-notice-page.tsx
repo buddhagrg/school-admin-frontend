@@ -11,10 +11,13 @@ import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetNoticeDetailQuery, useHandleNoticeStatusMutation } from '../api/notice-api';
 import { ViewNoticeSkeleton } from '../components';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 export const ViewNotice = () => {
   const { id } = useParams();
   const [modalOpen, setModalOpen] = React.useState(false);
+  const appBase = useSelector(getAppBase);
 
   const navigate = useNavigate();
   const [deleteNotice, { isLoading: isDeletingNotice }] = useHandleNoticeStatusMutation();
@@ -28,7 +31,7 @@ export const ViewNotice = () => {
       const result = await deleteNotice({ id: Number(id), status: 3 }).unwrap();
       toast.info(result.message);
       toggleDeleteConfirmationModal();
-      navigate('/app/notices');
+      navigate(`${appBase}/notices`);
       closeModal();
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
@@ -64,7 +67,7 @@ export const ViewNotice = () => {
           </Box>
           <Box component='div'>
             <Stack direction='row' spacing={1}>
-              <IconButton color='primary' component={Link} to={`/app/notices/edit/${id}`}>
+              <IconButton color='primary' component={Link} to={`${appBase}/notices/edit/${id}`}>
                 <Edit />
               </IconButton>
               <IconButton color='primary' onClick={toggleDeleteConfirmationModal}>

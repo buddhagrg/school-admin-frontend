@@ -29,7 +29,7 @@ export const LoginPage = () => {
       const user = await login(data).unwrap();
       if (user) {
         dispatch(setUser({ user }));
-        const redirectPath = user.roleId === 1 ? '/schools' : '/app';
+        const redirectPath = user.appBase;
         navigate(redirectPath);
       }
     } catch (error) {
@@ -71,7 +71,7 @@ export const LoginPage = () => {
       >
         <Box
           sx={{
-            width: { xs: '300px', md: '450px' }
+            width: { xs: '400px', md: '450px' }
           }}
         >
           <Box sx={{ border: '1px solid #f3f6f999', padding: '40px' }} component={Paper}>

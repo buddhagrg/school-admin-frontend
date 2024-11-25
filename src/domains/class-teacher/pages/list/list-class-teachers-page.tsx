@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { PageContentHeader } from '@/components/page-content-header';
 import { ClassTeacherProps, ClassTeacherSchema } from '@/domains/class/types';
 import { ManageClassTeacher } from '../../components';
-import { ClassTeacherData } from './class-teacher-data';
+import { DisplayClassTeachers } from './display-class-teachers';
 
 const initialState = {
   class: '',
@@ -28,7 +28,7 @@ export const ListClassTeachers = () => {
           <ManageClassTeacher operation='Add' methods={methods} />
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
-          <ClassTeacherData />
+          <DisplayClassTeachers />
         </Grid2>
       </Grid2>
     </>

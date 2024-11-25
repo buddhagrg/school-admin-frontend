@@ -18,6 +18,7 @@ export type BasePermission = {
   path: string;
   type: string;
   method: string;
+  directAllowedRoleId: string;
   icon?: React.ReactNode;
 };
 export type Permission = BasePermission & {

@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { DepartmentForm } from '../types';
 import { useAddNewDepartmentMutation, useUpdateDepartmentMutation } from '../api';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 type ManageDepartmentProps = {
   id?: number;
@@ -21,6 +23,8 @@ export const ManageDepartment: React.FC<ManageDepartmentProps> = ({ id, operatio
   const [addNewDepartment, { isLoading: isAddingDepartment }] = useAddNewDepartmentMutation();
   const [updateDepartment, { isLoading: isUpdatingDepartment }] = useUpdateDepartmentMutation();
   const navigate = useNavigate();
+  const appBase = useSelector(getAppBase);
+
   const {
     register,
     handleSubmit,
@@ -38,7 +42,7 @@ export const ManageDepartment: React.FC<ManageDepartmentProps> = ({ id, operatio
 
       reset();
       toast.info(result?.message);
-      navigate('/app/departments');
+      navigate(`${appBase}/departments`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

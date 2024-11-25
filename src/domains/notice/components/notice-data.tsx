@@ -17,7 +17,7 @@ import {
 import { Link } from 'react-router-dom';
 import { menuItemTexts } from '@/constants';
 import { useSelector } from 'react-redux';
-import { getUserId } from '@/domains/auth/slice';
+import { getAppBase, getUserId } from '@/domains/auth/slice';
 import { DialogModal } from '@/components/dialog-modal';
 import { toast } from 'react-toastify';
 import { useHandleMenuAction } from '@/hooks';
@@ -57,6 +57,7 @@ export const NoticeData: React.FC<NoticeDataProps> = ({
   const [state, setState] = React.useState<State>(initialState);
   const currentUserId = useSelector(getUserId);
   const { handleAction } = useHandleMenuAction();
+  const appBase = useSelector(getAppBase);
 
   const columns: MRT_ColumnDef<Notice>[] = React.useMemo(
     () => [
@@ -162,7 +163,7 @@ export const NoticeData: React.FC<NoticeDataProps> = ({
           onClick={() => closeMenu()}
           disabled={isEditPermissionAvailable(authorId, statusId, currentUserId)}
           component={Link}
-          to={`/app/notices/edit/${id}`}
+          to={`${appBase}/notices/edit/${id}`}
         >
           Edit
         </MenuItem>,

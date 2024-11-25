@@ -4,16 +4,20 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
-import { useDeletePermissionMutation } from '@/domains/role-and-permission/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useDeleteAccessControlMutation } from '../api';
 
-type DeletePermissionProps = {
+type DeleteAccessControlProps = {
   permissionId: number;
   closeModal: () => void;
 };
 
-export const DeletePermission: React.FC<DeletePermissionProps> = ({ permissionId, closeModal }) => {
-  const [deletePermission, { isLoading: isDeleting }] = useDeletePermissionMutation();
+export const DeleteAccessControl: React.FC<DeleteAccessControlProps> = ({
+  permissionId,
+  closeModal
+}) => {
+  const [deletePermission, { isLoading: isDeleting }] = useDeleteAccessControlMutation();
+
   const onDelete = async () => {
     try {
       const result = await deletePermission(permissionId).unwrap();
@@ -32,9 +36,9 @@ export const DeletePermission: React.FC<DeletePermissionProps> = ({ permissionId
       closeModal={closeModal}
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
-      titleText='Delete Permission'
+      titleText='Delete Access Control'
     >
-      Are you sure you want to delete this permission ?
+      Are you sure you want to delete this access control ?
     </DialogModal>
   );
 };

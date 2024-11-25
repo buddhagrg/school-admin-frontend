@@ -6,7 +6,7 @@ import { NotFound } from '@/components/errors';
 import { routes } from './routes';
 
 export const AppRoot = () => {
-  const { isLoading, isError, errorMessage, hasData, doesRouteExist } = usePermission();
+  const { hasData, doesRouteExist } = usePermission();
 
   const location = useLocation();
   const matchedRoute = matchRoutes(routes, location?.pathname);
@@ -18,8 +18,6 @@ export const AppRoot = () => {
     return '';
   }, [matchedRoute]);
 
-  if (isLoading) return <PermissionErrorLayout error='Checking permission...' />;
-  if (isError) return <PermissionErrorLayout error={errorMessage} />;
   if (!hasData) return <PermissionErrorLayout error='No permission data available' />;
 
   const isRouteAvailable = doesRouteExist(currentPath);

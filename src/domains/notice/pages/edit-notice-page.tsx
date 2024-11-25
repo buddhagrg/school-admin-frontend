@@ -13,6 +13,8 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { NoticeFormProps, NoticeFormSchema } from '../types';
 import { useGetNoticeDetailQuery, useUpdateNoticeMutation } from '../api/notice-api';
 import { NoticeForm } from '../components';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 const initialState: NoticeFormProps = {
   title: '',
@@ -29,6 +31,7 @@ export const EditNotice = () => {
   const { data, isLoading, isError, error } = useGetNoticeDetailQuery(id);
   const [selectedRoleId, setSelectedRoleId] = React.useState<number>(0);
   const [updateNotice, { isLoading: updatingNotice }] = useUpdateNoticeMutation();
+  const appBase = useSelector(getAppBase);
 
   const methods = useForm<NoticeFormProps>({
     defaultValues: initialState,
@@ -54,7 +57,7 @@ export const EditNotice = () => {
     try {
       const result = await updateNotice({ id: id!, ...data }).unwrap();
       toast.info(result.message);
-      navigate(`/app/notices/${id}`);
+      navigate(`${appBase}/notices/${id}`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

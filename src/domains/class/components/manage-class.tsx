@@ -22,6 +22,8 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ClassProps } from '../types';
 import { useAddClassMutation, useUpdateClassMutation } from '../api/class-api';
 import { useGetSectionsQuery } from '@/domains/section/api';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 type ManageClassProps = {
   id?: number;
@@ -34,6 +36,7 @@ export const ManageClass: React.FC<ManageClassProps> = ({ id, operation, methods
   const [addNewClass, { isLoading: isAddingClass }] = useAddClassMutation();
   const [updateClass, { isLoading: isUpdatingClass }] = useUpdateClassMutation();
   const navigate = useNavigate();
+  const appBase = useSelector(getAppBase);
 
   const {
     register,
@@ -75,7 +78,7 @@ export const ManageClass: React.FC<ManageClassProps> = ({ id, operation, methods
 
       reset();
       toast.info(result?.message);
-      navigate('/app/classes');
+      navigate(`${appBase}/classes`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }
@@ -102,8 +105,7 @@ export const ManageClass: React.FC<ManageClassProps> = ({ id, operation, methods
           {isLoading ? (
             <>loading...</>
           ) : (
-            data?.sections &&
-            data?.sections.map(({ name }) => (
+            data?.sections?.map(({ name }) => (
               <FormGroup key={name}>
                 <Controller
                   name='sections'
@@ -124,7 +126,7 @@ export const ManageClass: React.FC<ManageClassProps> = ({ id, operation, methods
                   )}
                 />
               </FormGroup>
-            ))
+            )) || <Typography color='red'>No section data</Typography>
           )}
         </FormControl>
 

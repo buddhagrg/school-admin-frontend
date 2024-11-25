@@ -4,9 +4,6 @@ import {
   NoticeDetailProps,
   NoticeFormProps,
   NoticeFormPropsWithId,
-  NoticeRecipient,
-  NoticeRecipientWithId,
-  RecipientData,
   RecipientResponse,
   ReviewNotice
 } from '../types';
@@ -71,41 +68,6 @@ export const noticeApi = api.injectEndpoints({
         result?.noticeRecipients?.map(({ id }) => {
           return { type: Tag.NOTICE_RECIPIENT_LIST, id };
         }) || [{ type: Tag.NOTICE_RECIPIENT_LIST }]
-    }),
-    getNoticeRecipients: builder.query<RecipientData, void>({
-      query: () => `/notices/recipients`,
-      providesTags: (result) =>
-        result?.noticeRecipients?.map(({ id }) => {
-          return { type: Tag.NOTICE_RECIPIENTS, id };
-        }) || [{ type: Tag.NOTICE_RECIPIENTS }]
-    }),
-    getNoticeRecipient: builder.query<NoticeRecipientWithId, number>({
-      query: (id) => `/notices/recipients/${id}`,
-      providesTags: (result) => (result ? [{ type: Tag.NOTICE_RECIPIENTS, id: result.id }] : [])
-    }),
-    addNoticeRecipient: builder.mutation<{ message: string }, NoticeRecipient>({
-      query: (payload) => ({
-        url: `/notices/recipients`,
-        method: 'POST',
-        body: { ...payload }
-      }),
-      invalidatesTags: [Tag.NOTICE_RECIPIENTS]
-    }),
-    updateNoticeRecipient: builder.mutation<{ message: string }, NoticeRecipientWithId>({
-      query: ({ id, ...rest }) => ({
-        url: `/notices/recipients/${id}`,
-        method: 'PUT',
-        body: { ...rest }
-      }),
-      invalidatesTags: (result, _error, { id }) =>
-        result ? [{ type: Tag.NOTICE_RECIPIENTS, id }] : []
-    }),
-    deleteNoticeRecipient: builder.mutation<{ message: string }, number>({
-      query: (id) => ({
-        url: `/notices/recipients/${id}`,
-        method: 'DELETE'
-      }),
-      invalidatesTags: (result, _error, id) => (result ? [{ type: Tag.NOTICE_RECIPIENTS, id }] : [])
     })
   })
 });
@@ -118,10 +80,5 @@ export const {
   useAddNoticeMutation,
   useUpdateNoticeMutation,
   useHandleNoticeStatusMutation,
-  useGetNoticeRecipientsQuery,
-  useGetNoticeRecipientQuery,
-  useAddNoticeRecipientMutation,
-  useUpdateNoticeRecipientMutation,
-  useDeleteNoticeRecipientMutation,
   useGetAllPendingNoticesQuery
 } = noticeApi;

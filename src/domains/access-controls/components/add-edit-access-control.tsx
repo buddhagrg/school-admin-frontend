@@ -7,48 +7,49 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 import { DialogModal } from '@/components/dialog-modal';
-import {
-  useAddPermissionMutation,
-  useUpdatePermissionMutation
-} from '@/domains/role-and-permission/api';
-import {
-  AddEditPermissionProps,
-  AddEditPermissionSchema
-} from '@/domains/role-and-permission/types';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { FormInitialState } from './permission-list';
+import { AccessControlFormProps } from '../pages/access-control-page';
+import { AddEditAccessControlProps, AddEditAccessControlSchema } from '../types';
+import { useAddAccessControlMutation, useUpdateAccessControlMutation } from '../api';
 
-type Props = {
+type AddEditACProps = {
   closeModal: () => void;
-  formData: FormInitialState;
+  formData: AccessControlFormProps;
 };
 const initialState = {
   name: '',
   type: '',
   method: '',
-  path: ''
+  path: '',
+  directAllowedRoleId: ''
 };
-const fields: Array<keyof AddEditPermissionProps> = ['name', 'type', 'path', 'method'];
+const fields: Array<keyof AddEditAccessControlProps> = [
+  'name',
+  'type',
+  'path',
+  'method',
+  'directAllowedRoleId'
+];
 
-export const AddEditPermission: React.FC<Props> = ({ formData, closeModal }) => {
+export const AddEditAccessControl: React.FC<AddEditACProps> = ({ formData, closeModal }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset
-  } = useForm<AddEditPermissionProps>({
-    resolver: zodResolver(AddEditPermissionSchema),
+  } = useForm<AddEditAccessControlProps>({
+    resolver: zodResolver(AddEditAccessControlSchema),
     defaultValues: initialState
   });
-  const [addPermission, { isLoading: isAdding }] = useAddPermissionMutation();
-  const [updatePermission, { isLoading: isUpdating }] = useUpdatePermissionMutation();
+  const [addPermission, { isLoading: isAdding }] = useAddAccessControlMutation();
+  const [updatePermission, { isLoading: isUpdating }] = useUpdateAccessControlMutation();
   const { action, id, ...state } = formData;
 
   React.useEffect(() => {
     reset(state);
-  }, [state, reset]);
+  }, [reset]);
 
-  const onSave = async (data: AddEditPermissionProps) => {
+  const onSave = async (data: AddEditAccessControlProps) => {
     try {
       const payload = { ...data, id };
       const result =
@@ -64,7 +65,7 @@ export const AddEditPermission: React.FC<Props> = ({ formData, closeModal }) => 
 
   return (
     <DialogModal
-      titleText={action === 'add' ? `Add Permission` : `Update Permission`}
+      titleText={action === 'add' ? `Add New Access Control` : `Update Access Control`}
       isOpen={true}
       isSaving={isAdding || isUpdating}
       handleSave={handleSubmit(onSave)}
@@ -75,7 +76,11 @@ export const AddEditPermission: React.FC<Props> = ({ formData, closeModal }) => 
           <TextField
             size='small'
             type='text'
-            label={field.charAt(0).toUpperCase() + field.slice(1)}
+            label={
+              field === 'directAllowedRoleId'
+                ? 'Direct Allowed Role Id'
+                : field.charAt(0).toUpperCase() + field.slice(1)
+            }
             sx={{ margin: '10px 0' }}
             fullWidth
             {...register(field)}

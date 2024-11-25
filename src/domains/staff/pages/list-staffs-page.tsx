@@ -13,6 +13,8 @@ import { UserAccountBasic } from '@/components/user-account-basic';
 import { StaffFilter, StaffFilterSchema } from '../types';
 import { useGetStaffsQuery } from '../api/staff-api';
 import { FilterStaff } from '../components/forms';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 const initialState = {
   roleId: '',
@@ -23,6 +25,7 @@ const initialState = {
 export const ListStaffs = () => {
   const [filter, setFilter] = React.useState<StaffFilter>({});
   const { data, isLoading, isError, error } = useGetStaffsQuery(filter);
+  const appBase = useSelector(getAppBase);
 
   const methods = useForm<StaffFilter>({
     defaultValues: initialState,
@@ -43,7 +46,7 @@ export const ListStaffs = () => {
             variant='contained'
             startIcon={<Add />}
             component={Link}
-            to='/app/staffs/add'
+            to={`${appBase}/staffs/add`}
           >
             Add New Staff
           </Button>

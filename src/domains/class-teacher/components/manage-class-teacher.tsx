@@ -29,6 +29,8 @@ import {
   useUpdateClassTeacherMutation
 } from '../api/class-teacher-api';
 import { useGetSectionsQuery } from '@/domains/section/api';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 type ManageClassTeacherProps = {
   operation: string;
@@ -47,6 +49,7 @@ export const ManageClassTeacher: React.FC<ManageClassTeacherProps> = ({
   const [addClassTeacher, { isLoading: addingClassTeacher }] = useAddClassTeacherMutation();
   const [updateClassTeacher, { isLoading: updatingClassTeacher }] = useUpdateClassTeacherMutation();
   const navigate = useNavigate();
+  const appBase = useSelector(getAppBase);
 
   const {
     register,
@@ -79,7 +82,7 @@ export const ManageClassTeacher: React.FC<ManageClassTeacherProps> = ({
           : await updateClassTeacher({ id: id!, ...data }).unwrap();
 
       toast.info(result.message);
-      navigate('/app/class-teachers');
+      navigate(`${appBase}/class-teachers`);
       reset();
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
@@ -121,7 +124,7 @@ export const ManageClassTeacher: React.FC<ManageClassTeacherProps> = ({
                         value={name}
                         control={<Radio size='small' />}
                       />
-                    ))
+                    )) || <Typography color='red'>No section data</Typography>
                   )}
                 </RadioGroup>
               )}

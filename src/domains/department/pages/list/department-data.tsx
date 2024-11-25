@@ -8,11 +8,14 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetDepartmentsQuery } from '../../api';
 import { DepartmentFormWithId } from '../../types';
 import { DeleteDepartment } from './delete-department';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 export const DepartmentData = () => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [departmentId, setDepartmentId] = React.useState<number>(0);
   const { data, isLoading, isError, error } = useGetDepartmentsQuery();
+  const appBase = useSelector(getAppBase);
 
   const columns: MRT_ColumnDef<DepartmentFormWithId>[] = [
     {
@@ -54,7 +57,7 @@ export const DepartmentData = () => {
             title='Edit class'
             color='info'
             component={Link}
-            to={`/app/departments/edit/${id}`}
+            to={`${appBase}/departments/edit/${id}`}
           >
             <Edit />
           </IconButton>

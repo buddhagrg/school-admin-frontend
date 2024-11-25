@@ -14,7 +14,7 @@ import {
 import { blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUserMenus } from '@/domains/auth/slice';
+import { getAppBase, getUserMenus } from '@/domains/auth/slice';
 
 type DrawerContentProps = {
   handleNavigationClick: (name: string) => void;
@@ -26,11 +26,12 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
   openNavMenu
 }) => {
   const menus = useSelector(getUserMenus);
+  const appBase = useSelector(getAppBase);
   const API_URL = import.meta.env.VITE_API_URL;
 
   return (
     <div>
-      <Toolbar sx={{ textDecoration: 'none' }} component={Link} to='/app'>
+      <Toolbar sx={{ textDecoration: 'none' }} component={Link} to={appBase!}>
         <AcUnitOutlined color='primary' fontSize='large' />
         <Typography variant='h6' sx={{ ml: 2, color: blue[800] }}>
           School Admin
@@ -56,7 +57,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
                         <ListItemButton
                           key={name}
                           component={Link}
-                          to={`/app/${path}`}
+                          to={`${appBase}/${path}`}
                           sx={{ paddingLeft: '75px' }}
                         >
                           <ListItemText primary={name} />
@@ -68,7 +69,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
               );
             } else {
               return (
-                <ListItemButton key={name} component={Link} to={`/app/${path}`}>
+                <ListItemButton key={name} component={Link} to={`${appBase}/${path}`}>
                   <ListItemIcon>
                     <img width='20px' height='20px' src={`${API_URL}/${icon}`} />
                   </ListItemIcon>

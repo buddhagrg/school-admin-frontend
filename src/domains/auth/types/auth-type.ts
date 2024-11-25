@@ -31,6 +31,7 @@ export type User = {
   apis: BasePermission[];
   uis: BasePermission[];
   roleId: number;
+  appBase: string;
 };
 
 export type LoginRequest = z.infer<typeof LoginSchema>;

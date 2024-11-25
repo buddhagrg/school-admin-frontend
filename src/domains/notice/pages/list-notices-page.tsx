@@ -5,9 +5,12 @@ import { Link } from 'react-router-dom';
 import { PageContentHeader } from '@/components/page-content-header';
 import { useGetNoticesQuery } from '../api/notice-api';
 import { NoticeData } from '../components';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 export const ListNotices = () => {
   const { data, isLoading, isError, error } = useGetNoticesQuery();
+  const appBase = useSelector(getAppBase);
 
   return (
     <>
@@ -18,7 +21,7 @@ export const ListNotices = () => {
         size='small'
         sx={{ mb: 2, margin: 'auto' }}
         component={Link}
-        to={`/app/notices/add`}
+        to={`${appBase}/notices/add`}
       >
         Add Notice
       </Button>

@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useAddNewSectionMutation, useUpdateSectionMutation } from '../api';
 import { SectionForm } from '../types';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 type ManageSectionProps = {
   id?: number;
@@ -20,6 +22,8 @@ type ManageSectionProps = {
 export const ManageSection: React.FC<ManageSectionProps> = ({ id, operation, methods }) => {
   const [addNewSection, { isLoading: isAddingSection }] = useAddNewSectionMutation();
   const [updateSection, { isLoading: isUpdatingSection }] = useUpdateSectionMutation();
+  const appBase = useSelector(getAppBase);
+
   const navigate = useNavigate();
   const {
     register,
@@ -38,7 +42,7 @@ export const ManageSection: React.FC<ManageSectionProps> = ({ id, operation, met
 
       reset();
       toast.info(result?.message);
-      navigate('/app/sections');
+      navigate(`${appBase}/sections`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

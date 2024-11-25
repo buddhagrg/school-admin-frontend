@@ -5,43 +5,43 @@ import { Link } from 'react-router-dom';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetNoticeRecipientsQuery } from '../../api';
-import { NoticeRecipientWithIdAndRoleName } from '../../types';
-import { DeleteRecipient } from '../../components';
+import { useGetClassesQuery } from '../../api/class-api';
+import { ClassDataPropsWithId } from '../../types';
+import { DeleteClass } from './delete-class';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
-export const RecipientData = () => {
-  const [modalOpen, setModalOpen] = React.useState(false);
-  const [recipientId, setRecipientId] = React.useState<number>(0);
-  const { data, isLoading, isError, error } = useGetNoticeRecipientsQuery();
+export const DisplayClasses = () => {
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [classId, setClassId] = React.useState<number>(0);
+  const { data, isLoading, isError, error } = useGetClassesQuery();
+  const appBase = useSelector(getAppBase);
 
-  const columns: MRT_ColumnDef<NoticeRecipientWithIdAndRoleName>[] = React.useMemo(
+  const columns: MRT_ColumnDef<ClassDataPropsWithId>[] = React.useMemo(
     () => [
       {
-        accessorKey: 'roleName',
-        header: 'Role'
+        accessorKey: 'name',
+        header: 'Name'
       },
       {
-        accessorKey: 'primaryDependentName',
-        header: 'Dependent Name'
-      },
-      {
-        accessorKey: 'primaryDependentSelect',
-        header: 'Dependent Select'
+        accessorKey: 'sections',
+        header: 'Section'
       }
     ],
     []
   );
 
-  const openModal = (id: number) => {
-    setRecipientId(id);
-    setModalOpen(true);
+  const openModal = (leaveId: number) => {
+    setClassId(leaveId);
+    setIsOpen((isOpen) => !isOpen);
   };
+
   const closeModal = () => {
-    setModalOpen(false);
+    setIsOpen((isOpen) => !isOpen);
   };
 
   const table = useMaterialReactTable({
-    data: isError ? [] : data?.noticeRecipients || [],
+    data: isError ? [] : data?.classes || [],
     columns,
     state: {
       isLoading,
@@ -61,7 +61,7 @@ export const RecipientData = () => {
             title='Edit class'
             color='info'
             component={Link}
-            to={`/app/notices/recipients/edit/${id}`}
+            to={`${appBase}/classes/edit/${id}`}
           >
             <Edit />
           </IconButton>
@@ -83,7 +83,7 @@ export const RecipientData = () => {
         <MaterialReactTable table={table} />
       </Box>
 
-      {modalOpen && <DeleteRecipient recipientId={recipientId} closeModal={closeModal} />}
+      {isOpen && <DeleteClass classId={classId} closeModal={closeModal} />}
     </>
   );
 };

@@ -7,10 +7,6 @@ export const purgeMiddleware: Middleware = () => (next) => async (action: any) =
     persistor.pause();
     await persistor.flush();
     await persistor.purge();
-  } else if (action.type === 'auth/setUser') {
-    persistor.pause();
-    await persistor.flush();
-    await persistor.purge();
     persistor.persist();
   }
   return next(action);

@@ -48,3 +48,4 @@ export const getUserEmail = (state: RootState) => state.auth.user?.email;
 export const getUserRole = (state: RootState) => state.auth.user?.role;
 export const getUserMenus = (state: RootState) => state.auth.user?.menus;
 export const getUserScreens = (state: RootState) => state.auth.user?.uis;
+export const getAppBase = (state: RootState) => state.auth.user?.appBase;

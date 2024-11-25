@@ -14,7 +14,7 @@ import {
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { getUserRoleId, isUserAuthenticated } from '../auth/slice';
+import { getAppBase, isUserAuthenticated } from '../auth/slice';
 import { HomeBar } from '@/components/home-bar';
 import { Close, Menu } from '@mui/icons-material';
 
@@ -25,7 +25,7 @@ export const Appbar = () => {
 
   const pages: Array<{ name: string; path: string }> = [{ name: 'Features', path: '#features' }];
   const isAuthenticated = useSelector(isUserAuthenticated);
-  const userRoleId = useSelector(getUserRoleId);
+  const appBase = useSelector(getAppBase);
   const [open, setOpen] = React.useState<boolean>(false);
 
   const menus = (
@@ -51,7 +51,7 @@ export const Appbar = () => {
   const actions = isAuthenticated ? (
     <Button
       component={Link}
-      to={userRoleId === 1 ? '/schools' : '/app'}
+      to={appBase!}
       sx={{ color: '#DF5C52', textTransform: 'none', fontSize: 16, ml: { xs: 1, lg: 0 } }}
     >
       Dashboard

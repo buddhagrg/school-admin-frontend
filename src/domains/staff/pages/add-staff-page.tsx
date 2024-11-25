@@ -19,9 +19,12 @@ import {
   ParentsInformation,
   staffInitialState
 } from '../components/forms';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 export const AddStaff = () => {
   const navigate = useNavigate();
+  const appBase = useSelector(getAppBase);
 
   const [addNewStaff, { isLoading: isAddingStaff }] = useAddStaffMutation();
 
@@ -37,7 +40,7 @@ export const AddStaff = () => {
     try {
       const result = await addNewStaff(data).unwrap();
       toast.info(result.message);
-      navigate('/app/staffs');
+      navigate(`${appBase}/staffs`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

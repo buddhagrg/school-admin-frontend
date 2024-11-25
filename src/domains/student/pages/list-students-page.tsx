@@ -13,6 +13,8 @@ import { StudentFilter, StudentFilterSchema } from '../types';
 import { FilterStudent } from '../components/forms';
 import { UserAccountBasic } from '@/components/user-account-basic';
 import { useGetStudentsQuery } from '../api/student-api';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 const initialState = {
   class: '',
@@ -22,6 +24,8 @@ const initialState = {
 };
 
 export const ListStudents: React.FC = () => {
+  const appBase = useSelector(getAppBase);
+
   const methods = useForm<StudentFilter>({
     defaultValues: initialState,
     resolver: zodResolver(StudentFilterSchema)
@@ -44,7 +48,7 @@ export const ListStudents: React.FC = () => {
             variant='contained'
             startIcon={<Add />}
             component={Link}
-            to='/app/students/add'
+            to={`${appBase}/students/add`}
           >
             Add New Student
           </Button>

@@ -13,6 +13,8 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UserAccountBasicDataProps, UserAccountBasicProps } from './user-account-basic-type';
 import { useHandleMenuAction } from '../../hooks';
 import { menuItemTexts } from '@/constants';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
 type State = {
   isSaving: boolean;
@@ -32,6 +34,7 @@ const initialState = {
 };
 
 export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) => {
+  const appBase = useSelector(getAppBase);
   const [state, setState] = React.useState<State>(initialState);
   const { handleAction } = useHandleMenuAction();
   const { users, userType, isLoading, isError, error } = data;
@@ -130,7 +133,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
           key={0}
           onClick={() => closeMenu()}
           component={Link}
-          to={userType === 'staff' ? `/app/staffs/${id}` : `/app/students/${id}`}
+          to={userType === 'staff' ? `${appBase}/staffs/${id}` : `${appBase}/students/${id}`}
         >
           <ListItemIcon>
             <Visibility fontSize='small' />
@@ -141,7 +144,9 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
           key={1}
           onClick={() => closeMenu()}
           component={Link}
-          to={userType === 'staff' ? `/app/staffs/edit/${id}` : `/app/students/edit/${id}`}
+          to={
+            userType === 'staff' ? `${appBase}/staffs/edit/${id}` : `${appBase}/students/edit/${id}`
+          }
         >
           <ListItemIcon>
             <Edit fontSize='small' />

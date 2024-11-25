@@ -7,9 +7,12 @@ import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'materi
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetClassTeachersQuery } from '../../api/class-teacher-api';
 import { ClassTeacherDetail } from '@/domains/class/types';
+import { useSelector } from 'react-redux';
+import { getAppBase } from '@/domains/auth/slice';
 
-export const ClassTeacherData = () => {
+export const DisplayClassTeachers = () => {
   const { data, isLoading, isError, error } = useGetClassTeachersQuery();
+  const appBase = useSelector(getAppBase);
 
   const columns: MRT_ColumnDef<ClassTeacherDetail>[] = React.useMemo(
     () => [
@@ -45,7 +48,7 @@ export const ClassTeacherData = () => {
         title='Edit class'
         color='info'
         component={Link}
-        to={`/app/class-teachers/edit/${row.original.id}`}
+        to={`${appBase}/class-teachers/edit/${row.original.id}`}
       >
         <Edit />
       </IconButton>

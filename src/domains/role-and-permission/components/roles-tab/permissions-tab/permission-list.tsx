@@ -1,48 +1,24 @@
 import * as React from 'react';
-import {
-  MaterialReactTable,
-  MRT_ColumnDef,
-  MRT_RowSelectionState,
-  useMaterialReactTable
-} from 'material-react-table';
-import { toast } from 'react-toastify';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
-import { Box, Button, IconButton } from '@mui/material';
-import { Add, Delete, Edit } from '@mui/icons-material';
-import { LoadingButton } from '@mui/lab';
+import { Box } from '@mui/material';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DeletePermission } from './delete-permission';
-import { AddEditPermission } from './add-edit-permission';
 import { useRolePermission } from '@/domains/role-and-permission/context/role-permission-provider';
-import { Permission } from '@/utils/type/misc';
+import { AccessControl } from '@/components/access-control';
 import {
   useGetRolePermissionsQuery,
   useUpdateRolePermissionMutation
 } from '@/domains/role-and-permission/api';
+import { LoadingButton } from '@mui/lab';
+import { MRT_RowSelectionState } from 'material-react-table';
+import { toast } from 'react-toastify';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 import { ExtendedPermission } from '@/domains/role-and-permission/types';
+import { Permission } from '@/utils/type/misc';
 
 type PermissionListProps = {
   roleId: number;
 };
-export type FormInitialState = {
-  action: string;
-  id: number;
-  name: string;
-  path: string;
-  type: string;
-  method: string;
-};
-const formInitialState = {
-  action: '',
-  id: 0,
-  name: '',
-  path: '',
-  type: '',
-  method: ''
-};
-
 const updatePermissionsAvailability = (
   permissions: ExtendedPermission[],
   currentRolePermissions: Permission[]
@@ -67,16 +43,15 @@ const updatePermissionsAvailability = (
 
 export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
   const [rowSelection, setRowSelection] = React.useState<MRT_RowSelectionState>({});
-  const { data, isLoading: isFetchingCurrentRolePermission } = useGetRolePermissionsQuery(roleId);
   const [currentRolePermissions, setCurrentRolePermissions] = React.useState<ExtendedPermission[]>(
     []
   );
-  const [formState, setFormState] = React.useState<FormInitialState>(formInitialState);
+  const { data, isLoading: isFetchingCurrentRolePermission } = useGetRolePermissionsQuery(roleId);
+  const [updatePermissions, { isLoading: isUpdatingPermissions }] =
+    useUpdateRolePermissionMutation();
   const {
     state: { permissions }
   } = useRolePermission();
-  const [updatePermissions, { isLoading: isUpdatingPermissions }] =
-    useUpdateRolePermissionMutation();
 
   React.useEffect(() => {
     if (permissions) {
@@ -106,20 +81,6 @@ export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
     }
   }, [currentRolePermissions]);
 
-  const columns: MRT_ColumnDef<ExtendedPermission>[] = [
-    {
-      accessorKey: 'name',
-      header: 'Name'
-    },
-    {
-      accessorKey: 'type',
-      header: 'Type'
-    },
-    {
-      accessorKey: 'method',
-      header: 'Method'
-    }
-  ];
   const handleSave = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     try {
@@ -133,73 +94,17 @@ export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }
   };
-  const handleAction = (rowData: FormInitialState) => {
-    setFormState(rowData);
-  };
-  const closeModal = () => {
-    setFormState(formInitialState);
-  };
 
-  const table = useMaterialReactTable({
-    columns,
-    data: currentRolePermissions,
-    enableExpanding: true,
-    getRowId: (row) => row?.id?.toString(),
-    getSubRows: (row) => row.subMenus,
-    enableRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      density: 'compact',
-      rowSelection,
-      isLoading: isFetchingCurrentRolePermission
-    },
-    enablePagination: false,
-    enableDensityToggle: false,
-    enableColumnFilters: true,
-    filterFromLeafRows: true,
-    enableRowActions: true,
-    positionActionsColumn: 'last',
-    renderRowActions: ({ row }) => {
-      const {
-        original: { id, name, type, method, path },
-        parentId
-      } = row;
-      const rowData = { id, name, type, method, path };
-
-      return (
-        <Box>
-          <IconButton
-            disabled={Boolean(parentId)}
-            color='primary'
-            onClick={() => handleAction({ ...formInitialState, id: rowData.id, action: 'add' })}
-          >
-            <Add />
-          </IconButton>
-          <IconButton color='primary' onClick={() => handleAction({ ...rowData, action: 'edit' })}>
-            <Edit />
-          </IconButton>
-          <IconButton color='error' onClick={() => handleAction({ ...rowData, action: 'delete' })}>
-            <Delete />
-          </IconButton>
-        </Box>
-      );
-    },
-    renderTopToolbarCustomActions: () => (
-      <Button
-        variant='contained'
-        startIcon={<Add />}
-        onClick={() => handleAction({ ...formInitialState, action: 'add' })}
-      >
-        Add Root Permission
-      </Button>
-    )
-  });
-
-  const { action, id } = formState;
   return (
     <>
       <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }}>
-        <MaterialReactTable table={table} />
+        <AccessControl
+          rowSelection={rowSelection}
+          permissions={currentRolePermissions}
+          onRowSelectChange={setRowSelection}
+          isLoading={isFetchingCurrentRolePermission}
+        />
+
         <LoadingButton
           loading={isUpdatingPermissions}
           sx={{ marginTop: '20px' }}
@@ -210,11 +115,6 @@ export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
           Save
         </LoadingButton>
       </Box>
-
-      {action === 'delete' && <DeletePermission permissionId={id} closeModal={closeModal} />}
-      {(action === 'add' || action === 'edit') && (
-        <AddEditPermission closeModal={closeModal} formData={formState} />
-      )}
     </>
   );
 };
