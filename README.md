@@ -1,7 +1,3 @@
-### Demo
-
-https://www.school-admin.xyz
-
 ### To-Do
 
 - [x] Live deployment
