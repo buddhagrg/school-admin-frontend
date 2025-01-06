@@ -4,19 +4,19 @@ import { School, SchoolProps, SchoolsData, SchoolWithIdProps } from '../types';
 export const schoolApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getSchools: builder.query<SchoolsData, void>({
-      query: () => `/admin/schools`,
+      query: () => `/schools`,
       providesTags: (result) =>
         result?.schools?.map(({ schoolId }) => {
           return { type: Tag.SCHOOLS, id: schoolId };
         }) || [{ type: Tag.SCHOOLS }]
     }),
     getSchool: builder.query<School, number>({
-      query: (id) => `/admin/schools/${id}`,
+      query: (id) => `/schools/${id}`,
       providesTags: (result) => (result ? [{ type: Tag.SCHOOLS, id: result.schoolId }] : [])
     }),
     updateSchool: builder.mutation<{ message: string }, SchoolWithIdProps>({
       query: ({ schoolId, ...payload }) => ({
-        url: `/admin/schools/${schoolId}`,
+        url: `/schools/${schoolId}`,
         method: 'PUT',
         body: payload
       }),
@@ -25,7 +25,7 @@ export const schoolApi = api.injectEndpoints({
     }),
     addSchool: builder.mutation<{ message: string }, SchoolProps>({
       query: (payload) => ({
-        url: `/admin/schools`,
+        url: `/schools`,
         method: 'POST',
         body: payload
       }),
@@ -33,7 +33,7 @@ export const schoolApi = api.injectEndpoints({
     }),
     deleteSchool: builder.mutation<{ message: string }, { schoolId: number }>({
       query: (schoolId) => ({
-        url: `/admin/schools/${schoolId}`,
+        url: `/schools/${schoolId}`,
         method: 'DELETE'
       }),
       invalidatesTags: (result) => (result ? [Tag.SCHOOLS] : [])

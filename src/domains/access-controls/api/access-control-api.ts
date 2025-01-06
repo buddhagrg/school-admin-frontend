@@ -5,7 +5,7 @@ export const accessControlApi = api.injectEndpoints({
   endpoints: (builder) => ({
     addAccessControl: builder.mutation<{ message: string }, AddEditAccessControlProps>({
       query: (payload) => ({
-        url: `/admin/access-controls`,
+        url: `/access-controls`,
         method: 'POST',
         body: payload
       }),
@@ -13,7 +13,7 @@ export const accessControlApi = api.injectEndpoints({
     }),
     updateAccessControl: builder.mutation<{ message: string }, AddEditAccessControlWithId>({
       query: ({ id, ...payload }) => ({
-        url: `/admin/access-controls/${id}`,
+        url: `/access-controls/${id}`,
         method: 'PUT',
         body: payload
       }),
@@ -22,7 +22,7 @@ export const accessControlApi = api.injectEndpoints({
     }),
     deleteAccessControl: builder.mutation<{ message: string }, number>({
       query: (id) => ({
-        url: `/admin/access-controls/${id}`,
+        url: `/access-controls/${id}`,
         method: 'DELETE'
       }),
       invalidatesTags: [Tag.PERMISSIONS, Tag.MY_PERMISSIONS]
