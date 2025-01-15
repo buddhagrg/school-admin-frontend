@@ -88,7 +88,7 @@ export const StudentAccountEdit: React.FC<StudentAccountEditProps> = ({
           <AddressInformation />
 
           <hr />
-          <OtherInformation />
+          <OtherInformation action='edit' />
         </FormProvider>
         <hr />
         <Stack direction='row' alignItems='center' justifyContent='center' spacing={1}>

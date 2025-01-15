@@ -9,7 +9,7 @@ export const StudentFilterSchema = z.object({
 
 export const BasicInfoSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  gender: z.string().min(1, 'Gender is required'),
+  gender: z.string().min(1, 'Gender is required').or(z.number().min(1, 'Gender is required')),
   dob: z.union([z.date(), z.string()]),
   phone: z.string().min(1, 'Phone is required'),
   email: z.string().min(1, 'Email is required'),
@@ -17,7 +17,7 @@ export const BasicInfoSchema = z.object({
 });
 
 export const AcademicInfoSchema = z.object({
-  class: z.string().min(1, 'Class is required'),
+  class: z.string().min(1, 'Class is required').or(z.number().min(1, 'Class is required')),
   section: z.string(),
   roll: z.string().min(1, 'Roll is required'),
   admissionDate: z.union([z.date(), z.string()])
@@ -39,7 +39,8 @@ export const ParentsAndGuardianInfoSchema = z.object({
 });
 
 export const OtherInfoSchema = z.object({
-  systemAccess: z.boolean()
+  systemAccess: z.boolean(),
+  enrollToSystem: z.boolean().optional()
 });
 
 export const StudentSchema = BasicInfoSchema.extend(AcademicInfoSchema.shape)

@@ -60,7 +60,7 @@ export const AddStaff = () => {
           <ParentsInformation />
 
           <hr />
-          <OtherInformation />
+          <OtherInformation action='add' />
         </FormProvider>
 
         <hr />

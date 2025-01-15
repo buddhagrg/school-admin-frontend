@@ -18,6 +18,7 @@ import {
   AcademicInformation,
   AddressInformation,
   BasicInformation,
+  OtherInformation,
   ParentsAndGuardianInformation
 } from '../components/forms';
 import { useSelector } from 'react-redux';
@@ -71,6 +72,9 @@ export const AddStudent = () => {
 
           <hr />
           <AddressInformation />
+
+          <hr />
+          <OtherInformation action='add' />
 
           <hr />
           <Stack direction='row' alignItems='center' justifyContent='center' spacing={1}>

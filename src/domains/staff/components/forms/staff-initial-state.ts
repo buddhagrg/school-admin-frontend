@@ -2,7 +2,7 @@ import { StaffFormProps } from '../../types';
 
 export const staffInitialState: StaffFormProps = {
   name: '',
-  role: 0,
+  role: '',
   roleName: '',
   gender: '',
   maritalStatus: '',
@@ -17,8 +17,9 @@ export const staffInitialState: StaffFormProps = {
   fatherName: '',
   motherName: '',
   emergencyPhone: '',
-  reporterId: 0,
-  systemAccess: false
+  reporterId: '',
+  systemAccess: false,
+  enrollToSystem: false
 };
 
 export const {

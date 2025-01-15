@@ -84,7 +84,7 @@ export const StaffAccountEdit: React.FC<StaffAccountEditProps> = ({
           <ParentsInformation />
 
           <hr />
-          <OtherInformation />
+          <OtherInformation action='edit' />
         </FormProvider>
         <hr />
         <Stack alignItems='center' justifyContent='center'>

@@ -4,9 +4,11 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
+  FormLabel,
   InputLabel,
   MenuItem,
   Radio,
+  RadioGroup,
   Select,
   Stack,
   Typography
@@ -15,7 +17,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { useGetStaffs } from '../../hooks/use-get-staffs';
 import { StaffFormProps } from '../../types';
 
-export const OtherInformation = () => {
+export const OtherInformation = ({ action }: { action: string }) => {
   const staffs = useGetStaffs();
 
   const {
@@ -61,30 +63,59 @@ export const OtherInformation = () => {
           </FormControl>
         </Box>
 
-        <Box>
-          <Controller
-            name='systemAccess'
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <FormControlLabel
+        {action === 'edit' && (
+          <FormControl>
+            <FormLabel>System Access</FormLabel>
+            <RadioGroup row>
+              <Controller
                 name='systemAccess'
-                label='Allow Access to System'
-                control={<Radio checked={value} onChange={() => onChange(true)} />}
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <FormControlLabel
+                    label='Yes'
+                    control={<Radio checked={value} onChange={() => onChange(true)} />}
+                  />
+                )}
               />
-            )}
-          />
-          <Controller
-            name='systemAccess'
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <FormControlLabel
+              <Controller
                 name='systemAccess'
-                label='No Access'
-                control={<Radio checked={!value} onChange={() => onChange(false)} />}
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <FormControlLabel
+                    label='No'
+                    control={<Radio checked={!value} onChange={() => onChange(false)} />}
+                  />
+                )}
               />
-            )}
-          />
-        </Box>
+            </RadioGroup>
+          </FormControl>
+        )}
+
+        <FormControl>
+          <FormLabel>Enroll to System</FormLabel>
+          <RadioGroup row>
+            <Controller
+              name='enrollToSystem'
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <FormControlLabel
+                  label='Yes'
+                  control={<Radio checked={value} onChange={() => onChange(true)} />}
+                />
+              )}
+            />
+            <Controller
+              name='enrollToSystem'
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <FormControlLabel
+                  label='No'
+                  control={<Radio checked={!value} onChange={() => onChange(false)} />}
+                />
+              )}
+            />
+          </RadioGroup>
+        </FormControl>
       </Stack>
     </>
   );

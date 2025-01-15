@@ -9,9 +9,9 @@ export const StaffFilterSchema = z
   .partial();
 export const BasicInfoSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  role: z.number().min(1, 'Role is required'),
+  role: z.string().min(1, 'Role is required').or(z.number().min(1, 'Role is required')),
   roleName: z.string().optional().nullable(),
-  gender: z.string().min(1, 'Gender is required'),
+  gender: z.string().min(1, 'Gender is required').or(z.number().min(1, 'Gender is required')),
   maritalStatus: z.string().min(1, 'Marital Status is required'),
   phone: z.string().min(1, 'Phone is required'),
   email: z.string().min(1, 'Email is required'),
@@ -31,8 +31,12 @@ export const ParentsInfoSchema = z.object({
   emergencyPhone: z.string().min(1, 'Emergency phone is required')
 });
 export const OtherInfoSchema = z.object({
-  reporterId: z.number().min(1, 'You must select at least one person'),
+  reporterId: z
+    .string()
+    .min(1, 'You must select at least one person')
+    .or(z.number().min(1, 'You must select at least one person')),
   systemAccess: z.boolean(),
+  enrollToSystem: z.boolean().optional(),
   reporterName: z.string().optional().nullable()
 });
 export const StaffFormSchema = BasicInfoSchema.extend(AddressInfoSchema.shape)

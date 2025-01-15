@@ -80,7 +80,7 @@ export const AcademicInformation = () => {
                   notched
                 >
                   {isLoading ? (
-                    <>loading...</>
+                    <div>loading...</div>
                   ) : (
                     data?.sections?.map(({ name }) => (
                       <MenuItem value={name} key={name}>

@@ -19,7 +19,8 @@ export const studentFormInitialState: StudentProps = {
   relationOfGuardian: '',
   currentAddress: '',
   permanentAddress: '',
-  systemAccess: false
+  systemAccess: false,
+  enrollToSystem: false
 };
 
 export const studentFormReducer = (
