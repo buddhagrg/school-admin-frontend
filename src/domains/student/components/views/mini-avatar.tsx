@@ -6,7 +6,7 @@ type MiniAvatarProps = {
   name: string;
   phone: string;
   email: string;
-  selectedClass: string;
+  selectedClass: string | number;
   section: string;
   schoolName?: string;
 };

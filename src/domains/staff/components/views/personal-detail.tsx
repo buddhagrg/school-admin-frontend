@@ -5,10 +5,10 @@ import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 
 type PersonalDetailProps = {
   id?: string;
-  gender: string;
+  gender: string | number;
   dob: string | Date;
   joinDate: string | Date;
-  maritalStatus: string;
+  maritalStatus: string | number;
   qualification?: string;
   experience?: string;
   currentAddress: string;

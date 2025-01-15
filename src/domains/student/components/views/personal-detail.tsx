@@ -5,7 +5,7 @@ import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 
 type PersonalDetailProps = {
   dob: string | Date;
-  gender: string;
+  gender: string | number;
   roll: string;
   admissionDate: string | Date;
   currentAddress: string;

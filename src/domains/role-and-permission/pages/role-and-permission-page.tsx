@@ -27,13 +27,13 @@ const RoleAndPermissionPage = () => {
   }, []);
 
   React.useEffect(() => {
-    if (permissionsData?.permissions) {
+    if (permissionsData?.accessControls) {
       dispatch({
         type: 'SET_PERMISSIONS',
-        payload: initializePermissions(permissionsData.permissions)
+        payload: initializePermissions(permissionsData.accessControls)
       });
     }
-  }, [permissionsData?.permissions, dispatch, initializePermissions]);
+  }, [permissionsData?.accessControls, dispatch, initializePermissions]);
   React.useEffect(() => {
     if (rolesData) {
       dispatch({ type: 'SET_ROLES', payload: rolesData.roles ?? [] });
