@@ -14,7 +14,7 @@ export const useClasses = () => {
           setClasses(result.classes);
         }
       } catch (error) {
-        console.log(error);
+        setClasses([]);
       }
     };
 

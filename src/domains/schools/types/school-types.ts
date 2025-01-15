@@ -7,8 +7,8 @@ export type School = {
   email: string;
   phone: string;
   lastModifiedByName: number;
-  createdDt: Date | null;
-  updatedDt: Date | null;
+  createdDate: Date | null;
+  updatedDate: Date | null;
   isActive: boolean;
   isEmailVerified: boolean;
 };

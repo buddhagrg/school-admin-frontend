@@ -67,7 +67,7 @@ export type ExtendedPermission = BasePermission & {
   subMenus?: ExtendedPermission[];
 };
 export type PermissionData = {
-  permissions: Permission[];
+  accessControls: Permission[];
 };
 export type HandleRoleStatus = {
   id: number;

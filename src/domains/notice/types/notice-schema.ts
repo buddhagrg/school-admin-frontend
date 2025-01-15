@@ -19,9 +19,9 @@ export const NoticeFormSchema = z
   .object({
     title: z.string().min(1, 'Title is required'),
     description: z.string().min(1, 'Description is required'),
-    status: z.number().min(1, 'Status is required'),
+    status: z.number().min(1, 'Status is required').or(z.string().min(1, 'Status is required')),
     recipientType: z.enum(['EV', 'SP']),
-    recipientRole: z.number().optional(),
+    recipientRole: z.number().optional().or(z.string().optional()),
     firstField: z.union([z.number(), z.string()]).optional()
   })
   .superRefine((value, ctx) => {

@@ -41,7 +41,7 @@ export const ManageAccessControl = () => {
       <AccessControl
         rowSelection={{}}
         isLoading={isLoading}
-        permissions={data?.permissions ?? []}
+        permissions={data?.accessControls ?? []}
         handleAction={handleAction}
       />
       {action === 'delete' && <DeleteAccessControl permissionId={id} closeModal={closeModal} />}

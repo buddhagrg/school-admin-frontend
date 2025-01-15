@@ -16,7 +16,7 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
     getPermissions: builder.query<PermissionData, void>({
       query: () => `/access-controls`,
       providesTags: (result) =>
-        result?.permissions?.map(({ id }) => {
+        result?.accessControls?.map(({ id }) => {
           return { type: Tag.PERMISSIONS, id };
         }) || [{ type: Tag.PERMISSIONS }]
     }),

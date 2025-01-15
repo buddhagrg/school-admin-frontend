@@ -19,7 +19,7 @@ export const RequestNewLeave = () => {
 
   const methods = useForm<LeaveRequestForm>({
     defaultValues: {
-      policy: myLeavePolicies.length > 0 ? myLeavePolicies[0].id : 0,
+      policy: myLeavePolicies.length > 0 ? myLeavePolicies[0].id : '',
       from: new Date(),
       to: new Date(),
       note: ''

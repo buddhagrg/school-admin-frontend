@@ -19,9 +19,9 @@ import { getAppBase } from '@/domains/auth/slice';
 const initialState: NoticeFormProps = {
   title: '',
   description: '',
-  status: 0,
+  status: '',
   recipientType: 'EV',
-  recipientRole: 0,
+  recipientRole: '',
   firstField: ''
 };
 

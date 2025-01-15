@@ -18,7 +18,7 @@ import {
 export const leaveApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getMyLeaveHistory: builder.query<LeaveRequestHistory, void>({
-      query: () => `/leave/request`,
+      query: () => `/leaves/request`,
       providesTags: (result) =>
         result?.leaveHistory.map(({ id }) => {
           return { type: Tag.LEAVE_HISTORY, id };
@@ -26,7 +26,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     applyLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApi>({
       query: (payload) => ({
-        url: `/leave/request`,
+        url: `/leaves/request`,
         method: 'POST',
         body: payload
       }),
@@ -34,7 +34,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     updateLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApiWithId>({
       query: ({ id, ...restPayload }) => ({
-        url: `/leave/request/${id}`,
+        url: `/leaves/request/${id}`,
         method: 'PUT',
         body: { ...restPayload }
       }),
@@ -48,7 +48,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     deleteLeaveRequest: builder.mutation<{ message: string }, number | undefined>({
       query: (id) => ({
-        url: `/leave/request/${id}`,
+        url: `/leaves/request/${id}`,
         method: 'DELETE'
       }),
       invalidatesTags: (result, _error, id) =>
@@ -61,7 +61,7 @@ export const leaveApi = api.injectEndpoints({
     }),
 
     getLeavePending: builder.query<PendingLeaveRequestHistory, void>({
-      query: () => `/leave/pending`,
+      query: () => `/leaves/pending`,
       providesTags: (result) =>
         result?.pendingLeaves.map(({ id }) => {
           return { type: Tag.PENDING_LEAVES, id };
@@ -69,7 +69,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     handlePendingLeaveStatus: builder.mutation<{ message: string }, LeaveStatus>({
       query: ({ id, status }) => ({
-        url: `/leave/pending/${id}/status`,
+        url: `/leaves/pending/${id}/status`,
         method: 'POST',
         body: { status }
       }),
@@ -82,21 +82,21 @@ export const leaveApi = api.injectEndpoints({
           : []
     }),
     getLeavePolicies: builder.query<LeavePolicyData, void>({
-      query: () => '/leave/policies',
+      query: () => '/leaves/policies',
       providesTags: (result) =>
         result?.leavePolicies.map(({ id }) => {
           return { type: Tag.LEAVE_POLICIES, id };
         }) || [{ type: Tag.LEAVE_POLICIES }]
     }),
     getEligibleLeavePolicyUsers: builder.query<EligiblePolicyUsers, void>({
-      query: () => `leave/policies/eligible-users`,
+      query: () => `leaves/policies/eligible-users`,
       providesTags: (result) =>
         result?.users.map(({ id }) => {
           return { type: Tag.LEAVE_ELIGIBLE_USERS, id };
         }) || [{ type: Tag.LEAVE_ELIGIBLE_USERS }]
     }),
     getLeavePolicyUsers: builder.query<PolicyUserData, number>({
-      query: (id) => `/leave/policies/${id}/users`,
+      query: (id) => `/leaves/policies/${id}/users`,
       providesTags: (result) =>
         result?.users.map(({ id }) => {
           return { type: Tag.LEAVE_POLICY_USERS, id };
@@ -104,7 +104,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     addLeavePolicy: builder.mutation<{ message: string }, Pick<PolicyDetail, 'name'>>({
       query: ({ name }) => ({
-        url: `/leave/policies`,
+        url: `/leaves/policies`,
         method: 'POST',
         body: { name }
       }),
@@ -112,7 +112,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     updateLeavePolicy: builder.mutation<{ message: string }, Pick<PolicyDetail, 'name' | 'id'>>({
       query: ({ id, name }) => ({
-        url: `/leave/policies/${id}`,
+        url: `/leaves/policies/${id}`,
         method: 'PUT',
         body: { name }
       }),
@@ -121,7 +121,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     handleLeavePolicy: builder.mutation<{ message: string }, PolicyStatus>({
       query: ({ id, status }) => ({
-        url: `/leave/policies/${id}/status`,
+        url: `/leaves/policies/${id}/status`,
         method: 'POST',
         body: { status }
       }),
@@ -130,7 +130,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     addUserToPolicy: builder.mutation<{ message: string }, AddUserToPolicy>({
       query: ({ userList, id }) => ({
-        url: `/leave/policies/${id}/users`,
+        url: `/leaves/policies/${id}/users`,
         method: 'POST',
         body: { users: userList }
       }),
@@ -146,7 +146,7 @@ export const leaveApi = api.injectEndpoints({
     }),
     removeUserFromPolicy: builder.mutation<{ message: string }, RemoveUserFromPolicy>({
       query: ({ userId, policyId }) => ({
-        url: `/leave/policies/${policyId}/users`,
+        url: `/leaves/policies/${policyId}/users`,
         method: 'DELETE',
         body: { user: userId }
       }),
@@ -161,7 +161,7 @@ export const leaveApi = api.injectEndpoints({
       }
     }),
     getMyLeavePolicies: builder.query<MyLeavePolicyData, void>({
-      query: () => `/leave/policies/me`,
+      query: () => `/leaves/policies/me`,
       providesTags: (result) =>
         result?.leavePolicies.map(({ id }) => {
           return { type: Tag.MY_LEAVE_POLICIES, id };

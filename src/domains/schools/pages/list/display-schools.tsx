@@ -38,12 +38,12 @@ export const DisplaySchools = () => {
         header: 'Last Modified By'
       },
       {
-        accessorKey: 'createdDt',
+        accessorKey: 'createdDate',
         header: 'Created Date',
         Cell: ({ cell }) => <>{getFormattedDate(cell.getValue<string>(), DATE_TIME_24_HR_FORMAT)}</>
       },
       {
-        accessorKey: 'updatedDt',
+        accessorKey: 'updatedDate',
         header: 'Updated Date',
         Cell: ({ cell }) => <>{getFormattedDate(cell.getValue<string>(), DATE_TIME_24_HR_FORMAT)}</>
       },
