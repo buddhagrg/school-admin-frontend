@@ -94,7 +94,6 @@ export const rolesAndPermissionsApi = api.injectEndpoints({
 
 export const {
   useGetPermissionsQuery,
-  useLazyGetRolesQuery,
   useGetRolesQuery,
   useGetRoleUsersQuery,
   useGetRolePermissionsQuery,
