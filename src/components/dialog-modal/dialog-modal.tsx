@@ -1,14 +1,5 @@
 import * as React from 'react';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Paper,
-  PaperProps
-} from '@mui/material';
-import Draggable from 'react-draggable';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 type DialogModalProps = {
@@ -23,13 +14,13 @@ type DialogModalProps = {
   handleSave: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-function PaperComponent(props: PaperProps) {
-  return (
-    <Draggable handle='#draggable-dialog-title' cancel={'[class*="MuiDialogContent-root"]'}>
-      <Paper {...props} />
-    </Draggable>
-  );
-}
+// function PaperComponent(props: PaperProps) {
+//   return (
+//     <Draggable handle='#draggable-dialog-title' cancel={'[class*="MuiDialogContent-root"]'}>
+//       <Paper {...props} />
+//     </Draggable>
+//   );
+// }
 export const DialogModal: React.FC<DialogModalProps> = ({
   isSaving,
   actionFooterCancelText,
@@ -53,7 +44,7 @@ export const DialogModal: React.FC<DialogModalProps> = ({
       onClose={handleClose}
       fullWidth
       maxWidth='xs'
-      PaperComponent={PaperComponent}
+      // PaperComponent={PaperComponent}
     >
       <DialogTitle id='draggable-dialog-title'>{titleText}</DialogTitle>
       <DialogContent>{children}</DialogContent>

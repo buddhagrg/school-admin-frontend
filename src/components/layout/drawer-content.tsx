@@ -6,7 +6,6 @@ import {
   Divider,
   List,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   Toolbar,
   Typography
@@ -27,7 +26,6 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
 }) => {
   const menus = useSelector(getUserMenus);
   const appBase = useSelector(getAppBase);
-  const API_URL = import.meta.env.VITE_API_URL;
 
   return (
     <div>
@@ -40,14 +38,14 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
       <Divider />
       <List component='nav' sx={{ width: '100%' }}>
         {menus &&
-          menus.map(({ name, path, subMenus, icon }) => {
+          menus.map(({ name, path, subMenus }) => {
             if (Array.isArray(subMenus) && subMenus.length > 0) {
               return (
                 <Box key={name}>
                   <ListItemButton onClick={() => handleNavigationClick(name)}>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                       <img width='20px' height='20px' src={`${API_URL}/${icon}`} />
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                     <ListItemText primary={name} />
                     {openNavMenu === name ? <ArrowDropDown /> : <ArrowRight />}
                   </ListItemButton>
@@ -70,9 +68,9 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
             } else {
               return (
                 <ListItemButton key={name} component={Link} to={`${appBase}/${path}`}>
-                  <ListItemIcon>
+                  {/* <ListItemIcon>
                     <img width='20px' height='20px' src={`${API_URL}/${icon}`} />
-                  </ListItemIcon>
+                  </ListItemIcon> */}
                   <ListItemText primary={name} />
                 </ListItemButton>
               );

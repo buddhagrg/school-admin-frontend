@@ -29,6 +29,7 @@ import { SignUpPage } from '@/domains/auth/pages/signup/signup-page';
 import { ManageAccessControl } from '@/domains/access-controls/pages/access-control-page';
 import { SuperAdminDashboard } from '@/domains/super-admin-dashboard';
 import { EditSchool, ListSchoolsPage } from '@/domains/schools/pages';
+import { AcademicLevelWithPeriodPage } from '@/domains/academic-level/pages';
 
 export const routes = [
   {
@@ -90,6 +91,7 @@ export const routes = [
       { path: 'roles-and-permissions', element: <RoleAndPermission /> },
       { path: 'departments', element: <ListDepartmentsPage /> },
       { path: 'departments/edit/:id', element: <EditDepartmentPage /> },
+      { path: 'academic-level-and-period', element: <AcademicLevelWithPeriodPage /> },
       { path: '*', element: <NotFound /> }
     ]
   },
