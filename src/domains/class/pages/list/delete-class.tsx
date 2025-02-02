@@ -32,9 +32,10 @@ export const DeleteClass: React.FC<DeleteClassProps> = ({ classId, closeModal })
       isOpen={true}
       closeModal={closeModal}
       handleSave={onSave}
-      titleText='Delete Class'
-    >
-      <Typography variant='body1'>Are you sure you want to delete this class?</Typography>
-    </DialogModal>
+      titleText='Confirm Deletion'
+      contextText={
+        <Typography variant='body1'>Are you sure you want to delete this class?</Typography>
+      }
+    />
   );
 };

@@ -9,6 +9,7 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { useUpdatePeriodOrderMutation } from '../../api';
+import { Chip, List } from '@mui/material';
 
 type ManagePeriodOrderProps = {
   closeModal: () => void;
@@ -62,13 +63,16 @@ export const ManagePeriodOrder: React.FC<ManagePeriodOrderProps> = ({
     <DialogModal
       isOpen={true}
       titleText='Manage Period Order'
+      contextText={<Chip label='Drag items vertically to reorder' color='primary' />}
       isSaving={isUpdating}
       closeModal={closeModal}
       handleSave={handleSave}
     >
       <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
         <SortableContext items={periods} strategy={verticalListSortingStrategy}>
-          {periodList?.map(({ id, name }) => <PeriodItem id={id} name={name} key={id} />)}
+          <List dense>
+            {periodList?.map(({ id, name }) => <PeriodItem id={id} name={name} key={id} />)}
+          </List>
         </SortableContext>
       </DndContext>
     </DialogModal>

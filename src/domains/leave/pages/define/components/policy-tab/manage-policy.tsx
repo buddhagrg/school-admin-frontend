@@ -61,7 +61,7 @@ export const ManagePolicy = ({ id, name }: { id: number; name: string }) => {
       {action === 'disablePolicy' && (
         <PolicyStatus
           title='Disable Policy'
-          bodyText='Are you sure you want to disable this policy?'
+          contextText='Are you sure you want to disable this policy?'
           policyStatus={false}
           policyId={id}
           closeModal={closeModal}

@@ -74,14 +74,16 @@ export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({ policyId, 
       isModalClosedOnOutClick={false}
       isOpen={true}
       titleText='Add People'
+      contextText={
+        <Alert severity='info'>
+          One Person can be added to only one policy. If a person is already part of another policy
+          and is being assigned to new one, then the person will only be part of the policy being
+          assigned to.
+        </Alert>
+      }
       closeModal={closeModal}
       handleSave={handleSubmit(handleAddPeopleSubmit)}
     >
-      <Alert severity='info'>
-        One Person can be added to only one policy. If a person is already part of another policy
-        and is being assigned to new one, then the person will only be part of the policy being
-        assigned to.
-      </Alert>
       <FormControl fullWidth size='small' sx={{ my: 3 }} error={!!errors.users}>
         <InputLabel id='add-people-to-policy'>Users</InputLabel>
         <Controller

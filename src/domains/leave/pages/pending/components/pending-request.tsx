@@ -110,7 +110,7 @@ export const PendingRequestData = () => {
             leaveId={leaveId}
             status={action === 'approve' ? 2 : 3}
             titleText={action === 'approve' ? 'Approve Leave' : 'Reject Leave'}
-            bodyText={`Are you sure you want to ${action} this leave request?`}
+            contextText={`Are you sure you want to ${action} this leave request?`}
             closeModal={closeModal}
           />
         )}

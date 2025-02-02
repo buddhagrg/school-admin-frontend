@@ -92,12 +92,13 @@ export const ViewNotice = () => {
         actionFooterCancelText='No'
         actionFooterSaveText='Yes'
         isOpen={modalOpen}
-        titleText='Delete Notice'
+        titleText='Confirm Deletion'
+        contextText={
+          <Typography variant='body1'>Are you sure you want to delete this notice?</Typography>
+        }
         handleSave={onSave}
         closeModal={closeModal}
-      >
-        <Typography variant='body1'>Are you sure you want to delete this notice?</Typography>
-      </DialogModal>
+      />
     </Paper>
   );
 };

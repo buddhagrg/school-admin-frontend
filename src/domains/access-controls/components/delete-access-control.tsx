@@ -36,9 +36,8 @@ export const DeleteAccessControl: React.FC<DeleteAccessControlProps> = ({
       closeModal={closeModal}
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
-      titleText='Delete Access Control'
-    >
-      Are you sure you want to delete this access control ?
-    </DialogModal>
+      titleText='Confirm Deletion'
+      contextText={<>Are you sure you want to delete this access control?</>}
+    />
   );
 };

@@ -217,12 +217,11 @@ export const NoticeData: React.FC<NoticeDataProps> = ({
         actionFooterCancelText='No'
         actionFooterSaveText='Yes'
         titleText={modalTitle}
+        contextText={<Typography variant='body1'>{modalBodyText}</Typography>}
         isOpen={isModalOpen}
         closeModal={toggleModal}
         handleSave={onSave}
-      >
-        <Typography variant='body1'>{modalBodyText}</Typography>
-      </DialogModal>
+      />
     </>
   );
 };

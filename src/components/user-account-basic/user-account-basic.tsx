@@ -186,14 +186,13 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
       <DialogModal
         isSaving={isSaving}
         titleText={modalTitle}
+        contextText={<Typography variant='body1'>{modalBodyText}</Typography>}
         actionFooterCancelText='No'
         actionFooterSaveText='Yes'
         isOpen={isModalOpen}
         closeModal={toggleModal}
         handleSave={onSave}
-      >
-        <Typography variant='body1'>{modalBodyText}</Typography>
-      </DialogModal>
+      />
     </>
   );
 };

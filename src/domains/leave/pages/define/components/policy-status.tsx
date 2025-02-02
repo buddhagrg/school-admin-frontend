@@ -10,7 +10,7 @@ import { useHandleLeavePolicyMutation } from '../../../api/leave-api';
 
 type PolicyStatusProps = {
   title: string;
-  bodyText: string;
+  contextText: string;
   policyId: number;
   policyStatus: boolean;
   closeModal: () => void;
@@ -18,7 +18,7 @@ type PolicyStatusProps = {
 
 export const PolicyStatus: React.FC<PolicyStatusProps> = ({
   title,
-  bodyText,
+  contextText,
   policyId,
   closeModal,
   policyStatus
@@ -43,8 +43,7 @@ export const PolicyStatus: React.FC<PolicyStatusProps> = ({
       titleText={title}
       closeModal={closeModal}
       handleSave={handlePolicyStatusSubmit}
-    >
-      <Typography variant='body1'>{bodyText}</Typography>
-    </DialogModal>
+      contextText={<Typography variant='body1'>{contextText}</Typography>}
+    />
   );
 };

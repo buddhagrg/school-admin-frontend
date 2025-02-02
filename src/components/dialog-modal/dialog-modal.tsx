@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 type DialogModalProps = {
@@ -9,8 +16,9 @@ type DialogModalProps = {
   isModalClosedOnOutClick?: boolean;
   isOpen: boolean;
   titleText?: string;
+  contextText?: JSX.Element;
   closeModal: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   handleSave: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -28,6 +36,7 @@ export const DialogModal: React.FC<DialogModalProps> = ({
   isModalClosedOnOutClick = true,
   isOpen,
   titleText,
+  contextText,
   closeModal,
   children,
   handleSave
@@ -47,7 +56,10 @@ export const DialogModal: React.FC<DialogModalProps> = ({
       // PaperComponent={PaperComponent}
     >
       <DialogTitle id='draggable-dialog-title'>{titleText}</DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent>
+        <DialogContentText gutterBottom>{contextText}</DialogContentText>
+        {children}
+      </DialogContent>
       <DialogActions>
         <Button type='button' size='small' variant='contained' color='error' onClick={closeModal}>
           {actionFooterCancelText ?? 'Cancel'}

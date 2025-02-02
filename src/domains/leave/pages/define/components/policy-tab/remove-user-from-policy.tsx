@@ -35,15 +35,16 @@ export const RemoveUserFromPolicy: React.FC<RemoveUserFromPolicyProps> = ({
     <DialogModal
       isSaving={isRemovingUser}
       titleText='Remove User'
+      contextText={
+        <Typography variant='body1'>
+          Are you sure you want to remove user from this policy?
+        </Typography>
+      }
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
       isOpen={true}
       closeModal={closeModal}
       handleSave={onSave}
-    >
-      <Typography variant='body1'>
-        Are you sure you want to remove user from this policy?
-      </Typography>
-    </DialogModal>
+    />
   );
 };

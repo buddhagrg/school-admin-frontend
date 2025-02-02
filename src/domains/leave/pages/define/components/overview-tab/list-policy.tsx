@@ -135,7 +135,7 @@ export const ListPolicy = () => {
       {['enable', 'disable'].includes(action) && (
         <PolicyStatus
           title={modalTitleText}
-          bodyText={`Are you sure you want to ${action} this policy?`}
+          contextText={`Are you sure you want to ${action} this policy?`}
           policyId={id}
           policyStatus={action === 'disable' ? false : true}
           closeModal={closeModal}

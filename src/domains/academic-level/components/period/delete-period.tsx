@@ -29,11 +29,10 @@ export const DeletePeriod: React.FC<DeletePeriodProps> = ({ closeModal, id, name
     <DialogModal
       isOpen={true}
       closeModal={closeModal}
-      titleText='Delete Period'
+      titleText='Confirm Deletion'
+      contextText={<Typography>Are you sure you want to delete the period "{name}"?</Typography>}
       isSaving={isDeleting}
       handleSave={handleSave}
-    >
-      <Typography>Are you sure you want to delete period - "{name}"?</Typography>
-    </DialogModal>
+    />
   );
 };

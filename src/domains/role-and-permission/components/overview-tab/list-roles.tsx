@@ -140,7 +140,7 @@ export const ListRoles = () => {
       {(action === 'enable' || action === 'disable') && (
         <HandleRoleStatus
           title={modalTitleText}
-          bodyText={`Are you sure you want to ${action} this role?`}
+          contextText={`Are you sure you want to ${action} this role?`}
           roleId={id}
           roleStatus={action === 'disable' ? false : true}
           closeModals={closeModal}

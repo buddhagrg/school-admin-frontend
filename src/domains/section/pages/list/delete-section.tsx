@@ -33,9 +33,10 @@ export const DeleteSection: React.FC<DeleteSectionProps> = ({ sectionId, closeMo
       isOpen={true}
       closeModal={closeModal}
       handleSave={onSave}
-      titleText='Delete Section'
-    >
-      <Typography variant='body1'>Are you sure you want to delete this section?</Typography>
-    </DialogModal>
+      titleText='Confirm Deletion'
+      contextText={
+        <Typography variant='body1'>Are you sure you want to delete this section?</Typography>
+      }
+    />
   );
 };

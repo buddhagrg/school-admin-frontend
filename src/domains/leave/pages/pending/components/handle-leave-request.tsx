@@ -13,7 +13,7 @@ type HandleLeaveReuqestProps = {
   status: number;
   titleText: string;
   closeModal: () => void;
-  bodyText: string;
+  contextText: string;
 };
 
 export const HandleLeaveRequest: React.FC<HandleLeaveReuqestProps> = ({
@@ -21,7 +21,7 @@ export const HandleLeaveRequest: React.FC<HandleLeaveReuqestProps> = ({
   status,
   titleText,
   closeModal,
-  bodyText
+  contextText
 }) => {
   const [handleLeaveStatus, { isLoading: isHandlingLeaveStatus }] =
     useHandlePendingLeaveStatusMutation();
@@ -45,9 +45,8 @@ export const HandleLeaveRequest: React.FC<HandleLeaveReuqestProps> = ({
       handleSave={onSave}
       isOpen={true}
       titleText={titleText}
+      contextText={<Typography>{contextText}</Typography>}
       closeModal={closeModal}
-    >
-      <Typography>{bodyText}</Typography>
-    </DialogModal>
+    />
   );
 };

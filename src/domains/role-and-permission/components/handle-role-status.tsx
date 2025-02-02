@@ -13,7 +13,7 @@ type RoleStatusProps = {
   roleId: number;
   closeModals: () => void;
   title: string;
-  bodyText: string;
+  contextText: string;
 };
 
 export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
@@ -21,7 +21,7 @@ export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
   closeModals,
   roleStatus,
   title,
-  bodyText
+  contextText
 }) => {
   const [handleRoleStatus, { isLoading: isDisablingRole }] = useHandleRoleStatusMutation();
 
@@ -42,10 +42,9 @@ export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
       actionFooterSaveText='Yes'
       isOpen={true}
       titleText={title}
+      contextText={<Typography variant='body1'>{contextText}</Typography>}
       closeModal={closeModals}
       handleSave={onSave}
-    >
-      <Typography variant='body1'>{bodyText}</Typography>
-    </DialogModal>
+    />
   );
 };

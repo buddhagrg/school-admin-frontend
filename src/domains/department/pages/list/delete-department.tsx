@@ -33,9 +33,10 @@ export const DeleteDepartment: React.FC<DeleteDepartmentProps> = ({ departmentId
       isOpen={true}
       closeModal={closeModal}
       handleSave={onSave}
-      titleText='Delete Department'
-    >
-      <Typography variant='body1'>Are you sure you want to delete this department?</Typography>
-    </DialogModal>
+      titleText='Confirm Deletion'
+      contextText={
+        <Typography variant='body1'>Are you sure you want to delete this department?</Typography>
+      }
+    />
   );
 };

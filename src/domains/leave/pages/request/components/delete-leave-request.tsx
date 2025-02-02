@@ -30,13 +30,14 @@ export const DeleteLeaveRequest: React.FC<DeleteLeaveRequestProps> = ({ id, clos
     <DialogModal
       isSaving={isDeleting}
       isOpen={true}
-      titleText='Delete Leave Request'
+      titleText='Confirm Deletion'
+      contextText={
+        <Typography variant='body1'>Are you sure you want to delete this leave request?</Typography>
+      }
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
       handleSave={onSave}
       closeModal={closeModal}
-    >
-      <Typography variant='body1'>Are you sure you want to delete this leave request?</Typography>
-    </DialogModal>
+    />
   );
 };

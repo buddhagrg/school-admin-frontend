@@ -48,7 +48,7 @@ export const RoleManage = ({ id, name }: { id: number; name: string }) => {
       {action === 'block' && (
         <HandleRoleStatus
           title='Disable Role'
-          bodyText='Are you sure you want to disable this role?'
+          contextText='Are you sure you want to disable this role?'
           roleStatus={false}
           roleId={id}
           closeModals={closeModal}

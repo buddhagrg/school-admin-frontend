@@ -36,7 +36,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
         </Typography>
       </Toolbar>
       <Divider />
-      <List component='nav' sx={{ width: '100%' }}>
+      <List component='nav' sx={{ width: '100%' }} dense>
         {menus &&
           menus.map(({ name, path, subMenus }) => {
             if (Array.isArray(subMenus) && subMenus.length > 0) {
@@ -49,14 +49,19 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
                     <ListItemText primary={name} />
                     {openNavMenu === name ? <ArrowDropDown /> : <ArrowRight />}
                   </ListItemButton>
-                  <Collapse in={openNavMenu === name} timeout='auto' unmountOnExit>
-                    <List component='div'>
+                  <Collapse
+                    in={openNavMenu === name}
+                    timeout='auto'
+                    unmountOnExit
+                    sx={{ paddingLeft: '15px' }}
+                  >
+                    <List component='div' dense>
                       {subMenus.map(({ name, path }) => (
                         <ListItemButton
                           key={name}
                           component={Link}
                           to={`${appBase}/${path}`}
-                          sx={{ paddingLeft: '75px' }}
+                          sx={{ borderLeft: '1px solid black' }}
                         >
                           <ListItemText primary={name} />
                         </ListItemButton>

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Box, ListItemText } from '@mui/material';
+import { Box, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { DragIndicator } from '@mui/icons-material';
 
 type PeriodItemProps = {
   id: number;
@@ -21,7 +22,12 @@ export const PeriodItem: React.FC<PeriodItemProps> = ({ id, name }) => {
 
   return (
     <Box ref={setNodeRef} component='section' style={style}>
-      <ListItemText {...attributes} {...listeners} primary={name} />
+      <ListItem>
+        <ListItemIcon {...attributes} {...listeners}>
+          <DragIndicator />
+        </ListItemIcon>
+        <ListItemText primary={name} />
+      </ListItem>
     </Box>
   );
 };
