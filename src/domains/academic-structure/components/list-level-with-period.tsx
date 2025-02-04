@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { KeyboardDoubleArrowRight } from '@mui/icons-material';
 import { Box, Button, CircularProgress, Paper, Typography } from '@mui/material';
-import { useGetAcademicLevelsWithPeriodsQuery } from '../api';
+import { useGetAcademicStructureQuery } from '../api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { UpdateLevel } from '../components/level/update-level';
-import { UpdatePeriod } from '../components/period/update-period';
-import { DeletePeriod } from '../components/period/delete-period';
+import { UpdateLevel } from './level/update-level';
+import { UpdatePeriod } from './period/update-period';
+import { DeletePeriod } from './period/delete-period';
 import { Period } from '../types';
-import { ManagePeriodOrder } from '../components/period/manage-period-order';
+import { ManagePeriodOrder } from './period/manage-period-order';
+import { DeleteLevel } from './level/delete-level';
 
 const ResponsiveBox = ({ children }: { children: React.ReactElement }) => {
   return (
@@ -17,72 +18,53 @@ const ResponsiveBox = ({ children }: { children: React.ReactElement }) => {
   );
 };
 
-const levelState = {
-  isOpen: false,
-  id: 0,
-  name: ''
-};
-const periodState = {
-  isOpen: false,
-  academicLevelId: 0,
-  id: 0,
-  name: ''
-};
-const periodDeleteState = {
-  isOpen: false,
-  id: 0,
-  name: ''
-};
-type levelOrderStateProps = {
-  isOpen: boolean;
+type levelAction = '' | 'manage' | 'update' | 'delete';
+type levelStateProps = {
+  action: levelAction;
   academicLevelId: number;
   academicLevelName: string;
   periods: Period[];
 };
-const levelOrderState = {
-  isOpen: false,
+const levelState: levelStateProps = {
+  action: '',
   academicLevelId: 0,
   academicLevelName: '',
   periods: []
 };
+const periodState = {
+  action: '',
+  academicLevelId: 0,
+  id: 0,
+  periodName: ''
+};
 
 export const ListLevelWithPeriod = () => {
-  const { data, isLoading, isError, error } = useGetAcademicLevelsWithPeriodsQuery();
-  const [levelDetail, setLevelDetail] = React.useState(levelState);
+  const { data, isLoading, isError, error } = useGetAcademicStructureQuery();
   const [periodDetail, setPeriodDetail] = React.useState(periodState);
-  const [periodDeleteDetail, setPeriodDeleteDetail] = React.useState(periodDeleteState);
-  const [levelOrderDetail, setLevelOrderDetail] =
-    React.useState<levelOrderStateProps>(levelOrderState);
+  const [levelDetail, setLevelDetail] = React.useState<levelStateProps>(levelState);
 
-  const onLevelClick = (isOpen: boolean, id: number, name: string) => {
-    setLevelDetail({ isOpen, id, name });
-  };
-  const onPeriodClick = (isOpen: boolean, academicLevelId: number, id: number, name: string) => {
-    setPeriodDetail({ isOpen, academicLevelId, id, name });
-  };
-  const onDeletePeriodClick = (id: number, name: string) => {
-    setPeriodDeleteDetail({ isOpen: true, id, name });
+  const onPeriodClick = (
+    action: string,
+    academicLevelId: number,
+    id: number,
+    periodName: string
+  ) => {
+    setPeriodDetail({ action, academicLevelId, id, periodName });
   };
   const closeLevelModal = () => {
-    setLevelDetail((prevState) => ({ ...prevState, isOpen: false }));
+    setLevelDetail((prevState) => ({ ...prevState, action: '' }));
   };
   const closePeriodModal = () => {
-    setPeriodDetail((prevState) => ({ ...prevState, isOpen: false }));
+    setPeriodDetail((prevState) => ({ ...prevState, action: '' }));
   };
-  const closeDeleteModal = () => {
-    setPeriodDeleteDetail((prevState) => ({ ...prevState, isOpen: false }));
-  };
-  const closeLevelOrderModal = () => {
-    setLevelOrderDetail((prevState) => ({ ...prevState, isOpen: false }));
-  };
-  const onManageLevelClick = (
-    isOpen: boolean,
+  const onLevelBtnClick = (
+    action: levelAction,
     academicLevelId: number,
     academicLevelName: string,
     periods: Period[]
   ) => {
-    setLevelOrderDetail({
-      isOpen,
+    setLevelDetail({
+      action,
       academicLevelId,
       academicLevelName,
       periods
@@ -107,25 +89,33 @@ export const ListLevelWithPeriod = () => {
     <>
       <ResponsiveBox>
         <>
-          {data?.academicLevelsWithPeriods?.map(({ id: academicLevelId, name, periods }) => (
+          {data?.academicStructure?.map(({ id: academicLevelId, name, periods }) => (
             <div key={academicLevelId}>
               <Box sx={{ display: 'flex', alignItems: 'center', padding: '10px' }}>
                 <Typography sx={{ fontWeight: '500' }}>{name}</Typography>
                 <Box sx={{ ml: 'auto' }}>
                   <Button
                     size='small'
-                    variant='contained'
-                    onClick={() => onManageLevelClick(true, academicLevelId, name, periods)}
+                    variant='outlined'
+                    color='error'
+                    onClick={() => onLevelBtnClick('delete', academicLevelId, name, periods)}
                   >
-                    Manage Order
+                    Delete
                   </Button>
                   <Button
                     size='small'
                     variant='outlined'
-                    sx={{ ml: 1 }}
-                    onClick={() => onLevelClick(true, academicLevelId, name)}
+                    sx={{ mx: 1 }}
+                    onClick={() => onLevelBtnClick('update', academicLevelId, name, periods)}
                   >
                     Edit
+                  </Button>
+                  <Button
+                    size='small'
+                    variant='contained'
+                    onClick={() => onLevelBtnClick('manage', academicLevelId, name, periods)}
+                  >
+                    Manage Order
                   </Button>
                 </Box>
               </Box>
@@ -138,7 +128,7 @@ export const ListLevelWithPeriod = () => {
                       <Button
                         size='small'
                         variant='outlined'
-                        onClick={() => onPeriodClick(true, academicLevelId, id, name)}
+                        onClick={() => onPeriodClick('update', academicLevelId, id, name)}
                       >
                         Edit
                       </Button>
@@ -147,7 +137,7 @@ export const ListLevelWithPeriod = () => {
                         variant='outlined'
                         color='error'
                         sx={{ ml: 1 }}
-                        onClick={() => onDeletePeriodClick(id, name)}
+                        onClick={() => onPeriodClick('delete', academicLevelId, id, name)}
                       >
                         Delete
                       </Button>
@@ -160,32 +150,42 @@ export const ListLevelWithPeriod = () => {
         </>
       </ResponsiveBox>
 
-      {levelDetail.isOpen && (
-        <UpdateLevel closeModal={closeLevelModal} id={levelDetail.id} name={levelDetail.name} />
+      {levelDetail.action === 'manage' && (
+        <ManagePeriodOrder
+          closeModal={closeLevelModal}
+          academicLevelId={levelDetail.academicLevelId}
+          periods={levelDetail.periods}
+        />
+      )}
+      {levelDetail.action === 'update' && (
+        <UpdateLevel
+          closeModal={closeLevelModal}
+          id={levelDetail.academicLevelId}
+          name={levelDetail.academicLevelName}
+        />
+      )}
+      {levelDetail.action === 'delete' && (
+        <DeleteLevel
+          closeModal={closeLevelModal}
+          id={levelDetail.academicLevelId}
+          name={levelDetail.academicLevelName}
+        />
       )}
 
-      {periodDetail.isOpen && (
+      {periodDetail.action === 'update' && (
         <UpdatePeriod
           closeModal={closePeriodModal}
           academicLevelId={periodDetail.academicLevelId}
           id={periodDetail.id}
-          name={periodDetail.name}
+          name={periodDetail.periodName}
         />
       )}
 
-      {periodDeleteDetail.isOpen && (
+      {periodDetail.action === 'delete' && (
         <DeletePeriod
-          closeModal={closeDeleteModal}
-          id={periodDeleteDetail.id}
-          name={periodDeleteDetail.name}
-        />
-      )}
-
-      {levelOrderDetail.isOpen && (
-        <ManagePeriodOrder
-          closeModal={closeLevelOrderModal}
-          academicLevelId={levelOrderDetail.academicLevelId}
-          periods={levelOrderDetail.periods}
+          closeModal={closePeriodModal}
+          id={periodDetail.id}
+          name={periodDetail.periodName}
         />
       )}
     </>

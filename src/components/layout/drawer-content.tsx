@@ -36,7 +36,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
         </Typography>
       </Toolbar>
       <Divider />
-      <List component='nav' sx={{ width: '100%' }} dense>
+      <List component='nav' sx={{ width: '100%' }}>
         {menus &&
           menus.map(({ name, path, subMenus }) => {
             if (Array.isArray(subMenus) && subMenus.length > 0) {
@@ -55,7 +55,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
                     unmountOnExit
                     sx={{ paddingLeft: '15px' }}
                   >
-                    <List component='div' dense>
+                    <List component='div'>
                       {subMenus.map(({ name, path }) => (
                         <ListItemButton
                           key={name}

@@ -1,10 +1,10 @@
 import { PageContentHeader } from '@/components/page-content-header';
 import { Info } from '@mui/icons-material';
 import { Grid2 } from '@mui/material';
-import { ListLevelWithPeriod } from './list-level-with-period';
+import { ListLevelWithPeriod } from '../components/list-level-with-period';
 import { ManageLevelPeriodTab } from '../components/manage-level-period-tab';
 
-export const AcademicLevelWithPeriodPage = () => {
+export const AcademicStructurePage = () => {
   return (
     <>
       <PageContentHeader icon={<Info sx={{ mr: 1 }} />} heading='Academic Levels and Periods' />

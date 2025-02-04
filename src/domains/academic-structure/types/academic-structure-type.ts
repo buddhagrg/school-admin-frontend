@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { AcademicLevelFormSchema, AcademicPeriodFormSchema } from './academic-level-schema';
+import { AcademicLevelFormSchema, AcademicPeriodFormSchema } from './academic-structure-schema';
 export type Level = { id: number; name: string };
 export type AcademicLevelFormProps = z.infer<typeof AcademicLevelFormSchema>;
 export type AcademicLevelFormWithId = AcademicLevelFormProps & { id: number };
@@ -12,7 +12,7 @@ export type AcademicLevelData = {
 };
 
 export type Period = { id: number; name: string };
-export type AcademicLevelsWithPeriods = {
-  academicLevelsWithPeriods: { id: number; name: string; periods: Period[] }[];
+export type AcademicStructure = {
+  academicStructure: { id: number; name: string; periods: Period[] }[];
 };
 export type ManagePeriodOrder = { academicLevelId: number; periods: Period[] };
