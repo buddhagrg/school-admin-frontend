@@ -14,8 +14,8 @@ import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveRequestForm, LeaveRequestFormSchema, MyLeavePolicy } from '@/domains/leave/types';
 import { LeaveDetail, LeaveForm } from '@/domains/leave/components';
 import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '@/domains/leave/api';
+import { ERROR } from '@/constants';
 
-const NO_RECORD = 'Record not found';
 const settings = {
   infinite: false,
   speed: 500,
@@ -66,7 +66,7 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
 
   let content: React.ReactNode | null = null;
   if (!Array.isArray(leavePolicies) || leavePolicies.length <= 0) {
-    content = <>{NO_RECORD}</>;
+    content = <>{ERROR.NO_RECORD}</>;
   } else {
     content = (
       <div className='slider-container'>

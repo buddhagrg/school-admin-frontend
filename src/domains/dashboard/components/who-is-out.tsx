@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { getFormattedLeaveDate } from '../util';
 import { WhoIsOutProps } from '../types';
+import { ERROR } from '@/constants';
 
 export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {
   return (
@@ -27,9 +28,7 @@ export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {
         <CardContent>
           <List>
             {whoIsOut.length <= 0 ? (
-              <Typography variant='body1' color='text.secondary'>
-                No record found.
-              </Typography>
+              <>{ERROR.NO_RECORD}</>
             ) : (
               whoIsOut.map(({ user, userId, fromDate, toDate, leaveType }) => (
                 <div key={`${userId}${fromDate}`}>

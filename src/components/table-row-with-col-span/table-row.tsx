@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { TableCell, TableRow } from '@mui/material';
-
-const NO_RECORD = 'Record not found';
+import { ERROR } from '@/constants';
 
 type Props = {
   colSpan: number;
@@ -11,7 +10,7 @@ type Props = {
 export const TableRowWithColSpan: React.FC<Props> = ({ colSpan, text }) => {
   return (
     <TableRow>
-      <TableCell colSpan={colSpan}>{text ? text : NO_RECORD}</TableCell>
+      <TableCell colSpan={colSpan}>{text ? text : ERROR.NO_RECORD}</TableCell>
     </TableRow>
   );
 };
