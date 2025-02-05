@@ -40,7 +40,7 @@ export const ManagePeriodOrder: React.FC<ManagePeriodOrderProps> = ({
       const newIndex = getPeriodPosition(Number(over?.id));
       const res = arrayMove(prevPeriods, oldIndex, newIndex).map((p, index) => ({
         ...p,
-        orderId: index + 1
+        sortOrder: index + 1
       }));
       return res;
     });

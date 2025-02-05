@@ -11,7 +11,7 @@ export type AcademicLevelData = {
   academicLevels: Level[];
 };
 
-export type Period = { id: number; name: string };
+export type Period = { id: number; name: string; sortOrder: number };
 export type AcademicStructure = {
   academicStructure: { id: number; name: string; periods: Period[] }[];
 };
