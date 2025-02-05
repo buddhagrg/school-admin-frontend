@@ -12,7 +12,7 @@ import {
 export const academicStructureApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAcademicStructure: builder.query<AcademicStructure, void>({
-      query: () => `academic-structure`,
+      query: () => `/academic-structure`,
       providesTags: (result) =>
         result?.academicStructure.map(({ id }) => ({
           type: Tag.ACADEMIC_STRUCTURE,
