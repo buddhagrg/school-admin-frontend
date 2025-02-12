@@ -16,7 +16,7 @@ type DialogModalProps = {
   isModalClosedOnOutClick?: boolean;
   isOpen: boolean;
   titleText?: string;
-  contextText?: JSX.Element;
+  contextText?: React.ReactNode;
   closeModal: () => void;
   children?: React.ReactNode;
   handleSave: (event: React.MouseEvent<HTMLButtonElement>) => void;

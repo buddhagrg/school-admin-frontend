@@ -61,7 +61,7 @@ export const AddNotice = () => {
 
   return (
     <>
-      <PageContentHeader icon={<AddCircleOutline sx={{ mr: 1 }} />} heading='Add New Notice' />
+      <PageContentHeader icon={AddCircleOutline} heading='Add New Notice' />
       <Box component={Paper} sx={{ padding: '20px' }}>
         <Box sx={{ width: '100%' }}>
           <NoticeForm

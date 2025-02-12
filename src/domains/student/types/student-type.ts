@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { NameIdType } from '@/utils/type/misc';
-import { ClassPropsWithId } from '@/domains/class/types';
 import {
   AcademicInfoSchema,
   AddressInfoSchema,
@@ -20,18 +19,6 @@ export type Student = {
   systemAccess: boolean;
   lastLogin: Date;
 };
-
-export type StudentFilterState = {
-  classes: ClassPropsWithId[];
-  class: string;
-  section: string;
-  name: string;
-  roll: string;
-};
-
-export type StudentFilterActions =
-  | { type: 'SET_CLASSES'; payload: ClassPropsWithId[] | [] }
-  | { type: 'SET_UPDATE_VALUES'; payload: { name: string; value: string } };
 
 export type StudentState = {
   isLoading: boolean;

@@ -14,7 +14,7 @@ export const ManageNotices = () => {
 
   return (
     <>
-      <PageContentHeader icon={<Settings sx={{ mr: 1 }} />} heading='Manage Notices' />
+      <PageContentHeader icon={Settings} heading='Manage Notices' />
       <Button
         variant='contained'
         startIcon={<Add />}

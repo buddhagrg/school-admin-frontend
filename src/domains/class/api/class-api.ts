@@ -1,50 +1,98 @@
 import { api, Tag } from '@/api';
-import { ClassData, ClassDataProps, ClassDataPropsWithId } from '../types';
+import {
+  ClassFormProps,
+  ClassFormWithId,
+  ClassSectionStructure,
+  GetClassList,
+  SectionFormProps,
+  SectionFormWithId
+} from '../types';
 
 export const classApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getClasses: builder.query<ClassData, void>({
-      query: () => `/classes`,
-      providesTags: (result) =>
-        result?.classes?.map(({ id }) => {
-          return { type: Tag.CLASSES, id };
-        }) || [{ type: Tag.CLASSES }]
+    getClassSectionStructure: builder.query<ClassSectionStructure, void>({
+      query: () => `/classes/structure`,
+      providesTags: [Tag.CLASS_SECTION_STRUCTURE]
     }),
-    getClassDetail: builder.query<ClassDataPropsWithId, string | undefined>({
-      query: (id) => `/classes/${id}`,
-      providesTags: (result) => (result ? [{ type: Tag.CLASSES, id: result.id }] : [])
-    }),
-    addClass: builder.mutation<{ message: string }, ClassDataProps>({
+    addClass: builder.mutation<{ message: string }, ClassFormProps>({
       query: (payload) => ({
         url: `/classes`,
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: [Tag.CLASSES]
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
     }),
-    updateClass: builder.mutation<{ message: string }, ClassDataPropsWithId>({
-      query: ({ id, ...payload }) => ({
+    updateClass: builder.mutation<{ message: string }, ClassFormWithId>({
+      query: ({ id, name }) => ({
         url: `/classes/${id}`,
         method: 'PUT',
-        body: payload
+        body: { name }
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: Tag.CLASSES, id }]
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
     }),
-    deleteClass: builder.mutation<{ message: string }, number>({
+    deactivateClass: builder.mutation<{ message: string }, number>({
       query: (id) => ({
-        url: `/classes/${id}`,
-        method: 'DELETE'
+        url: `/classes/${id}/deactivate`,
+        method: 'POST'
       }),
-      invalidatesTags: [Tag.CLASSES]
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES, Tag.ACADEMIC_LEVELS_WITH_CLASSES]
+    }),
+    activateClass: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `/classes/${id}/activate`,
+        method: 'POST'
+      }),
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES, Tag.ACADEMIC_LEVELS_WITH_CLASSES]
+    }),
+    getClasses: builder.query<GetClassList, void>({
+      query: () => `/classes`,
+      providesTags: (result) =>
+        result?.classes?.map(({ id }) => {
+          return { type: Tag.CLASSES, id };
+        }) || [Tag.CLASSES]
+    }),
+    addSection: builder.mutation<{ message: string }, SectionFormProps>({
+      query: ({ classId, name }) => ({
+        url: `/classes/${classId}/sections`,
+        method: 'POST',
+        body: { name }
+      }),
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES]
+    }),
+    updateSection: builder.mutation<{ message: string }, SectionFormWithId>({
+      query: ({ classId, id, name }) => ({
+        url: `/classes/${classId}/sections/${id}`,
+        method: 'PUT',
+        body: { name }
+      }),
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES]
+    }),
+    deactivateSection: builder.mutation<{ message: string }, Omit<SectionFormWithId, 'name'>>({
+      query: ({ classId, id }) => ({
+        url: `/classes/${classId}/sections/${id}/deactivate`,
+        method: 'POST'
+      }),
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
+    }),
+    activateSection: builder.mutation<{ message: string }, Omit<SectionFormWithId, 'name'>>({
+      query: ({ classId, id }) => ({
+        url: `/classes/${classId}/sections/${id}/activate`,
+        method: 'POST'
+      }),
+      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
     })
   })
 });
 
 export const {
-  useGetClassesQuery,
-  useLazyGetClassesQuery,
-  useGetClassDetailQuery,
   useAddClassMutation,
+  useGetClassesQuery,
+  useAddSectionMutation,
+  useGetClassSectionStructureQuery,
+  useUpdateSectionMutation,
   useUpdateClassMutation,
-  useDeleteClassMutation
+  useDeactivateSectionMutation,
+  useActivateClassMutation,
+  useDeactivateClassMutation,
+  useActivateSectionMutation
 } = classApi;

@@ -35,7 +35,7 @@ export const LeaveDefinePage = () => {
   const { policies, policyTab } = state;
   return (
     <>
-      <PageContentHeader icon={<Policy sx={{ mr: 1 }} />} heading='Leave Define' />
+      <PageContentHeader icon={Policy} heading='Leave Define' />
       <Box
         sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
         flexDirection={isSmallScreen ? 'column' : 'row'}

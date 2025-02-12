@@ -16,18 +16,24 @@ import { parseISO } from 'date-fns';
 
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { StudentProps } from '../../types';
-import { useClasses } from '../../hooks';
-import { useGetSectionsQuery } from '@/domains/section/api';
+import { useGetClassSectionStructureQuery } from '@/domains/class/api';
+import React from 'react';
+import { SectionDetail } from '@/domains/class/types';
 
 export const AcademicInformation = () => {
+  const [sections, setSections] = React.useState<SectionDetail[]>([]);
   const {
     register,
     control,
     formState: { errors }
   } = useFormContext<StudentProps>();
+  const { data } = useGetClassSectionStructureQuery();
 
-  const classes = useClasses();
-  const { data, isLoading } = useGetSectionsQuery();
+  const handleClassChange = (classId: number | string) => {
+    const classes = data?.classSectionStructure || [];
+    const selectedClass = classes.find((item) => item.id === Number(classId));
+    setSections(selectedClass?.sections || []);
+  };
 
   return (
     <>
@@ -50,10 +56,14 @@ export const AcademicInformation = () => {
                   labelId='class'
                   notched
                   value={value}
-                  onChange={(event) => onChange(event.target.value)}
+                  onChange={(event) => {
+                    const selectedClass = event.target.value;
+                    onChange(selectedClass);
+                    handleClassChange(selectedClass);
+                  }}
                 >
-                  {classes.map(({ name }) => (
-                    <MenuItem value={name} key={name}>
+                  {data?.classSectionStructure.map(({ id, name }) => (
+                    <MenuItem value={id} key={id}>
                       {name}
                     </MenuItem>
                   ))}
@@ -79,15 +89,11 @@ export const AcademicInformation = () => {
                   onChange={(e) => onChange(e.target.value)}
                   notched
                 >
-                  {isLoading ? (
-                    <div>loading...</div>
-                  ) : (
-                    data?.sections?.map(({ name }) => (
-                      <MenuItem value={name} key={name}>
-                        {name}
-                      </MenuItem>
-                    ))
-                  )}
+                  {sections.map(({ id, name }) => (
+                    <MenuItem value={id} key={id}>
+                      {name}
+                    </MenuItem>
+                  ))}
                 </Select>
                 <FormHelperText>{error?.message}</FormHelperText>
               </>

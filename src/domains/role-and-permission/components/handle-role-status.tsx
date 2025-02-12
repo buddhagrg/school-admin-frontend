@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Typography } from '@mui/material';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
@@ -42,7 +41,7 @@ export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
       actionFooterSaveText='Yes'
       isOpen={true}
       titleText={title}
-      contextText={<Typography variant='body1'>{contextText}</Typography>}
+      contextText={contextText}
       closeModal={closeModals}
       handleSave={onSave}
     />

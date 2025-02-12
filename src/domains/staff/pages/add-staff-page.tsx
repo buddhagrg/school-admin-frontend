@@ -48,7 +48,7 @@ export const AddStaff = () => {
 
   return (
     <>
-      <PageContentHeader icon={<AddCircleOutline sx={{ mr: 1 }} />} heading='Add Staff' />
+      <PageContentHeader icon={AddCircleOutline} heading='Add Staff' />
       <Paper sx={{ p: 3 }}>
         <FormProvider {...methods}>
           <BasicInformation schema={BasicInfoSchema} />

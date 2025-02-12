@@ -25,13 +25,11 @@ const initialState = {
 
 export const ListStudents: React.FC = () => {
   const appBase = useSelector(getAppBase);
-
+  const [filter, setFilter] = React.useState<StudentFilter>({});
   const methods = useForm<StudentFilter>({
     defaultValues: initialState,
     resolver: zodResolver(StudentFilterSchema)
   });
-
-  const [filter, setFilter] = React.useState<StudentFilter>({});
   const { data, isLoading, isError, error } = useGetStudentsQuery(filter);
 
   const searchStudent = (payload: StudentFilter) => {
@@ -56,7 +54,7 @@ export const ListStudents: React.FC = () => {
       </Box>
       <FilterStudent methods={methods} searchStudent={methods.handleSubmit(searchStudent)} />
       <Box sx={{ my: 10 }} />
-      <PageContentHeader icon={<InfoOutlined sx={{ mr: 1 }} />} heading='Student Information' />
+      <PageContentHeader icon={InfoOutlined} heading='Student Information' />
       <UserAccountBasic
         data={{
           userType: 'student',

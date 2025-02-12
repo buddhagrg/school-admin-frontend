@@ -48,10 +48,7 @@ const RoleAndPermissionPage = () => {
   const { roleTab, roles } = state;
   return (
     <>
-      <PageContentHeader
-        icon={<AdminPanelSettings sx={{ mr: 1 }} />}
-        heading='Roles & Permissions Setting'
-      />
+      <PageContentHeader icon={AdminPanelSettings} heading='Roles & Permissions Setting' />
       <Box
         flexDirection={isSmallScreen ? 'column' : 'row'}
         sx={{ display: 'flex', bgcolor: 'background.paper', flexGrow: 1 }}

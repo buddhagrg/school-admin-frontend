@@ -84,7 +84,7 @@ export const EditNotice = () => {
 
   return (
     <>
-      <PageContentHeader icon={<Edit sx={{ mr: 1 }} />} heading='Edit Notice' />
+      <PageContentHeader icon={Edit} heading='Edit Notice' />
       <Box component={Paper} sx={{ padding: '20px' }}>
         <Box sx={{ width: '100%' }}>
           <NoticeForm

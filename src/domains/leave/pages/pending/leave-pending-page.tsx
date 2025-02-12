@@ -6,7 +6,7 @@ import { PendingRequestData } from './components/pending-request';
 export const PendingRequest = () => {
   return (
     <Box>
-      <PageContentHeader icon={<Pending sx={{ mr: 1 }} />} heading='Pending Leave Requests' />
+      <PageContentHeader icon={Pending} heading='Pending Leave Requests' />
       <PendingRequestData />
     </Box>
   );

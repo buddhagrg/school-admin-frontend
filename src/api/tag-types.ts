@@ -24,5 +24,7 @@ export enum Tag {
   SCHOOLS = 'Schools',
   ACADEMIC_STRUCTURE = 'AcademicLevelsWithPeriods',
   ACADEMIC_PERIODS = 'AcademicPeriods',
-  ACADEMIC_LEVELS = 'AcademicLevels'
+  ACADEMIC_LEVELS = 'AcademicLevels',
+  ACADEMIC_LEVELS_WITH_CLASSES = 'AcademicLevelsWithClasses',
+  CLASS_SECTION_STRUCTURE = 'ClassSectionStructure'
 }

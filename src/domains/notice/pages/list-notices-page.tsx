@@ -14,7 +14,7 @@ export const ListNotices = () => {
 
   return (
     <>
-      <PageContentHeader icon={<Campaign sx={{ mr: 1 }} />} heading='Notices' />
+      <PageContentHeader icon={Campaign} heading='Notices' />
       <Button
         variant='contained'
         startIcon={<Add />}

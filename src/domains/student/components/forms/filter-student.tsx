@@ -15,27 +15,23 @@ import { Search } from '@mui/icons-material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
 import { StudentFilter } from '../../types';
-import { useGetClassesQuery } from '@/domains/class/api';
+import { useGetClassSectionStructureQuery } from '@/domains/class/api';
+import { SectionDetail } from '@/domains/class/types';
 
 type FilterStudentProps = {
   methods: UseFormReturn<StudentFilter>;
   searchStudent: () => void;
 };
-
 export const FilterStudent: React.FC<FilterStudentProps> = ({ methods, searchStudent }) => {
-  const { data: classResult } = useGetClassesQuery();
-  const [sections, setSections] = React.useState<string[]>([]);
+  const { data } = useGetClassSectionStructureQuery();
+  const [sections, setSections] = React.useState<SectionDetail[]>([]);
+  const { control, register, setValue } = methods;
 
-  const { control, register } = methods;
-
-  const handleClassChange = (selectedClass: number | string) => {
-    const classes = classResult?.classes || [];
-    const selectedSections = classes.find((cl) => cl.id === Number(selectedClass));
-    if (selectedSections) {
-      setSections(selectedSections.sections.length > 0 ? selectedSections.sections.split(',') : []);
-    } else {
-      setSections([]);
-    }
+  const handleClassChange = (classId: number | string) => {
+    const classes = data?.classSectionStructure || [];
+    const selectedClass = classes.find((item) => item.id === Number(classId));
+    setValue('section', '');
+    setSections(selectedClass?.sections || []);
   };
 
   return (
@@ -61,9 +57,9 @@ export const FilterStudent: React.FC<FilterStudentProps> = ({ methods, searchStu
                     handleClassChange(selectedClass);
                   }}
                 >
-                  {classResult?.classes?.map((c) => (
-                    <MenuItem key={c.id} value={c.id.toString()}>
-                      {c.name}
+                  {data?.classSectionStructure?.map((item) => (
+                    <MenuItem key={item.id} value={item.id.toString()}>
+                      {item.name}
                     </MenuItem>
                   ))}
                 </Select>
@@ -85,9 +81,9 @@ export const FilterStudent: React.FC<FilterStudentProps> = ({ methods, searchStu
                   onChange={onChange}
                   size='small'
                 >
-                  {sections.map((s) => (
-                    <MenuItem key={s} value={s}>
-                      {s}
+                  {sections.map((section) => (
+                    <MenuItem key={section.id} value={section.id}>
+                      {section.name}
                     </MenuItem>
                   ))}
                 </Select>

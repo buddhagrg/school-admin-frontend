@@ -72,7 +72,7 @@ export const StaffAccountEdit: React.FC<StaffAccountEditProps> = ({
 
   return (
     <>
-      <PageContentHeader icon={<Edit sx={{ mr: 1 }} />} heading={heading} />
+      <PageContentHeader icon={Edit} heading={heading} />
       <Paper sx={{ p: 3 }}>
         <FormProvider {...methods}>
           <BasicInformation schema={BasicInfoSchema} />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, ListItemIcon, ListItemText, MenuItem, Paper, Typography } from '@mui/material';
+import { Box, ListItemIcon, ListItemText, MenuItem, Paper } from '@mui/material';
 import { Block, CheckCircle, Edit, Email, Key, LockReset, Visibility } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -186,7 +186,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
       <DialogModal
         isSaving={isSaving}
         titleText={modalTitle}
-        contextText={<Typography variant='body1'>{modalBodyText}</Typography>}
+        contextText={modalBodyText}
         actionFooterCancelText='No'
         actionFooterSaveText='Yes'
         isOpen={isModalOpen}

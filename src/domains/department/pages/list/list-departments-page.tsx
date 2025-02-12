@@ -16,7 +16,7 @@ export const ListDepartmentsPage = () => {
 
   return (
     <>
-      <PageContentHeader icon={<Info sx={{ mr: 1 }} />} heading='Department Information' />
+      <PageContentHeader icon={Info} heading='Department Information' />
       <Grid2 container columnSpacing={5} rowSpacing={2}>
         <Grid2 size={{ xs: 12, md: 4 }}>
           <ManageDepartment operation='Add' methods={methods} />

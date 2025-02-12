@@ -59,7 +59,7 @@ export const AddStudent = () => {
 
   return (
     <>
-      <PageContentHeader icon={<AddCircleOutline sx={{ mr: 1 }} />} heading='Add Student' />
+      <PageContentHeader icon={AddCircleOutline} heading='Add Student' />
       <Paper sx={{ p: 3 }}>
         <FormProvider {...methods}>
           <BasicInformation />

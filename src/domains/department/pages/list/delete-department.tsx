@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -34,9 +33,7 @@ export const DeleteDepartment: React.FC<DeleteDepartmentProps> = ({ departmentId
       closeModal={closeModal}
       handleSave={onSave}
       titleText='Confirm Deletion'
-      contextText={
-        <Typography variant='body1'>Are you sure you want to delete this department?</Typography>
-      }
+      contextText='Are you sure you want to delete this department?'
     />
   );
 };

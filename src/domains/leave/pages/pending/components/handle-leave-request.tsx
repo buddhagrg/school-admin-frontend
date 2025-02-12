@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Typography } from '@mui/material';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { toast } from 'react-toastify';
@@ -45,7 +44,7 @@ export const HandleLeaveRequest: React.FC<HandleLeaveReuqestProps> = ({
       handleSave={onSave}
       isOpen={true}
       titleText={titleText}
-      contextText={<Typography>{contextText}</Typography>}
+      contextText={contextText}
       closeModal={closeModal}
     />
   );

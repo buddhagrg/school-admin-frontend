@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -43,7 +42,7 @@ export const PolicyStatus: React.FC<PolicyStatusProps> = ({
       titleText={title}
       closeModal={closeModal}
       handleSave={handlePolicyStatusSubmit}
-      contextText={<Typography variant='body1'>{contextText}</Typography>}
+      contextText={contextText}
     />
   );
 };

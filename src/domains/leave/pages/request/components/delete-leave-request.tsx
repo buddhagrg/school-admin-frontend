@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -31,9 +30,7 @@ export const DeleteLeaveRequest: React.FC<DeleteLeaveRequestProps> = ({ id, clos
       isSaving={isDeleting}
       isOpen={true}
       titleText='Confirm Deletion'
-      contextText={
-        <Typography variant='body1'>Are you sure you want to delete this leave request?</Typography>
-      }
+      contextText='Are you sure you want to delete this leave request?'
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
       handleSave={onSave}

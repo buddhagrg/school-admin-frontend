@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, MenuItem, Paper, Typography } from '@mui/material';
+import { Box, MenuItem, Paper } from '@mui/material';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
@@ -217,7 +217,7 @@ export const NoticeData: React.FC<NoticeDataProps> = ({
         actionFooterCancelText='No'
         actionFooterSaveText='Yes'
         titleText={modalTitle}
-        contextText={<Typography variant='body1'>{modalBodyText}</Typography>}
+        contextText={modalBodyText}
         isOpen={isModalOpen}
         closeModal={toggleModal}
         handleSave={onSave}

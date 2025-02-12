@@ -50,7 +50,7 @@ export const SwitchUserRole: React.FC<SwitchUserRoleProps> = ({ userId, handleRo
       isSaving={isSwitchingRole}
       isOpen={true}
       titleText='Switch Role'
-      contextText={<p>Switching role will remove access permissions from current role.</p>}
+      contextText='Switching role will remove access permissions from current role.'
       closeModal={closeModal}
       handleSave={handleSubmit(handleSave)}
     >

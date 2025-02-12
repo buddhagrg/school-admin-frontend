@@ -58,7 +58,7 @@ export const ListStaffs = () => {
         isLoading={isLoading}
       />
       <Box sx={{ my: 10 }} />
-      <PageContentHeader icon={<InfoOutlined sx={{ mr: 1 }} />} heading='Staff Information' />
+      <PageContentHeader icon={InfoOutlined} heading='Staff Information' />
       <UserAccountBasic
         data={{
           userType: 'staff',

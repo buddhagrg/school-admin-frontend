@@ -34,10 +34,10 @@ export const DeleteAccessControl: React.FC<DeleteAccessControlProps> = ({
       isSaving={isDeleting}
       handleSave={onDelete}
       closeModal={closeModal}
+      titleText='Confirm Deletion'
+      contextText='Are you sure you want to delete this access control?'
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
-      titleText='Confirm Deletion'
-      contextText={<>Are you sure you want to delete this access control?</>}
     />
   );
 };

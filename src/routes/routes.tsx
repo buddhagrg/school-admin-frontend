@@ -6,8 +6,7 @@ import { AppRoot } from './app-root';
 import { LoginPage, SetupPasswordPage } from '@/domains/auth/pages';
 import { DashboardPage } from '@/domains/dashboard/pages';
 import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/domains/leave/pages';
-import { EditClass, ListClasses } from '@/domains/class/pages';
-import { EditClassTeacher, ListClassTeachers } from '@/domains/class-teacher/pages';
+// import { EditClass, ListClasses } from '@/domains/class-str/pages';
 import { AddStudent, EditStudent, ListStudents, ViewStudent } from '@/domains/student/pages';
 import {
   AddNotice,
@@ -18,7 +17,7 @@ import {
 } from '@/domains/notice/pages';
 import { AddStaff, EditStaff, ListStaffs, ViewStaff } from '@/domains/staff/pages';
 import { AccountPage } from '@/domains/account/pages';
-import { EditSectionPage, ListSectionPage } from '@/domains/section/pages';
+// import { EditSectionPage, ListSectionPage } from '@/domains/section/pages';
 import { EditDepartmentPage, ListDepartmentsPage } from '@/domains/department/pages';
 import { ErrorPage, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
@@ -29,7 +28,8 @@ import { SignUpPage } from '@/domains/auth/pages/signup/signup-page';
 import { ManageAccessControl } from '@/domains/access-controls/pages/access-control-page';
 import { SuperAdminDashboard } from '@/domains/super-admin-dashboard';
 import { EditSchool, ListSchoolsPage } from '@/domains/schools/pages';
-import { AcademicStructurePage } from '@/domains/academic-structure/pages';
+import { LevelClassPage, AcademicPage } from '@/domains/academic/pages';
+import { ClassSectionPage } from '@/domains/class/pages';
 
 export const routes = [
   {
@@ -66,15 +66,13 @@ export const routes = [
     children: [
       { index: true, element: <DashboardPage /> },
       { path: 'account', element: <AccountPage /> },
-      { path: 'leave/define', element: <LeaveDefine /> },
-      { path: 'leave/request', element: <MyLeaveRequest /> },
-      { path: 'leave/pending', element: <PendingRequest /> },
-      { path: 'classes', element: <ListClasses /> },
-      { path: 'classes/edit/:id', element: <EditClass /> },
-      { path: 'class-teachers', element: <ListClassTeachers /> },
-      { path: 'class-teachers/edit/:id', element: <EditClassTeacher /> },
-      { path: 'sections', element: <ListSectionPage /> },
-      { path: 'sections/edit/:id', element: <EditSectionPage /> },
+      { path: 'leaves/manage', element: <LeaveDefine /> },
+      { path: 'leaves/request', element: <MyLeaveRequest /> },
+      { path: 'leaves/review', element: <PendingRequest /> },
+      { path: 'classes/manage', element: <ClassSectionPage /> },
+      // { path: 'classes/edit/:id', element: <EditClass /> },
+      // { path: 'sections', element: <ListSectionPage /> },
+      // { path: 'sections/edit/:id', element: <EditSectionPage /> },
       { path: 'students', element: <ListStudents /> },
       { path: 'students/add', element: <AddStudent /> },
       { path: 'students/:id', element: <ViewStudent /> },
@@ -88,10 +86,11 @@ export const routes = [
       { path: 'staffs/add', element: <AddStaff /> },
       { path: 'staffs/:id', element: <ViewStaff /> },
       { path: 'staffs/edit/:id', element: <EditStaff /> },
-      { path: 'roles-and-permissions', element: <RoleAndPermission /> },
+      { path: 'users/role-and-permission', element: <RoleAndPermission /> },
       { path: 'departments', element: <ListDepartmentsPage /> },
       { path: 'departments/edit/:id', element: <EditDepartmentPage /> },
-      { path: 'academic-structure', element: <AcademicStructurePage /> },
+      { path: 'academic/manage', element: <AcademicPage /> },
+      { path: 'academic/level-class', element: <LevelClassPage /> },
       { path: '*', element: <NotFound /> }
     ]
   },

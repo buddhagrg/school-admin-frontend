@@ -3,24 +3,15 @@ import { Box, Typography } from '@mui/material';
 
 export const PageContentHeader = ({
   heading,
-  icon
+  icon: Icon
 }: {
   heading: string;
-  icon?: React.ReactNode;
+  icon?: React.ElementType;
 }) => {
   return (
-    <Box display='flex' flexGrow={1}>
-      <Typography
-        component='div'
-        variant='h6'
-        sx={{
-          color: 'text.secondary',
-          mb: 2,
-          display: 'flex',
-          alignItems: 'center'
-        }}
-      >
-        {icon}
+    <Box display='flex' flexGrow={1} sx={{ color: 'text.secondary' }}>
+      {Icon && <Icon sx={{ mr: 1, mb: 2 }} fontSize='small' />}
+      <Typography component='div' sx={{ fontWeight: 500 }}>
         {heading}
       </Typography>
     </Box>
