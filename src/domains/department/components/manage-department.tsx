@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Box, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -66,15 +65,16 @@ export const ManageDepartment: React.FC<ManageDepartmentProps> = ({ id, operatio
         />
 
         <Box textAlign='center'>
-          <LoadingButton
+          <Button
             type='submit'
             size='small'
             variant='contained'
             sx={{ mt: 4 }}
             loading={isAddingDepartment || isUpdatingDepartment}
+            loadingPosition='start'
           >
             Save
-          </LoadingButton>
+          </Button>
         </Box>
       </form>
     </Box>

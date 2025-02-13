@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Stack, TextField } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
-import { LoadingButton } from '@mui/lab';
 import { LoginRequest } from '../../types';
 
 type LoginFormProps = {
@@ -45,9 +44,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, methods, isFetch
         />
       </div>
       <Stack>
-        <LoadingButton loading={isFetching} type='submit' size='small' variant='contained'>
+        <Button
+          loading={isFetching}
+          loadingPosition='start'
+          type='submit'
+          size='small'
+          variant='contained'
+        >
           <span>Sign In</span>
-        </LoadingButton>
+        </Button>
       </Stack>
     </form>
   );

@@ -3,7 +3,6 @@ import { ClassTeacherForm } from './class-teacher-form';
 import { ClassTeacherFormProps, ClassTeacherFormSchema } from '../../types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Paper, Typography } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -56,15 +55,16 @@ export const AddClassTeacher = () => {
           >
             Clear
           </Button>
-          <LoadingButton
+          <Button
             loading={isAssigning}
+            loadingPosition='start'
             type='button'
             size='small'
             variant='contained'
             onClick={methods.handleSubmit(handleSave)}
           >
             Save
-          </LoadingButton>
+          </Button>
         </Box>
       </Box>
     </Paper>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { LoadingButton } from '@mui/lab';
 import { Box, Button, Grid2, TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { SetupPasswordProps } from '../../types';
@@ -71,9 +70,15 @@ export const SetupPasswordForm: React.FC<SetupPasswordFormProps> = ({
         >
           Clear
         </Button>
-        <LoadingButton loading={isLoading} type='submit' size='small' variant='contained'>
+        <Button
+          loading={isLoading}
+          loadingPosition='start'
+          type='submit'
+          size='small'
+          variant='contained'
+        >
           Setup Password
-        </LoadingButton>
+        </Button>
       </Box>
     </form>
   );

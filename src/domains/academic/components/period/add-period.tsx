@@ -3,7 +3,6 @@ import { Box, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { AcademicPeriodFormProps, AcademicPeriodFormSchema } from '../../types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoadingButton } from '@mui/lab';
 import { useAddAcademicPeriodMutation } from '../../api';
 import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -26,7 +25,7 @@ export const AddPeriod = () => {
   React.useEffect(() => {
     methods.setValue('academicLevelId', '');
     methods.setValue('name', '');
-  }, []);
+  }, [methods]);
 
   const handleClear = () => {
     methods.reset(initialState);
@@ -56,15 +55,16 @@ export const AddPeriod = () => {
           >
             Clear
           </Button>
-          <LoadingButton
+          <Button
             loading={isAdding}
+            loadingPosition='start'
             type='button'
             size='small'
             variant='contained'
             onClick={methods.handleSubmit(handleSave)}
           >
             Save
-          </LoadingButton>
+          </Button>
         </Box>
       </Box>
     </>

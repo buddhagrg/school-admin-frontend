@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AddCircleOutline } from '@mui/icons-material';
-import { LoadingButton } from '@mui/lab';
 import { Button, Paper, Stack } from '@mui/material';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -73,15 +72,16 @@ export const AddStaff = () => {
           >
             Reset
           </Button>
-          <LoadingButton
+          <Button
             loading={isAddingStaff}
+            loadingPosition='start'
             size='small'
             variant='contained'
             color='primary'
             onClick={methods.handleSubmit(onSave)}
           >
             Save
-          </LoadingButton>
+          </Button>
         </Stack>
       </Paper>
     </>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Button,
   FormControl,
   FormHelperText,
   Grid2,
@@ -12,7 +13,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { useAddAcademicLevelToClassMutation } from '../../api';
 import { AddClassToLevelForm, AddClassToLevelFormProps } from '../../types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoadingButton } from '@mui/lab';
 import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -88,15 +88,16 @@ export const AddClassToLevel: React.FC<AddClassToLevelProps> = ({
               )}
             />
           </FormControl>
-          <LoadingButton
+          <Button
             size='small'
             loading={isAdding}
+            loadingPosition='start'
             variant='contained'
             onClick={handleSubmit(onSave)}
             sx={{ mt: 1 }}
           >
             Add Class to {academicLevelName}
-          </LoadingButton>
+          </Button>
         </Paper>
       </Grid2>
     </>

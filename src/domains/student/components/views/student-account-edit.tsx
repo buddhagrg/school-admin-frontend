@@ -2,8 +2,7 @@ import * as React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Edit } from '@mui/icons-material';
-import { Paper, Stack } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Button, Paper, Stack } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -92,15 +91,16 @@ export const StudentAccountEdit: React.FC<StudentAccountEditProps> = ({
         </FormProvider>
         <hr />
         <Stack direction='row' alignItems='center' justifyContent='center' spacing={1}>
-          <LoadingButton
+          <Button
             loading={isLoading}
+            loadingPosition='start'
             size='small'
             variant='contained'
             color='primary'
             onClick={methods.handleSubmit(onUpdate)}
           >
             Save
-          </LoadingButton>
+          </Button>
         </Stack>
       </Paper>
     </>

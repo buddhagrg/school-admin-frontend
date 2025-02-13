@@ -2,7 +2,6 @@ import { Button, Paper, Stack } from '@mui/material';
 import { AddCircleOutline } from '@mui/icons-material';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { LoadingButton } from '@mui/lab';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -86,15 +85,16 @@ export const AddStudent = () => {
             >
               Reset
             </Button>
-            <LoadingButton
+            <Button
               loading={isLoading}
+              loadingPosition='start'
               size='small'
               variant='contained'
               color='primary'
               onClick={methods.handleSubmit(onSave)}
             >
               Save
-            </LoadingButton>
+            </Button>
           </Stack>
         </FormProvider>
       </Paper>

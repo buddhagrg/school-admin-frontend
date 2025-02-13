@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoadingButton } from '@mui/lab';
 import { Box, Button, Grid2, Paper, TextField } from '@mui/material';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -92,14 +91,15 @@ export const ChangePassword = () => {
           >
             Clear
           </Button>
-          <LoadingButton
+          <Button
             loading={isChangingPassword}
+            loadingPosition='start'
             type='submit'
             size='small'
             variant='contained'
           >
             Change Password
-          </LoadingButton>
+          </Button>
         </Box>
       </Paper>
     </form>

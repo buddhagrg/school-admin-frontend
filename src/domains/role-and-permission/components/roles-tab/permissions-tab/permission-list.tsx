@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 import { useRolePermission } from '@/domains/role-and-permission/context/role-permission-provider';
 import { AccessControl } from '@/components/access-control';
@@ -7,7 +7,6 @@ import {
   useGetRolePermissionsQuery,
   useUpdateRolePermissionMutation
 } from '@/domains/role-and-permission/api';
-import { LoadingButton } from '@mui/lab';
 import { MRT_RowSelectionState } from 'material-react-table';
 import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -105,15 +104,16 @@ export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
           isLoading={isFetchingCurrentRolePermission}
         />
 
-        <LoadingButton
+        <Button
           loading={isUpdatingPermissions}
+          loadingPosition='start'
           sx={{ marginTop: '20px' }}
           size='medium'
           variant='contained'
           onClick={handleSave}
         >
           Save
-        </LoadingButton>
+        </Button>
       </Box>
     </>
   );

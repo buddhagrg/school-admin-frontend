@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Box, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
-import { LoadingButton } from '@mui/lab';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { SchoolProps } from '../types';
@@ -70,15 +69,16 @@ export const ManageSchool: React.FC<ManageSchoolPropsProps> = ({ operation, id, 
           ))}
 
           <Box textAlign='center'>
-            <LoadingButton
+            <Button
               loading={isAddingSchool || isUpdatingSchool}
+              loadingPosition='start'
               type='submit'
               size='small'
               variant='contained'
               sx={{ mt: 4 }}
             >
               Save
-            </LoadingButton>
+            </Button>
           </Box>
         </form>
       </Box>

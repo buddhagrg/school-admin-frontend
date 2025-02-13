@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { LoadingButton } from '@mui/lab';
 import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -20,7 +19,7 @@ export const AddLevel = () => {
 
   React.useEffect(() => {
     methods.setValue('name', '');
-  }, []);
+  }, [methods]);
 
   const handleClear = () => {
     methods.reset({ name: '' });
@@ -50,15 +49,16 @@ export const AddLevel = () => {
           >
             Clear
           </Button>
-          <LoadingButton
+          <Button
             loading={isAdding}
+            loadingPosition='start'
             type='button'
             size='small'
             variant='contained'
             onClick={methods.handleSubmit(handleSave)}
           >
             Save
-          </LoadingButton>
+          </Button>
         </Box>
       </Box>
     </>

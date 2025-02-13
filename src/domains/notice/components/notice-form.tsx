@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Box,
+  Button,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -15,7 +16,6 @@ import {
   TextField
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
-import { LoadingButton } from '@mui/lab';
 
 import { NoticeFormProps, RecipientListData } from '../types';
 import { noticeStatusList } from '@/constants';
@@ -232,15 +232,16 @@ export const NoticeForm: React.FC<Props> = ({
         </Grid2>
       )}
 
-      <LoadingButton
+      <Button
         loading={isSaving}
+        loadingPosition='start'
         type='submit'
         size='medium'
         variant='contained'
         sx={{ margin: '30px 0 10px 0' }}
       >
         Save
-      </LoadingButton>
+      </Button>
     </form>
   );
 };

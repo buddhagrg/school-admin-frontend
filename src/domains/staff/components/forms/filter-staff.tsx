@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Box,
+  Button,
   FormControl,
   FormHelperText,
   Grid2,
@@ -12,7 +13,6 @@ import {
   Typography
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
-import { LoadingButton } from '@mui/lab';
 
 import { useGetRoles } from '../../hooks/use-get-roles';
 import { StaffFilter } from '../../types';
@@ -91,15 +91,16 @@ export const FilterStaff: React.FC<FilterStaffProps> = ({ searchStaff, methods, 
       </Grid2>
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ marginLeft: 'auto', mt: 2 }}>
-          <LoadingButton
+          <Button
             loading={isLoading}
+            loadingPosition='start'
             color='primary'
             size='small'
             onClick={searchStaff}
             variant='contained'
           >
             Search
-          </LoadingButton>
+          </Button>
         </Box>
       </Box>
     </Box>

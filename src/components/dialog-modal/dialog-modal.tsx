@@ -7,7 +7,6 @@ import {
   DialogContentText,
   DialogTitle
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 
 type DialogModalProps = {
   isSaving: boolean;
@@ -64,15 +63,16 @@ export const DialogModal: React.FC<DialogModalProps> = ({
         <Button type='button' size='small' variant='contained' color='error' onClick={closeModal}>
           {actionFooterCancelText ?? 'Cancel'}
         </Button>
-        <LoadingButton
+        <Button
           loading={isSaving}
+          loadingPosition='start'
           type='button'
           size='small'
           variant='contained'
           onClick={handleSave}
         >
           {actionFooterSaveText ?? 'Save'}
-        </LoadingButton>
+        </Button>
       </DialogActions>
     </Dialog>
   );

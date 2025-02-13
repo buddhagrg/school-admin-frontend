@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Edit } from '@mui/icons-material';
-import { Paper, Stack } from '@mui/material';
+import { Button, Paper, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoadingButton } from '@mui/lab';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -88,15 +87,16 @@ export const StaffAccountEdit: React.FC<StaffAccountEditProps> = ({
         </FormProvider>
         <hr />
         <Stack alignItems='center' justifyContent='center'>
-          <LoadingButton
+          <Button
             loading={isUpdatingStaff}
+            loadingPosition='start'
             size='small'
             variant='contained'
             color='primary'
             onClick={methods.handleSubmit(onUpdateStaff)}
           >
             Save
-          </LoadingButton>
+          </Button>
         </Stack>
       </Paper>
     </>

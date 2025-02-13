@@ -3,7 +3,6 @@ import { SectionForm } from './section-form';
 import { SectionFormProps, SectionFormSchema } from '../../types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -24,7 +23,7 @@ export const AddSection = () => {
 
   React.useEffect(() => {
     methods.reset(initialState);
-  }, []);
+  }, [methods]);
 
   const handleClear = () => {
     methods.reset(initialState);
@@ -54,15 +53,16 @@ export const AddSection = () => {
           >
             Clear
           </Button>
-          <LoadingButton
+          <Button
             loading={isAdding}
+            loadingPosition='start'
             type='button'
             size='small'
             variant='contained'
             onClick={methods.handleSubmit(handleSave)}
           >
             Save
-          </LoadingButton>
+          </Button>
         </Box>
       </Box>
     </>
