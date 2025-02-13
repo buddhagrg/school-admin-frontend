@@ -6,7 +6,6 @@ import { AppRoot } from './app-root';
 import { LoginPage, SetupPasswordPage } from '@/domains/auth/pages';
 import { DashboardPage } from '@/domains/dashboard/pages';
 import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/domains/leave/pages';
-// import { EditClass, ListClasses } from '@/domains/class-str/pages';
 import { AddStudent, EditStudent, ListStudents, ViewStudent } from '@/domains/student/pages';
 import {
   AddNotice,
@@ -17,7 +16,6 @@ import {
 } from '@/domains/notice/pages';
 import { AddStaff, EditStaff, ListStaffs, ViewStaff } from '@/domains/staff/pages';
 import { AccountPage } from '@/domains/account/pages';
-// import { EditSectionPage, ListSectionPage } from '@/domains/section/pages';
 import { EditDepartmentPage, ListDepartmentsPage } from '@/domains/department/pages';
 import { ErrorPage, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
@@ -29,7 +27,7 @@ import { ManageAccessControl } from '@/domains/access-controls/pages/access-cont
 import { SuperAdminDashboard } from '@/domains/super-admin-dashboard';
 import { EditSchool, ListSchoolsPage } from '@/domains/schools/pages';
 import { LevelClassPage, AcademicPage } from '@/domains/academic/pages';
-import { ClassSectionPage } from '@/domains/class/pages';
+import { ClassSectionPage, ClassTeacherPage } from '@/domains/class/pages';
 
 export const routes = [
   {
@@ -70,9 +68,7 @@ export const routes = [
       { path: 'leaves/request', element: <MyLeaveRequest /> },
       { path: 'leaves/review', element: <PendingRequest /> },
       { path: 'classes/manage', element: <ClassSectionPage /> },
-      // { path: 'classes/edit/:id', element: <EditClass /> },
-      // { path: 'sections', element: <ListSectionPage /> },
-      // { path: 'sections/edit/:id', element: <EditSectionPage /> },
+      { path: 'classes/teachers', element: <ClassTeacherPage /> },
       { path: 'students', element: <ListStudents /> },
       { path: 'students/add', element: <AddStudent /> },
       { path: 'students/:id', element: <ViewStudent /> },

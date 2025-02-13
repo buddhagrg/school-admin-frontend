@@ -2,7 +2,6 @@ import { api, Tag } from '@/api';
 import {
   AddStudent,
   GetStudentDetailProps,
-  GetTeachers,
   ReviewStudentStatusRequest,
   StudentData,
   StudentFilter,
@@ -50,9 +49,6 @@ export const studentApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: (_result, _error, { id }) => [{ type: Tag.STUDENTS, id }]
-    }),
-    getTeachers: builder.query<GetTeachers, void>({
-      query: () => `/teachers`
     })
   })
 });
@@ -62,6 +58,5 @@ export const {
   useLazyGetStudentDetailQuery,
   useReviewStudentStatusMutation,
   useAddStudentMutation,
-  useUpdateStudentMutation,
-  useGetTeachersQuery
+  useUpdateStudentMutation
 } = studentApi;

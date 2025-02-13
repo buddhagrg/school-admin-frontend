@@ -18,3 +18,15 @@ export const SectionFormSchema = z.object({
     ])
     .optional()
 });
+
+export const ClassTeacherFormSchema = z.object({
+  classId: z.union([
+    z.number().min(1, 'Class is required'),
+    z.string().min(1, 'Class is required')
+  ]),
+  teacherId: z.union([
+    z.number().min(1, 'Teacher is required'),
+    z.string().min(1, 'Teacher is required')
+  ]),
+  className: z.string().optional()
+});

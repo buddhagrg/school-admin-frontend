@@ -3,9 +3,12 @@ import {
   ClassFormProps,
   ClassFormWithId,
   ClassSectionStructure,
+  ClassTeacherFormProps,
+  ClassTeachers,
   GetClassList,
   SectionFormProps,
-  SectionFormWithId
+  SectionFormWithId,
+  Teachers
 } from '../types';
 
 export const classApi = api.injectEndpoints({
@@ -80,6 +83,40 @@ export const classApi = api.injectEndpoints({
         method: 'POST'
       }),
       invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
+    }),
+    getClassTeachers: builder.query<ClassTeachers, void>({
+      query: () => `/classes/teachers`,
+      providesTags: (result) =>
+        result?.classTeachers?.map(({ classId }) => ({
+          type: Tag.CLASS_TEACHERS,
+          id: classId
+        })) || [Tag.CLASS_TEACHERS]
+    }),
+    getTeachers: builder.query<Teachers, void>({
+      query: () => `/teachers`,
+      providesTags: (result) =>
+        result?.teachers?.map(({ id }) => ({
+          type: Tag.TEACHERS,
+          id
+        })) || [Tag.TEACHERS]
+    }),
+    assignClassTeacher: builder.mutation<
+      { message: string },
+      Omit<ClassTeacherFormProps, 'className'>
+    >({
+      query: ({ classId, teacherId }) => ({
+        url: `/classes/${classId}/teachers/${teacherId}`,
+        method: 'POST'
+      }),
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASS_TEACHERS])
+    }),
+    deleteClassTeacher: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `/classes/teachers`,
+        method: 'DELETE',
+        body: { id }
+      }),
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASS_TEACHERS])
     })
   })
 });
@@ -94,5 +131,9 @@ export const {
   useDeactivateSectionMutation,
   useActivateClassMutation,
   useDeactivateClassMutation,
-  useActivateSectionMutation
+  useActivateSectionMutation,
+  useGetClassTeachersQuery,
+  useGetTeachersQuery,
+  useAssignClassTeacherMutation,
+  useDeleteClassTeacherMutation
 } = classApi;

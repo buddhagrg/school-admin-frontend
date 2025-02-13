@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { NameIdType } from '@/utils/type/misc';
 import {
   AcademicInfoSchema,
   AddressInfoSchema,
@@ -75,8 +74,4 @@ export type AddStudent = {
 export type ReviewStudentStatusRequest = {
   id: number;
   status: boolean;
-};
-
-export type GetTeachers = {
-  teachers: NameIdType[];
 };
