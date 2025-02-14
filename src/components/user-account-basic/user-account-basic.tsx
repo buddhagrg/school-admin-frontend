@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
+import { useSelector } from 'react-redux';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
@@ -13,7 +14,6 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UserAccountBasicDataProps, UserAccountBasicProps } from './user-account-basic-type';
 import { useHandleMenuAction } from '../../hooks';
 import { menuItemTexts } from '@/constants';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 
 type State = {

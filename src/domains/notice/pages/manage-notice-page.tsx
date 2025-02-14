@@ -1,10 +1,10 @@
 import { Box, Button } from '@mui/material';
 import { Add, Settings } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { NoticeData } from '../components';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { useGetAllPendingNoticesQuery } from '../api';
 

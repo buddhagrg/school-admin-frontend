@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { Box, Paper } from '@mui/material';
+
 import { AccessControl } from '@/components/access-control';
 import { DeleteAccessControl } from '../components/delete-access-control';
 import { AddEditAccessControl } from '../components/add-edit-access-control';
 import { useGetPermissionsQuery } from '@/domains/role-and-permission/api';
-import { Box, Paper } from '@mui/material';
 
 export type AccessControlFormProps = {
   action: string;

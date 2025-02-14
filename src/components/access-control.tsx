@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-import { ExtendedPermission } from '@/domains/role-and-permission/types';
 import {
   MaterialReactTable,
   MRT_ColumnDef,
@@ -8,6 +7,8 @@ import {
 } from 'material-react-table';
 import { Box, Button, IconButton } from '@mui/material';
 import { Add, Delete, Edit } from '@mui/icons-material';
+
+import { ExtendedPermission } from '@/domains/role-and-permission/types';
 import {
   AccessControlFormProps,
   accessControlFormState

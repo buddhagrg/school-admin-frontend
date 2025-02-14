@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -19,7 +20,6 @@ import {
   OtherInformation,
   ParentsAndGuardianInformation
 } from '../components/forms';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { useAddStudentMutation } from '../api';
 

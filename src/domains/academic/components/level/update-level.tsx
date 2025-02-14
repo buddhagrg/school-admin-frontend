@@ -1,14 +1,15 @@
 import { FC, useEffect } from 'react';
-import { DialogModal } from '@/components/dialog-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+
+import { DialogModal } from '@/components/dialog-modal';
 import { AcademicLevelFormProps, AcademicLevelFormSchema } from '../../types';
 import { useUpdateAcademicLevelMutation } from '../../api';
 import { LevelForm } from './level-form';
-import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
 
 type UpdateLevelProps = {
   closeModal: () => void;

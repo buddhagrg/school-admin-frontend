@@ -1,4 +1,6 @@
 import { CircularProgress, Grid2, Paper, Typography } from '@mui/material';
+import { Info } from '@mui/icons-material';
+
 import { ClassItem } from '../components/level/class-item';
 import { useGetAcademicLevelsWithClassesQuery } from '../api';
 import { ResponsiveBox } from '@/components/responsive-box';
@@ -6,7 +8,6 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ERROR } from '@/constants';
 import { AddClassToLevel } from '../components/level/add-class-to-level';
 import { PageContentHeader } from '@/components/page-content-header';
-import { Info } from '@mui/icons-material';
 
 export const LevelClassPage = () => {
   const { data, isLoading, isError, error } = useGetAcademicLevelsWithClassesQuery();

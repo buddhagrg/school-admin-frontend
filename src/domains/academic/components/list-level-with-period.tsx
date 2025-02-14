@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { KeyboardDoubleArrowRight } from '@mui/icons-material';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
+
 import { useGetAcademicStructureQuery } from '../api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UpdateLevel } from './level/update-level';

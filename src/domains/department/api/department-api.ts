@@ -1,5 +1,4 @@
 import { api, Tag } from '@/api';
-
 import { DepartmentData, DepartmentForm, DepartmentFormWithId } from '../types';
 
 const departmentApi = api.injectEndpoints({

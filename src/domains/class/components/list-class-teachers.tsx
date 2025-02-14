@@ -1,10 +1,11 @@
-import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
-import { ClassTeacherDetail } from '../types';
-import { useGetClassTeachersQuery } from '../api';
 import { useMemo, useState } from 'react';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 import { Box, IconButton } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+
+import { ClassTeacherDetail } from '../types';
+import { useGetClassTeachersQuery } from '../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UpdateClassTeacher } from './class/update-class-teacher';
 import { DeleteClassTeacher } from './class/delete-class-teacher';
 

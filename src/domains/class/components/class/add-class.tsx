@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { ClassForm } from './class-form';
-import { ClassFormProps, ClassFormSchema } from '../../types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button } from '@mui/material';
-import { useAddClassMutation } from '../../api';
-import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+
+import { ClassForm } from './class-form';
+import { ClassFormProps, ClassFormSchema } from '../../types';
+import { useAddClassMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 const initialState: ClassFormProps = {
   name: '',

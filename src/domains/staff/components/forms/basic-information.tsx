@@ -15,11 +15,11 @@ import {
 import { DatePicker } from '@mui/x-date-pickers';
 import { parseISO } from 'date-fns';
 import { Controller, FieldValues, Path, useFormContext } from 'react-hook-form';
+import { z } from 'zod';
 
 import { useGetRoles } from '../../hooks/use-get-roles';
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { genders, maritalStatusList } from '@/constants';
-import { z } from 'zod';
 
 type BasicInformationProps<T extends FieldValues> = {
   schema: z.ZodObject<T>;

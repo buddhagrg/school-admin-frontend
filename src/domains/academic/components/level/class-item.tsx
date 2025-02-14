@@ -1,10 +1,11 @@
 import { FC, useState } from 'react';
 import { Chip } from '@mui/material';
-import { useDeleteLevelFromClassMutation } from '../../api';
-import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { toast } from 'react-toastify';
 import { SerializedError } from '@reduxjs/toolkit';
+
+import { useDeleteLevelFromClassMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { DialogModal } from '@/components/dialog-modal';
 
 type ClassItemProps = {

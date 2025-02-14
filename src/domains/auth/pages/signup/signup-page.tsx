@@ -11,20 +11,21 @@ import {
   Stepper,
   Typography
 } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+
 import { SchoolProfile } from './school-profile';
 import { AdminProfile } from './admin-profile';
-import { useForm } from 'react-hook-form';
 import { SchoolProfileProps, SchoolProfileSchema } from '../../types';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { AdminStaffProps, AdminStaffSchema } from '@/domains/staff/types';
 import { staffInitialStateForAdminProfile } from '@/domains/staff/components/forms';
 import { useSetupAdminProfileMutation, useSetupSchoolProfileMutation } from '../../api';
-import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
 import { HomeBar } from '@/components/home-bar';
-import { Link } from 'react-router-dom';
 
 const steps = ['School Profile', 'Admin Profile'];
 const schoolProfile = {

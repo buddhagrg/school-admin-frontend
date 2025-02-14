@@ -10,13 +10,14 @@ import {
   Select
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-import { useAddAcademicLevelToClassMutation } from '../../api';
-import { AddClassToLevelForm, AddClassToLevelFormProps } from '../../types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+
+import { useAddAcademicLevelToClassMutation } from '../../api';
+import { AddClassToLevelForm, AddClassToLevelFormProps } from '../../types';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetClassesQuery } from '@/domains/class/api';
 import { ClassData } from '@/domains/class/types';
 

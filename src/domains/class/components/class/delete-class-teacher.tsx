@@ -1,10 +1,11 @@
 import { FC } from 'react';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { toast } from 'react-toastify';
+import { SerializedError } from '@reduxjs/toolkit';
+
 import { DialogModal } from '@/components/dialog-modal';
 import { useDeleteClassTeacherMutation } from '../../api';
-import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
 
 type DeleteClassTeacherProps = {
   id: number;

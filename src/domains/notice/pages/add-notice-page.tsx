@@ -7,12 +7,12 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { NoticeFormProps, NoticeFormSchema } from '../types';
 import { NoticeForm } from '../components';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { useAddNoticeMutation } from '../api';
 

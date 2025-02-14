@@ -1,15 +1,16 @@
 import { FC, useEffect, useState } from 'react';
-import { DialogModal } from '@/components/dialog-modal';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { Period } from '../../types';
-import { PeriodItem } from './period-item';
 import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { useUpdatePeriodOrderMutation } from '../../api';
 import { Chip, List } from '@mui/material';
+
+import { DialogModal } from '@/components/dialog-modal';
+import { Period } from '../../types';
+import { PeriodItem } from './period-item';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useUpdatePeriodOrderMutation } from '../../api';
 
 type ManagePeriodOrderProps = {
   closeModal: () => void;

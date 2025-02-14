@@ -6,6 +6,7 @@ import { Button, Paper, Stack } from '@mui/material';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -17,7 +18,6 @@ import {
   ParentsInformation,
   staffInitialState
 } from '../components/forms';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { useAddStaffMutation } from '../api';
 

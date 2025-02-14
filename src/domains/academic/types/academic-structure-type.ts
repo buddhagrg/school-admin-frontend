@@ -4,6 +4,7 @@ import {
   AcademicPeriodFormSchema,
   AddClassToLevelForm
 } from './academic-structure-schema';
+
 export type Level = { id: number; name: string };
 export type AcademicLevelFormProps = z.infer<typeof AcademicLevelFormSchema>;
 export type AcademicLevelFormWithId = AcademicLevelFormProps & { id: number };

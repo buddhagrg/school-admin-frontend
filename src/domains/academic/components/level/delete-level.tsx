@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { DialogModal } from '@/components/dialog-modal';
-import { useDeleteAcademicLevelMutation } from '../../api';
 import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+
+import { DialogModal } from '@/components/dialog-modal';
+import { useDeleteAcademicLevelMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type DeleteLevelProps = {
   closeModal: () => void;

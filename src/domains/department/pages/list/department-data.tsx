@@ -3,12 +3,12 @@ import { Box, IconButton, Paper } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
+import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetDepartmentsQuery } from '../../api';
 import { DepartmentFormWithId } from '../../types';
 import { DeleteDepartment } from './delete-department';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 
 export const DepartmentData = () => {

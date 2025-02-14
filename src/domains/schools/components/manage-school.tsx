@@ -5,11 +5,11 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { SchoolProps } from '../types';
 import { useAddSchoolMutation, useUpdateSchoolMutation } from '../api';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 
 type ManageSchoolPropsProps = {

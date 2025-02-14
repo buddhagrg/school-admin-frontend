@@ -1,6 +1,6 @@
-import { PageContentHeader } from '@/components/page-content-header';
 import { Info } from '@mui/icons-material';
 import { Box, Grid2 } from '@mui/material';
+import { PageContentHeader } from '@/components/page-content-header';
 import { ListClassTeachers } from '../components/list-class-teachers';
 import { AddClassTeacher } from '../components/class/add-class-teacher';
 

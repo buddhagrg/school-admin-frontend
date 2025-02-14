@@ -5,12 +5,12 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ViewNoticeSkeleton } from '../components';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { useGetNoticeDetailQuery, useHandleNoticeStatusMutation } from '../api';
 

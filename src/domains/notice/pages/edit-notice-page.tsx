@@ -7,12 +7,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { SerializedError } from '@reduxjs/toolkit';
 import { Edit } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { NoticeFormProps, NoticeFormSchema } from '../types';
 import { NoticeForm } from '../components';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { useGetNoticeDetailQuery, useUpdateNoticeMutation } from '../api';
 

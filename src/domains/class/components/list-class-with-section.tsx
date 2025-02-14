@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
-import { useGetClassSectionStructureQuery } from '../api';
 import {
   Box,
   IconButton,
@@ -15,6 +14,8 @@ import {
   useTheme
 } from '@mui/material';
 import { CheckBox, DoNotDisturb, Edit } from '@mui/icons-material';
+
+import { useGetClassSectionStructureQuery } from '../api';
 import { UpdateSection } from './section/update-section';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UpdateClass } from './class/update-class';
