@@ -11,7 +11,6 @@ import { parseISO } from 'date-fns';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetStaffDetail } from '../../hooks';
 import { BasicInfoSchema, StaffFormProps, StaffFormSchema } from '../../types';
 import {
   Address,
@@ -20,7 +19,7 @@ import {
   ParentsInformation,
   staffInitialState
 } from '../forms';
-import { useUpdateStaffMutation } from '../../api';
+import { useGetStaffDetailQuery, useUpdateStaffMutation } from '../../api';
 
 type StaffAccountEditProps = {
   id?: string;
@@ -30,7 +29,7 @@ type StaffAccountEditProps = {
 type StaffDetailValue<T> = T extends { [key: string]: infer U } ? U : never;
 
 export const StaffAccountEdit: FC<StaffAccountEditProps> = ({ id, redirectPath, heading }) => {
-  const staffDetail = useGetStaffDetail(id);
+  const { data: staffDetail } = useGetStaffDetailQuery(id);
   const [updateStaff, { isLoading: isUpdatingStaff }] = useUpdateStaffMutation();
   const navigate = useNavigate();
 

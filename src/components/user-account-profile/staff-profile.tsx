@@ -6,14 +6,28 @@ import {
   ParentsInformation,
   PersonalDetail
 } from '@/domains/staff/components/views';
-import { useGetStaffDetail } from '@/domains/staff/hooks';
+import { useGetStaffDetailQuery } from '@/domains/staff/api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { ERROR } from '@/constants';
 
 type StaffProfileProps = {
   id?: string;
 };
 
 export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
-  const staffDetail = useGetStaffDetail(id);
+  const { data, isLoading, isError, error } = useGetStaffDetailQuery(id);
+
+  if (isLoading) {
+    return <>loading...</>;
+  }
+
+  if (isError) {
+    return <>{getErrorMsg(error).message}</>;
+  }
+
+  if (!data) {
+    return <>{ERROR.NO_RECORD}</>;
+  }
 
   const {
     name,
@@ -34,7 +48,7 @@ export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
     reporterName,
     systemAccess,
     schoolName
-  } = staffDetail;
+  } = data;
 
   return (
     <Grid2 container spacing={3}>

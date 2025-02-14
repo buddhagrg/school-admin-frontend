@@ -1,19 +1,34 @@
 import { FC } from 'react';
 import { Grid2 } from '@mui/material';
-import { useGetStudentDetail } from '@/domains/student/hooks/use-get-student-detail';
 import {
   MiniAvatar,
   Others,
   ParentsAndGuardianInformation,
   PersonalDetail
 } from '@/domains/student/components/views';
+import { useGetStudentDetailQuery } from '@/domains/student/api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { ERROR } from '@/constants';
 
 type StudentProfileProps = {
   id?: string;
 };
 
 export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
-  const student = useGetStudentDetail(id);
+  const { data, isLoading, isError, error } = useGetStudentDetailQuery(id);
+
+  if (isLoading) {
+    return <>Loading...</>;
+  }
+
+  if (isError) {
+    return <>{getErrorMsg(error).message}</>;
+  }
+
+  if (!data) {
+    return <>{ERROR.NO_RECORD}</>;
+  }
+
   const {
     name,
     email,
@@ -36,7 +51,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
     systemAccess,
     reporterName,
     schoolName
-  } = student;
+  } = data;
 
   return (
     <Grid2 container spacing={3}>

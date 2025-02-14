@@ -14,11 +14,11 @@ import {
   Typography
 } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
-import { useGetStaffs } from '../../hooks/use-get-staffs';
 import { StaffFormProps } from '../../types';
+import { useGetStaffsQuery } from '../../api';
 
 export const OtherInformation = ({ action }: { action: string }) => {
-  const staffs = useGetStaffs();
+  const { data } = useGetStaffsQuery({});
 
   const {
     control,
@@ -50,7 +50,7 @@ export const OtherInformation = ({ action }: { action: string }) => {
                     onChange={(e) => onChange(e.target.value)}
                     notched
                   >
-                    {staffs.map((staff) => (
+                    {data?.staffs.map((staff) => (
                       <MenuItem value={staff.id} key={staff.id}>
                         {staff.name}
                       </MenuItem>

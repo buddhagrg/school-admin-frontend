@@ -53,7 +53,6 @@ export const staffApi = api.injectEndpoints({
 
 export const {
   useGetStaffsQuery,
-  useLazyGetStaffDetailQuery,
   useGetStaffDetailQuery,
   useHandleStaffStatusMutation,
   useAddStaffMutation,

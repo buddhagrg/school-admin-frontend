@@ -19,8 +19,7 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { StudentProps } from '../../types';
 import { studentFormInitialState } from '../../reducer/student-form-reducer';
 import { StudentSchema } from '../../types/student-schema';
-import { useGetStudentDetail } from '../../hooks';
-import { useUpdateStudentMutation } from '../../api';
+import { useGetStudentDetailQuery, useUpdateStudentMutation } from '../../api';
 
 type StudentAccountEditProps = {
   heading: string;
@@ -37,7 +36,7 @@ export const StudentAccountEdit: FC<StudentAccountEditProps> = ({ id, redirectPa
   const [updateStudent, { isLoading }] = useUpdateStudentMutation();
   const navigate = useNavigate();
 
-  const studentDetail = useGetStudentDetail(id);
+  const { data: studentDetail } = useGetStudentDetailQuery(id);
 
   useEffect(() => {
     if (studentDetail) {

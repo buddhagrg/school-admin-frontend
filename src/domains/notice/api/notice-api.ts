@@ -76,7 +76,7 @@ export const {
   useGetNoticesQuery,
   useGetNoticeDetailQuery,
   useGetMyNoticesQuery,
-  useLazyGetNoticeRecipientListQuery,
+  useGetNoticeRecipientListQuery,
   useAddNoticeMutation,
   useUpdateNoticeMutation,
   useHandleNoticeStatusMutation,

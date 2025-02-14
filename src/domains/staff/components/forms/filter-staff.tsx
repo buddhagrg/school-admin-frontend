@@ -14,8 +14,8 @@ import {
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
-import { useGetRoles } from '../../hooks/use-get-roles';
 import { StaffFilter } from '../../types';
+import { useGetRolesQuery } from '@/domains/role-and-permission/api';
 
 type FilterStaffProps = {
   methods: UseFormReturn<StaffFilter>;
@@ -24,7 +24,7 @@ type FilterStaffProps = {
 };
 
 export const FilterStaff: FC<FilterStaffProps> = ({ searchStaff, methods, isLoading }) => {
-  const roles = useGetRoles();
+  const { data } = useGetRolesQuery();
   const {
     formState: { errors },
     control,
@@ -54,7 +54,7 @@ export const FilterStaff: FC<FilterStaffProps> = ({ searchStaff, methods, isLoad
                     onChange={(e) => onChange(String(e.target.value))}
                     notched
                   >
-                    {roles.map((role) => (
+                    {data?.roles.map((role) => (
                       <MenuItem key={role.id} value={role.id}>
                         {role.name}
                       </MenuItem>

@@ -17,16 +17,16 @@ import { parseISO } from 'date-fns';
 import { Controller, FieldValues, Path, useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useGetRoles } from '../../hooks/use-get-roles';
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { genders, maritalStatusList } from '@/constants';
+import { useGetRolesQuery } from '@/domains/role-and-permission/api';
 
 type BasicInformationProps<T extends FieldValues> = {
   schema: z.ZodObject<T>;
 };
 
 export const BasicInformation = <T extends FieldValues>({ schema }: BasicInformationProps<T>) => {
-  const roles = useGetRoles();
+  const { data } = useGetRolesQuery();
   const {
     register,
     control,
@@ -67,7 +67,7 @@ export const BasicInformation = <T extends FieldValues>({ schema }: BasicInforma
                     onChange={(e) => onChange(e.target.value)}
                     notched
                   >
-                    {roles.map((role) => (
+                    {data?.roles.map((role) => (
                       <MenuItem value={role.id} key={role.id}>
                         {role.name}
                       </MenuItem>

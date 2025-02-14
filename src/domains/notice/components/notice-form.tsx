@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import {
   Box,
   Button,
@@ -17,9 +17,9 @@ import {
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
-import { NoticeFormProps, RecipientListData } from '../types';
+import { NoticeFormProps } from '../types';
 import { noticeStatusList } from '@/constants';
-import { useLazyGetNoticeRecipientListQuery } from '../api';
+import { useGetNoticeRecipientListQuery } from '../api';
 
 type Props = {
   isSaving: boolean;
@@ -38,30 +38,17 @@ export const NoticeForm: FC<Props> = ({
   handleRecipientChange,
   selectedRoleId
 }) => {
-  const [getRecipients] = useLazyGetNoticeRecipientListQuery();
+  const { data } = useGetNoticeRecipientListQuery();
   const {
     register,
     formState: { errors },
     control,
     watch
   } = methods;
-  const [recipients, setRecipients] = useState<RecipientListData>([]);
-
   const recipientWatch = watch('recipientType');
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const result = await getRecipients().unwrap();
-        setRecipients(result.noticeRecipients);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetch();
-  }, [getRecipients]);
 
   const getDependentFields = () => {
-    const role = recipients.find((r) => r.roleId === selectedRoleId);
+    const role = data?.noticeRecipients.find((r) => r.roleId === selectedRoleId);
     if (!role) return { primaryDependents: [] };
 
     return {
@@ -69,7 +56,7 @@ export const NoticeForm: FC<Props> = ({
     };
   };
   const getDependentRole = (type: 'primaryDependents') => {
-    return recipients.find((r) => r.roleId === selectedRoleId)?.[type].name;
+    return data?.noticeRecipients.find((r) => r.roleId === selectedRoleId)?.[type].name;
   };
 
   const { primaryDependents } = getDependentFields();
@@ -177,7 +164,7 @@ export const NoticeForm: FC<Props> = ({
                         handleRoleChange(e);
                       }}
                     >
-                      {recipients.map((item) => (
+                      {data?.noticeRecipients.map((item) => (
                         <MenuItem key={item.roleId} value={item.roleId}>
                           {item.name}
                         </MenuItem>
