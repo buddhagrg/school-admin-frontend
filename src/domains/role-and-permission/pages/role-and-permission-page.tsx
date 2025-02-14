@@ -4,12 +4,12 @@ import { AdminPanelSettings } from '@mui/icons-material';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { TabPanel } from '@/components/tab-panel';
-import { useGetPermissionsQuery, useGetRolesQuery } from '../api/role-and-permission-api';
 import { RoleTabs } from '../components/roles-tab/roles-tab';
 import { Permission } from '@/utils/type/misc';
 import { ExtendedPermission } from '../types';
 import { RolePermissionProvider, useRolePermission } from '../context/role-permission-provider';
 import { OverviewTab } from '../components/overview-tab/overview-tab';
+import { useGetPermissionsQuery, useGetRolesQuery } from '../api';
 
 const RoleAndPermissionPage = () => {
   const { data: rolesData } = useGetRolesQuery();

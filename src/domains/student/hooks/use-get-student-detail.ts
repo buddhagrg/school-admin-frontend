@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { studentFormInitialState } from '../reducer/student-form-reducer';
 import { GetStudentDetailProps } from '../types';
-import { useLazyGetStudentDetailQuery } from '../api/student-api';
+import { useLazyGetStudentDetailQuery } from '../api';
 
 const initialState: GetStudentDetailProps = { ...studentFormInitialState, id: 0, reporterName: '' };
 export const useGetStudentDetail = (id: string | undefined) => {

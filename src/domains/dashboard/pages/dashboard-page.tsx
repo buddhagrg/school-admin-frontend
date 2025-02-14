@@ -2,10 +2,10 @@ import { Grid2 } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetDashboardDataQuery } from '../api/dashboard-api';
 import { Celebrations, GridCard, LeavePolicyDetail, Notices, WhoIsOut } from '../components';
 import { getUserRole } from '@/domains/auth/slice';
 import { DashboardProps } from '../types';
+import { useGetDashboardDataQuery } from '../api';
 
 export const DashboardPage = () => {
   const currentUserRole = useSelector(getUserRole);

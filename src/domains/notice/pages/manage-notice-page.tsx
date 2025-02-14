@@ -3,10 +3,10 @@ import { Add, Settings } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 import { PageContentHeader } from '@/components/page-content-header';
-import { useGetAllPendingNoticesQuery } from '../api/notice-api';
 import { NoticeData } from '../components';
 import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
+import { useGetAllPendingNoticesQuery } from '../api';
 
 export const ManageNotices = () => {
   const { data, isLoading, isError, error } = useGetAllPendingNoticesQuery();

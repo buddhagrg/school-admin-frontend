@@ -20,7 +20,7 @@ import {
   ParentsInformation,
   staffInitialState
 } from '../forms';
-import { useUpdateStaffMutation } from '../../api/staff-api';
+import { useUpdateStaffMutation } from '../../api';
 
 type StaffAccountEditProps = {
   id?: string;

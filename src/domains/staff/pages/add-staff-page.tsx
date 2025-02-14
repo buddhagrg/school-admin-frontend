@@ -9,7 +9,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useAddStaffMutation } from '../api/staff-api';
 import { BasicInfoSchema, StaffFormProps, StaffFormSchema } from '../types';
 import {
   Address,
@@ -20,6 +19,7 @@ import {
 } from '../components/forms';
 import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
+import { useAddStaffMutation } from '../api';
 
 export const AddStaff = () => {
   const navigate = useNavigate();

@@ -9,10 +9,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetNoticeDetailQuery, useHandleNoticeStatusMutation } from '../api/notice-api';
 import { ViewNoticeSkeleton } from '../components';
 import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
+import { useGetNoticeDetailQuery, useHandleNoticeStatusMutation } from '../api';
 
 export const ViewNotice = () => {
   const { id } = useParams();

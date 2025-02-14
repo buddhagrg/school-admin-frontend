@@ -3,10 +3,10 @@ import { Add, Campaign } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 import { PageContentHeader } from '@/components/page-content-header';
-import { useGetNoticesQuery } from '../api/notice-api';
 import { NoticeData } from '../components';
 import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
+import { useGetNoticesQuery } from '../api';
 
 export const ListNotices = () => {
   const { data, isLoading, isError, error } = useGetNoticesQuery();

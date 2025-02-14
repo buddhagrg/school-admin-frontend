@@ -12,9 +12,9 @@ import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UserAccountBasic } from '@/components/user-account-basic';
 import { StaffFilter, StaffFilterSchema } from '../types';
-import { useGetStaffsQuery } from '../api/staff-api';
 import { FilterStaff } from '../components/forms';
 import { getAppBase } from '@/domains/auth/slice';
+import { useGetStaffsQuery } from '../api';
 
 const initialState = {
   roleId: '',

@@ -3,10 +3,10 @@ import { Box, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 
-import { useGetLeavePolicyUsersQuery } from '../../../../api/leave-api';
 import { PolicyUser } from '@/domains/leave/types';
 import { RemoveUserFromPolicy } from './remove-user-from-policy';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useGetLeavePolicyUsersQuery } from '@/domains/leave/api';
 
 export const UserList = ({ policyId }: { policyId: number }) => {
   const { data, isLoading, isError, error } = useGetLeavePolicyUsersQuery(policyId);

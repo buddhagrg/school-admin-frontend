@@ -10,8 +10,8 @@ import { LeaveDetail } from './leave-detail';
 import { LeaveForm } from './leave-form';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveRequestForm, LeaveRequestFormSchema } from '../types';
-import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '../api/leave-api';
 import { ERROR } from '@/constants';
+import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '../api';
 
 export const LeavePolicyDetail = () => {
   const [applyLeaveRequest, { isLoading: isApplyingLeave }] = useApplyLeaveRequestMutation();

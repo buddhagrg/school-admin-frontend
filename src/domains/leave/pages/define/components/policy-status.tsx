@@ -5,7 +5,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useHandleLeavePolicyMutation } from '../../../api/leave-api';
+import { useHandleLeavePolicyMutation } from '@/domains/leave/api';
 
 type PolicyStatusProps = {
   title: string;

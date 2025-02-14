@@ -11,10 +11,10 @@ import { useNavigate } from 'react-router-dom';
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { NoticeFormProps, NoticeFormSchema } from '../types';
-import { useAddNoticeMutation } from '../api/notice-api';
 import { NoticeForm } from '../components';
 import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
+import { useAddNoticeMutation } from '../api';
 
 const initialState: NoticeFormProps = {
   title: '',

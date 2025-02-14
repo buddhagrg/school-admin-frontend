@@ -9,12 +9,12 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { LoginRequest, LoginSchema } from '../../types';
 import { LoginForm } from './login-form';
-import { useLoginMutation } from '../../api/auth-api';
 import { setUser } from '../../slice/auth-slice';
 import { formatApiError } from '@/utils/helpers/format-api-error';
 import { ApiError } from '@/components/errors';
 import { Link } from 'react-router-dom';
 import { HomeBar } from '@/components/home-bar';
+import { useLoginMutation } from '../../api';
 
 export const LoginPage = () => {
   const navigate = useNavigate();

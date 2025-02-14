@@ -10,7 +10,6 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { useAddStudentMutation } from '../api/student-api';
 import { StudentProps, StudentSchema } from '../types';
 import { studentFormInitialState } from '../reducer';
 import {
@@ -22,6 +21,7 @@ import {
 } from '../components/forms';
 import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
+import { useAddStudentMutation } from '../api';
 
 export const AddStudent = () => {
   const [addStudent, { isLoading }] = useAddStudentMutation();

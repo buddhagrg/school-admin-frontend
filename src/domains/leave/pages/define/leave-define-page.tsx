@@ -7,10 +7,10 @@ import { useMediaQuery, useTheme } from '@mui/material';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { TabPanel } from '@/components/tab-panel';
-import { useGetLeavePoliciesQuery } from '../../api/leave-api';
 import { LeaveDefineProvider, useLeaveDefine } from './context/leave-define-provider';
 import { OverviewTab } from './components/overview-tab/overview-tab';
 import { PolicyTab } from './components/policy-tab/policy-tab';
+import { useGetLeavePoliciesQuery } from '../../api';
 
 export const LeaveDefinePage = () => {
   const { data, isLoading } = useGetLeavePoliciesQuery();

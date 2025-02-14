@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { UserAccountBasicProps } from '@/components/user-account-basic';
-import { useGetStaffsQuery } from '../api/staff-api';
+import { useGetStaffsQuery } from '../api';
 
 export const useGetStaffs = () => {
   const [staffs, setStaffs] = useState<UserAccountBasicProps[]>([]);

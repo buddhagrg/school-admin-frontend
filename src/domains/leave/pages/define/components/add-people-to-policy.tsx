@@ -25,7 +25,7 @@ import { PolicyUsers, PolicyUsersSchema } from '../../../types';
 import {
   useAddUserToPolicyMutation,
   useGetEligibleLeavePolicyUsersQuery
-} from '../../../api/leave-api';
+} from '@/domains/leave/api';
 
 type AddPeopleToPolicyProps = {
   policyId: number;
