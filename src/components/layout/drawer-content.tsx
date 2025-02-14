@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { AcUnitOutlined, ArrowDropDown, ArrowRight } from '@mui/icons-material';
 import {
   Box,
@@ -20,10 +20,7 @@ type DrawerContentProps = {
   openNavMenu: string | null;
 };
 
-export const DrawerContent: React.FC<DrawerContentProps> = ({
-  handleNavigationClick,
-  openNavMenu
-}) => {
+export const DrawerContent: FC<DrawerContentProps> = ({ handleNavigationClick, openNavMenu }) => {
   const menus = useSelector(getUserMenus);
   const appBase = useSelector(getAppBase);
 

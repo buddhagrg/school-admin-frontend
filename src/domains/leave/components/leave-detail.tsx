@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Card, CardContent, Grid2, Typography } from '@mui/material';
 
 type LeaveDetailType = {
@@ -7,7 +7,7 @@ type LeaveDetailType = {
   icon?: string;
 };
 
-export const LeaveDetail: React.FC<LeaveDetailType> = ({ name, totalDaysUsed }) => {
+export const LeaveDetail: FC<LeaveDetailType> = ({ name, totalDaysUsed }) => {
   return (
     <Grid2>
       <Card sx={{ textAlign: 'center' }}>

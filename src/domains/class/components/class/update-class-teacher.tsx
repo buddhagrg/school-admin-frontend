@@ -1,21 +1,22 @@
-import { DialogModal } from '@/components/dialog-modal';
-import { ClassTeacherForm } from './class-teacher-form';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ClassTeacherFormProps, ClassTeacherFormSchema } from '../../types';
-import { useAssignClassTeacherMutation } from '../../api';
-import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { FC, useEffect } from 'react';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+
+import { DialogModal } from '@/components/dialog-modal';
+import { ClassTeacherForm } from './class-teacher-form';
+import { ClassTeacherFormProps, ClassTeacherFormSchema } from '../../types';
+import { useAssignClassTeacherMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type UpdateClassTeacherProps = {
   closeModal: () => void;
   classId: number;
   className: string;
 };
-export const UpdateClassTeacher: React.FC<UpdateClassTeacherProps> = ({
+export const UpdateClassTeacher: FC<UpdateClassTeacherProps> = ({
   closeModal,
   classId,
   className

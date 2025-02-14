@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, MouseEvent } from 'react';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -11,10 +11,10 @@ type DeleteLeaveRequestProps = {
   id: number;
   closeModal: () => void;
 };
-export const DeleteLeaveRequest: React.FC<DeleteLeaveRequestProps> = ({ id, closeModal }) => {
+export const DeleteLeaveRequest: FC<DeleteLeaveRequestProps> = ({ id, closeModal }) => {
   const [deleteLeaveRequest, { isLoading: isDeleting }] = useDeleteLeaveRequestMutation();
 
-  const onSave = async (event: React.MouseEvent) => {
+  const onSave = async (event: MouseEvent) => {
     event.preventDefault();
     try {
       const result = await deleteLeaveRequest(id).unwrap();

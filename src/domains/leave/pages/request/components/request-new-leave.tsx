@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { CalendarMonth } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -13,7 +13,7 @@ import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveForm } from '@/domains/leave/components';
 
 export const RequestNewLeave = () => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [applyLeaveRequest, { isLoading: isApplyingLeave }] = useApplyLeaveRequestMutation();
   const { myLeavePolicies } = useLeaveRequest();
 

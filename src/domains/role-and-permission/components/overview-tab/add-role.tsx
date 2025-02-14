@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { AddCircle } from '@mui/icons-material';
 import { Button, Stack } from '@mui/material';
 import { AddEditRole } from '../add-edit-role';
 
 export const AddRole = () => {
-  const [action, setAction] = React.useState<string>('');
+  const [action, setAction] = useState<string>('');
 
   const onClick = () => {
     setAction('add');

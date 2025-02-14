@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
 import {
   Box,
   Button,
@@ -22,9 +22,9 @@ type FilterStudentProps = {
   methods: UseFormReturn<StudentFilter>;
   searchStudent: () => void;
 };
-export const FilterStudent: React.FC<FilterStudentProps> = ({ methods, searchStudent }) => {
+export const FilterStudent: FC<FilterStudentProps> = ({ methods, searchStudent }) => {
   const { data } = useGetClassSectionStructureQuery();
-  const [sections, setSections] = React.useState<SectionDetail[]>([]);
+  const [sections, setSections] = useState<SectionDetail[]>([]);
   const { control, register, setValue } = methods;
 
   const handleClassChange = (classId: number | string) => {

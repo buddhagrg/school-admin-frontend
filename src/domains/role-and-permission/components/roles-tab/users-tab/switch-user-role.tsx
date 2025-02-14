@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { z } from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,7 +20,7 @@ const Schema = z.object({
 });
 type SchemaType = z.infer<typeof Schema>;
 
-export const SwitchUserRole: React.FC<SwitchUserRoleProps> = ({ userId, handleRoleSwitch }) => {
+export const SwitchUserRole: FC<SwitchUserRoleProps> = ({ userId, handleRoleSwitch }) => {
   const { data } = useGetRolesQuery();
   const roles = data?.roles ?? [];
   const [switchUserRole, { isLoading: isSwitchingRole }] = useSwitchUserRoleMutation();

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -6,7 +7,6 @@ import {
   Select,
   TextField
 } from '@mui/material';
-import React from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { ClassTeacherFormProps } from '../../types';
 import { useGetClassesQuery, useGetTeachersQuery } from '../../api';
@@ -15,7 +15,7 @@ type ClassTeacherFormType = {
   methods: UseFormReturn<ClassTeacherFormProps>;
   action: 'add' | 'update';
 };
-export const ClassTeacherForm: React.FC<ClassTeacherFormType> = ({ methods, action }) => {
+export const ClassTeacherForm: FC<ClassTeacherFormType> = ({ methods, action }) => {
   const {
     control,
     register,

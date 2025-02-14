@@ -1,13 +1,14 @@
+import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { SectionForm } from './section-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SectionFormProps, SectionFormSchema } from '../../types';
-import React, { useEffect } from 'react';
-import { useUpdateSectionMutation } from '../../api';
-import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+
+import { SectionForm } from './section-form';
+import { SectionFormProps, SectionFormSchema } from '../../types';
+import { useUpdateSectionMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { DialogModal } from '@/components/dialog-modal';
 
 type EditSectionType = {
@@ -16,7 +17,7 @@ type EditSectionType = {
   classId: number;
   name: string;
 };
-export const UpdateSection: React.FC<EditSectionType> = ({ closeModal, id, classId, name }) => {
+export const UpdateSection: FC<EditSectionType> = ({ closeModal, id, classId, name }) => {
   const methods = useForm<SectionFormProps>({
     defaultValues: { name: '' },
     resolver: zodResolver(SectionFormSchema)

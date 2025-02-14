@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,7 +18,7 @@ type AddEditPolicyProps = {
   closeModal: () => void;
 };
 
-export const AddEditPolicy: React.FC<AddEditPolicyProps> = ({
+export const AddEditPolicy: FC<AddEditPolicyProps> = ({
   policyId,
   policyName,
   title,
@@ -33,7 +33,7 @@ export const AddEditPolicy: React.FC<AddEditPolicyProps> = ({
     handleSubmit
   } = useForm<Pick<PolicyDetail, 'name'>>({ resolver: zodResolver(NewLeavePolicySchema) });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (policyId) {
       setValue('name', policyName);
     } else {

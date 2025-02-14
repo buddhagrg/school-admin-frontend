@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -20,7 +20,7 @@ type LeaveFormProps = {
   leavePolicies: MyLeavePolicy[] | LeavePolicy[];
 };
 
-export const LeaveForm: React.FC<LeaveFormProps> = ({ methods, leavePolicies }) => {
+export const LeaveForm: FC<LeaveFormProps> = ({ methods, leavePolicies }) => {
   const {
     register,
     formState: { errors },

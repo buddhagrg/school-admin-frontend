@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode, useContext, useReducer } from 'react';
 import { Action, initialState, RolePermissionContext, State } from './role-permission-context';
 
 const reducer = (state: State, action: Action) => {
@@ -23,8 +23,8 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-export const RolePermissionProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+export const RolePermissionProvider = ({ children }: { children: ReactNode }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <RolePermissionContext.Provider value={{ state, dispatch }}>
@@ -33,4 +33,4 @@ export const RolePermissionProvider = ({ children }: { children: React.ReactNode
   );
 };
 
-export const useRolePermission = () => React.useContext(RolePermissionContext);
+export const useRolePermission = () => useContext(RolePermissionContext);

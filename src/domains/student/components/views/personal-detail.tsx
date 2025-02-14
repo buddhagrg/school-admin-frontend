@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
 import { Box, Card, CardContent, Divider, Grid2, Typography } from '@mui/material';
 import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
@@ -12,7 +12,7 @@ type PersonalDetailProps = {
   permanentAddress: string;
 };
 
-export const PersonalDetail: React.FC<PersonalDetailProps> = ({
+export const PersonalDetail: FC<PersonalDetailProps> = ({
   dob,
   gender,
   roll,

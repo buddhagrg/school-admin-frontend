@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const methods = useForm<LoginRequest>({ resolver: zodResolver(LoginSchema) });
-  const [apiErrors, setApiErrors] = React.useState<string[]>([]);
+  const [apiErrors, setApiErrors] = useState<string[]>([]);
 
   const [login, { isLoading }] = useLoginMutation();
 

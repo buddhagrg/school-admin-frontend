@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -16,7 +16,7 @@ type PeriodFormProps = {
   action: 'add' | 'update';
 };
 
-export const PeriodForm: React.FC<PeriodFormProps> = ({ methods, action }) => {
+export const PeriodForm: FC<PeriodFormProps> = ({ methods, action }) => {
   const {
     register,
     formState: { errors },

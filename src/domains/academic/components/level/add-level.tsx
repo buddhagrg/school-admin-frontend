@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -17,7 +17,7 @@ export const AddLevel = () => {
   });
   const [addLevel, { isLoading: isAdding }] = useAddAcademicLevelMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     methods.setValue('name', '');
   }, [methods]);
 

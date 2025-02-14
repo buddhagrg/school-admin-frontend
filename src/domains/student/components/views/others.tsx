@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { LockPerson } from '@mui/icons-material';
 import { Box, Card, CardContent, Divider, Typography } from '@mui/material';
 
@@ -7,7 +7,7 @@ type OthersProps = {
   systemAccess: boolean;
 };
 
-export const Others: React.FC<OthersProps> = ({ systemAccess, reporterName }) => {
+export const Others: FC<OthersProps> = ({ systemAccess, reporterName }) => {
   return (
     <Card variant='outlined'>
       <CardContent>

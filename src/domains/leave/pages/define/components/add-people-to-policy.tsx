@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import {
   Alert,
   Checkbox,
@@ -32,7 +32,7 @@ type AddPeopleToPolicyProps = {
   closeModal: () => void;
 };
 
-export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({ policyId, closeModal }) => {
+export const AddPeopleToPolicy: FC<AddPeopleToPolicyProps> = ({ policyId, closeModal }) => {
   const { data } = useGetEligibleLeavePolicyUsersQuery();
   const [addUsersToPolicy, { isLoading: isAddingUsersToPolicy }] = useAddUserToPolicyMutation();
 
@@ -45,14 +45,14 @@ export const AddPeopleToPolicy: React.FC<AddPeopleToPolicyProps> = ({ policyId, 
     defaultValues: { users: [] },
     resolver: zodResolver(PolicyUsersSchema)
   });
-  const [searchText, setSearchText] = React.useState('');
+  const [searchText, setSearchText] = useState<string>('');
 
-  const filteredUsers = React.useMemo(() => {
+  const filteredUsers = useMemo(() => {
     const searchTextLow = searchText.toLowerCase();
     return data?.users.filter(({ name }) => name.toLowerCase().includes(searchTextLow));
   }, [searchText, data?.users]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setValue('users', []);
   }, [setValue]);
 

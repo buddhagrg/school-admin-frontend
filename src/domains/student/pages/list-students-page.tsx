@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Button } from '@mui/material';
 import { Add, InfoOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -12,9 +13,8 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { StudentFilter, StudentFilterSchema } from '../types';
 import { FilterStudent } from '../components/forms';
 import { UserAccountBasic } from '@/components/user-account-basic';
-import { useGetStudentsQuery } from '../api/student-api';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
+import { useGetStudentsQuery } from '../api';
 
 const initialState = {
   class: '',
@@ -23,9 +23,9 @@ const initialState = {
   roll: ''
 };
 
-export const ListStudents: React.FC = () => {
+export const ListStudents: FC = () => {
   const appBase = useSelector(getAppBase);
-  const [filter, setFilter] = React.useState<StudentFilter>({});
+  const [filter, setFilter] = useState<StudentFilter>({});
   const methods = useForm<StudentFilter>({
     defaultValues: initialState,
     resolver: zodResolver(StudentFilterSchema)

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { ReactNode, useContext } from 'react';
 import { initialState, LeaveRequestContext, State } from './leave-request-context';
 import { useGetMyLeavePoliciesQuery } from '@/domains/leave/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
-export const LeaveRequestProvider = ({ children }: { children: React.ReactNode }) => {
+export const LeaveRequestProvider = ({ children }: { children: ReactNode }) => {
   const { data, isLoading, isError, error } = useGetMyLeavePoliciesQuery();
 
   const state: State = {
@@ -17,4 +17,4 @@ export const LeaveRequestProvider = ({ children }: { children: React.ReactNode }
   return <LeaveRequestContext.Provider value={state}>{children}</LeaveRequestContext.Provider>;
 };
 
-export const useLeaveRequest = () => React.useContext(LeaveRequestContext);
+export const useLeaveRequest = () => useContext(LeaveRequestContext);

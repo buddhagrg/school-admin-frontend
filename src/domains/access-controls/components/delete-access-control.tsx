@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -12,10 +12,7 @@ type DeleteAccessControlProps = {
   closeModal: () => void;
 };
 
-export const DeleteAccessControl: React.FC<DeleteAccessControlProps> = ({
-  permissionId,
-  closeModal
-}) => {
+export const DeleteAccessControl: FC<DeleteAccessControlProps> = ({ permissionId, closeModal }) => {
   const [deletePermission, { isLoading: isDeleting }] = useDeleteAccessControlMutation();
 
   const onDelete = async () => {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Block, Done, Pending } from '@mui/icons-material';
 import { Chip } from '@mui/material';
 
@@ -17,7 +17,7 @@ type LeaveStatusProps = {
   label: string;
 };
 
-export const LeaveStatus: React.FC<LeaveStatusProps> = ({ statusId, label }) => {
+export const LeaveStatus: FC<LeaveStatusProps> = ({ statusId, label }) => {
   const [color, icon] = statusMap[statusId] || ['default', null];
 
   return <Chip icon={icon} label={label} color={color} />;

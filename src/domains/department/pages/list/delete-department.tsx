@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -11,7 +11,7 @@ type DeleteDepartmentProps = {
   closeModal: () => void;
   departmentId: number;
 };
-export const DeleteDepartment: React.FC<DeleteDepartmentProps> = ({ departmentId, closeModal }) => {
+export const DeleteDepartment: FC<DeleteDepartmentProps> = ({ departmentId, closeModal }) => {
   const [deleteDepartment, { isLoading: isDeletingDepartment }] = useDeleteDepartmentMutation();
 
   const onSave = async () => {

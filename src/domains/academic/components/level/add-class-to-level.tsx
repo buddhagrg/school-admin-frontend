@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useMemo } from 'react';
 import {
   Button,
   FormControl,
@@ -25,7 +25,7 @@ type AddClassToLevelProps = {
   academicLevelName: string;
   usedClassList: ClassData[];
 };
-export const AddClassToLevel: React.FC<AddClassToLevelProps> = ({
+export const AddClassToLevel: FC<AddClassToLevelProps> = ({
   academicLevelId,
   academicLevelName,
   usedClassList
@@ -41,7 +41,7 @@ export const AddClassToLevel: React.FC<AddClassToLevelProps> = ({
     resolver: zodResolver(AddClassToLevelForm)
   });
 
-  const unusedClasses = React.useMemo(() => {
+  const unusedClasses = useMemo(() => {
     return classData?.classes.filter(
       (item) => !usedClassList.some((uItem) => uItem.id === item.id)
     );

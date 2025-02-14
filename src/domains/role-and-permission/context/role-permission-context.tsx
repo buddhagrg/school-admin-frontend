@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createContext, Dispatch } from 'react';
 import { ExtendedPermission, RoleWithUsersAssociated } from '../types';
 
 export const initialState = {
@@ -18,11 +18,11 @@ export type Action =
 
 type DefaultContext = {
   state: State;
-  dispatch: React.Dispatch<Action>;
+  dispatch: Dispatch<Action>;
 };
 const defaultValues: DefaultContext = {
   state: initialState,
   dispatch: () => {}
 };
 
-export const RolePermissionContext = React.createContext(defaultValues);
+export const RolePermissionContext = createContext(defaultValues);

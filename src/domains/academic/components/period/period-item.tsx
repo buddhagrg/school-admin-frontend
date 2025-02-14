@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { CSSProperties, FC } from 'react';
 import { Box, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -8,9 +8,9 @@ type PeriodItemProps = {
   id: number;
   name: string;
 };
-export const PeriodItem: React.FC<PeriodItemProps> = ({ id, name }) => {
+export const PeriodItem: FC<PeriodItemProps> = ({ id, name }) => {
   const { attributes, setNodeRef, listeners, transform, transition } = useSortable({ id });
-  const style: React.CSSProperties = {
+  const style: CSSProperties = {
     transition,
     transform: CSS.Transform.toString(transform),
     border: '1px dashed grey',

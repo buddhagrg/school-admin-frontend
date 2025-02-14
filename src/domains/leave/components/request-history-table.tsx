@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useMemo, useRef, useState } from 'react';
 import { Box, IconButton } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
@@ -24,13 +24,13 @@ const initialState = {
   requestId: 0
 };
 
-export const RequestHistoryTable: React.FC<RequestHistoryTableProps> = ({
+export const RequestHistoryTable: FC<RequestHistoryTableProps> = ({
   isLoading,
   isError,
   errorMessage,
   requests
 }) => {
-  const columns: MRT_ColumnDef<MyLeaveRequestDetail>[] = React.useMemo(
+  const columns: MRT_ColumnDef<MyLeaveRequestDetail>[] = useMemo(
     () => [
       {
         accessorKey: 'user',
@@ -100,8 +100,8 @@ export const RequestHistoryTable: React.FC<RequestHistoryTableProps> = ({
     ],
     []
   );
-  const [state, setState] = React.useState<StateProps>(initialState);
-  const userDetailRef = React.useRef<null | MyLeaveRequestDetail>(null);
+  const [state, setState] = useState<StateProps>(initialState);
+  const userDetailRef = useRef<null | MyLeaveRequestDetail>(null);
 
   const onMenuItemClick = (action: string, row: MyLeaveRequestDetail) => {
     userDetailRef.current = row;

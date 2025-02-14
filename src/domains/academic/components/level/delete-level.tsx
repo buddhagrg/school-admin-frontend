@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { DialogModal } from '@/components/dialog-modal';
 import { useDeleteAcademicLevelMutation } from '../../api';
 import { toast } from 'react-toastify';
@@ -11,7 +11,7 @@ type DeleteLevelProps = {
   id: number;
   name: string;
 };
-export const DeleteLevel: React.FC<DeleteLevelProps> = ({ closeModal, id, name }) => {
+export const DeleteLevel: FC<DeleteLevelProps> = ({ closeModal, id, name }) => {
   const [deleteLevel, { isLoading: isDeleting }] = useDeleteAcademicLevelMutation();
 
   const handleSave = async () => {

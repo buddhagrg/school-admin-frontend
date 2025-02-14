@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import { Box, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
@@ -10,9 +10,9 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 export const UserList = ({ policyId }: { policyId: number }) => {
   const { data, isLoading, isError, error } = useGetLeavePolicyUsersQuery(policyId);
-  const [userId, setUserId] = React.useState<number>(0);
+  const [userId, setUserId] = useState<number>(0);
 
-  const columns: MRT_ColumnDef<PolicyUser>[] = React.useMemo(
+  const columns: MRT_ColumnDef<PolicyUser>[] = useMemo(
     () => [
       {
         accessorKey: 'name',

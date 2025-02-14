@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { AcademicLevelFormProps } from '../../types';
@@ -7,7 +7,7 @@ type LevelFormProps = {
   methods: UseFormReturn<AcademicLevelFormProps>;
 };
 
-export const LevelForm: React.FC<LevelFormProps> = ({ methods }) => {
+export const LevelForm: FC<LevelFormProps> = ({ methods }) => {
   const {
     register,
     formState: { errors }

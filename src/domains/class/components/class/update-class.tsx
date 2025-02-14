@@ -1,13 +1,14 @@
-import { DialogModal } from '@/components/dialog-modal';
+import { FC, useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { ClassFormProps, ClassFormSchema } from '../../types';
-import { useUpdateClassMutation } from '../../api';
 import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+
+import { DialogModal } from '@/components/dialog-modal';
+import { ClassFormProps, ClassFormSchema } from '../../types';
+import { useUpdateClassMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ClassForm } from './class-form';
 
 type UpdateClassProps = {
@@ -15,7 +16,7 @@ type UpdateClassProps = {
   id: number;
   name: string;
 };
-export const UpdateClass: React.FC<UpdateClassProps> = ({ closeModal, id, name }) => {
+export const UpdateClass: FC<UpdateClassProps> = ({ closeModal, id, name }) => {
   const methods = useForm<ClassFormProps>({
     defaultValues: { name: '' },
     resolver: zodResolver(ClassFormSchema)

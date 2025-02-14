@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactElement, useState } from 'react';
 import { Delete, Edit } from '@mui/icons-material';
 import { Box, Divider, IconButton, Paper, Stack, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -16,7 +16,7 @@ import { getAppBase } from '@/domains/auth/slice';
 
 export const ViewNotice = () => {
   const { id } = useParams();
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const appBase = useSelector(getAppBase);
 
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const ViewNotice = () => {
     setModalOpen(false);
   };
 
-  let content: null | React.ReactElement = null;
+  let content: null | ReactElement = null;
   if (isLoading) {
     content = <ViewNoticeSkeleton />;
   } else if (isError) {

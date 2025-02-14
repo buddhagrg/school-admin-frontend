@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode } from 'react';
 import { z } from 'zod';
 import {
   LoginSchema,
@@ -18,7 +18,7 @@ export type Menu = {
   id: number;
   name: string;
   path: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   subMenus: SubMenu[];
 };
 

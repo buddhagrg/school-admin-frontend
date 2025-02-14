@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { KeyboardDoubleArrowRight } from '@mui/icons-material';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { useGetAcademicStructureQuery } from '../api';
@@ -34,8 +34,8 @@ const periodState = {
 
 export const ListLevelWithPeriod = () => {
   const { data, isLoading, isError, error } = useGetAcademicStructureQuery();
-  const [periodDetail, setPeriodDetail] = React.useState(periodState);
-  const [levelDetail, setLevelDetail] = React.useState<levelStateProps>(levelState);
+  const [periodDetail, setPeriodDetail] = useState(periodState);
+  const [levelDetail, setLevelDetail] = useState<levelStateProps>(levelState);
 
   const onPeriodClick = (
     action: string,

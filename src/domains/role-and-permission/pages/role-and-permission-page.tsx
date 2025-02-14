@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { SyntheticEvent, useCallback, useEffect } from 'react';
 import { Box, Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import { AdminPanelSettings } from '@mui/icons-material';
 
@@ -18,7 +18,7 @@ const RoleAndPermissionPage = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const initializePermissions = React.useCallback((menus: Permission[]): ExtendedPermission[] => {
+  const initializePermissions = useCallback((menus: Permission[]): ExtendedPermission[] => {
     return menus.map((menu) => ({
       ...menu,
       isPermissionAvailable: false,
@@ -26,7 +26,7 @@ const RoleAndPermissionPage = () => {
     }));
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (permissionsData?.accessControls) {
       dispatch({
         type: 'SET_PERMISSIONS',
@@ -34,14 +34,14 @@ const RoleAndPermissionPage = () => {
       });
     }
   }, [permissionsData?.accessControls, dispatch, initializePermissions]);
-  React.useEffect(() => {
+  useEffect(() => {
     if (rolesData) {
       dispatch({ type: 'SET_ROLES', payload: rolesData.roles ?? [] });
       dispatch({ type: 'SET_ROLE_TAB', payload: 0 });
     }
   }, [rolesData, dispatch]);
 
-  const handleRoleTabChange = (_event: React.SyntheticEvent, index: number) => {
+  const handleRoleTabChange = (_event: SyntheticEvent, index: number) => {
     dispatch({ type: 'SET_ROLE_TAB', payload: index });
   };
 

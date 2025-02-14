@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode, useContext, useReducer } from 'react';
 import { Action, initialState, LeaveDefineContext, State } from './leave-define-context';
 
 const reducer = (state: State, action: Action) => {
@@ -18,8 +18,8 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-export const LeaveDefineProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+export const LeaveDefineProvider = ({ children }: { children: ReactNode }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <LeaveDefineContext.Provider value={{ state, dispatch }}>
@@ -28,4 +28,4 @@ export const LeaveDefineProvider = ({ children }: { children: React.ReactNode })
   );
 };
 
-export const useLeaveDefine = () => React.useContext(LeaveDefineContext);
+export const useLeaveDefine = () => useContext(LeaveDefineContext);

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -30,7 +30,7 @@ type Props = {
   selectedRoleId: number;
 };
 
-export const NoticeForm: React.FC<Props> = ({
+export const NoticeForm: FC<Props> = ({
   isSaving,
   methods,
   onSubmit,
@@ -45,10 +45,10 @@ export const NoticeForm: React.FC<Props> = ({
     control,
     watch
   } = methods;
-  const [recipients, setRecipients] = React.useState<RecipientListData>([]);
+  const [recipients, setRecipients] = useState<RecipientListData>([]);
 
   const recipientWatch = watch('recipientType');
-  React.useEffect(() => {
+  useEffect(() => {
     const fetch = async () => {
       try {
         const result = await getRecipients().unwrap();

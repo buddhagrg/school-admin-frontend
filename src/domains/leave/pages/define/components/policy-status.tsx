@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -15,7 +15,7 @@ type PolicyStatusProps = {
   closeModal: () => void;
 };
 
-export const PolicyStatus: React.FC<PolicyStatusProps> = ({
+export const PolicyStatus: FC<PolicyStatusProps> = ({
   title,
   contextText,
   policyId,

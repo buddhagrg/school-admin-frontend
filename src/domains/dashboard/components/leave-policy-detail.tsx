@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode, useState } from 'react';
 import { Button, Card, CardActions, CardContent, Stack, Typography } from '@mui/material';
 import Slider from 'react-slick';
 import { useForm } from 'react-hook-form';
@@ -24,7 +24,7 @@ const settings = {
 };
 
 export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePolicy[] }) => {
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [applyLeaveRequest, { isLoading: isApplyingLeave }] = useApplyLeaveRequestMutation();
   const { data } = useGetMyLeavePoliciesQuery();
   const myLeavePolicies = data?.leavePolicies ?? [];
@@ -64,7 +64,7 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
     }
   };
 
-  let content: React.ReactNode | null = null;
+  let content: ReactNode | null = null;
   if (!Array.isArray(leavePolicies) || leavePolicies.length <= 0) {
     content = <>{ERROR.NO_RECORD}</>;
   } else {

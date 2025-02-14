@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect, useState } from 'react';
 import { DialogModal } from '@/components/dialog-modal';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -16,15 +16,15 @@ type ManagePeriodOrderProps = {
   periods: Period[];
   academicLevelId: number;
 };
-export const ManagePeriodOrder: React.FC<ManagePeriodOrderProps> = ({
+export const ManagePeriodOrder: FC<ManagePeriodOrderProps> = ({
   closeModal,
   periods,
   academicLevelId
 }) => {
-  const [periodList, setPeriodList] = React.useState<Period[]>([]);
+  const [periodList, setPeriodList] = useState<Period[]>([]);
   const [updatePeriodOrder, { isLoading: isUpdating }] = useUpdatePeriodOrderMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (periods && periods.length > 0) {
       setPeriodList(periods);
     }

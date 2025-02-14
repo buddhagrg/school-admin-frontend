@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import { matchRoutes, Outlet, useLocation } from 'react-router-dom';
 import { MainLayout, PermissionErrorLayout } from '@/components/layout';
 import { usePermission } from '@/hooks';
@@ -10,7 +10,7 @@ export const AppRoot = () => {
 
   const location = useLocation();
   const matchedRoute = matchRoutes(routes, location?.pathname);
-  const currentPath = React.useMemo(() => {
+  const currentPath = useMemo(() => {
     if (matchedRoute && matchedRoute.length > 1) {
       const routePath = matchedRoute[1].route?.path;
       if (routePath) return routePath;

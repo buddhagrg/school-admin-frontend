@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { DialogModal } from '@/components/dialog-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -15,14 +15,14 @@ type UpdateLevelProps = {
   id: number;
   name: string;
 };
-export const UpdateLevel: React.FC<UpdateLevelProps> = ({ id, name, closeModal }) => {
+export const UpdateLevel: FC<UpdateLevelProps> = ({ id, name, closeModal }) => {
   const methods = useForm<AcademicLevelFormProps>({
     defaultValues: { name: '' },
     resolver: zodResolver(AcademicLevelFormSchema)
   });
   const [updateLevel, { isLoading: isUpdating }] = useUpdateAcademicLevelMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     methods.setValue('name', name);
   }, []);
 

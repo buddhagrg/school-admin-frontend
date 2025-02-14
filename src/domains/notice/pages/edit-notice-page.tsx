@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Paper, SelectChangeEvent } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -29,7 +29,7 @@ export const EditNotice = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, isError, error } = useGetNoticeDetailQuery(id);
-  const [selectedRoleId, setSelectedRoleId] = React.useState<number>(0);
+  const [selectedRoleId, setSelectedRoleId] = useState<number>(0);
   const [updateNotice, { isLoading: updatingNotice }] = useUpdateNoticeMutation();
   const appBase = useSelector(getAppBase);
 
@@ -38,7 +38,7 @@ export const EditNotice = () => {
     resolver: zodResolver(NoticeFormSchema)
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data) {
       const { title, description, status, recipientType, recipientRole, firstField } = data;
       methods.setValue('title', title);

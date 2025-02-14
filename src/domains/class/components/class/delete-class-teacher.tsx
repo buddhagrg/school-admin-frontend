@@ -1,5 +1,5 @@
+import { FC } from 'react';
 import { DialogModal } from '@/components/dialog-modal';
-import React from 'react';
 import { useDeleteClassTeacherMutation } from '../../api';
 import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -12,7 +12,7 @@ type DeleteClassTeacherProps = {
   teacherName: string;
   closeModal: () => void;
 };
-export const DeleteClassTeacher: React.FC<DeleteClassTeacherProps> = ({
+export const DeleteClassTeacher: FC<DeleteClassTeacherProps> = ({
   id,
   className,
   teacherName,

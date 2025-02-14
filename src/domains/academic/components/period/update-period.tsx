@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { AcademicPeriodFormProps, AcademicPeriodFormSchema } from '../../types';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -21,19 +21,14 @@ const initialState = {
   name: '',
   academicLevelId: 0
 };
-export const UpdatePeriod: React.FC<UpdatePeriodProps> = ({
-  id,
-  name,
-  closeModal,
-  academicLevelId
-}) => {
+export const UpdatePeriod: FC<UpdatePeriodProps> = ({ id, name, closeModal, academicLevelId }) => {
   const methods = useForm<AcademicPeriodFormProps>({
     defaultValues: initialState,
     resolver: zodResolver(AcademicPeriodFormSchema)
   });
   const [updatePeriod, { isLoading: isUpdating }] = useUpdateAcademicPeriodMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     methods.setValue('name', name);
   }, []);
 

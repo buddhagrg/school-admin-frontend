@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { ContactPhone } from '@mui/icons-material';
 import { Box, Grid2, Typography, Card, CardContent, Divider } from '@mui/material';
 
@@ -8,7 +8,7 @@ type ParentsInformationProps = {
   emergencyPhone: string;
 };
 
-export const ParentsInformation: React.FC<ParentsInformationProps> = ({
+export const ParentsInformation: FC<ParentsInformationProps> = ({
   fatherName,
   motherName,
   emergencyPhone

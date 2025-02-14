@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,7 +23,7 @@ const initValues = {
   name: ''
 };
 
-export const AddEditRole: React.FC<ModalProps> = ({
+export const AddEditRole: FC<ModalProps> = ({
   roleId,
   roleName,
   titleText,
@@ -42,7 +42,7 @@ export const AddEditRole: React.FC<ModalProps> = ({
   const [addNewRole, { isLoading: isAddingRole }] = useAddNewRoleMutation();
   const [updateRole, { isLoading: isUpdatingRole }] = useUpdateRoleMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (roleId) {
       setValue('name', roleName);
     } else {

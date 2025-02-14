@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
 import { Chip } from '@mui/material';
 import { useDeleteLevelFromClassMutation } from '../../api';
 import { toast } from 'react-toastify';
@@ -11,9 +11,9 @@ type ClassItemProps = {
   classId: number;
   className: string;
 };
-export const ClassItem: React.FC<ClassItemProps> = ({ classId, className }) => {
+export const ClassItem: FC<ClassItemProps> = ({ classId, className }) => {
   const [deleteClass, { isLoading: isDeleting }] = useDeleteLevelFromClassMutation();
-  const [isModalOpen, setModalOpen] = React.useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const toggleDeleteModal = () => {
     setModalOpen((isModalOpen) => !isModalOpen);

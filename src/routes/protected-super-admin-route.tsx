@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { getUserRoleId, isUserAuthenticated } from '@/domains/auth/slice';
 
-export const ProtectedSuperAdminRoute = ({ children }: { children: React.ReactNode }) => {
+export const ProtectedSuperAdminRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(isUserAuthenticated);
   const userRoleId = useSelector(getUserRoleId);
 

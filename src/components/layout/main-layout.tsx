@@ -1,15 +1,15 @@
-import * as React from 'react';
+import { MouseEvent, ReactNode, useState } from 'react';
 import { Box, Drawer, Toolbar } from '@mui/material';
 import { AppBarLayout } from './app-bar-layout';
 import { DrawerContent } from './drawer-content';
 
 const drawerWidth = 280;
 
-export const MainLayout = ({ children }: { children: React.ReactNode }) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [openNavMenu, setOpenNavMenu] = React.useState<null | string>(null);
-  const [mobileOpen, setMobileOpen] = React.useState<boolean>(false);
-  const [isClosing, setIsClosing] = React.useState<boolean>(false);
+export const MainLayout = ({ children }: { children: ReactNode }) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openNavMenu, setOpenNavMenu] = useState<null | string>(null);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const [isClosing, setIsClosing] = useState<boolean>(false);
 
   const handleDrawerClose = () => {
     setMobileOpen(false);
@@ -22,7 +22,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
       setMobileOpen(!mobileOpen);
     }
   };
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleMenuClose = () => {

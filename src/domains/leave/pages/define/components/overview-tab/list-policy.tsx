@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { MouseEvent, useState } from 'react';
 import {
   Box,
   Card,
@@ -33,7 +33,7 @@ type InitialStateProps = {
   modalTitleText: string;
 };
 export const ListPolicy = () => {
-  const [state, setState] = React.useState<InitialStateProps>(initialState);
+  const [state, setState] = useState<InitialStateProps>(initialState);
   const {
     state: { policies }
   } = useLeaveDefine();
@@ -45,7 +45,7 @@ export const ListPolicy = () => {
     { action: 'addPeopleToPolicy', name: 'Add People to Policy', status: false }
   ];
   const handleMenuClick = (
-    event: React.MouseEvent<HTMLElement>,
+    event: MouseEvent<HTMLElement>,
     id: number,
     name: string,
     status: boolean

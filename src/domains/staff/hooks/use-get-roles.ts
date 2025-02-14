@@ -1,12 +1,12 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useGetRolesQuery } from '@/domains/role-and-permission/api';
 import { Role } from '@/domains/role-and-permission/types';
 
 export const useGetRoles = () => {
-  const [roles, setRoles] = React.useState<Role[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const { data } = useGetRolesQuery();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data?.roles) {
       setRoles(data.roles);
     }

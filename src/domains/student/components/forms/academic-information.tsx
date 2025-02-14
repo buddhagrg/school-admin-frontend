@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Box,
   FormControl,
@@ -9,19 +10,18 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
 import { Controller, useFormContext } from 'react-hook-form';
 import { School } from '@mui/icons-material';
 import { parseISO } from 'date-fns';
+import { DatePicker } from '@mui/x-date-pickers';
 
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { StudentProps } from '../../types';
 import { useGetClassSectionStructureQuery } from '@/domains/class/api';
-import React from 'react';
 import { SectionDetail } from '@/domains/class/types';
 
 export const AcademicInformation = () => {
-  const [sections, setSections] = React.useState<SectionDetail[]>([]);
+  const [sections, setSections] = useState<SectionDetail[]>([]);
   const {
     register,
     control,

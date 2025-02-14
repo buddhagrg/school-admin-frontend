@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Grid2 } from '@mui/material';
 import {
   MiniAvatar,
@@ -11,7 +12,7 @@ type StaffProfileProps = {
   id?: string;
 };
 
-export const StaffProfile: React.FC<StaffProfileProps> = ({ id }) => {
+export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
   const staffDetail = useGetStaffDetail(id);
 
   const {

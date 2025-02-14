@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { DialogModal } from '@/components/dialog-modal';
 import { useDeleteAcademicPeriodMutation } from '../../api';
 import { toast } from 'react-toastify';
@@ -11,7 +11,7 @@ type DeletePeriodProps = {
   id: number;
   name: string;
 };
-export const DeletePeriod: React.FC<DeletePeriodProps> = ({ closeModal, id, name }) => {
+export const DeletePeriod: FC<DeletePeriodProps> = ({ closeModal, id, name }) => {
   const [deletePeriod, { isLoading: isDeleting }] = useDeleteAcademicPeriodMutation();
 
   const handleSave = async () => {

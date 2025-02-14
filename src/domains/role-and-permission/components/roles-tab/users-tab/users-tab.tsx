@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { UserList } from './user-list';
 
 type UserTabsProps = {
   roleId: number;
 };
 
-export const UserTabs: React.FC<UserTabsProps> = ({ roleId }) => {
+export const UserTabs: FC<UserTabsProps> = ({ roleId }) => {
   return (
     <>
       <UserList roleId={roleId} />

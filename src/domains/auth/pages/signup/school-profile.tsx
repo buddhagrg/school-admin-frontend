@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { AccountCircle, Email, Phone, School } from '@mui/icons-material';
 import {
   Box,
@@ -26,8 +26,8 @@ const fields: { id: keyof SchoolProfileProps; name: string; icon: JSX.Element }[
   { id: 'phone', name: 'Phone', icon: <Phone /> }
 ];
 
-export const SchoolProfile: React.FC<SchoolProfileType> = ({ step1Method }) => {
-  const [hasSchoolId, setHasSchoolId] = React.useState<boolean>(false);
+export const SchoolProfile: FC<SchoolProfileType> = ({ step1Method }) => {
+  const [hasSchoolId, setHasSchoolId] = useState<boolean>(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const {
@@ -36,7 +36,7 @@ export const SchoolProfile: React.FC<SchoolProfileType> = ({ step1Method }) => {
     reset
   } = step1Method;
 
-  const onCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onCheckChange = (event: ChangeEvent<HTMLInputElement>) => {
     reset();
     setHasSchoolId(event.target.checked);
   };

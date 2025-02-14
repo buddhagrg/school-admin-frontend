@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { AccessControl } from '@/components/access-control';
 import { DeleteAccessControl } from '../components/delete-access-control';
 import { AddEditAccessControl } from '../components/add-edit-access-control';
@@ -25,7 +25,7 @@ export const accessControlFormState = {
 };
 
 export const ManageAccessControl = () => {
-  const [formState, setFormState] = React.useState<AccessControlFormProps>(accessControlFormState);
+  const [formState, setFormState] = useState<AccessControlFormProps>(accessControlFormState);
   const { data, isLoading } = useGetPermissionsQuery();
 
   const handleAction = (rowData: AccessControlFormProps) => {

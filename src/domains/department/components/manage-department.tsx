@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -9,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { DepartmentForm } from '../types';
 import { useAddNewDepartmentMutation, useUpdateDepartmentMutation } from '../api';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 
 type ManageDepartmentProps = {
@@ -18,7 +18,7 @@ type ManageDepartmentProps = {
   methods: UseFormReturn<DepartmentForm>;
 };
 
-export const ManageDepartment: React.FC<ManageDepartmentProps> = ({ id, operation, methods }) => {
+export const ManageDepartment: FC<ManageDepartmentProps> = ({ id, operation, methods }) => {
   const [addNewDepartment, { isLoading: isAddingDepartment }] = useAddNewDepartmentMutation();
   const [updateDepartment, { isLoading: isUpdatingDepartment }] = useUpdateDepartmentMutation();
   const navigate = useNavigate();

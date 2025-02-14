@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { MouseEvent, useMemo, useState } from 'react';
 import {
   Box,
   Card,
@@ -36,9 +36,9 @@ export const ListRoles = () => {
   const {
     state: { roles }
   } = useRolePermission();
-  const [state, setState] = React.useState<InitialStateProps>(initialState);
+  const [state, setState] = useState<InitialStateProps>(initialState);
 
-  const menuItems: Array<{ action: string; name: string; status: boolean }> = React.useMemo(
+  const menuItems: Array<{ action: string; name: string; status: boolean }> = useMemo(
     () => [
       { action: 'edit', name: 'Edit Role', status: false },
       { action: 'disable', name: 'Disable Role', status: false },
@@ -48,7 +48,7 @@ export const ListRoles = () => {
   );
 
   const handleMenuClick = (
-    event: React.MouseEvent<HTMLElement>,
+    event: MouseEvent<HTMLElement>,
     id: number,
     name: string,
     status: boolean

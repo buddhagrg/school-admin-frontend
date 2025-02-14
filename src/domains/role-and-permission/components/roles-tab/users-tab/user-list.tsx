@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 import { Box, IconButton } from '@mui/material';
 import { SwapHoriz } from '@mui/icons-material';
@@ -13,9 +13,9 @@ type UserListProps = {
   roleId: number;
 };
 
-export const UserList: React.FC<UserListProps> = ({ roleId }) => {
+export const UserList: FC<UserListProps> = ({ roleId }) => {
   const { data, isLoading, isError, error } = useGetRoleUsersQuery(roleId);
-  const [userId, setUserId] = React.useState<number>(0);
+  const [userId, setUserId] = useState<number>(0);
 
   const columns: MRT_ColumnDef<User>[] = [
     {

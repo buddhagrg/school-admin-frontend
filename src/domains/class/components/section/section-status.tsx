@@ -1,10 +1,11 @@
-import { DialogModal } from '@/components/dialog-modal';
-import { useActivateSectionMutation, useDeactivateSectionMutation } from '../../api';
+import { FC } from 'react';
 import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import React from 'react';
+
+import { DialogModal } from '@/components/dialog-modal';
+import { useActivateSectionMutation, useDeactivateSectionMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type SectionStatusProps = {
   closeModal: () => void;
@@ -13,7 +14,7 @@ type SectionStatusProps = {
   name: string;
   action: string;
 };
-export const SectionStatus: React.FC<SectionStatusProps> = ({
+export const SectionStatus: FC<SectionStatusProps> = ({
   classId,
   id,
   closeModal,

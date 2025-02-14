@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { SyntheticEvent, useEffect } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -18,11 +18,11 @@ export const LeaveDefinePage = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: SyntheticEvent, newValue: number) => {
     dispatch({ type: 'SET_POLICY_TAB', payload: newValue });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data?.leavePolicies) {
       dispatch({ type: 'SET_POLICIES', payload: data.leavePolicies });
     }

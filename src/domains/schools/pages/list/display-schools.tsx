@@ -1,13 +1,13 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import { Box, IconButton, Paper } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
+import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetSchoolsQuery } from '../../api';
 import { School } from '../../types';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 
@@ -15,7 +15,7 @@ export const DisplaySchools = () => {
   const appBase = useSelector(getAppBase);
   const { data, isLoading, isError, error } = useGetSchoolsQuery();
 
-  const columns: MRT_ColumnDef<School>[] = React.useMemo(
+  const columns: MRT_ColumnDef<School>[] = useMemo(
     () => [
       {
         accessorKey: 'schoolId',

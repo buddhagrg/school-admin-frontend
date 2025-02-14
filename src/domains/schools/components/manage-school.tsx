@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -19,7 +19,7 @@ type ManageSchoolPropsProps = {
 };
 
 const fields: Array<keyof SchoolProps> = ['name', 'email', 'phone'];
-export const ManageSchool: React.FC<ManageSchoolPropsProps> = ({ operation, id, methods }) => {
+export const ManageSchool: FC<ManageSchoolPropsProps> = ({ operation, id, methods }) => {
   const appBase = useSelector(getAppBase);
   const [addSchool, { isLoading: isAddingSchool }] = useAddSchoolMutation();
   const [updateSchool, { isLoading: isUpdatingSchool }] = useUpdateSchoolMutation();

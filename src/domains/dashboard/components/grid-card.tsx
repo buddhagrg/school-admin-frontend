@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { TrendingDown, TrendingUp } from '@mui/icons-material';
 import { Box, Card, CardContent, Chip, Typography } from '@mui/material';
 
@@ -9,7 +9,7 @@ type GridCardType = {
   totalNumberValueInComparisonFromPrevYear: number;
 };
 
-export const GridCard: React.FC<GridCardType> = (props) => {
+export const GridCard: FC<GridCardType> = (props) => {
   const { heading, totalNumberCurrentYear, totalNumberPercInComparisonFromPrevYear } = props;
   const isNegative = totalNumberPercInComparisonFromPrevYear < 0 ? true : false;
 

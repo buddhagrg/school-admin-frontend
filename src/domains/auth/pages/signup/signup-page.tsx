@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import {
   Alert,
   Box,
@@ -35,7 +35,7 @@ const schoolProfile = {
 };
 
 export const SignUpPage = () => {
-  const [activeStep, setActiveStep] = React.useState<number>(0);
+  const [activeStep, setActiveStep] = useState<number>(0);
   const [saveSchoolProfile, { isLoading: savingSchoolProfile }] = useSetupSchoolProfileMutation();
   const [saveAdminProfile, { isLoading: savingAdminProfile }] = useSetupAdminProfileMutation();
 

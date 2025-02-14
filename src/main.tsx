@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './app';
 import '@fontsource/roboto/300.css';
@@ -19,7 +19,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
       <PersistGate loading={<>loading...</>} persistor={persistor}>
         <ThemeProvider theme={theme}>
@@ -30,5 +30,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ToastContainer />
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </StrictMode>
 );

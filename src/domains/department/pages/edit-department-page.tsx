@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid2 } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -18,14 +18,14 @@ export const EditDepartmentPage = () => {
     resolver: zodResolver(DepartmentSchema)
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (departmentDetail) {
       const { name } = departmentDetail;
       methods.setValue('name', name);
     }
   }, [departmentDetail, methods]);
 
-  let content: React.ReactNode | null = null;
+  let content: ReactNode | null = null;
   if (isLoading) {
     content = <>loading...</>;
   } else if (isError) {

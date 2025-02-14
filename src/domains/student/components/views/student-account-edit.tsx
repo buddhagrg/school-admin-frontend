@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Edit } from '@mui/icons-material';
@@ -20,7 +20,7 @@ import { StudentProps } from '../../types';
 import { studentFormInitialState } from '../../reducer/student-form-reducer';
 import { StudentSchema } from '../../types/student-schema';
 import { useGetStudentDetail } from '../../hooks';
-import { useUpdateStudentMutation } from '../../api/student-api';
+import { useUpdateStudentMutation } from '../../api';
 
 type StudentAccountEditProps = {
   heading: string;
@@ -29,11 +29,7 @@ type StudentAccountEditProps = {
 };
 type StudentDetailValue<T> = T extends { [key: string]: infer U } ? U : never;
 
-export const StudentAccountEdit: React.FC<StudentAccountEditProps> = ({
-  id,
-  redirectPath,
-  heading
-}) => {
+export const StudentAccountEdit: FC<StudentAccountEditProps> = ({ id, redirectPath, heading }) => {
   const methods = useForm<StudentProps>({
     defaultValues: studentFormInitialState,
     resolver: zodResolver(StudentSchema)
@@ -43,7 +39,7 @@ export const StudentAccountEdit: React.FC<StudentAccountEditProps> = ({
 
   const studentDetail = useGetStudentDetail(id);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (studentDetail) {
       const { setValue } = methods;
       for (const [key, value] of Object.entries(studentDetail) as [

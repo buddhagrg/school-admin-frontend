@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { AutoDelete, Block, Delete, Done, Drafts, HourglassTop } from '@mui/icons-material';
 import { Chip } from '@mui/material';
 
@@ -20,7 +20,7 @@ type LeaveStatusProps = {
   label: string;
 };
 
-export const NoticeStatus: React.FC<LeaveStatusProps> = ({ statusId, label }) => {
+export const NoticeStatus: FC<LeaveStatusProps> = ({ statusId, label }) => {
   const [color, icon] = statusMap[statusId] || ['default', null];
 
   return <Chip icon={icon} label={label} color={color} />;

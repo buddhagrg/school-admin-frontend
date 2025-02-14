@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Email, Person, Phone, School, SupervisorAccount } from '@mui/icons-material';
 import { Box, Card, CardContent, Divider, Grid2, Typography } from '@mui/material';
 
@@ -10,13 +10,7 @@ type MiniAvatarProps = {
   schoolName?: string;
 };
 
-export const MiniAvatar: React.FC<MiniAvatarProps> = ({
-  name,
-  roleName,
-  email,
-  phone,
-  schoolName
-}) => {
+export const MiniAvatar: FC<MiniAvatarProps> = ({ name, roleName, email, phone, schoolName }) => {
   return (
     <Card variant='outlined'>
       <CardContent>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
@@ -15,7 +15,7 @@ type RoleStatusProps = {
   contextText: string;
 };
 
-export const HandleRoleStatus: React.FC<RoleStatusProps> = ({
+export const HandleRoleStatus: FC<RoleStatusProps> = ({
   roleId,
   closeModals,
   roleStatus,

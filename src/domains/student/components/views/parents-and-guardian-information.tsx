@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { ContactPhone } from '@mui/icons-material';
 import { Box, Grid2, Typography, Card, CardContent, Divider } from '@mui/material';
 
@@ -12,7 +12,7 @@ type ParentsAndGuardianInformationProps = {
   relationOfGuardian: string;
 };
 
-export const ParentsAndGuardianInformation: React.FC<ParentsAndGuardianInformationProps> = ({
+export const ParentsAndGuardianInformation: FC<ParentsAndGuardianInformationProps> = ({
   fatherName,
   fatherPhone,
   motherName,

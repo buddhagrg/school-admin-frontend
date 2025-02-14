@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Box, MenuItem, Paper } from '@mui/material';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -47,19 +47,19 @@ const initialState = {
   isSaving: false,
   isModalOpen: false
 };
-export const NoticeData: React.FC<NoticeDataProps> = ({
+export const NoticeData: FC<NoticeDataProps> = ({
   notices,
   isLoading,
   isError,
   error,
   actionCellType
 }) => {
-  const [state, setState] = React.useState<State>(initialState);
+  const [state, setState] = useState<State>(initialState);
   const currentUserId = useSelector(getUserId);
   const { handleAction } = useHandleMenuAction();
   const appBase = useSelector(getAppBase);
 
-  const columns: MRT_ColumnDef<Notice>[] = React.useMemo(
+  const columns: MRT_ColumnDef<Notice>[] = useMemo(
     () => [
       { accessorKey: 'title', header: 'Title', minWidth: 120 },
       { accessorKey: 'author', header: 'Author', minWidth: 110 },

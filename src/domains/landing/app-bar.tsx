@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -26,7 +26,7 @@ export const Appbar = () => {
   const pages: Array<{ name: string; path: string }> = [{ name: 'Features', path: '#features' }];
   const isAuthenticated = useSelector(isUserAuthenticated);
   const appBase = useSelector(getAppBase);
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const menus = (
     <Box sx={{ flexGrow: 1, display: 'flex' }}>

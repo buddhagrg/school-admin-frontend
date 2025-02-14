@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Add, InfoOutlined } from '@mui/icons-material';
 import { Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -13,7 +14,6 @@ import { UserAccountBasic } from '@/components/user-account-basic';
 import { StaffFilter, StaffFilterSchema } from '../types';
 import { useGetStaffsQuery } from '../api/staff-api';
 import { FilterStaff } from '../components/forms';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 
 const initialState = {
@@ -23,7 +23,7 @@ const initialState = {
 };
 
 export const ListStaffs = () => {
-  const [filter, setFilter] = React.useState<StaffFilter>({});
+  const [filter, setFilter] = useState<StaffFilter>({});
   const { data, isLoading, isError, error } = useGetStaffsQuery(filter);
   const appBase = useSelector(getAppBase);
 

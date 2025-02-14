@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 
 export type Column = {
   value: string;
@@ -19,7 +19,7 @@ export type BasePermission = {
   type: string;
   method: string;
   directAllowedRoleId: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 };
 export type Permission = BasePermission & {
   subMenus?: BasePermission[];

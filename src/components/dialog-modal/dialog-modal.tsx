@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, MouseEvent, ReactNode } from 'react';
 import {
   Button,
   Dialog,
@@ -15,10 +15,10 @@ type DialogModalProps = {
   isModalClosedOnOutClick?: boolean;
   isOpen: boolean;
   titleText?: string;
-  contextText?: React.ReactNode;
+  contextText?: ReactNode;
   closeModal: () => void;
-  children?: React.ReactNode;
-  handleSave: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  children?: ReactNode;
+  handleSave: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
 // function PaperComponent(props: PaperProps) {
@@ -28,7 +28,7 @@ type DialogModalProps = {
 //     </Draggable>
 //   );
 // }
-export const DialogModal: React.FC<DialogModalProps> = ({
+export const DialogModal: FC<DialogModalProps> = ({
   isSaving,
   actionFooterCancelText,
   actionFooterSaveText,

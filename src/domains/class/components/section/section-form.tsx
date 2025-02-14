@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -8,14 +9,13 @@ import {
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { SectionFormProps } from '../../types';
-import React from 'react';
 import { useGetClassesQuery } from '../../api';
 
 type SectionFormType = {
   action: 'add' | 'update';
   methods: UseFormReturn<SectionFormProps>;
 };
-export const SectionForm: React.FC<SectionFormType> = ({ methods, action }) => {
+export const SectionForm: FC<SectionFormType> = ({ methods, action }) => {
   const {
     register,
     control,

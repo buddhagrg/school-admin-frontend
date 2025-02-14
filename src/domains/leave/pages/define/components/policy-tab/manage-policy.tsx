@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Block, Edit, PersonAddAlt } from '@mui/icons-material';
 import { IconButton, Stack, Typography } from '@mui/material';
 
@@ -7,7 +7,7 @@ import { AddPeopleToPolicy } from '../add-people-to-policy';
 import { PolicyStatus } from '../policy-status';
 
 export const ManagePolicy = ({ id, name }: { id: number; name: string }) => {
-  const [action, setAction] = React.useState<string>('');
+  const [action, setAction] = useState<string>('');
 
   const onBtnClick = (action: string) => {
     setAction(action);

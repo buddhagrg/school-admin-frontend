@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import { Box, ListItemIcon, ListItemText, MenuItem, Paper } from '@mui/material';
 import { Block, CheckCircle, Edit, Email, Key, LockReset, Visibility } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -35,11 +35,11 @@ const initialState = {
 
 export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) => {
   const appBase = useSelector(getAppBase);
-  const [state, setState] = React.useState<State>(initialState);
+  const [state, setState] = useState<State>(initialState);
   const { handleAction } = useHandleMenuAction();
   const { users, userType, isLoading, isError, error } = data;
 
-  const columns: MRT_ColumnDef<UserAccountBasicProps>[] = React.useMemo(
+  const columns: MRT_ColumnDef<UserAccountBasicProps>[] = useMemo(
     () => [
       { accessorKey: 'id', header: 'ID' },
       { accessorKey: 'name', header: 'Name' },

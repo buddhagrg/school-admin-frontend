@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createContext } from 'react';
 import { MyLeavePolicy } from '@/domains/leave/types';
 
 export const initialState: State = {
@@ -14,4 +14,4 @@ export type State = {
   myLeavePolicies: MyLeavePolicy[];
 };
 
-export const LeaveRequestContext = React.createContext(initialState);
+export const LeaveRequestContext = createContext(initialState);

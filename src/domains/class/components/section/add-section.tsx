@@ -1,13 +1,14 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { SectionForm } from './section-form';
-import { SectionFormProps, SectionFormSchema } from '../../types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button } from '@mui/material';
-import React from 'react';
-import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Box, Button } from '@mui/material';
+import { toast } from 'react-toastify';
+
+import { SectionForm } from './section-form';
+import { SectionFormProps, SectionFormSchema } from '../../types';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useAddSectionMutation } from '../../api';
 
 const initialState: SectionFormProps = {
@@ -21,7 +22,7 @@ export const AddSection = () => {
   });
   const [addSection, { isLoading: isAdding }] = useAddSectionMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     methods.reset(initialState);
   }, [methods]);
 

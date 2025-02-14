@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
 
 import { TabPanel } from '@/components/tab-panel';
@@ -8,16 +8,16 @@ import { useRolePermission } from '../../context/role-permission-provider';
 import { RoleManage } from '../role-manage';
 
 export const RoleTabs = () => {
-  const [secondaryTab, setSecondaryTab] = React.useState(0);
+  const [secondaryTab, setSecondaryTab] = useState(0);
   const {
     state: { roles, roleTab }
   } = useRolePermission();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSecondaryTab(0);
   }, [roleTab]);
 
-  const handlePermissionTabChange = (_event: React.SyntheticEvent, index: number) => {
+  const handlePermissionTabChange = (_event: SyntheticEvent, index: number) => {
     setSecondaryTab(index);
   };
 

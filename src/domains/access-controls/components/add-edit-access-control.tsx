@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -31,7 +31,7 @@ const fields: Array<keyof AddEditAccessControlProps> = [
   'directAllowedRoleId'
 ];
 
-export const AddEditAccessControl: React.FC<AddEditACProps> = ({ formData, closeModal }) => {
+export const AddEditAccessControl: FC<AddEditACProps> = ({ formData, closeModal }) => {
   const {
     register,
     handleSubmit,
@@ -45,7 +45,7 @@ export const AddEditAccessControl: React.FC<AddEditACProps> = ({ formData, close
   const [updatePermission, { isLoading: isUpdating }] = useUpdateAccessControlMutation();
   const { action, id, ...state } = formData;
 
-  React.useEffect(() => {
+  useEffect(() => {
     reset(state);
   }, [reset]);
 

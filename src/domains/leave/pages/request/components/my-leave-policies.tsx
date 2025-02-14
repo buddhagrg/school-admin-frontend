@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode } from 'react';
 import { Grid2 } from '@mui/material';
 import { LeaveDetail } from '@/domains/leave/components';
 import { useLeaveRequest } from '../context/leave-request-provider';
@@ -6,7 +6,7 @@ import { useLeaveRequest } from '../context/leave-request-provider';
 export const MyLeavePolicies = () => {
   const { isLoading, isError, errorMessage, myLeavePolicies } = useLeaveRequest();
 
-  let content: React.ReactNode | null = null;
+  let content: ReactNode | null = null;
   if (isLoading) {
     content = <>loading...</>;
   } else if (isError) {

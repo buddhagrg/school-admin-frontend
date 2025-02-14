@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { Box, Paper, Tab, Tabs } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
@@ -9,13 +9,13 @@ import { StudentProfile } from '@/components/user-account-profile';
 const tabs = ['Profile'];
 export const ViewStudent = () => {
   const { id } = useParams();
-  const [tab, setTab] = React.useState(0);
+  const [tab, setTab] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTab(0);
   }, []);
 
-  const handleTabChange = (_event: React.SyntheticEvent, index: number) => {
+  const handleTabChange = (_event: SyntheticEvent, index: number) => {
     setTab(index);
   };
 

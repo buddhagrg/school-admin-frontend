@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import { Box, IconButton } from '@mui/material';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 import { Block, CheckCircle } from '@mui/icons-material';
@@ -15,9 +15,9 @@ const initialState = {
 };
 export const PendingRequestData = () => {
   const { data, isLoading, isError, error } = useGetLeavePendingQuery();
-  const [state, setState] = React.useState<{ action: string; leaveId: number }>(initialState);
+  const [state, setState] = useState<{ action: string; leaveId: number }>(initialState);
 
-  const columns: MRT_ColumnDef<MyLeaveRequestDetail>[] = React.useMemo(
+  const columns: MRT_ColumnDef<MyLeaveRequestDetail>[] = useMemo(
     () => [
       { accessorKey: 'user', header: 'Name', minWidth: 110 },
       { accessorKey: 'policy', header: 'Policy', minWidth: 110 },

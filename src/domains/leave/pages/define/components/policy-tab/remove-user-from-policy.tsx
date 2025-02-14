@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, MouseEvent } from 'react';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -12,14 +12,14 @@ type RemoveUserFromPolicyProps = {
   userId: number;
   closeModal: () => void;
 };
-export const RemoveUserFromPolicy: React.FC<RemoveUserFromPolicyProps> = ({
+export const RemoveUserFromPolicy: FC<RemoveUserFromPolicyProps> = ({
   policyId,
   userId,
   closeModal
 }) => {
   const [removeUser, { isLoading: isRemovingUser }] = useRemoveUserFromPolicyMutation();
 
-  const onSave = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onSave = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault();
       const result = await removeUser({ policyId, userId }).unwrap();

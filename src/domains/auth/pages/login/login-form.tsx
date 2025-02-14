@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Button, Stack, TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { LoginRequest } from '../../types';
@@ -9,7 +9,7 @@ type LoginFormProps = {
   isFetching: boolean;
 };
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, methods, isFetching }) => {
+export const LoginForm: FC<LoginFormProps> = ({ onSubmit, methods, isFetching }) => {
   const {
     register,
     formState: { errors }

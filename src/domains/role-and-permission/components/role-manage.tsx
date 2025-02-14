@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Block, Edit } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
 
@@ -6,7 +6,7 @@ import { HandleRoleStatus } from './handle-role-status';
 import { AddEditRole } from './add-edit-role';
 
 export const RoleManage = ({ id, name }: { id: number; name: string }) => {
-  const [action, setAction] = React.useState<string>('');
+  const [action, setAction] = useState<string>('');
 
   const handleAction = (action: string) => {
     setAction(action);

@@ -1,10 +1,11 @@
-import { DialogModal } from '@/components/dialog-modal';
-import { useActivateClassMutation, useDeactivateClassMutation } from '../../api';
-import React from 'react';
-import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { FC } from 'react';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+
+import { DialogModal } from '@/components/dialog-modal';
+import { useActivateClassMutation, useDeactivateClassMutation } from '../../api';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type ClassStatusProps = {
   id: number;
@@ -12,7 +13,7 @@ type ClassStatusProps = {
   closeModal: () => void;
   action: string;
 };
-export const ClassStatus: React.FC<ClassStatusProps> = ({ id, name, closeModal, action }) => {
+export const ClassStatus: FC<ClassStatusProps> = ({ id, name, closeModal, action }) => {
   const [deactivateClass, { isLoading: isDeactivating }] = useDeactivateClassMutation();
   const [activateClass, { isLoading: isActivating }] = useActivateClassMutation();
 

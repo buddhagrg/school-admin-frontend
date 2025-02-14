@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { ExtendedPermission } from '@/domains/role-and-permission/types';
 import {
   MaterialReactTable,
@@ -21,14 +21,14 @@ type AccessControlProps = {
   isLoading: boolean;
 };
 
-export const AccessControl: React.FC<AccessControlProps> = ({
+export const AccessControl: FC<AccessControlProps> = ({
   rowSelection,
   permissions,
   onRowSelectChange,
   handleAction,
   isLoading
 }) => {
-  React.useEffect(() => {
+  useEffect(() => {
     if (onRowSelectChange) {
       onRowSelectChange(rowSelection);
     }

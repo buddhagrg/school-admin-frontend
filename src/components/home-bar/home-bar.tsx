@@ -1,13 +1,13 @@
-import * as React from 'react';
+import { FC, ReactNode } from 'react';
 import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 type HomeBarProps = {
-  menus?: React.ReactNode;
-  actions?: React.ReactNode;
+  menus?: ReactNode;
+  actions?: ReactNode;
 };
 
-export const HomeBar: React.FC<HomeBarProps> = ({ menus, actions }) => {
+export const HomeBar: FC<HomeBarProps> = ({ menus, actions }) => {
   return (
     <AppBar
       sx={{ backgroundColor: 'white', color: 'black', boxShadow: 'none' }}

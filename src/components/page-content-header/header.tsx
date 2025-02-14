@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ElementType } from 'react';
 import { Box, Typography } from '@mui/material';
 
 export const PageContentHeader = ({
@@ -6,7 +6,7 @@ export const PageContentHeader = ({
   icon: Icon
 }: {
   heading: string;
-  icon?: React.ElementType;
+  icon?: ElementType;
 }) => {
   return (
     <Box display='flex' flexGrow={1} sx={{ color: 'text.secondary' }}>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import { Edit } from '@mui/icons-material';
 import { Button, Paper, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -29,11 +29,7 @@ type StaffAccountEditProps = {
 };
 type StaffDetailValue<T> = T extends { [key: string]: infer U } ? U : never;
 
-export const StaffAccountEdit: React.FC<StaffAccountEditProps> = ({
-  id,
-  redirectPath,
-  heading
-}) => {
+export const StaffAccountEdit: FC<StaffAccountEditProps> = ({ id, redirectPath, heading }) => {
   const staffDetail = useGetStaffDetail(id);
   const [updateStaff, { isLoading: isUpdatingStaff }] = useUpdateStaffMutation();
   const navigate = useNavigate();
@@ -43,7 +39,7 @@ export const StaffAccountEdit: React.FC<StaffAccountEditProps> = ({
     resolver: zodResolver(StaffFormSchema)
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (staffDetail) {
       const { setValue } = methods;
       for (const [key, value] of Object.entries(staffDetail) as [

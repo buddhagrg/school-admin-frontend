@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactNode } from 'react';
 import { Campaign, Person } from '@mui/icons-material';
 import {
   Avatar,
@@ -13,17 +13,17 @@ import {
   Typography
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { Notice } from '@/domains/notice/types';
-import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 import { ERROR } from '@/constants';
 
 export const Notices = ({ notices }: { notices: Notice[] }) => {
   const appBase = useSelector(getAppBase);
 
-  let content: React.ReactNode | null = null;
+  let content: ReactNode | null = null;
   if (!Array.isArray(notices) || notices.length <= 0) {
     content = <>{ERROR.NO_RECORD}</>;
   } else {

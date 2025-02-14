@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ClassForm } from './class-form';
 import { ClassFormProps, ClassFormSchema } from '../../types';
@@ -21,7 +21,7 @@ export const AddClass = () => {
   });
   const [addClass, { isLoading: isAdding }] = useAddClassMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     methods.setValue('name', '');
   }, [methods]);
 

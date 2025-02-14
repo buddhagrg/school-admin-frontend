@@ -1,5 +1,5 @@
+import { useMemo, useState } from 'react';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
-import * as React from 'react';
 import { useGetClassSectionStructureQuery } from '../api';
 import {
   Box,
@@ -35,11 +35,11 @@ const sectionState = {
 };
 export const ListClassWithSection = () => {
   const { data, isLoading, isError, error } = useGetClassSectionStructureQuery();
-  const [classDetail, setClassDetail] = React.useState(classState);
-  const [sectionDetail, setSectionDetail] = React.useState(sectionState);
+  const [classDetail, setClassDetail] = useState(classState);
+  const [sectionDetail, setSectionDetail] = useState(sectionState);
   const theme = useTheme();
 
-  const columns: MRT_ColumnDef<ClassSection>[] = React.useMemo(
+  const columns: MRT_ColumnDef<ClassSection>[] = useMemo(
     () => [
       {
         accessorKey: 'name',

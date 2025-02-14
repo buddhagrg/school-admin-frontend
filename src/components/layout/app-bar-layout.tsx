@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, MouseEvent } from 'react';
 import { ArrowDropDown, Logout, MenuBook, Person } from '@mui/icons-material';
 import {
   AppBar,
@@ -31,13 +31,13 @@ import {
 
 type AppBarLayoutProps = {
   handleDrawerToggle: () => void;
-  handleMenu: (event: React.MouseEvent<HTMLElement>) => void;
+  handleMenu: (event: MouseEvent<HTMLElement>) => void;
   anchorEl: HTMLElement | null;
   handleMenuClose: () => void;
   drawerWidth: number;
 };
 
-export const AppBarLayout: React.FC<AppBarLayoutProps> = ({
+export const AppBarLayout: FC<AppBarLayoutProps> = ({
   handleDrawerToggle,
   handleMenu,
   anchorEl,
@@ -53,7 +53,7 @@ export const AppBarLayout: React.FC<AppBarLayoutProps> = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async (event: React.MouseEvent<HTMLElement>) => {
+  const handleLogout = async (event: MouseEvent<HTMLElement>) => {
     handleMenuClose();
     event.preventDefault();
     try {

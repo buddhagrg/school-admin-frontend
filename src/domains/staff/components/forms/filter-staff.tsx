@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import {
   Box,
   Button,
@@ -23,7 +23,7 @@ type FilterStaffProps = {
   isLoading: boolean;
 };
 
-export const FilterStaff: React.FC<FilterStaffProps> = ({ searchStaff, methods, isLoading }) => {
+export const FilterStaff: FC<FilterStaffProps> = ({ searchStaff, methods, isLoading }) => {
   const roles = useGetRoles();
   const {
     formState: { errors },

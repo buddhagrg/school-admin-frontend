@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import {
   LeaveRequestForm,
   LeaveRequestFormSchema,
@@ -22,7 +22,7 @@ type EditLeaveRequestProps = {
   user: null | MyLeaveRequestDetail;
   closeModal: () => void;
 };
-export const EditLeaveRequest: React.FC<EditLeaveRequestProps> = ({ user, closeModal }) => {
+export const EditLeaveRequest: FC<EditLeaveRequestProps> = ({ user, closeModal }) => {
   const [updateLeaveRequest, { isLoading: isUpdating }] = useUpdateLeaveRequestMutation();
   const { myLeavePolicies } = useLeaveRequest();
   const methods = useForm<LeaveRequestForm>({
@@ -35,7 +35,7 @@ export const EditLeaveRequest: React.FC<EditLeaveRequestProps> = ({ user, closeM
     resolver: zodResolver(LeaveRequestFormSchema)
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       const { setValue } = methods;
       setValue('policy', user.policyId);

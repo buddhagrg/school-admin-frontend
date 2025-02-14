@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactElement, useState } from 'react';
 import { CalendarMonth } from '@mui/icons-material';
 import { Box, Button, Grid2, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -17,7 +17,7 @@ export const LeavePolicyDetail = () => {
   const [applyLeaveRequest, { isLoading: isApplyingLeave }] = useApplyLeaveRequestMutation();
 
   const { data } = useGetMyLeavePoliciesQuery();
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const leavePolicies = data?.leavePolicies ?? [];
 
   const methods = useForm<LeaveRequestForm>({
@@ -53,7 +53,7 @@ export const LeavePolicyDetail = () => {
     }
   };
 
-  let content: null | React.ReactElement = null;
+  let content: null | ReactElement = null;
   if (!Array.isArray(leavePolicies) || leavePolicies.length <= 0) {
     content = (
       <Grid2 size={{ xs: 12 }}>

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -6,7 +7,6 @@ import {
   Select,
   TextField
 } from '@mui/material';
-import React from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { ClassFormProps } from '../../types';
 import { useGetAcademicLevelsQuery } from '@/domains/academic/api';
@@ -15,7 +15,7 @@ type ClassFormType = {
   methods: UseFormReturn<ClassFormProps>;
   action: 'add' | 'update';
 };
-export const ClassForm: React.FC<ClassFormType> = ({ methods, action }) => {
+export const ClassForm: FC<ClassFormType> = ({ methods, action }) => {
   const {
     control,
     register,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Grid2 } from '@mui/material';
 import { useGetStudentDetail } from '@/domains/student/hooks/use-get-student-detail';
 import {
@@ -12,7 +12,7 @@ type StudentProfileProps = {
   id?: string;
 };
 
-export const StudentProfile: React.FC<StudentProfileProps> = ({ id }) => {
+export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
   const student = useGetStudentDetail(id);
   const {
     name,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createContext, Dispatch } from 'react';
 import { LeavePolicy } from '@/domains/leave/types';
 
 export const initialState = {
@@ -15,11 +15,11 @@ export type Action =
 
 type DefaultContext = {
   state: State;
-  dispatch: React.Dispatch<Action>;
+  dispatch: Dispatch<Action>;
 };
 const defaultValues: DefaultContext = {
   state: initialState,
   dispatch: () => {}
 };
 
-export const LeaveDefineContext = React.createContext(defaultValues);
+export const LeaveDefineContext = createContext(defaultValues);

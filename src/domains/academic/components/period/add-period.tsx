@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { AcademicPeriodFormProps, AcademicPeriodFormSchema } from '../../types';
@@ -22,7 +22,7 @@ export const AddPeriod = () => {
   });
   const [addPeriod, { isLoading: isAdding }] = useAddAcademicPeriodMutation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     methods.setValue('academicLevelId', '');
     methods.setValue('name', '');
   }, [methods]);

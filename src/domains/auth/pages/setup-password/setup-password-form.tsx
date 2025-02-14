@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Box, Button, Grid2, TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { SetupPasswordProps } from '../../types';
@@ -10,7 +10,7 @@ type SetupPasswordFormProps = {
   onSubmit: () => void;
 };
 
-export const SetupPasswordForm: React.FC<SetupPasswordFormProps> = ({
+export const SetupPasswordForm: FC<SetupPasswordFormProps> = ({
   methods,
   isLoading,
   clearForm,

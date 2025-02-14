@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Box, IconButton, Paper } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -12,8 +12,8 @@ import { useSelector } from 'react-redux';
 import { getAppBase } from '@/domains/auth/slice';
 
 export const DepartmentData = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
-  const [departmentId, setDepartmentId] = React.useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [departmentId, setDepartmentId] = useState<number>(0);
   const { data, isLoading, isError, error } = useGetDepartmentsQuery();
   const appBase = useSelector(getAppBase);
 

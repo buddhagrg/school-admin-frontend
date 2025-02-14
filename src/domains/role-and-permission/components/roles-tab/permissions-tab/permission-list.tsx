@@ -1,5 +1,9 @@
-import * as React from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 import { Box, Button } from '@mui/material';
+import { MRT_RowSelectionState } from 'material-react-table';
+import { toast } from 'react-toastify';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 import { useRolePermission } from '@/domains/role-and-permission/context/role-permission-provider';
 import { AccessControl } from '@/components/access-control';
@@ -7,11 +11,7 @@ import {
   useGetRolePermissionsQuery,
   useUpdateRolePermissionMutation
 } from '@/domains/role-and-permission/api';
-import { MRT_RowSelectionState } from 'material-react-table';
-import { toast } from 'react-toastify';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
 import { ExtendedPermission } from '@/domains/role-and-permission/types';
 import { Permission } from '@/utils/type/misc';
 
@@ -40,11 +40,9 @@ const updatePermissionsAvailability = (
   });
 };
 
-export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
-  const [rowSelection, setRowSelection] = React.useState<MRT_RowSelectionState>({});
-  const [currentRolePermissions, setCurrentRolePermissions] = React.useState<ExtendedPermission[]>(
-    []
-  );
+export const PermissionList: FC<PermissionListProps> = ({ roleId }) => {
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const [currentRolePermissions, setCurrentRolePermissions] = useState<ExtendedPermission[]>([]);
   const { data, isLoading: isFetchingCurrentRolePermission } = useGetRolePermissionsQuery(roleId);
   const [updatePermissions, { isLoading: isUpdatingPermissions }] =
     useUpdateRolePermissionMutation();
@@ -52,7 +50,7 @@ export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
     state: { permissions }
   } = useRolePermission();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (permissions) {
       const updatedPermissions = updatePermissionsAvailability(
         permissions,
@@ -62,7 +60,7 @@ export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
     }
   }, [roleId, permissions, data]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (currentRolePermissions && currentRolePermissions.length > 0) {
       const initialSelected = currentRolePermissions.reduce((acc, menu) => {
         if (menu.isPermissionAvailable) {
@@ -80,7 +78,7 @@ export const PermissionList: React.FC<PermissionListProps> = ({ roleId }) => {
     }
   }, [currentRolePermissions]);
 
-  const handleSave = async (event: React.MouseEvent<HTMLElement>) => {
+  const handleSave = async (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     try {
       const ids = Object.keys(rowSelection);

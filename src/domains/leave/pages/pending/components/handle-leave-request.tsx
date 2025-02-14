@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, MouseEvent } from 'react';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { toast } from 'react-toastify';
@@ -15,7 +15,7 @@ type HandleLeaveReuqestProps = {
   contextText: string;
 };
 
-export const HandleLeaveRequest: React.FC<HandleLeaveReuqestProps> = ({
+export const HandleLeaveRequest: FC<HandleLeaveReuqestProps> = ({
   leaveId,
   status,
   titleText,
@@ -25,7 +25,7 @@ export const HandleLeaveRequest: React.FC<HandleLeaveReuqestProps> = ({
   const [handleLeaveStatus, { isLoading: isHandlingLeaveStatus }] =
     useHandlePendingLeaveStatusMutation();
 
-  const onSave = async (event: React.MouseEvent) => {
+  const onSave = async (event: MouseEvent) => {
     event.preventDefault();
     try {
       const result = await handleLeaveStatus({ id: leaveId, status }).unwrap();
