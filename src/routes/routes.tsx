@@ -3,31 +3,25 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ProtectedRoute } from './protected-route';
 import { AppRoot } from './app-root';
-import { LoginPage, SetupPasswordPage } from '@/domains/auth/pages';
-import { DashboardPage } from '@/domains/dashboard/pages';
-import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/domains/leave/pages';
-import { AddStudent, EditStudent, ListStudents, ViewStudent } from '@/domains/student/pages';
-import {
-  AddNotice,
-  EditNotice,
-  ListNotices,
-  ManageNotices,
-  ViewNotice
-} from '@/domains/notice/pages';
-import { AddStaff, EditStaff, ListStaffs, ViewStaff } from '@/domains/staff/pages';
-import { AccountPage } from '@/domains/account/pages';
-import { EditDepartmentPage, ListDepartmentsPage } from '@/domains/department/pages';
+import { LoginPage, SetupPasswordPage } from '@/app/auth/pages';
+import { DashboardPage } from '@/app/dashboard/pages';
+import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/app/leave/pages';
+import { AddStudent, EditStudent, ListStudents, ViewStudent } from '@/app/student/pages';
+import { AddNotice, EditNotice, ListNotices, ManageNotices, ViewNotice } from '@/app/notice/pages';
+import { AddStaff, EditStaff, ListStaffs, ViewStaff } from '@/app/staff/pages';
+import { AccountPage } from '@/app/account/pages';
+import { EditDepartmentPage, ListDepartmentsPage } from '@/app/department/pages';
 import { ErrorPage, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
-import { RoleAndPermission } from '@/domains/role-and-permission/pages';
-import { Home } from '@/domains/landing';
+import { RoleAndPermission } from '@/app/role-and-permission/pages';
+import { Home } from '@/app/landing';
 import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
-import { SignUpPage } from '@/domains/auth/pages/signup/signup-page';
-import { ManageAccessControl } from '@/domains/access-controls/pages/access-control-page';
-import { SuperAdminDashboard } from '@/domains/super-admin-dashboard';
-import { EditSchool, ListSchoolsPage } from '@/domains/schools/pages';
-import { LevelClassPage, AcademicPage } from '@/domains/academic/pages';
-import { ClassSectionPage, ClassTeacherPage } from '@/domains/class/pages';
+import { SignUpPage } from '@/app/auth/pages/signup/signup-page';
+import { ManageAccessControl } from '@/app/access-controls/pages/access-control-page';
+import { SuperAdminDashboard } from '@/app/super-admin-dashboard';
+import { EditSchool, ListSchoolsPage } from '@/app/schools/pages';
+import { LevelClassPage, AcademicPage } from '@/app/academic/pages';
+import { ClassSectionPage, ClassTeacherPage } from '@/app/class/pages';
 
 export const routes = [
   {
