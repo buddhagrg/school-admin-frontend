@@ -11,7 +11,7 @@ import { Period } from '../types';
 import { ManagePeriodOrder } from './period/manage-period-order';
 import { DeleteLevel } from './level/delete-level';
 import { ResponsiveBox } from '@/components/responsive-box';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 type levelAction = '' | 'manage' | 'update' | 'delete';
 type levelStateProps = {
@@ -83,7 +83,7 @@ export const ListLevelWithPeriod = () => {
   if (!data || data?.academicStructure.length <= 0) {
     return (
       <ResponsiveBox>
-        <>{ERROR.NO_RECORD}</>
+        <>{ERROR_MESSAGE.NO_RECORD}</>
       </ResponsiveBox>
     );
   }

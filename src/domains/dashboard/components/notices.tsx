@@ -18,14 +18,14 @@ import { useSelector } from 'react-redux';
 import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { Notice } from '@/domains/notice/types';
 import { getAppBase } from '@/domains/auth/slice';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const Notices = ({ notices }: { notices: Notice[] }) => {
   const appBase = useSelector(getAppBase);
 
   let content: ReactNode | null = null;
   if (!Array.isArray(notices) || notices.length <= 0) {
-    content = <>{ERROR.NO_RECORD}</>;
+    content = <>{ERROR_MESSAGE.NO_RECORD}</>;
   } else {
     content = notices.map(({ id, title, author, createdDate }, index) => (
       <List key={id}>

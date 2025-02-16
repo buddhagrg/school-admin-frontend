@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { getFormattedLeaveDate } from '../util';
 import { WhoIsOutProps } from '../types';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {
   return (
@@ -28,7 +28,7 @@ export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {
         <CardContent>
           <List>
             {whoIsOut.length <= 0 ? (
-              <>{ERROR.NO_RECORD}</>
+              <>{ERROR_MESSAGE.NO_RECORD}</>
             ) : (
               whoIsOut.map(({ user, userId, fromDate, toDate, leaveType }) => (
                 <div key={`${userId}${fromDate}`}>

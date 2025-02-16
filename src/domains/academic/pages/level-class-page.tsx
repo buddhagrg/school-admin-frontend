@@ -5,9 +5,9 @@ import { ClassItem } from '../components/level/class-item';
 import { useGetAcademicLevelsWithClassesQuery } from '../api';
 import { ResponsiveBox } from '@/components/responsive-box';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { ERROR } from '@/constants';
 import { AddClassToLevel } from '../components/level/add-class-to-level';
 import { PageContentHeader } from '@/components/page-content-header';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const LevelClassPage = () => {
   const { data, isLoading, isError, error } = useGetAcademicLevelsWithClassesQuery();
@@ -29,7 +29,7 @@ export const LevelClassPage = () => {
   if (!data || data?.levelClass.length <= 0) {
     return (
       <ResponsiveBox>
-        <>{ERROR.NO_RECORD}</>
+        <>{ERROR_MESSAGE.NO_RECORD}</>
       </ResponsiveBox>
     );
   }
@@ -48,7 +48,7 @@ export const LevelClassPage = () => {
                     <ClassItem key={item.id} classId={item.id} className={item.name} />
                   ))
                 ) : (
-                  <>{ERROR.NO_RECORD}</>
+                  <>{ERROR_MESSAGE.NO_RECORD}</>
                 )}
               </Paper>
             </Grid2>

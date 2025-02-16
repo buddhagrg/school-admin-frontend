@@ -14,7 +14,7 @@ import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveRequestForm, LeaveRequestFormSchema, MyLeavePolicy } from '@/domains/leave/types';
 import { LeaveDetail, LeaveForm } from '@/domains/leave/components';
 import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '@/domains/leave/api';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 const settings = {
   infinite: false,
@@ -66,7 +66,7 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
 
   let content: ReactNode | null = null;
   if (!Array.isArray(leavePolicies) || leavePolicies.length <= 0) {
-    content = <>{ERROR.NO_RECORD}</>;
+    content = <>{ERROR_MESSAGE.NO_RECORD}</>;
   } else {
     content = (
       <div className='slider-container'>

@@ -10,8 +10,8 @@ import { LeaveDetail } from './leave-detail';
 import { LeaveForm } from './leave-form';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveRequestForm, LeaveRequestFormSchema } from '../types';
-import { ERROR } from '@/constants';
 import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '../api';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const LeavePolicyDetail = () => {
   const [applyLeaveRequest, { isLoading: isApplyingLeave }] = useApplyLeaveRequestMutation();
@@ -58,7 +58,7 @@ export const LeavePolicyDetail = () => {
     content = (
       <Grid2 size={{ xs: 12 }}>
         <Box component={Paper} sx={{ p: 2 }}>
-          {ERROR.NO_RECORD}
+          {ERROR_MESSAGE.NO_RECORD}
         </Box>
       </Grid2>
     );

@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { getFormattedCelebrationDate } from '../util';
 import { CelebrationProps } from '../types';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const Celebrations = ({ celebrations }: { celebrations: CelebrationProps[] }) => {
   return (
@@ -28,7 +28,7 @@ export const Celebrations = ({ celebrations }: { celebrations: CelebrationProps[
         <CardContent>
           <List>
             {celebrations.length <= 0 ? (
-              <>{ERROR.NO_RECORD}</>
+              <>{ERROR_MESSAGE.NO_RECORD}</>
             ) : (
               celebrations.map(({ userId, user, event, eventDate }) => (
                 <div key={`${userId}${event}`}>

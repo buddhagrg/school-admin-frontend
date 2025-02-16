@@ -8,7 +8,7 @@ import {
 } from '@/domains/staff/components/views';
 import { useGetStaffDetailQuery } from '@/domains/staff/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '../errors';
 
 type StaffProfileProps = {
   id?: string;
@@ -26,7 +26,7 @@ export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
   }
 
   if (!data) {
-    return <>{ERROR.NO_RECORD}</>;
+    return <>{ERROR_MESSAGE.NO_RECORD}</>;
   }
 
   const {

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { TableCell, TableRow } from '@mui/material';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '../errors';
 
 type Props = {
   colSpan: number;
@@ -10,7 +10,7 @@ type Props = {
 export const TableRowWithColSpan: FC<Props> = ({ colSpan, text }) => {
   return (
     <TableRow>
-      <TableCell colSpan={colSpan}>{text ? text : ERROR.NO_RECORD}</TableCell>
+      <TableCell colSpan={colSpan}>{text ? text : ERROR_MESSAGE.NO_RECORD}</TableCell>
     </TableRow>
   );
 };

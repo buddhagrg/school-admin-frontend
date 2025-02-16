@@ -8,7 +8,7 @@ import {
 } from '@/domains/student/components/views';
 import { useGetStudentDetailQuery } from '@/domains/student/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { ERROR } from '@/constants';
+import { ERROR_MESSAGE } from '../errors';
 
 type StudentProfileProps = {
   id?: string;
@@ -26,7 +26,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
   }
 
   if (!data) {
-    return <>{ERROR.NO_RECORD}</>;
+    return <>{ERROR_MESSAGE.NO_RECORD}</>;
   }
 
   const {
