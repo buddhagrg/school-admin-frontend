@@ -3,10 +3,10 @@ import {
   useResendPwdSetupLinkMutation,
   useResendVerificationEmailMutation,
   useResetPwdMutation
-} from '@/domains/auth/api';
-import { useHandleNoticeStatusMutation } from '@/domains/notice/api';
-import { useHandleStaffStatusMutation } from '@/domains/staff/api';
-import { useReviewStudentStatusMutation } from '@/domains/student/api';
+} from '@/app/auth/api';
+import { useHandleNoticeStatusMutation } from '@/app/notice/api';
+import { useHandleStaffStatusMutation } from '@/app/staff/api';
+import { useReviewStudentStatusMutation } from '@/app/student/api';
 
 export const useHandleMenuAction = () => {
   const [handleStaffStatus] = useHandleStaffStatusMutation();

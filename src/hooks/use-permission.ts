@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserScreens, isUserAuthenticated } from '@/domains/auth/slice';
+import { getUserScreens, isUserAuthenticated } from '@/app/auth/slice';
 
 export const usePermission = () => {
   const routes = useSelector(getUserScreens);

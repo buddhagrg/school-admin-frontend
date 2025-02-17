@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { TabPanel } from '@/components/tab-panel';
-import { getUserRole } from '@/domains/auth/slice';
+import { getUserRole } from '@/app/auth/slice';
 import { ChangePassword } from '../components';
 import { StaffProfile, StudentProfile } from '@/components/user-account-profile';
 

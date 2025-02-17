@@ -18,7 +18,7 @@ import {
   ParentsInformation,
   staffInitialState
 } from '../components/forms';
-import { getAppBase } from '@/domains/auth/slice';
+import { getAppBase } from '@/app/auth/slice';
 import { useAddStaffMutation } from '../api';
 
 export const AddStaff = () => {
@@ -39,7 +39,7 @@ export const AddStaff = () => {
     try {
       const result = await addNewStaff(data).unwrap();
       toast.info(result.message);
-      navigate(`${appBase}/staffs`);
+      navigate(`${appBase}/staff`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

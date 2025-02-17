@@ -17,8 +17,8 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { StudentProps } from '../../types';
-import { useGetClassSectionStructureQuery } from '@/domains/class/api';
-import { SectionDetail } from '@/domains/class/types';
+import { useGetClassSectionStructureQuery } from '@/app/class/api';
+import { SectionDetail } from '@/app/class/types';
 
 export const AcademicInformation = () => {
   const [sections, setSections] = useState<SectionDetail[]>([]);

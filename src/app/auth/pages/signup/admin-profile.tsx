@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Paper } from '@mui/material';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
-import { Address, BasicInformation, ParentsInformation } from '@/domains/staff/components/forms';
-import { AdminStaffProps, BasicInfoSchemaWithoutRole } from '@/domains/staff/types';
+import { Address, BasicInformation, ParentsInformation } from '@/app/staff/components/forms';
+import { AdminStaffProps, BasicInfoSchemaWithoutRole } from '@/app/staff/types';
 
 type AdminProfileProps = {
   step2Method: UseFormReturn<AdminStaffProps>;

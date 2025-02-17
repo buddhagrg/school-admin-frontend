@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { Celebrations, GridCard, LeavePolicyDetail, Notices, WhoIsOut } from '../components';
-import { getUserRole } from '@/domains/auth/slice';
+import { getUserRole } from '@/app/auth/slice';
 import { DashboardProps } from '../types';
 import { useGetDashboardDataQuery } from '../api';
 

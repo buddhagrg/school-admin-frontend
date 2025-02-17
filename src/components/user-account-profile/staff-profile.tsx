@@ -5,8 +5,8 @@ import {
   Others,
   ParentsInformation,
   PersonalDetail
-} from '@/domains/staff/components/views';
-import { useGetStaffDetailQuery } from '@/domains/staff/api';
+} from '@/app/staff/components/views';
+import { useGetStaffDetailQuery } from '@/app/staff/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ERROR_MESSAGE } from '../errors';
 

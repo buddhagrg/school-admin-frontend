@@ -5,14 +5,14 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
-import { useRolePermission } from '@/domains/role-and-permission/context/role-permission-provider';
+import { useRolePermission } from '@/app/role-and-permission/context/role-permission-provider';
 import { AccessControl } from '@/components/access-control';
 import {
   useGetRolePermissionsQuery,
   useUpdateRolePermissionMutation
-} from '@/domains/role-and-permission/api';
+} from '@/app/role-and-permission/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { ExtendedPermission } from '@/domains/role-and-permission/types';
+import { ExtendedPermission } from '@/app/role-and-permission/types';
 import { Permission } from '@/utils/type/misc';
 
 type PermissionListProps = {

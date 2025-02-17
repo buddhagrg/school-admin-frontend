@@ -9,7 +9,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetRolesQuery, useSwitchUserRoleMutation } from '@/domains/role-and-permission/api';
+import { useGetRolesQuery, useSwitchUserRoleMutation } from '@/app/role-and-permission/api';
 
 type SwitchUserRoleProps = {
   userId: number;

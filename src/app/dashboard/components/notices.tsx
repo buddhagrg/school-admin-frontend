@@ -16,8 +16,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { Notice } from '@/domains/notice/types';
-import { getAppBase } from '@/domains/auth/slice';
+import { Notice } from '@/app/notice/types';
+import { getAppBase } from '@/app/auth/slice';
 import { ERROR_MESSAGE } from '@/components/errors';
 
 export const Notices = ({ notices }: { notices: Notice[] }) => {

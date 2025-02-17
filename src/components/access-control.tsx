@@ -8,11 +8,11 @@ import {
 import { Box, Button, IconButton } from '@mui/material';
 import { Add, Delete, Edit } from '@mui/icons-material';
 
-import { ExtendedPermission } from '@/domains/role-and-permission/types';
+import { ExtendedPermission } from '@/app/role-and-permission/types';
 import {
   AccessControlFormProps,
   accessControlFormState
-} from '@/domains/access-controls/pages/access-control-page';
+} from '@/app/access-controls/pages/access-control-page';
 
 type AccessControlProps = {
   rowSelection: MRT_RowSelectionState;

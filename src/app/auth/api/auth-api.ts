@@ -7,7 +7,7 @@ import {
   User,
   UserId
 } from '../types';
-import { AdminStaffProps } from '@/domains/staff/types';
+import { AdminStaffProps } from '@/app/staff/types';
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({

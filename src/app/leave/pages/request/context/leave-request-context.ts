@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { MyLeavePolicy } from '@/domains/leave/types';
+import { MyLeavePolicy } from '@/app/leave/types';
 
 export const initialState: State = {
   isLoading: false,

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
-import { useGetMyLeaveHistoryQuery } from '@/domains/leave/api';
-import { RequestHistoryTable } from '@/domains/leave/components';
+import { useGetMyLeaveHistoryQuery } from '@/app/leave/api';
+import { RequestHistoryTable } from '@/app/leave/components';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 export const MyLeaveRequestHistory = () => {

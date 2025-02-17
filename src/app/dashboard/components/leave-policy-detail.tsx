@@ -11,9 +11,9 @@ import { ScheduleSend } from '@mui/icons-material';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { LeaveRequestForm, LeaveRequestFormSchema, MyLeavePolicy } from '@/domains/leave/types';
-import { LeaveDetail, LeaveForm } from '@/domains/leave/components';
-import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '@/domains/leave/api';
+import { LeaveRequestForm, LeaveRequestFormSchema, MyLeavePolicy } from '@/app/leave/types';
+import { LeaveDetail, LeaveForm } from '@/app/leave/components';
+import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '@/app/leave/api';
 import { ERROR_MESSAGE } from '@/components/errors';
 
 const settings = {

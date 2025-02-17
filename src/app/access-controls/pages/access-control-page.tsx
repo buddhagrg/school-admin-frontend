@@ -4,7 +4,7 @@ import { Box, Paper } from '@mui/material';
 import { AccessControl } from '@/components/access-control';
 import { DeleteAccessControl } from '../components/delete-access-control';
 import { AddEditAccessControl } from '../components/add-edit-access-control';
-import { useGetPermissionsQuery } from '@/domains/role-and-permission/api';
+import { useGetPermissionsQuery } from '@/app/role-and-permission/api';
 
 export type AccessControlFormProps = {
   action: string;

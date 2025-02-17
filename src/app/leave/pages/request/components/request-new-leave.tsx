@@ -7,10 +7,10 @@ import { toast } from 'react-toastify';
 
 import { useLeaveRequest } from '../context/leave-request-provider';
 import { DialogModal } from '@/components/dialog-modal';
-import { useApplyLeaveRequestMutation } from '@/domains/leave/api';
-import { LeaveRequestForm, LeaveRequestFormSchema } from '@/domains/leave/types';
+import { useApplyLeaveRequestMutation } from '@/app/leave/api';
+import { LeaveRequestForm, LeaveRequestFormSchema } from '@/app/leave/types';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { LeaveForm } from '@/domains/leave/components';
+import { LeaveForm } from '@/app/leave/components';
 
 export const RequestNewLeave = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -9,7 +9,7 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetDepartmentsQuery } from '../../api';
 import { DepartmentFormWithId } from '../../types';
 import { DeleteDepartment } from './delete-department';
-import { getAppBase } from '@/domains/auth/slice';
+import { getAppBase } from '@/app/auth/slice';
 
 export const DepartmentData = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

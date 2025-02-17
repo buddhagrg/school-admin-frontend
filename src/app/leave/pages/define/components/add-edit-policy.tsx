@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { NewLeavePolicySchema, PolicyDetail } from '../../../types';
-import { useAddLeavePolicyMutation, useUpdateLeavePolicyMutation } from '@/domains/leave/api';
+import { useAddLeavePolicyMutation, useUpdateLeavePolicyMutation } from '@/app/leave/api';
 
 type AddEditPolicyProps = {
   policyId: number;

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Grid2 } from '@mui/material';
-import { LeaveDetail } from '@/domains/leave/components';
+import { LeaveDetail } from '@/app/leave/components';
 import { useLeaveRequest } from '../context/leave-request-provider';
 
 export const MyLeavePolicies = () => {

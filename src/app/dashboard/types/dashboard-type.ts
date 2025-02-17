@@ -1,5 +1,5 @@
-import { MyLeavePolicy } from '@/domains/leave/types';
-import { Notice } from '@/domains/notice/types';
+import { MyLeavePolicy } from '@/app/leave/types';
+import { Notice } from '@/app/notice/types';
 
 type GeneralData = {
   heading: string;

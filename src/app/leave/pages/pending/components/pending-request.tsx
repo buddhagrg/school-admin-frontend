@@ -5,8 +5,8 @@ import { Block, CheckCircle } from '@mui/icons-material';
 
 import { HandleLeaveRequest } from './handle-leave-request';
 import { DATE_FORMAT, DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { MyLeaveRequestDetail } from '@/domains/leave/types';
-import { useGetLeavePendingQuery } from '@/domains/leave/api';
+import { MyLeaveRequestDetail } from '@/app/leave/types';
+import { useGetLeavePendingQuery } from '@/app/leave/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 const initialState = {

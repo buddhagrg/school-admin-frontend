@@ -18,8 +18,8 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { useAddAcademicLevelToClassMutation } from '../../api';
 import { AddClassToLevelForm, AddClassToLevelFormProps } from '../../types';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetClassesQuery } from '@/domains/class/api';
-import { ClassData } from '@/domains/class/types';
+import { useGetClassesQuery } from '@/app/class/api';
+import { ClassData } from '@/app/class/types';
 
 type AddClassToLevelProps = {
   academicLevelId: number;

@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useChangePwdMutation } from '@/domains/auth/api';
-import { PasswordProps, PasswordSchema } from '@/domains/auth/types';
+import { useChangePwdMutation } from '@/app/auth/api';
+import { PasswordProps, PasswordSchema } from '@/app/auth/types';
 
 const initialState = {
   oldPassword: '',

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { NoticeData } from '../components';
-import { getAppBase } from '@/domains/auth/slice';
+import { getAppBase } from '@/app/auth/slice';
 import { useGetAllPendingNoticesQuery } from '../api';
 
 export const ManageNotices = () => {

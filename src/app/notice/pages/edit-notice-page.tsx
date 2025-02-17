@@ -13,7 +13,7 @@ import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { NoticeFormProps, NoticeFormSchema } from '../types';
 import { NoticeForm } from '../components';
-import { getAppBase } from '@/domains/auth/slice';
+import { getAppBase } from '@/app/auth/slice';
 import { useGetNoticeDetailQuery, useUpdateNoticeMutation } from '../api';
 
 const initialState: NoticeFormProps = {

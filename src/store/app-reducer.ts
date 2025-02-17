@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { api } from '../api';
-import { authReducer } from '@/domains/auth/slice';
+import { authReducer } from '@/app/auth/slice';
 
 export const appReducer = combineReducers({
   [api.reducerPath]: api.reducer,

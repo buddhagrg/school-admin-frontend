@@ -18,7 +18,7 @@ import {
   isRejectPermissionAvailable
 } from '@/utils/helpers/get-notice-permission';
 import { menuItemTexts } from '@/constants';
-import { getAppBase, getUserId } from '@/domains/auth/slice';
+import { getAppBase, getUserId } from '@/app/auth/slice';
 import { DialogModal } from '@/components/dialog-modal';
 import { useHandleMenuAction } from '@/hooks';
 

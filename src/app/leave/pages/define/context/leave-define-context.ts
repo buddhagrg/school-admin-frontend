@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { LeavePolicy } from '@/domains/leave/types';
+import { LeavePolicy } from '@/app/leave/types';
 
 export const initialState = {
   policyTab: 0,

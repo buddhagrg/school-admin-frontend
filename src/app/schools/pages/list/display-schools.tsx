@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetSchoolsQuery } from '../../api';
 import { School } from '../../types';
-import { getAppBase } from '@/domains/auth/slice';
+import { getAppBase } from '@/app/auth/slice';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 
 export const DisplaySchools = () => {

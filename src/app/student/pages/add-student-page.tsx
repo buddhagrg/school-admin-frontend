@@ -20,7 +20,7 @@ import {
   OtherInformation,
   ParentsAndGuardianInformation
 } from '../components/forms';
-import { getAppBase } from '@/domains/auth/slice';
+import { getAppBase } from '@/app/auth/slice';
 import { useAddStudentMutation } from '../api';
 
 export const AddStudent = () => {

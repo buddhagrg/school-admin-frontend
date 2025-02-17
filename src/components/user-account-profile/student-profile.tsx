@@ -5,8 +5,8 @@ import {
   Others,
   ParentsAndGuardianInformation,
   PersonalDetail
-} from '@/domains/student/components/views';
-import { useGetStudentDetailQuery } from '@/domains/student/api';
+} from '@/app/student/components/views';
+import { useGetStudentDetailQuery } from '@/app/student/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ERROR_MESSAGE } from '../errors';
 

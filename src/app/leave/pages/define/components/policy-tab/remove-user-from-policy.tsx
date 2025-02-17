@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
-import { useRemoveUserFromPolicyMutation } from '@/domains/leave/api';
+import { useRemoveUserFromPolicyMutation } from '@/app/leave/api';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 

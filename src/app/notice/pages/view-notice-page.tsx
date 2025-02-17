@@ -11,7 +11,7 @@ import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ViewNoticeSkeleton } from '../components';
-import { getAppBase } from '@/domains/auth/slice';
+import { getAppBase } from '@/app/auth/slice';
 import { useGetNoticeDetailQuery, useHandleNoticeStatusMutation } from '../api';
 
 export const ViewNotice = () => {

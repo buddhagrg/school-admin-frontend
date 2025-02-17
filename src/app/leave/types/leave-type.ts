@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { LeaveRequestApiSchema, LeaveRequestFormSchema, PolicyUsersSchema } from './leave-schema';
-import { User } from '@/domains/auth/types';
+import { User } from '@/app/auth/types';
 
 export type LeavePolicy = {
   id: number;
