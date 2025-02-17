@@ -76,7 +76,7 @@ export const routes = [
       { path: 'users/staff/add', element: <AddStaff /> },
       { path: 'users/staff/:id', element: <ViewStaff /> },
       { path: 'users/staff/edit/:id', element: <EditStaff /> },
-      { path: 'users/role-and-permission', element: <RoleAndPermission /> },
+      { path: 'users/roles-permissions', element: <RoleAndPermission /> },
       { path: 'departments', element: <ListDepartmentsPage /> },
       { path: 'departments/edit/:id', element: <EditDepartmentPage /> },
       { path: 'academic/manage', element: <AcademicPage /> },
