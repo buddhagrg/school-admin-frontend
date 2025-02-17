@@ -5,10 +5,8 @@ import {
   BasicInfoSchema,
   OtherInfoSchema,
   ParentsAndGuardianInfoSchema,
-  StudentFilterSchema,
   StudentSchema
 } from './student-schema';
-import { UserAccountBasicProps } from '@/components/user-account-basic';
 
 export type Student = {
   id: number;
@@ -52,15 +50,10 @@ type SetStateAction = { type: 'SET_STATE'; payload: StudentFormState };
 type ResetFieldAction = { type: 'RESET_FIELD'; payload: StudentFormState };
 export type StudentFormAction = SetFieldAction | SetStateAction | ResetFieldAction;
 
-export type StudentFilter = z.infer<typeof StudentFilterSchema>;
-
 export type StudentProps = z.infer<typeof StudentSchema>;
 
 export type StudentPropsWithId = StudentProps & { id: number };
 export type GetStudentDetailProps = StudentPropsWithId & { reporterName: string };
-export type StudentData = {
-  students: UserAccountBasicProps[];
-};
 
 export type StudentDetail = {
   student: StudentPropsWithId;

@@ -10,8 +10,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
-  useTheme
+  Typography
 } from '@mui/material';
 import { CheckBox, DoNotDisturb, Edit } from '@mui/icons-material';
 
@@ -22,6 +21,7 @@ import { UpdateClass } from './class/update-class';
 import { ClassSection } from '../types';
 import { ClassStatus } from './class/class-status';
 import { SectionStatus } from './section/section-status';
+import { getTextColor } from '@/utils/helpers/get-text-color';
 
 const classState = {
   id: 0,
@@ -38,7 +38,6 @@ export const ListClassWithSection = () => {
   const { data, isLoading, isError, error } = useGetClassSectionStructureQuery();
   const [classDetail, setClassDetail] = useState(classState);
   const [sectionDetail, setSectionDetail] = useState(sectionState);
-  const theme = useTheme();
 
   const columns: MRT_ColumnDef<ClassSection>[] = useMemo(
     () => [
@@ -52,7 +51,7 @@ export const ListClassWithSection = () => {
         Cell: ({ cell }) => {
           const status = cell.getValue<boolean>();
           return (
-            <Box component='span' sx={getStyle(status)}>
+            <Box component='span' sx={getTextColor(status)}>
               {status ? 'Active' : 'Inactive'}
             </Box>
           );
@@ -74,15 +73,6 @@ export const ListClassWithSection = () => {
   const closeModal = () => {
     setClassDetail(classState);
     setSectionDetail(sectionState);
-  };
-
-  const getStyle = (isActive: boolean) => {
-    return {
-      backgroundColor: isActive ? theme.palette.success.light : theme.palette.error.light,
-      color: 'white',
-      padding: '5px',
-      borderRadius: '3px'
-    };
   };
 
   const table = useMaterialReactTable({
@@ -145,7 +135,7 @@ export const ListClassWithSection = () => {
                   </TableCell>
                   <TableCell>{name}</TableCell>
                   <TableCell>
-                    <Box component='span' sx={getStyle(isActive)}>
+                    <Box component='span' sx={getTextColor(isActive)}>
                       {isActive ? 'Active' : 'Inactive'}
                     </Box>
                   </TableCell>

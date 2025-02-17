@@ -11,7 +11,7 @@ export const EditStaff = () => {
     <StaffAccountEdit
       heading='Edit Staff Account'
       id={id}
-      redirectPath={`${appBase}/staffs/${id}`}
+      redirectPath={`${appBase}/staff/${id}`}
     />
   );
 };

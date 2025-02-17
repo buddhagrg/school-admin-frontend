@@ -1,20 +1,22 @@
-import { useMemo, useState } from 'react';
-import { Box, ListItemIcon, ListItemText, MenuItem, Paper } from '@mui/material';
+import { FC, useMemo, useState } from 'react';
 import { Block, CheckCircle, Edit, Email, Key, LockReset, Visibility } from '@mui/icons-material';
+import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
+import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
-import { useSelector } from 'react-redux';
 
-import { DialogModal } from '@/components/dialog-modal';
+import { UserAccountBasic } from '../types';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { UserAccountBasicDataProps, UserAccountBasicProps } from './user-account-basic-type';
-import { useHandleMenuAction } from '../../hooks';
+import { getAppBase } from '@/app/auth/slice';
 import { menuItemTexts } from '@/constants';
-import { getAppBase } from '@/domains/auth/slice';
+import { useHandleMenuAction } from '@/hooks';
+import { ERROR_MESSAGE } from '@/components/errors';
+import { getTextColor } from '@/utils/helpers/get-text-color';
 
 type State = {
   isSaving: boolean;
@@ -24,7 +26,7 @@ type State = {
   userId: number;
   menuAction: string;
 };
-const initialState = {
+const initialState: State = {
   isSaving: false,
   isModalOpen: false,
   modalTitle: '',
@@ -32,32 +34,72 @@ const initialState = {
   userId: 0,
   menuAction: ''
 };
-
-export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) => {
+type UserTableProps = {
+  users: UserAccountBasic[];
+  isLoading: boolean;
+  isError: boolean;
+  error?: FetchBaseQueryError | SerializedError;
+};
+export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error }) => {
   const appBase = useSelector(getAppBase);
   const [state, setState] = useState<State>(initialState);
   const { handleAction } = useHandleMenuAction();
-  const { users, userType, isLoading, isError, error } = data;
+  const userType = users.length > 0 ? users[0].staticRoleId : 0;
+  const isStaff = [2, 10].includes(userType);
 
-  const columns: MRT_ColumnDef<UserAccountBasicProps>[] = useMemo(
+  const columns: MRT_ColumnDef<UserAccountBasic>[] = useMemo(
     () => [
-      { accessorKey: 'id', header: 'ID' },
+      { accessorKey: 'id', header: 'Id' },
       { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'email', header: 'Email' },
       { accessorKey: 'role', header: 'Role' },
       {
-        accessorKey: 'systemAccess',
-        header: 'System Access',
-        Cell: ({ cell }) => <>{cell.getValue<boolean>().toString()}</>
-      },
-      {
         accessorKey: 'lastLogin',
         header: 'Last Login',
         Cell: ({ cell }) => <>{getFormattedDate(cell.getValue<string>(), DATE_TIME_24_HR_FORMAT)}</>
+      },
+      {
+        accessorKey: 'systemAccess',
+        header: 'System Access',
+        Cell: ({ cell }) => {
+          const status = cell.getValue<boolean>();
+          return (
+            <Box component='span' sx={getTextColor(status)}>
+              {status.toString()}
+            </Box>
+          );
+        }
       }
     ],
     []
   );
+  const menuActions = [
+    {
+      action: isStaff ? 'DISABLE_STAFF_STATUS' : 'DISABLE_STUDENT_STATUS',
+      icon: <Block />,
+      text: 'Disable'
+    },
+    {
+      action: isStaff ? 'ENABLE_STAFF_STATUS' : 'ENABLE_STUDENT_STATUS',
+      icon: <CheckCircle />,
+      text: 'Enable'
+    },
+    {
+      action: 'RESEND_VERIFICATION_EMAIL_TO_USER',
+      icon: <Email />,
+      text: 'Resend Verification Email'
+    },
+    {
+      action: 'RESEND_PWD_LINK_EMAIL_TO_USER',
+      icon: <Key />,
+      text: 'Resend Password Setup Link'
+    },
+    {
+      action: 'RESET_USER_PWD',
+      icon: <LockReset />,
+      text: 'Reset Password'
+    }
+  ];
   const onMenuItemClick = (menuAction: string, userId: number) => {
     const modalTitle = menuItemTexts[menuAction] || '';
     const modalBodyText = `Are you sure you want to ${modalTitle}?`;
@@ -86,41 +128,10 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
       setState((prevState) => ({ ...prevState, isSaving: !prevState.isSaving }));
     }
   };
-
-  const menuActions = [
-    {
-      action: userType === 'staff' ? 'DISABLE_STAFF_STATUS' : 'DISABLE_STUDENT_STATUS',
-      icon: <Block />,
-      text: 'Disable'
-    },
-    {
-      action: userType === 'staff' ? 'ENABLE_STAFF_STATUS' : 'ENABLE_STUDENT_STATUS',
-      icon: <CheckCircle />,
-      text: 'Enable'
-    },
-    {
-      action: 'RESEND_VERIFICATION_EMAIL_TO_USER',
-      icon: <Email />,
-      text: 'Resend Verification Email'
-    },
-    {
-      action: 'RESEND_PWD_LINK_EMAIL_TO_USER',
-      icon: <Key />,
-      text: 'Resend Password Setup Link'
-    },
-    {
-      action: 'RESET_USER_PWD',
-      icon: <LockReset />,
-      text: 'Reset Password'
-    }
-  ];
   const table = useMaterialReactTable({
-    data: isError ? [] : users || [],
+    data: users,
     columns,
-    state: {
-      isLoading,
-      density: 'compact'
-    },
+    state: { isLoading, density: 'compact' },
     enableDensityToggle: false,
     getRowId: (row) => row?.id?.toString(),
     enableRowActions: true,
@@ -133,7 +144,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
           key={0}
           onClick={() => closeMenu()}
           component={Link}
-          to={userType === 'staff' ? `${appBase}/staffs/${id}` : `${appBase}/students/${id}`}
+          to={isStaff ? `${appBase}/staff/${id}` : `${appBase}/students/${id}`}
         >
           <ListItemIcon>
             <Visibility fontSize='small' />
@@ -144,9 +155,7 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
           key={1}
           onClick={() => closeMenu()}
           component={Link}
-          to={
-            userType === 'staff' ? `${appBase}/staffs/edit/${id}` : `${appBase}/students/edit/${id}`
-          }
+          to={isStaff ? `${appBase}/staff/edit/${id}` : `${appBase}/students/edit/${id}`}
         >
           <ListItemIcon>
             <Edit fontSize='small' />
@@ -171,25 +180,22 @@ export const UserAccountBasic = ({ data }: { data: UserAccountBasicDataProps }) 
       ];
     },
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? error : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : ERROR_MESSAGE.NO_RECORD;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });
 
-  const { modalTitle, modalBodyText, isModalOpen, isSaving } = state;
   return (
     <>
-      <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }} component={Paper}>
-        <MaterialReactTable table={table} />
-      </Box>
+      <MaterialReactTable table={table} />
 
       <DialogModal
-        isSaving={isSaving}
-        titleText={modalTitle}
-        contextText={modalBodyText}
+        isSaving={state.isSaving}
+        titleText={state.modalTitle}
+        contextText={state.modalBodyText}
         actionFooterCancelText='No'
         actionFooterSaveText='Yes'
-        isOpen={isModalOpen}
+        isOpen={state.isModalOpen}
         closeModal={toggleModal}
         handleSave={onSave}
       />

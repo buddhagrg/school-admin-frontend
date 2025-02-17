@@ -1,12 +1,5 @@
 import { z } from 'zod';
 
-export const StudentFilterSchema = z.object({
-  class: z.string().optional(),
-  section: z.string().optional(),
-  name: z.string().optional(),
-  roll: z.string().optional()
-});
-
 export const BasicInfoSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   gender: z.string().min(1, 'Gender is required').or(z.number().min(1, 'Gender is required')),

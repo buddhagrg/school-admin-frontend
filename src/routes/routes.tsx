@@ -6,9 +6,9 @@ import { AppRoot } from './app-root';
 import { LoginPage, SetupPasswordPage } from '@/app/auth/pages';
 import { DashboardPage } from '@/app/dashboard/pages';
 import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/app/leave/pages';
-import { AddStudent, EditStudent, ListStudents, ViewStudent } from '@/app/student/pages';
+import { AddStudent, EditStudent, ViewStudent } from '@/app/student/pages';
 import { AddNotice, EditNotice, ListNotices, ManageNotices, ViewNotice } from '@/app/notice/pages';
-import { AddStaff, EditStaff, ListStaffs, ViewStaff } from '@/app/staff/pages';
+import { AddStaff, EditStaff, ViewStaff } from '@/app/staff/pages';
 import { AccountPage } from '@/app/account/pages';
 import { EditDepartmentPage, ListDepartmentsPage } from '@/app/department/pages';
 import { ErrorPage, NotFound } from '@/components/errors';
@@ -22,6 +22,7 @@ import { SuperAdminDashboard } from '@/app/super-admin-dashboard';
 import { EditSchool, ListSchoolsPage } from '@/app/schools/pages';
 import { LevelClassPage, AcademicPage } from '@/app/academic/pages';
 import { ClassSectionPage, ClassTeacherPage } from '@/app/class/pages';
+import { ManageUsers } from '@/app/manage-users/pages';
 
 export const routes = [
   {
@@ -63,19 +64,18 @@ export const routes = [
       { path: 'leaves/review', element: <PendingRequest /> },
       { path: 'classes/manage', element: <ClassSectionPage /> },
       { path: 'classes/teachers', element: <ClassTeacherPage /> },
-      { path: 'students', element: <ListStudents /> },
-      { path: 'students/add', element: <AddStudent /> },
-      { path: 'students/:id', element: <ViewStudent /> },
-      { path: 'students/edit/:id', element: <EditStudent /> },
+      { path: 'users/students/add', element: <AddStudent /> },
+      { path: 'users/students/:id', element: <ViewStudent /> },
+      { path: 'users/students/edit/:id', element: <EditStudent /> },
       { path: 'notices', element: <ListNotices /> },
       { path: 'notices/add', element: <AddNotice /> },
       { path: 'notices/:id', element: <ViewNotice /> },
       { path: 'notices/edit/:id', element: <EditNotice /> },
       { path: 'notices/manage', element: <ManageNotices /> },
-      { path: 'staffs', element: <ListStaffs /> },
-      { path: 'staffs/add', element: <AddStaff /> },
-      { path: 'staffs/:id', element: <ViewStaff /> },
-      { path: 'staffs/edit/:id', element: <EditStaff /> },
+      { path: 'users/manage', element: <ManageUsers /> },
+      { path: 'users/staff/add', element: <AddStaff /> },
+      { path: 'users/staff/:id', element: <ViewStaff /> },
+      { path: 'users/staff/edit/:id', element: <EditStaff /> },
       { path: 'users/role-and-permission', element: <RoleAndPermission /> },
       { path: 'departments', element: <ListDepartmentsPage /> },
       { path: 'departments/edit/:id', element: <EditDepartmentPage /> },

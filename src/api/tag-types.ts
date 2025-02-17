@@ -7,7 +7,7 @@ export enum Tag {
   NOTICES = 'Notices',
   NOTICE_RECIPIENT_LIST = 'NoticeRecipientList',
   NOTICE_RECIPIENTS = 'NoticeRecipients',
-  STAFFS = 'Staffs',
+  STAFF = 'STAFF',
   DASHBOARD = 'Dashboard',
   LEAVE_HISTORY = 'LeaveHistory',
   PENDING_LEAVES = 'PendingLeaves',
@@ -27,5 +27,6 @@ export enum Tag {
   ACADEMIC_LEVELS = 'AcademicLevels',
   ACADEMIC_LEVELS_WITH_CLASSES = 'AcademicLevelsWithClasses',
   CLASS_SECTION_STRUCTURE = 'ClassSectionStructure',
-  TEACHERS = 'TEACHERS'
+  TEACHERS = 'TEACHERS',
+  USERS = 'USERS'
 }

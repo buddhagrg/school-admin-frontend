@@ -1,12 +1,5 @@
 import { z } from 'zod';
 
-export const StaffFilterSchema = z
-  .object({
-    roleId: z.string(),
-    staffId: z.string(),
-    staffName: z.string()
-  })
-  .partial();
 export const BasicInfoSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   role: z.string().min(1, 'Role is required').or(z.number().min(1, 'Role is required')),

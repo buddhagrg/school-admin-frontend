@@ -3,25 +3,12 @@ import {
   AddStudent,
   GetStudentDetailProps,
   ReviewStudentStatusRequest,
-  StudentData,
-  StudentFilter,
   StudentProps,
   StudentPropsWithId
 } from '../types';
-import { getQueryString } from '@/utils/helpers/get-query-string';
 
 export const studentApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getStudents: builder.query<StudentData, StudentFilter>({
-      query: (payload) => {
-        const queryString = getQueryString(payload);
-        return `/students${queryString}`;
-      },
-      providesTags: (result) =>
-        result?.students?.map(({ id }) => {
-          return { type: Tag.STUDENTS, id };
-        }) || [{ type: Tag.STUDENTS }]
-    }),
     getStudentDetail: builder.query<GetStudentDetailProps, string | undefined>({
       query: (id) => (id ? `/students/${id}` : `/account/me`),
       providesTags: (result) => (result ? [{ type: Tag.STUDENTS, id: result.id }] : [])
@@ -54,7 +41,6 @@ export const studentApi = api.injectEndpoints({
 });
 
 export const {
-  useGetStudentsQuery,
   useGetStudentDetailQuery,
   useReviewStudentStatusMutation,
   useAddStudentMutation,

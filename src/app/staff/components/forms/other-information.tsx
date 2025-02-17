@@ -18,7 +18,7 @@ import { StaffFormProps } from '../../types';
 import { useGetStaffsQuery } from '../../api';
 
 export const OtherInformation = ({ action }: { action: string }) => {
-  const { data } = useGetStaffsQuery({});
+  const { data } = useGetStaffsQuery();
 
   const {
     control,
@@ -50,9 +50,9 @@ export const OtherInformation = ({ action }: { action: string }) => {
                     onChange={(e) => onChange(e.target.value)}
                     notched
                   >
-                    {data?.staffs.map((staff) => (
-                      <MenuItem value={staff.id} key={staff.id}>
-                        {staff.name}
+                    {data?.staff.map((item) => (
+                      <MenuItem value={item.id} key={item.id}>
+                        {item.name}
                       </MenuItem>
                     ))}
                   </Select>

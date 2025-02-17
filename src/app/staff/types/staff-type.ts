@@ -3,12 +3,9 @@ import {
   AdminStaffSchema,
   BasicInfoSchema,
   ParentsInfoSchema,
-  StaffFilterSchema,
   StaffFormSchema
 } from './staff-schema';
-import { UserAccountBasicProps } from '@/components/user-account-basic';
-
-export type StaffFilter = z.infer<typeof StaffFilterSchema>;
+import { UserAccountBasic } from '@/app/manage-users/types';
 
 export type StaffFormProps = z.infer<typeof StaffFormSchema>;
 export type AdminStaffProps = z.infer<typeof AdminStaffSchema>;
@@ -19,9 +16,8 @@ export type StaffStatusRequest = {
 };
 
 export type StaffData = {
-  staffs: UserAccountBasicProps[];
+  staff: UserAccountBasic[];
 };
 
 export type ParentsInfo = z.infer<typeof ParentsInfoSchema>;
-
 export type BasicInfo = z.infer<typeof BasicInfoSchema>;
