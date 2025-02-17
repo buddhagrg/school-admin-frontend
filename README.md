@@ -34,7 +34,7 @@ Below are the features that are available in the system upto now. Other features
 - sections (add/edit/delete/list sections)
 - students (add/edit/list students)
 - notice (add/edit/delete/list/approve/reject notices)
-- staff (add/edit/list staffs)
+- staff (add/edit/list staff)
 - departments (add/edit/list/delete)
 - roles and permissions (add/edit/enable/disable roles, assign permissions to user)
 
@@ -69,7 +69,7 @@ src
     +-- app             # main api slice and redux store config
     +-- components      # shared components
     |
-    +-- domains         # domain based modules
+    +-- app         # domain based modules
     |   |
         +-- auth        # every needed and unshared modules are kept in their own module
             |
