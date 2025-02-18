@@ -19,9 +19,9 @@ import { useGetNoticeDetailQuery, useUpdateNoticeMutation } from '../api';
 const initialState: NoticeFormProps = {
   title: '',
   description: '',
-  status: 0,
+  status: '',
   recipientType: 'EV',
-  recipientRole: 0,
+  recipientRole: '',
   firstField: ''
 };
 
@@ -29,7 +29,7 @@ export const EditNotice = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, isError, error } = useGetNoticeDetailQuery(id);
-  const [selectedRoleId, setSelectedRoleId] = useState<number>(0);
+  const [selectedRoleId, setSelectedRoleId] = useState<number | string>('');
   const [updateNotice, { isLoading: updatingNotice }] = useUpdateNoticeMutation();
   const appBase = useSelector(getAppBase);
 
@@ -72,7 +72,7 @@ export const EditNotice = () => {
     const shouldResetFields = value === 'EV';
     setSelectedRoleId(0);
     if (shouldResetFields) {
-      methods.reset({ ...methods.getValues(), recipientRole: 0, firstField: '' });
+      methods.reset({ ...methods.getValues(), recipientRole: '', firstField: '' });
     }
   };
 

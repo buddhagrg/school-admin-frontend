@@ -27,7 +27,7 @@ type Props = {
   methods: UseFormReturn<NoticeFormProps>;
   handleRoleChange: (event: SelectChangeEvent<string | number>) => void;
   handleRecipientChange: (event: SelectChangeEvent<string | number>) => void;
-  selectedRoleId: number;
+  selectedRoleId: number | string;
 };
 
 export const NoticeForm: FC<Props> = ({
@@ -203,8 +203,8 @@ export const NoticeForm: FC<Props> = ({
                         <MenuItem value='' disabled>
                           <em>None</em>
                         </MenuItem>
-                        {primaryDependents.map(({ name }) => (
-                          <MenuItem key={name} value={name}>
+                        {primaryDependents.map(({ id, name }) => (
+                          <MenuItem key={id} value={id}>
                             {name}
                           </MenuItem>
                         ))}
