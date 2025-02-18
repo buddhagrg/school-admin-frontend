@@ -27,7 +27,7 @@ export const OtherInformation = ({ action }: { action: string }) => {
             <FormLabel>System Access</FormLabel>
             <RadioGroup row>
               <Controller
-                name='systemAccess'
+                name='hasSystemAccess'
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <FormControlLabel
@@ -37,7 +37,7 @@ export const OtherInformation = ({ action }: { action: string }) => {
                 )}
               />
               <Controller
-                name='systemAccess'
+                name='hasSystemAccess'
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <FormControlLabel
@@ -51,10 +51,10 @@ export const OtherInformation = ({ action }: { action: string }) => {
         )}
 
         <FormControl>
-          <FormLabel>Enroll to System</FormLabel>
+          <FormLabel>Enable System Access</FormLabel>
           <RadioGroup row>
             <Controller
-              name='enrollToSystem'
+              name='hasSystemAccess'
               control={control}
               render={({ field: { onChange, value } }) => (
                 <FormControlLabel
@@ -64,7 +64,7 @@ export const OtherInformation = ({ action }: { action: string }) => {
               )}
             />
             <Controller
-              name='enrollToSystem'
+              name='hasSystemAccess'
               control={control}
               render={({ field: { onChange, value } }) => (
                 <FormControlLabel

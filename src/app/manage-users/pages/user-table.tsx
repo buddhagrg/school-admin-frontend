@@ -44,8 +44,6 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
   const appBase = useSelector(getAppBase);
   const [state, setState] = useState<State>(initialState);
   const { handleAction } = useHandleMenuAction();
-  const userType = users.length > 0 ? users[0].staticRoleId : 0;
-  const isStaff = [2, 10].includes(userType);
 
   const columns: MRT_ColumnDef<UserAccountBasic>[] = useMemo(
     () => [
@@ -59,8 +57,8 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
         Cell: ({ cell }) => <>{getFormattedDate(cell.getValue<string>(), DATE_TIME_24_HR_FORMAT)}</>
       },
       {
-        accessorKey: 'systemAccess',
-        header: 'System Access',
+        accessorKey: 'hasSystemAccess',
+        header: 'Has System Access',
         Cell: ({ cell }) => {
           const status = cell.getValue<boolean>();
           return (
@@ -75,14 +73,14 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
   );
   const menuActions = [
     {
-      action: isStaff ? 'DISABLE_STAFF_STATUS' : 'DISABLE_STUDENT_STATUS',
+      action: 'DISABLE_SYSTEM_ACCESS',
       icon: <Block />,
-      text: 'Disable'
+      text: 'Disable System Access'
     },
     {
-      action: isStaff ? 'ENABLE_STAFF_STATUS' : 'ENABLE_STUDENT_STATUS',
+      action: 'ENABLE_SYSTEM_ACCESS',
       icon: <CheckCircle />,
-      text: 'Enable'
+      text: 'Enable System Access'
     },
     {
       action: 'RESEND_VERIFICATION_EMAIL_TO_USER',
@@ -128,6 +126,22 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
       setState((prevState) => ({ ...prevState, isSaving: !prevState.isSaving }));
     }
   };
+  const isMenuDisabled = (action: string, hasSystemAccess: boolean) => {
+    switch (hasSystemAccess) {
+      case true:
+        if (action === 'ENABLE_SYSTEM_ACCESS') {
+          return true;
+        }
+        return false;
+      case false:
+        if (action === 'ENABLE_SYSTEM_ACCESS') {
+          return false;
+        }
+        return true;
+      default:
+        return true;
+    }
+  };
   const table = useMaterialReactTable({
     data: users,
     columns,
@@ -137,14 +151,15 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
     enableRowActions: true,
     renderRowActionMenuItems: ({ row, closeMenu }) => {
       const {
-        original: { id }
+        original: { id, staticRoleId, hasSystemAccess }
       } = row;
+      const userRoute = staticRoleId === 4 ? 'students' : 'staff';
       const staticAction = [
         <MenuItem
           key={0}
           onClick={() => closeMenu()}
           component={Link}
-          to={isStaff ? `${appBase}/staff/${id}` : `${appBase}/students/${id}`}
+          to={`${appBase}/users/${userRoute}/${id}`}
         >
           <ListItemIcon>
             <Visibility fontSize='small' />
@@ -155,7 +170,7 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
           key={1}
           onClick={() => closeMenu()}
           component={Link}
-          to={isStaff ? `${appBase}/staff/edit/${id}` : `${appBase}/students/edit/${id}`}
+          to={`${appBase}/users/${userRoute}/edit/${id}`}
         >
           <ListItemIcon>
             <Edit fontSize='small' />
@@ -167,11 +182,12 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
         ...staticAction,
         menuActions.map(({ action, icon, text }) => (
           <MenuItem
+            disabled={isMenuDisabled(action, hasSystemAccess)}
+            key={action}
             onClick={() => {
               closeMenu();
               onMenuItemClick(action, id);
             }}
-            key={action}
           >
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText>{text}</ListItemText>

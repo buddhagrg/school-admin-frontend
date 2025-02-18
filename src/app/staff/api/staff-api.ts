@@ -1,10 +1,10 @@
 import { api, Tag } from '@/api';
-import { StaffData, StaffFormProps, StaffFormPropsWithId, StaffStatusRequest } from '../types';
+import { StaffData, StaffFormProps, StaffFormPropsWithId } from '../types';
 
 export const staffApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getStaffs: builder.query<StaffData, void>({
-      query: () => `/staffs`,
+      query: () => `/staff`,
       providesTags: (result) =>
         result?.staff?.map(({ id }) => {
           return { type: Tag.STAFF, id };
@@ -14,21 +14,13 @@ export const staffApi = api.injectEndpoints({
       query: (id) => (id ? `/staff/${id}` : `/account/me`),
       providesTags: (result) => (result ? [{ type: Tag.STAFF, id: result.id }] : [])
     }),
-    handleStaffStatus: builder.mutation<{ message: string }, StaffStatusRequest>({
-      query: ({ id, status }) => ({
-        url: `/staff/${id}/status`,
-        method: 'POST',
-        body: { status }
-      }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: Tag.STAFF, id }, Tag.STAFF]
-    }),
     addStaff: builder.mutation<{ message: string }, StaffFormProps>({
       query: (payload) => ({
         url: `/staff`,
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: [Tag.STAFF]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.USERS])
     }),
     updateStaff: builder.mutation<{ message: string }, StaffFormPropsWithId>({
       query: ({ id, ...payload }) => ({
@@ -36,7 +28,7 @@ export const staffApi = api.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: Tag.STAFF, id }]
+      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.USERS, id }])
     })
   })
 });
@@ -44,7 +36,6 @@ export const staffApi = api.injectEndpoints({
 export const {
   useGetStaffsQuery,
   useGetStaffDetailQuery,
-  useHandleStaffStatusMutation,
   useAddStaffMutation,
   useUpdateStaffMutation
 } = staffApi;

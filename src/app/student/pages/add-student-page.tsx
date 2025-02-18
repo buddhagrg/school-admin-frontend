@@ -50,7 +50,7 @@ export const AddStudent = () => {
 
       const result = await addStudent(payload).unwrap();
       toast.info(result.message);
-      navigate(`${appBase}/students`);
+      navigate(`${appBase}/users/manage`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

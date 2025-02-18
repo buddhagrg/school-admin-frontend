@@ -18,8 +18,7 @@ export const staffInitialState: StaffFormProps = {
   motherName: '',
   emergencyPhone: '',
   reporterId: '',
-  systemAccess: false,
-  enrollToSystem: false
+  hasSystemAccess: false
 };
 
 export const {
@@ -27,6 +26,6 @@ export const {
   roleName,
   reporterId,
   reporterName,
-  systemAccess,
+  hasSystemAccess,
   ...staffInitialStateForAdminProfile
 } = staffInitialState;

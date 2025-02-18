@@ -19,10 +19,8 @@ export const maritalStatusList: NameIdType[] = [
 ];
 
 export const menuItemTexts: Record<string, string> = {
-  ENABLE_STAFF_STATUS: 'Enable Staff',
-  DISABLE_STAFF_STATUS: 'Disable Staff',
-  ENABLE_STUDENT_STATUS: 'Enable Student',
-  DISABLE_STUDENT_STATUS: 'Disable Student',
+  ENABLE_SYSTEM_ACCESS: 'Enable System Access',
+  DISABLE_SYSTEM_ACCESS: 'Disable System Access',
   RESEND_VERIFICATION_EMAIL_TO_USER: 'Resend Verification Email',
   RESEND_PWD_LINK_EMAIL_TO_USER: 'Resend Password Setup Link',
   RESET_USER_PWD: 'Reset User Password',

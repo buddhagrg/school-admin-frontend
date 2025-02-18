@@ -11,7 +11,7 @@ export const BasicInfoSchema = z.object({
 
 export const AcademicInfoSchema = z.object({
   class: z.string().min(1, 'Class is required').or(z.number().min(1, 'Class is required')),
-  section: z.string(),
+  section: z.union([z.string(), z.number()]),
   roll: z.string().min(1, 'Roll is required'),
   admissionDate: z.union([z.date(), z.string()])
 });
@@ -32,8 +32,7 @@ export const ParentsAndGuardianInfoSchema = z.object({
 });
 
 export const OtherInfoSchema = z.object({
-  systemAccess: z.boolean(),
-  enrollToSystem: z.boolean().optional()
+  hasSystemAccess: z.boolean().optional()
 });
 
 export const StudentSchema = BasicInfoSchema.extend(AcademicInfoSchema.shape)

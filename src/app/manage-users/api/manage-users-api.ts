@@ -1,5 +1,5 @@
 import { api, Tag } from '@/api';
-import { UserFilterProps, UsersData } from '../types';
+import { UserFilterProps, UsersData, UserSystemAccessRequest } from '../types';
 import { getQueryString } from '@/utils/helpers/get-query-string';
 
 const manageUsersApi = api.injectEndpoints({
@@ -13,8 +13,16 @@ const manageUsersApi = api.injectEndpoints({
         result?.users?.map(({ id }) => {
           return { type: Tag.USERS, id };
         }) || [{ type: Tag.USERS }]
+    }),
+    handleUserSystemAccess: builder.mutation<{ message: string }, UserSystemAccessRequest>({
+      query: ({ id, hasSystemAccess }) => ({
+        url: `/users/${id}/system-access`,
+        method: 'POST',
+        body: { hasSystemAccess }
+      }),
+      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.USERS, id }])
     })
   })
 });
 
-export const { useGetUsersQuery } = manageUsersApi;
+export const { useGetUsersQuery, useHandleUserSystemAccessMutation } = manageUsersApi;

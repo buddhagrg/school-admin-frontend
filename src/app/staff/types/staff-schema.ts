@@ -28,8 +28,7 @@ export const OtherInfoSchema = z.object({
     .string()
     .min(1, 'You must select at least one person')
     .or(z.number().min(1, 'You must select at least one person')),
-  systemAccess: z.boolean(),
-  enrollToSystem: z.boolean().optional(),
+  hasSystemAccess: z.boolean().optional(),
   reporterName: z.string().optional().nullable()
 });
 export const StaffFormSchema = BasicInfoSchema.extend(AddressInfoSchema.shape)

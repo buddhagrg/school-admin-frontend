@@ -48,7 +48,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
     guardianName,
     guardianPhone,
     relationOfGuardian,
-    systemAccess,
+    hasSystemAccess,
     reporterName,
     schoolName
   } = data;
@@ -89,7 +89,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
       </Grid2>
       <Grid2 size={{ xs: 12, md: 5 }}></Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
-        <Others systemAccess={systemAccess} reporterName={reporterName} />
+        <Others hasSystemAccess={hasSystemAccess ?? false} reporterName={reporterName} />
       </Grid2>
     </Grid2>
   );

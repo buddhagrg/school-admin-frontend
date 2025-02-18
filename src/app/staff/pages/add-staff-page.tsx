@@ -39,7 +39,7 @@ export const AddStaff = () => {
     try {
       const result = await addNewStaff(data).unwrap();
       toast.info(result.message);
-      navigate(`${appBase}/staff`);
+      navigate(`${appBase}/users/manage`);
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

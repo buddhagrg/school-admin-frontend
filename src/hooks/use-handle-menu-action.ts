@@ -4,13 +4,11 @@ import {
   useResendVerificationEmailMutation,
   useResetPwdMutation
 } from '@/app/auth/api';
+import { useHandleUserSystemAccessMutation } from '@/app/manage-users/api';
 import { useHandleNoticeStatusMutation } from '@/app/notice/api';
-import { useHandleStaffStatusMutation } from '@/app/staff/api';
-import { useReviewStudentStatusMutation } from '@/app/student/api';
 
 export const useHandleMenuAction = () => {
-  const [handleStaffStatus] = useHandleStaffStatusMutation();
-  const [handleStudentStatus] = useReviewStudentStatusMutation();
+  const [handleUserSystemAccess] = useHandleUserSystemAccessMutation();
   const [resendVerificationEmail] = useResendVerificationEmailMutation();
   const [resendPwdSetupLink] = useResendPwdSetupLinkMutation();
   const [resetPwd] = useResetPwdMutation();
@@ -20,10 +18,10 @@ export const useHandleMenuAction = () => {
     const actionHandlers: {
       [key in keyof typeof menuItemTexts]: () => Promise<{ message: string }>;
     } = {
-      ENABLE_STAFF_STATUS: () => handleStaffStatus({ id: selectedId, status: true }).unwrap(),
-      DISABLE_STAFF_STATUS: () => handleStaffStatus({ id: selectedId, status: false }).unwrap(),
-      ENABLE_STUDENT_STATUS: () => handleStudentStatus({ id: selectedId, status: true }).unwrap(),
-      DISABLE_STUDENT_STATUS: () => handleStudentStatus({ id: selectedId, status: false }).unwrap(),
+      ENABLE_SYSTEM_ACCESS: () =>
+        handleUserSystemAccess({ id: selectedId, hasSystemAccess: true }).unwrap(),
+      DISABLE_SYSTEM_ACCESS: () =>
+        handleUserSystemAccess({ id: selectedId, hasSystemAccess: false }).unwrap(),
       RESEND_VERIFICATION_EMAIL_TO_USER: () =>
         resendVerificationEmail({ userId: selectedId }).unwrap(),
       RESEND_PWD_LINK_EMAIL_TO_USER: () => resendPwdSetupLink({ userId: selectedId }).unwrap(),

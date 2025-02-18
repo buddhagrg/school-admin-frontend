@@ -8,22 +8,6 @@ import {
   StudentSchema
 } from './student-schema';
 
-export type Student = {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-  systemAccess: boolean;
-  lastLogin: Date;
-};
-
-export type StudentState = {
-  isLoading: boolean;
-  isError: boolean;
-  error?: string;
-  students: Student[] | [];
-};
-
 export type AddressInfo = z.infer<typeof AddressInfoSchema>;
 export type BasicInfo = z.infer<typeof BasicInfoSchema>;
 export type AcademicInfo = z.infer<typeof AcademicInfoSchema>;
@@ -49,22 +33,13 @@ type SetFieldAction = {
 type SetStateAction = { type: 'SET_STATE'; payload: StudentFormState };
 type ResetFieldAction = { type: 'RESET_FIELD'; payload: StudentFormState };
 export type StudentFormAction = SetFieldAction | SetStateAction | ResetFieldAction;
-
 export type StudentProps = z.infer<typeof StudentSchema>;
-
 export type StudentPropsWithId = StudentProps & { id: number };
 export type GetStudentDetailProps = StudentPropsWithId & { reporterName: string };
-
 export type StudentDetail = {
   student: StudentPropsWithId;
 };
-
 export type AddStudent = {
   message: string;
   id: number;
-};
-
-export type ReviewStudentStatusRequest = {
-  id: number;
-  status: boolean;
 };

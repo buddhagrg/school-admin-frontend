@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { LockPerson } from '@mui/icons-material';
 import { Box, Card, CardContent, Divider, Typography } from '@mui/material';
+import { getTextColor } from '@/utils/helpers/get-text-color';
 
 type OthersProps = {
-  systemAccess: boolean;
+  hasSystemAccess: boolean;
   reporterName?: string | null;
 };
-export const Others: FC<OthersProps> = ({ systemAccess, reporterName }) => {
+export const Others: FC<OthersProps> = ({ hasSystemAccess, reporterName }) => {
   return (
     <Card variant='outlined'>
       <CardContent>
@@ -17,7 +18,9 @@ export const Others: FC<OthersProps> = ({ systemAccess, reporterName }) => {
         <Divider sx={{ mb: 2 }} />
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Typography variant='subtitle2'>Has System Access : &nbsp;</Typography>
-          <Typography variant='body1'>{systemAccess?.toString()}</Typography>
+          <Typography variant='body1' sx={getTextColor(hasSystemAccess)}>
+            {hasSystemAccess.toString()}
+          </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Typography variant='subtitle2'>Reports To : &nbsp;</Typography>
