@@ -59,12 +59,12 @@ export const MainLayout = ({ children }: { children: ReactNode }) => {
           <DrawerContent handleNavigationClick={handleNavigationClick} openNavMenu={openNavMenu} />
         </Drawer>
         <Drawer
+          open
           variant='permanent'
           sx={{
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
           }}
-          open
         >
           <DrawerContent handleNavigationClick={handleNavigationClick} openNavMenu={openNavMenu} />
         </Drawer>
