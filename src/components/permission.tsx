@@ -118,7 +118,7 @@ export const Permission: FC<PermissionType> = ({
           startIcon={<Add />}
           onClick={() => handleAction && handleAction({ ...permissionFormState, action: 'add' })}
         >
-          Add Root Access Control
+          Add Root Permission
         </Button>
       ) : (
         <></>

@@ -65,7 +65,7 @@ export const AddEditPermission: FC<AddEditPermissionType> = ({ formData, closeMo
 
   return (
     <DialogModal
-      titleText={action === 'add' ? `Add New Access Control` : `Update Access Control`}
+      titleText={action === 'add' ? `Add New Permission` : `Update Permission`}
       isOpen={true}
       isSaving={isAdding || isUpdating}
       handleSave={handleSubmit(onSave)}
