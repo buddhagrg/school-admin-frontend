@@ -25,7 +25,7 @@ type Props = {
   isSaving: boolean;
   onSubmit: () => void;
   methods: UseFormReturn<NoticeFormProps>;
-  handleRoleChange: (event: SelectChangeEvent<string | number>) => void;
+  handleRoleChange: (event: SelectChangeEvent<string | number | null>) => void;
   handleRecipientChange: (event: SelectChangeEvent<string | number>) => void;
   selectedRoleId: number | string;
 };

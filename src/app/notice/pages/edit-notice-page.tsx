@@ -62,7 +62,7 @@ export const EditNotice = () => {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }
   };
-  const handleRoleChange = (event: SelectChangeEvent<string | number>) => {
+  const handleRoleChange = (event: SelectChangeEvent<string | number | null>) => {
     const { value } = event.target;
     setSelectedRoleId(Number(value));
     methods.reset({ ...methods.getValues(), firstField: '' });
