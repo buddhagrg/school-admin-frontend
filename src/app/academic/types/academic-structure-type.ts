@@ -17,8 +17,8 @@ export type AcademicLevelData = {
 };
 
 export type Period = { id: number; name: string; sortOrder: number };
-export type AcademicStructure = {
-  academicStructure: { id: number; name: string; periods: Period[] }[];
+export type AcademicLevelsWithPeriods = {
+  levelsWithPeriods: { id: number; name: string; periods: Period[] }[];
 };
 export type ManagePeriodOrder = { academicLevelId: number; periods: Period[] };
 
@@ -28,7 +28,7 @@ type LevelClass = {
   classes: Period[];
 };
 export type AcademicLevelsWithClasses = {
-  levelClass: LevelClass[];
+  levelsWithClasses: LevelClass[];
 };
 type Class = { id: number; name: string; sortOrder: number };
 type ClassesWithNoLevel = {
@@ -42,6 +42,7 @@ export type ClassesWithNoAcademicLevel = {
 
 export type AddClassToLevelFormProps = z.infer<typeof AddClassToLevelForm>;
 
-export type AddAcademicLevelToClass = AddClassToLevelFormProps & {
+export type AddClassToAcademicLevel = {
+  classId: number | string;
   academicLevelId: number;
 };

@@ -4,8 +4,8 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
-import { useActivateSectionMutation, useDeactivateSectionMutation } from '../../api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useUpdateSectionStatusMutation } from '../../api';
 
 type SectionStatusProps = {
   closeModal: () => void;
@@ -21,16 +21,12 @@ export const SectionStatus: FC<SectionStatusProps> = ({
   name,
   action
 }) => {
-  const [deactivateSection, { isLoading: isDeactivating }] = useDeactivateSectionMutation();
-  const [activateSection, { isLoading: isActivating }] = useActivateSectionMutation();
+  const [updateSectionStatus, { isLoading: isUpdating }] = useUpdateSectionStatusMutation();
 
   const handleSave = async () => {
     try {
-      const payload = { classId, id };
-      const result =
-        action === 'deactivate'
-          ? await deactivateSection(payload).unwrap()
-          : await activateSection(payload).unwrap();
+      const payload = { classId, id, status: action === 'activate' ? true : false };
+      const result = await updateSectionStatus(payload).unwrap();
       toast.info(result.message);
       closeModal();
     } catch (error) {
@@ -38,14 +34,15 @@ export const SectionStatus: FC<SectionStatusProps> = ({
     }
   };
 
+  const titleText = action === 'activate' ? 'Confirm Activation' : 'Confirm Deactivation';
   return (
     <DialogModal
       isOpen={true}
-      titleText='Confirm Deletion'
-      contextText={`Are you sure you want to delete the section "${name}"?`}
+      titleText={titleText}
+      contextText={`Are you sure you want to ${action} the section "${name}"?`}
       handleSave={handleSave}
       closeModal={closeModal}
-      isSaving={isDeactivating || isActivating}
+      isSaving={isUpdating}
       actionFooterCancelText='No'
       actionFooterSaveText='Yes'
     />

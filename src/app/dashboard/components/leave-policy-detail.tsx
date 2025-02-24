@@ -31,7 +31,7 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
 
   const methods = useForm<LeaveRequestForm>({
     defaultValues: {
-      policy: 0,
+      policyId: 0,
       from: new Date(),
       to: new Date(),
       note: ''
@@ -41,7 +41,7 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
 
   const onBtnClick = (id: number) => {
     const { setValue } = methods;
-    setValue('policy', id);
+    setValue('policyId', id);
     toggleModal();
   };
   const toggleModal = () => {
@@ -49,9 +49,9 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
   };
   const onLeaveSubmit = async (data: LeaveRequestForm) => {
     try {
-      const { policy, from, to, note } = data;
+      const { policyId, from, to, note } = data;
       const payload = {
-        policy,
+        policyId,
         from: getFormattedDate(from, API_DATE_FORMAT),
         to: getFormattedDate(to, API_DATE_FORMAT),
         note

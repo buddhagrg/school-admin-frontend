@@ -4,8 +4,8 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { DialogModal } from '@/components/dialog-modal';
-import { useActivateClassMutation, useDeactivateClassMutation } from '../../api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useUpdateClassStatusMutation } from '../../api';
 
 type ClassStatusProps = {
   id: number;
@@ -14,15 +14,15 @@ type ClassStatusProps = {
   action: string;
 };
 export const ClassStatus: FC<ClassStatusProps> = ({ id, name, closeModal, action }) => {
-  const [deactivateClass, { isLoading: isDeactivating }] = useDeactivateClassMutation();
-  const [activateClass, { isLoading: isActivating }] = useActivateClassMutation();
+  const [updateClassStatus, { isLoading: isUpdating }] = useUpdateClassStatusMutation();
 
   const handleSave = async () => {
     try {
-      const result =
-        action === 'activate'
-          ? await activateClass(id).unwrap()
-          : await deactivateClass(id).unwrap();
+      const payload = {
+        id,
+        status: action === 'activate' ? true : false
+      };
+      const result = await updateClassStatus(payload).unwrap();
       toast.info(result.message);
       closeModal();
     } catch (error) {
@@ -35,7 +35,7 @@ export const ClassStatus: FC<ClassStatusProps> = ({ id, name, closeModal, action
     <DialogModal
       isOpen={true}
       titleText={titleText}
-      isSaving={isDeactivating || isActivating}
+      isSaving={isUpdating}
       contextText={`Are you sure you want to ${action} the class "${name}"?`}
       closeModal={closeModal}
       handleSave={handleSave}

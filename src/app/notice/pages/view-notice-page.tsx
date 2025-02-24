@@ -12,7 +12,7 @@ import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ViewNoticeSkeleton } from '../components';
 import { getAppBase } from '@/app/auth/slice';
-import { useGetNoticeDetailQuery, useHandleNoticeStatusMutation } from '../api';
+import { useGetNoticeDetailQuery, useUpdateNoticeStatusMutation } from '../api';
 
 export const ViewNotice = () => {
   const { id } = useParams();
@@ -20,7 +20,7 @@ export const ViewNotice = () => {
   const appBase = useSelector(getAppBase);
 
   const navigate = useNavigate();
-  const [deleteNotice, { isLoading: isDeletingNotice }] = useHandleNoticeStatusMutation();
+  const [deleteNotice, { isLoading: isDeletingNotice }] = useUpdateNoticeStatusMutation();
   const { data: noticeDetail, isLoading, isError, error } = useGetNoticeDetailQuery(id);
 
   const toggleDeleteConfirmationModal = () => {

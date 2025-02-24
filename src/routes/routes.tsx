@@ -13,11 +13,11 @@ import { AccountPage } from '@/app/account/pages';
 import { EditDepartmentPage, ListDepartmentsPage } from '@/app/department/pages';
 import { ErrorPage, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
-import { RoleAndPermission } from '@/app/role-and-permission/pages';
+import { RolePage } from '@/app/roles/pages';
 import { Home } from '@/app/landing';
 import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
 import { SignUpPage } from '@/app/auth/pages/signup/signup-page';
-import { ManageAccessControl } from '@/app/access-controls/pages/access-control-page';
+import { PermissionPage } from '@/app/permissions/pages/permission-page';
 import { SuperAdminDashboard } from '@/app/super-admin-dashboard';
 import { EditSchool, ListSchoolsPage } from '@/app/schools/pages';
 import { LevelClassPage, AcademicPage } from '@/app/academic/pages';
@@ -59,28 +59,28 @@ export const routes = [
     children: [
       { index: true, element: <DashboardPage /> },
       { path: 'account', element: <AccountPage /> },
-      { path: 'leaves/manage', element: <LeaveDefine /> },
-      { path: 'leaves/request', element: <MyLeaveRequest /> },
-      { path: 'leaves/review', element: <PendingRequest /> },
-      { path: 'classes/manage', element: <ClassSectionPage /> },
+      { path: 'academic/levels/periods', element: <AcademicPage /> },
+      { path: 'academic/levels/classes', element: <LevelClassPage /> },
+      { path: 'classes/sections', element: <ClassSectionPage /> },
       { path: 'classes/teachers', element: <ClassTeacherPage /> },
+      { path: 'users/roles-permissions', element: <RolePage /> },
       { path: 'users/students/add', element: <AddStudent /> },
       { path: 'users/students/:id', element: <ViewStudent /> },
       { path: 'users/students/edit/:id', element: <EditStudent /> },
+      { path: 'users/staff/add', element: <AddStaff /> },
+      { path: 'users/staff/:id', element: <ViewStaff /> },
+      { path: 'users/staff/edit/:id', element: <EditStaff /> },
+      { path: 'users/manage', element: <ManageUsers /> },
+      { path: 'leaves/policies', element: <LeaveDefine /> },
+      { path: 'leaves/request', element: <MyLeaveRequest /> },
+      { path: 'leaves/review', element: <PendingRequest /> },
       { path: 'notices', element: <ListNotices /> },
       { path: 'notices/add', element: <AddNotice /> },
       { path: 'notices/:id', element: <ViewNotice /> },
       { path: 'notices/edit/:id', element: <EditNotice /> },
-      { path: 'notices/manage', element: <ManageNotices /> },
-      { path: 'users/manage', element: <ManageUsers /> },
-      { path: 'users/staff/add', element: <AddStaff /> },
-      { path: 'users/staff/:id', element: <ViewStaff /> },
-      { path: 'users/staff/edit/:id', element: <EditStaff /> },
-      { path: 'users/roles-permissions', element: <RoleAndPermission /> },
+      { path: 'notices/review', element: <ManageNotices /> },
       { path: 'departments', element: <ListDepartmentsPage /> },
       { path: 'departments/edit/:id', element: <EditDepartmentPage /> },
-      { path: 'academic/manage', element: <AcademicPage /> },
-      { path: 'academic/level-class', element: <LevelClassPage /> },
       { path: '*', element: <NotFound /> }
     ]
   },
@@ -101,7 +101,7 @@ export const routes = [
       { path: 'account', element: <AccountPage /> },
       { path: 'schools', element: <ListSchoolsPage /> },
       { path: 'schools/edit/:id', element: <EditSchool /> },
-      { path: 'access-controls', element: <ManageAccessControl /> }
+      { path: 'permissions', element: <PermissionPage /> }
     ]
   },
   {

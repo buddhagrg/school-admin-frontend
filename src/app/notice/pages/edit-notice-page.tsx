@@ -82,6 +82,7 @@ export const EditNotice = () => {
     return <div>{getErrorMsg(error)?.message}</div>;
   }
 
+  console.log(methods.formState.errors);
   return (
     <>
       <PageContentHeader icon={Edit} heading='Edit Notice' />

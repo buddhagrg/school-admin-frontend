@@ -1,12 +1,5 @@
 import { FC, MouseEvent, ReactNode } from 'react';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 type DialogModalProps = {
   isSaving: boolean;
@@ -56,7 +49,7 @@ export const DialogModal: FC<DialogModalProps> = ({
     >
       <DialogTitle id='draggable-dialog-title'>{titleText}</DialogTitle>
       <DialogContent>
-        <DialogContentText gutterBottom>{contextText}</DialogContentText>
+        <Box>{contextText}</Box>
         {children}
       </DialogContent>
       <DialogActions>

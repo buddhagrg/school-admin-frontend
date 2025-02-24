@@ -13,10 +13,10 @@ import {
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
-import { useGetClassSectionStructureQuery } from '@/app/class/api';
 import { SectionDetail } from '@/app/class/types';
 import { UserFilterProps } from '../types';
-import { useGetRolesQuery } from '@/app/role-and-permission/api';
+import { useGetRolesQuery } from '@/app/roles/api';
+import { useGetClassesWithSectionsQuery } from '@/app/class/api';
 
 type UserFilterType = {
   methods: UseFormReturn<UserFilterProps>;
@@ -25,12 +25,12 @@ type UserFilterType = {
 };
 export const UserFilter: FC<UserFilterType> = ({ methods, searchUser, clearFilter }) => {
   const [sections, setSections] = useState<SectionDetail[]>([]);
-  const { data: classSectionData } = useGetClassSectionStructureQuery();
+  const { data: classSectionData } = useGetClassesWithSectionsQuery();
   const { data: rolesData } = useGetRolesQuery();
   const { control, register, setValue } = methods;
 
   const handleClassChange = (classId: number | string) => {
-    const classes = classSectionData?.classSectionStructure || [];
+    const classes = classSectionData?.classesWithSections || [];
     const selectedClass = classes.find((item) => item.id === Number(classId));
     setValue('sectionId', '');
     setSections(selectedClass?.sections || []);
@@ -104,7 +104,7 @@ export const UserFilter: FC<UserFilterType> = ({ methods, searchUser, clearFilte
                     handleClassChange(selectedClass);
                   }}
                 >
-                  {classSectionData?.classSectionStructure?.map((item) => (
+                  {classSectionData?.classesWithSections?.map((item) => (
                     <MenuItem key={item.id} value={item.id.toString()}>
                       {item.name}
                     </MenuItem>

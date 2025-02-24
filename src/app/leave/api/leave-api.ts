@@ -17,70 +17,6 @@ import {
 
 export const leaveApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getMyLeaveHistory: builder.query<LeaveRequestHistory, void>({
-      query: () => `/leaves/request`,
-      providesTags: (result) =>
-        result?.leaveHistory.map(({ id }) => {
-          return { type: Tag.LEAVE_HISTORY, id };
-        }) || [{ type: Tag.LEAVE_HISTORY }]
-    }),
-    applyLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApi>({
-      query: (payload) => ({
-        url: `/leaves/request`,
-        method: 'POST',
-        body: payload
-      }),
-      invalidatesTags: (result) => (result ? [Tag.LEAVE_HISTORY, Tag.PENDING_LEAVES] : [])
-    }),
-    updateLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApiWithId>({
-      query: ({ id, ...restPayload }) => ({
-        url: `/leaves/request/${id}`,
-        method: 'PUT',
-        body: { ...restPayload }
-      }),
-      invalidatesTags: (result, _error, { id }) =>
-        result
-          ? [
-              { type: Tag.LEAVE_HISTORY, id },
-              { type: Tag.PENDING_LEAVES, id }
-            ]
-          : []
-    }),
-    deleteLeaveRequest: builder.mutation<{ message: string }, number | undefined>({
-      query: (id) => ({
-        url: `/leaves/request/${id}`,
-        method: 'DELETE'
-      }),
-      invalidatesTags: (result, _error, id) =>
-        result
-          ? [
-              { type: Tag.LEAVE_HISTORY, id },
-              { type: Tag.PENDING_LEAVES, id }
-            ]
-          : []
-    }),
-
-    getLeavePending: builder.query<PendingLeaveRequestHistory, void>({
-      query: () => `/leaves/pending`,
-      providesTags: (result) =>
-        result?.pendingLeaves.map(({ id }) => {
-          return { type: Tag.PENDING_LEAVES, id };
-        }) || [{ type: Tag.PENDING_LEAVES }]
-    }),
-    handlePendingLeaveStatus: builder.mutation<{ message: string }, LeaveStatus>({
-      query: ({ id, status }) => ({
-        url: `/leaves/pending/${id}/status`,
-        method: 'POST',
-        body: { status }
-      }),
-      invalidatesTags: (result, _error, { id }) =>
-        result
-          ? [
-              { type: Tag.LEAVE_HISTORY, id },
-              { type: Tag.PENDING_LEAVES, id }
-            ]
-          : []
-    }),
     getLeavePolicies: builder.query<LeavePolicyData, void>({
       query: () => '/leaves/policies',
       providesTags: (result) =>
@@ -108,7 +44,7 @@ export const leaveApi = api.injectEndpoints({
         method: 'POST',
         body: { name }
       }),
-      invalidatesTags: (result) => (result ? [Tag.LEAVE_POLICIES] : [])
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.LEAVE_POLICIES])
     }),
     updateLeavePolicy: builder.mutation<{ message: string }, Pick<PolicyDetail, 'name' | 'id'>>({
       query: ({ id, name }) => ({
@@ -116,56 +52,116 @@ export const leaveApi = api.injectEndpoints({
         method: 'PUT',
         body: { name }
       }),
-      invalidatesTags: (result, _error, { id }) =>
-        result ? [{ type: Tag.LEAVE_POLICIES, id }] : []
+      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.LEAVE_POLICIES, id }])
     }),
     handleLeavePolicy: builder.mutation<{ message: string }, PolicyStatus>({
       query: ({ id, status }) => ({
         url: `/leaves/policies/${id}/status`,
-        method: 'POST',
+        method: 'PATCH',
         body: { status }
       }),
-      invalidatesTags: (result, _error, { id }) =>
-        result ? [{ type: Tag.LEAVE_POLICIES, id }] : []
+      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.LEAVE_POLICIES, id }])
     }),
     addUserToPolicy: builder.mutation<{ message: string }, AddUserToPolicy>({
       query: ({ userList, id }) => ({
         url: `/leaves/policies/${id}/users`,
-        method: 'POST',
+        method: 'PUT',
         body: { users: userList }
       }),
-      invalidatesTags: (result) =>
-        result
-          ? [
+      invalidatesTags: (_result, error) =>
+        error
+          ? []
+          : [
               Tag.LEAVE_POLICY_USERS,
               Tag.LEAVE_ELIGIBLE_USERS,
               Tag.LEAVE_POLICIES,
               Tag.MY_LEAVE_POLICIES
             ]
-          : []
     }),
     removeUserFromPolicy: builder.mutation<{ message: string }, RemoveUserFromPolicy>({
       query: ({ userId, policyId }) => ({
         url: `/leaves/policies/${policyId}/users`,
         method: 'DELETE',
-        body: { user: userId }
+        body: { userId }
       }),
-      invalidatesTags: (result, _error, { userId }) => {
-        return result
-          ? [
+      invalidatesTags: (_result, error, { userId }) =>
+        error
+          ? []
+          : [
               { type: Tag.LEAVE_POLICY_USERS, id: userId },
               Tag.MY_LEAVE_POLICIES,
               Tag.LEAVE_POLICY_USERS
             ]
-          : [];
-      }
     }),
     getMyLeavePolicies: builder.query<MyLeavePolicyData, void>({
-      query: () => `/leaves/policies/me`,
+      query: () => `/leaves/policies/my`,
       providesTags: (result) =>
         result?.leavePolicies.map(({ id }) => {
           return { type: Tag.MY_LEAVE_POLICIES, id };
         }) || [{ type: Tag.MY_LEAVE_POLICIES }]
+    }),
+    getMyLeaveHistory: builder.query<LeaveRequestHistory, void>({
+      query: () => `/leaves/requests`,
+      providesTags: (result) =>
+        result?.leaveHistory.map(({ id }) => {
+          return { type: Tag.LEAVE_HISTORY, id };
+        }) || [{ type: Tag.LEAVE_HISTORY }]
+    }),
+    applyLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApi>({
+      query: (payload) => ({
+        url: `/leaves/requests`,
+        method: 'POST',
+        body: payload
+      }),
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.LEAVE_HISTORY, Tag.PENDING_LEAVES])
+    }),
+    updateLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApiWithId>({
+      query: ({ id, ...restPayload }) => ({
+        url: `/leaves/requests/${id}`,
+        method: 'PUT',
+        body: { ...restPayload }
+      }),
+      invalidatesTags: (_result, error, { id }) =>
+        error
+          ? []
+          : [
+              { type: Tag.LEAVE_HISTORY, id },
+              { type: Tag.PENDING_LEAVES, id }
+            ]
+    }),
+    deleteLeaveRequest: builder.mutation<{ message: string }, number | undefined>({
+      query: (id) => ({
+        url: `/leaves/requests/${id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: (_result, error, id) =>
+        error
+          ? []
+          : [
+              { type: Tag.LEAVE_HISTORY, id },
+              { type: Tag.PENDING_LEAVES, id }
+            ]
+    }),
+    getLeavePending: builder.query<PendingLeaveRequestHistory, void>({
+      query: () => `/leaves/requests/pending`,
+      providesTags: (result) =>
+        result?.pendingLeaves.map(({ id }) => {
+          return { type: Tag.PENDING_LEAVES, id };
+        }) || [{ type: Tag.PENDING_LEAVES }]
+    }),
+    handlePendingLeaveStatus: builder.mutation<{ message: string }, LeaveStatus>({
+      query: ({ id, status }) => ({
+        url: `/leaves/requests/pending/${id}/status`,
+        method: 'PATCH',
+        body: { status }
+      }),
+      invalidatesTags: (_result, error, { id }) =>
+        error
+          ? []
+          : [
+              { type: Tag.LEAVE_HISTORY, id },
+              { type: Tag.PENDING_LEAVES, id }
+            ]
     })
   })
 });

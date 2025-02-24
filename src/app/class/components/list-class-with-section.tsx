@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import { CheckBox, DoNotDisturb, Edit } from '@mui/icons-material';
 
-import { useGetClassSectionStructureQuery } from '../api';
 import { UpdateSection } from './section/update-section';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UpdateClass } from './class/update-class';
@@ -22,6 +21,7 @@ import { ClassSection } from '../types';
 import { ClassStatus } from './class/class-status';
 import { SectionStatus } from './section/section-status';
 import { getTextColor } from '@/utils/helpers/get-text-color';
+import { useGetClassesWithSectionsQuery } from '../api';
 
 const classState = {
   id: 0,
@@ -35,7 +35,7 @@ const sectionState = {
   action: ''
 };
 export const ListClassWithSection = () => {
-  const { data, isLoading, isError, error } = useGetClassSectionStructureQuery();
+  const { data, isLoading, isError, error } = useGetClassesWithSectionsQuery();
   const [classDetail, setClassDetail] = useState(classState);
   const [sectionDetail, setSectionDetail] = useState(sectionState);
 
@@ -77,7 +77,7 @@ export const ListClassWithSection = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data: isError ? [] : data?.classSectionStructure || [],
+    data: isError ? [] : data?.classesWithSections || [],
     state: {
       density: 'compact',
       isLoading

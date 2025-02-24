@@ -20,8 +20,8 @@ export const schoolApi = api.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (result, _error, { schoolId }) =>
-        result ? [{ type: Tag.SCHOOLS, id: schoolId }] : []
+      invalidatesTags: (_result, error, { schoolId }) =>
+        error ? [] : [{ type: Tag.SCHOOLS, id: schoolId }]
     }),
     addSchool: builder.mutation<{ message: string }, SchoolProps>({
       query: (payload) => ({
@@ -29,14 +29,14 @@ export const schoolApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (result) => (result ? [Tag.SCHOOLS] : [])
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.SCHOOLS])
     }),
     deleteSchool: builder.mutation<{ message: string }, { schoolId: number }>({
       query: (schoolId) => ({
         url: `/schools/${schoolId}`,
         method: 'DELETE'
       }),
-      invalidatesTags: (result) => (result ? [Tag.SCHOOLS] : [])
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.SCHOOLS])
     })
   })
 });

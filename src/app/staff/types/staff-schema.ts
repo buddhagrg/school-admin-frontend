@@ -24,11 +24,8 @@ export const ParentsInfoSchema = z.object({
   emergencyPhone: z.string().min(1, 'Emergency phone is required')
 });
 export const OtherInfoSchema = z.object({
-  reporterId: z
-    .string()
-    .min(1, 'You must select at least one person')
-    .or(z.number().min(1, 'You must select at least one person')),
-  hasSystemAccess: z.boolean().optional(),
+  hasSystemAccess: z.boolean(),
+  reporterId: z.union([z.string(), z.number()]).optional(),
   reporterName: z.string().optional().nullable()
 });
 export const StaffFormSchema = BasicInfoSchema.extend(AddressInfoSchema.shape)

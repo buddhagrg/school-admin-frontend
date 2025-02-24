@@ -24,8 +24,8 @@ export type ClassSection = {
   sortOrder: number;
   sections: SectionDetail[];
 };
-export type ClassSectionStructure = {
-  classSectionStructure: ClassSection[];
+export type ClassesWithSections = {
+  classesWithSections: ClassSection[];
 };
 export type ClassTeacherDetail = {
   id: number;
@@ -39,4 +39,13 @@ export type ClassTeachers = {
 export type ClassTeacherFormProps = z.infer<typeof ClassTeacherFormSchema>;
 export type Teachers = {
   teachers: NameIdType[];
+};
+export type ClassStatusProps = {
+  status: boolean;
+  id: number;
+};
+export type SectionStatusProps = {
+  status: boolean;
+  classId: number;
+  id: number;
 };

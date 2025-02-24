@@ -2,20 +2,26 @@ import { api, Tag } from '@/api';
 import {
   ClassFormProps,
   ClassFormWithId,
-  ClassSectionStructure,
+  ClassesWithSections,
   ClassTeacherFormProps,
   ClassTeachers,
   GetClassList,
   SectionFormProps,
   SectionFormWithId,
-  Teachers
+  Teachers,
+  ClassStatusProps,
+  SectionStatusProps
 } from '../types';
 
 export const classApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getClassSectionStructure: builder.query<ClassSectionStructure, void>({
-      query: () => `/classes/structure`,
-      providesTags: [Tag.CLASS_SECTION_STRUCTURE]
+    getClassesWithSections: builder.query<ClassesWithSections, void>({
+      query: () => `/classes/sections`,
+      providesTags: (result) =>
+        result?.classesWithSections?.map(({ id }) => ({
+          type: Tag.CLASSES_WITH_SECTIONS,
+          id
+        })) || [Tag.CLASSES_WITH_SECTIONS]
     }),
     addClass: builder.mutation<{ message: string }, ClassFormProps>({
       query: (payload) => ({
@@ -23,7 +29,7 @@ export const classApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
     }),
     updateClass: builder.mutation<{ message: string }, ClassFormWithId>({
       query: ({ id, name }) => ({
@@ -31,21 +37,16 @@ export const classApi = api.injectEndpoints({
         method: 'PUT',
         body: { name }
       }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
     }),
-    deactivateClass: builder.mutation<{ message: string }, number>({
-      query: (id) => ({
-        url: `/classes/${id}/deactivate`,
-        method: 'POST'
+    updateClassStatus: builder.mutation<{ message: string }, ClassStatusProps>({
+      query: ({ id, status }) => ({
+        url: `/classes/${id}/status`,
+        method: 'PATCH',
+        body: { status }
       }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES, Tag.ACADEMIC_LEVELS_WITH_CLASSES]
-    }),
-    activateClass: builder.mutation<{ message: string }, number>({
-      query: (id) => ({
-        url: `/classes/${id}/activate`,
-        method: 'POST'
-      }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES, Tag.ACADEMIC_LEVELS_WITH_CLASSES]
+      invalidatesTags: (_result, error) =>
+        error ? [] : [Tag.CLASSES_WITH_SECTIONS, Tag.CLASSES, Tag.ACADEMIC_LEVELS_WITH_CLASSES]
     }),
     getClasses: builder.query<GetClassList, void>({
       query: () => `/classes`,
@@ -60,7 +61,7 @@ export const classApi = api.injectEndpoints({
         method: 'POST',
         body: { name }
       }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS, Tag.CLASSES])
     }),
     updateSection: builder.mutation<{ message: string }, SectionFormWithId>({
       query: ({ classId, id, name }) => ({
@@ -68,21 +69,15 @@ export const classApi = api.injectEndpoints({
         method: 'PUT',
         body: { name }
       }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE, Tag.CLASSES]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS, Tag.CLASSES])
     }),
-    deactivateSection: builder.mutation<{ message: string }, Omit<SectionFormWithId, 'name'>>({
-      query: ({ classId, id }) => ({
-        url: `/classes/${classId}/sections/${id}/deactivate`,
-        method: 'POST'
+    updateSectionStatus: builder.mutation<{ message: string }, SectionStatusProps>({
+      query: ({ classId, status, id }) => ({
+        url: `/classes/${classId}/sections/${id}/status`,
+        method: 'PATCH',
+        body: { status }
       }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
-    }),
-    activateSection: builder.mutation<{ message: string }, Omit<SectionFormWithId, 'name'>>({
-      query: ({ classId, id }) => ({
-        url: `/classes/${classId}/sections/${id}/activate`,
-        method: 'POST'
-      }),
-      invalidatesTags: [Tag.CLASS_SECTION_STRUCTURE]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
     }),
     getClassTeachers: builder.query<ClassTeachers, void>({
       query: () => `/classes/teachers`,
@@ -106,15 +101,14 @@ export const classApi = api.injectEndpoints({
     >({
       query: ({ classId, teacherId }) => ({
         url: `/classes/${classId}/teachers/${teacherId}`,
-        method: 'POST'
+        method: 'PUT'
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASS_TEACHERS])
     }),
     deleteClassTeacher: builder.mutation<{ message: string }, number>({
       query: (id) => ({
-        url: `/classes/teachers`,
-        method: 'DELETE',
-        body: { id }
+        url: `/classes/teachers/${id}`,
+        method: 'DELETE'
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASS_TEACHERS])
     })
@@ -125,13 +119,11 @@ export const {
   useAddClassMutation,
   useGetClassesQuery,
   useAddSectionMutation,
-  useGetClassSectionStructureQuery,
+  useGetClassesWithSectionsQuery,
   useUpdateSectionMutation,
   useUpdateClassMutation,
-  useDeactivateSectionMutation,
-  useActivateClassMutation,
-  useDeactivateClassMutation,
-  useActivateSectionMutation,
+  useUpdateSectionStatusMutation,
+  useUpdateClassStatusMutation,
   useGetClassTeachersQuery,
   useGetTeachersQuery,
   useAssignClassTeacherMutation,

@@ -6,7 +6,7 @@ import {
   SchoolProfileSchema,
   SetupPasswordSchema
 } from './auth-schema';
-import { BasePermission, Permission } from '@/utils/type/misc';
+import { BasePermissionProps, PermissionProps } from '@/utils/type/misc';
 
 export type SubMenu = {
   id: number;
@@ -27,9 +27,9 @@ export type User = {
   name: string;
   email: string;
   role: string;
-  menus: Permission[];
-  apis: BasePermission[];
-  uis: BasePermission[];
+  menus: PermissionProps[];
+  apis: BasePermissionProps[];
+  uis: BasePermissionProps[];
   roleId: number;
   appBase: string;
 };

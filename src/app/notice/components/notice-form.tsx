@@ -19,7 +19,7 @@ import { Controller, UseFormReturn } from 'react-hook-form';
 
 import { NoticeFormProps } from '../types';
 import { noticeStatusList } from '@/constants';
-import { useGetNoticeRecipientListQuery } from '../api';
+import { useGetNoticeRecipientsQuery } from '../api';
 
 type Props = {
   isSaving: boolean;
@@ -38,7 +38,7 @@ export const NoticeForm: FC<Props> = ({
   handleRecipientChange,
   selectedRoleId
 }) => {
-  const { data } = useGetNoticeRecipientListQuery();
+  const { data } = useGetNoticeRecipientsQuery();
   const {
     register,
     formState: { errors },

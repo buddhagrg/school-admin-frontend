@@ -18,11 +18,11 @@ export const ListDepartmentsPage = () => {
     <>
       <PageContentHeader icon={Info} heading='Department Information' />
       <Grid2 container columnSpacing={5} rowSpacing={2}>
-        <Grid2 size={{ xs: 12, md: 4 }}>
-          <ManageDepartment operation='Add' methods={methods} />
-        </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
           <DepartmentData />
+        </Grid2>
+        <Grid2 size={{ xs: 10, md: 4 }}>
+          <ManageDepartment operation='Add' methods={methods} />
         </Grid2>
       </Grid2>
     </>

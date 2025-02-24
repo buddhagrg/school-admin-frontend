@@ -23,7 +23,7 @@ export const EditLeaveRequest: FC<EditLeaveRequestProps> = ({ user, closeModal }
   const { myLeavePolicies } = useLeaveRequest();
   const methods = useForm<LeaveRequestForm>({
     defaultValues: {
-      policy: user?.policyId || 0,
+      policyId: user?.policyId || 0,
       from: new Date(),
       to: new Date(),
       note: ''
@@ -34,7 +34,7 @@ export const EditLeaveRequest: FC<EditLeaveRequestProps> = ({ user, closeModal }
   useEffect(() => {
     if (user) {
       const { setValue } = methods;
-      setValue('policy', user.policyId);
+      setValue('policyId', user.policyId);
       setValue('from', parseISO(user.from));
       setValue('to', parseISO(user.to));
       setValue('note', user.note);
@@ -43,10 +43,10 @@ export const EditLeaveRequest: FC<EditLeaveRequestProps> = ({ user, closeModal }
 
   const editLeave = async (data: LeaveRequestForm) => {
     try {
-      const { policy, from, to, note } = data;
+      const { policyId, from, to, note } = data;
       const payload = {
         id: user?.id,
-        policy,
+        policyId,
         from: getFormattedDate(from, API_DATE_FORMAT),
         to: getFormattedDate(to, API_DATE_FORMAT),
         note

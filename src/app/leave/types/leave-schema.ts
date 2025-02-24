@@ -10,7 +10,7 @@ export const PolicyUsersSchema = z.object({
 });
 
 export const BaseLeaveSchema = z.object({
-  policy: z.number().min(1, 'Policy is required').or(z.string().min(1, 'Policy is required')),
+  policyId: z.number().min(1, 'Policy is required').or(z.string().min(1, 'Policy is required')),
   note: z.string().min(1, 'Note is required')
 });
 

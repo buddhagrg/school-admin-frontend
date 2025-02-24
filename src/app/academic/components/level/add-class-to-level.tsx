@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
-import { useAddAcademicLevelToClassMutation } from '../../api';
+import { useAddClassToAcademicLevelMutation } from '../../api';
 import { AddClassToLevelForm, AddClassToLevelFormProps } from '../../types';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetClassesQuery } from '@/app/class/api';
@@ -32,7 +32,7 @@ export const AddClassToLevel: FC<AddClassToLevelProps> = ({
   usedClassList
 }) => {
   const { data: classData } = useGetClassesQuery();
-  const [addClass, { isLoading: isAdding }] = useAddAcademicLevelToClassMutation();
+  const [addClass, { isLoading: isAdding }] = useAddClassToAcademicLevelMutation();
   const {
     control,
     formState: { errors },
@@ -50,7 +50,7 @@ export const AddClassToLevel: FC<AddClassToLevelProps> = ({
 
   const onSave = async (data: AddClassToLevelFormProps) => {
     try {
-      const payload = { id: data.id, academicLevelId };
+      const payload = { classId: data.id, academicLevelId };
       const result = await addClass(payload).unwrap();
       toast.info(result.message);
     } catch (error) {

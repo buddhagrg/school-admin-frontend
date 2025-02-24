@@ -19,7 +19,7 @@ import { z } from 'zod';
 
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { genders, maritalStatusList } from '@/constants';
-import { useGetRolesQuery } from '@/app/role-and-permission/api';
+import { useGetRolesQuery } from '@/app/roles/api';
 
 type BasicInformationProps<T extends FieldValues> = {
   schema: z.ZodObject<T>;

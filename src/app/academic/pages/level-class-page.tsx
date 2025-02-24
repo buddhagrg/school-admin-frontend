@@ -26,7 +26,7 @@ export const LevelClassPage = () => {
       </ResponsiveBox>
     );
   }
-  if (!data || data?.levelClass.length <= 0) {
+  if (!data || data?.levelsWithClasses.length <= 0) {
     return (
       <ResponsiveBox>
         <>{ERROR_MESSAGE.NO_RECORD}</>
@@ -37,7 +37,7 @@ export const LevelClassPage = () => {
   return (
     <>
       <PageContentHeader heading='Academic Level and Class Relation' icon={Info} />
-      {data?.levelClass.map(({ id, name, classes }) => (
+      {data?.levelsWithClasses.map(({ id, name, classes }) => (
         <div key={id}>
           <Typography sx={{ fontWeight: '500' }}>{name}</Typography>
           <Grid2 container spacing={3}>

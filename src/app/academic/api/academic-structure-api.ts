@@ -6,20 +6,20 @@ import {
   AcademicLevelsWithClasses,
   AcademicPeriodFormProps,
   AcademicPeriodFormWithId,
-  AcademicStructure,
-  AddAcademicLevelToClass,
+  AcademicLevelsWithPeriods,
+  AddClassToAcademicLevel,
   ManagePeriodOrder
 } from '../types';
 
 export const academicStructureApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getAcademicStructure: builder.query<AcademicStructure, void>({
-      query: () => `/academic/structure`,
+    getAcademicLevelsWithPeriods: builder.query<AcademicLevelsWithPeriods, void>({
+      query: () => `/academic/levels/periods`,
       providesTags: (result) =>
-        result?.academicStructure.map(({ id }) => ({
-          type: Tag.ACADEMIC_STRUCTURE,
+        result?.levelsWithPeriods.map(({ id }) => ({
+          type: Tag.ACADEMIC_LEVELS_WITH_PERIODS,
           id
-        })) || [Tag.ACADEMIC_STRUCTURE]
+        })) || [Tag.ACADEMIC_LEVELS_WITH_PERIODS]
     }),
     addAcademicLevel: builder.mutation<{ message: string }, AcademicLevelFormProps>({
       query: ({ name }) => ({
@@ -27,11 +27,14 @@ export const academicStructureApi = api.injectEndpoints({
         method: 'POST',
         body: { name }
       }),
-      invalidatesTags: [
-        Tag.ACADEMIC_STRUCTURE,
-        Tag.ACADEMIC_LEVELS,
-        Tag.ACADEMIC_LEVELS_WITH_CLASSES
-      ]
+      invalidatesTags: (_result, error) =>
+        error
+          ? []
+          : [
+              Tag.ACADEMIC_LEVELS_WITH_PERIODS,
+              Tag.ACADEMIC_LEVELS,
+              Tag.ACADEMIC_LEVELS_WITH_CLASSES
+            ]
     }),
     updateAcademicLevel: builder.mutation<{ message: string }, AcademicLevelFormWithId>({
       query: ({ id, name }) => ({
@@ -39,7 +42,8 @@ export const academicStructureApi = api.injectEndpoints({
         method: 'PUT',
         body: { name }
       }),
-      invalidatesTags: [Tag.ACADEMIC_STRUCTURE, Tag.ACADEMIC_LEVELS]
+      invalidatesTags: (_result, error) =>
+        error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS, Tag.ACADEMIC_LEVELS]
     }),
     getAcademicLevels: builder.query<AcademicLevelData, void>({
       query: () => `/academic/levels`,
@@ -53,16 +57,19 @@ export const academicStructureApi = api.injectEndpoints({
         url: `/academic/levels/${id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: [
-        Tag.ACADEMIC_STRUCTURE,
-        Tag.ACADEMIC_LEVELS,
-        Tag.ACADEMIC_LEVELS_WITH_CLASSES
-      ]
+      invalidatesTags: (_result, error) =>
+        error
+          ? []
+          : [
+              Tag.ACADEMIC_LEVELS_WITH_PERIODS,
+              Tag.ACADEMIC_LEVELS,
+              Tag.ACADEMIC_LEVELS_WITH_CLASSES
+            ]
     }),
     getAcademicLevelsWithClasses: builder.query<AcademicLevelsWithClasses, void>({
       query: () => `/academic/levels/classes`,
       providesTags: (result) =>
-        result?.levelClass.map(({ id }) => {
+        result?.levelsWithClasses.map(({ id }) => {
           return { type: Tag.ACADEMIC_LEVELS_WITH_CLASSES, id };
         }) || [Tag.ACADEMIC_LEVELS_WITH_CLASSES]
     }),
@@ -71,14 +78,15 @@ export const academicStructureApi = api.injectEndpoints({
         url: `/academic/levels/classes/${id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: [Tag.ACADEMIC_LEVELS_WITH_CLASSES]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_LEVELS_WITH_CLASSES])
     }),
-    addAcademicLevelToClass: builder.mutation<{ message: string }, AddAcademicLevelToClass>({
-      query: ({ id, academicLevelId }) => ({
-        url: `/academic/levels/${academicLevelId}/classes/${id}`,
-        method: 'POST'
+    addClassToAcademicLevel: builder.mutation<{ message: string }, AddClassToAcademicLevel>({
+      query: ({ classId, academicLevelId }) => ({
+        url: `/academic/levels/${academicLevelId}/classes`,
+        method: 'PUT',
+        body: { classId }
       }),
-      invalidatesTags: (result) => (result ? [Tag.ACADEMIC_LEVELS_WITH_CLASSES] : [])
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_LEVELS_WITH_CLASSES])
     }),
     addAcademicPeriod: builder.mutation<{ message: string }, AcademicPeriodFormProps>({
       query: (payload) => ({
@@ -86,7 +94,8 @@ export const academicStructureApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: [Tag.ACADEMIC_STRUCTURE, Tag.ACADEMIC_PERIODS]
+      invalidatesTags: (_result, error) =>
+        error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS, Tag.ACADEMIC_PERIODS]
     }),
     updateAcademicPeriod: builder.mutation<{ message: string }, AcademicPeriodFormWithId>({
       query: ({ id, name, academicLevelId }) => ({
@@ -94,23 +103,26 @@ export const academicStructureApi = api.injectEndpoints({
         method: 'PUT',
         body: { name, academicLevelId }
       }),
-      invalidatesTags: [Tag.ACADEMIC_STRUCTURE, Tag.ACADEMIC_PERIODS]
+      invalidatesTags: (_result, error) =>
+        error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS, Tag.ACADEMIC_PERIODS]
     }),
     deleteAcademicPeriod: builder.mutation<{ message: string }, number>({
       query: (id) => ({
         url: `/academic/periods/${id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: [Tag.ACADEMIC_STRUCTURE, Tag.ACADEMIC_PERIODS]
+      invalidatesTags: (_result, error) =>
+        error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS, Tag.ACADEMIC_PERIODS]
     }),
-    updatePeriodOrder: builder.mutation<{ message: string }, ManagePeriodOrder>({
+    reorderPeriods: builder.mutation<{ message: string }, ManagePeriodOrder>({
       query: ({ academicLevelId, periods }) => ({
-        url: `/academic/periods/${academicLevelId}/manage-order`,
+        url: `/academic/periods/${academicLevelId}/reorder`,
         method: 'POST',
         body: [...periods]
       }),
-      invalidatesTags: [Tag.ACADEMIC_STRUCTURE]
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS])
     })
+    //academic/levels/:id/periods/dates
   })
 });
 
@@ -118,13 +130,13 @@ export const {
   useAddAcademicLevelMutation,
   useAddAcademicPeriodMutation,
   useGetAcademicLevelsQuery,
-  useGetAcademicStructureQuery,
+  useGetAcademicLevelsWithPeriodsQuery,
   useUpdateAcademicLevelMutation,
   useUpdateAcademicPeriodMutation,
   useDeleteAcademicPeriodMutation,
-  useUpdatePeriodOrderMutation,
+  useReorderPeriodsMutation,
   useDeleteAcademicLevelMutation,
   useGetAcademicLevelsWithClassesQuery,
   useDeleteLevelFromClassMutation,
-  useAddAcademicLevelToClassMutation
+  useAddClassToAcademicLevelMutation
 } = academicStructureApi;

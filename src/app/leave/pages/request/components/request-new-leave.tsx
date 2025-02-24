@@ -19,7 +19,7 @@ export const RequestNewLeave = () => {
 
   const methods = useForm<LeaveRequestForm>({
     defaultValues: {
-      policy: myLeavePolicies.length > 0 ? myLeavePolicies[0].id : '',
+      policyId: myLeavePolicies.length > 0 ? myLeavePolicies[0].id : '',
       from: new Date(),
       to: new Date(),
       note: ''
@@ -32,9 +32,9 @@ export const RequestNewLeave = () => {
   };
   const onSave = async (data: LeaveRequestForm) => {
     try {
-      const { policy, from, to, note } = data;
+      const { policyId, from, to, note } = data;
       const payload = {
-        policy,
+        policyId,
         from: getFormattedDate(from, API_DATE_FORMAT),
         to: getFormattedDate(to, API_DATE_FORMAT),
         note

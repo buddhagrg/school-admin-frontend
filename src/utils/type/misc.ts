@@ -12,7 +12,7 @@ export type NameIdType<T = string | number> = {
   id: T;
 };
 
-export type BasePermission = {
+export type BasePermissionProps = {
   id: number;
   name: string;
   path: string;
@@ -21,6 +21,6 @@ export type BasePermission = {
   directAllowedRoleId: string;
   icon?: ReactNode;
 };
-export type Permission = BasePermission & {
-  subMenus?: BasePermission[];
+export type PermissionProps = BasePermissionProps & {
+  subMenus?: BasePermissionProps[];
 };

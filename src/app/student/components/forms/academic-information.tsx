@@ -17,8 +17,8 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { StudentProps } from '../../types';
-import { useGetClassSectionStructureQuery } from '@/app/class/api';
 import { SectionDetail } from '@/app/class/types';
+import { useGetClassesWithSectionsQuery } from '@/app/class/api';
 
 export const AcademicInformation = () => {
   const [sections, setSections] = useState<SectionDetail[]>([]);
@@ -27,10 +27,10 @@ export const AcademicInformation = () => {
     control,
     formState: { errors }
   } = useFormContext<StudentProps>();
-  const { data } = useGetClassSectionStructureQuery();
+  const { data } = useGetClassesWithSectionsQuery();
 
   const handleClassChange = (classId: number | string) => {
-    const classes = data?.classSectionStructure || [];
+    const classes = data?.classesWithSections || [];
     const selectedClass = classes.find((item) => item.id === Number(classId));
     setSections(selectedClass?.sections || []);
   };
@@ -62,7 +62,7 @@ export const AcademicInformation = () => {
                     handleClassChange(selectedClass);
                   }}
                 >
-                  {data?.classSectionStructure.map(({ id, name }) => (
+                  {data?.classesWithSections.map(({ id, name }) => (
                     <MenuItem value={id} key={id}>
                       {name}
                     </MenuItem>

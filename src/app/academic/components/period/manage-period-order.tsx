@@ -10,7 +10,7 @@ import { DialogModal } from '@/components/dialog-modal';
 import { Period } from '../../types';
 import { PeriodItem } from './period-item';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useUpdatePeriodOrderMutation } from '../../api';
+import { useReorderPeriodsMutation } from '../../api';
 
 type ManagePeriodOrderProps = {
   closeModal: () => void;
@@ -23,7 +23,7 @@ export const ManagePeriodOrder: FC<ManagePeriodOrderProps> = ({
   academicLevelId
 }) => {
   const [periodList, setPeriodList] = useState<Period[]>([]);
-  const [updatePeriodOrder, { isLoading: isUpdating }] = useUpdatePeriodOrderMutation();
+  const [reorderPeriods, { isLoading: isReordering }] = useReorderPeriodsMutation();
 
   useEffect(() => {
     if (periods && periods.length > 0) {
@@ -52,7 +52,7 @@ export const ManagePeriodOrder: FC<ManagePeriodOrderProps> = ({
         academicLevelId,
         periods: periodList
       };
-      const result = await updatePeriodOrder(payload).unwrap();
+      const result = await reorderPeriods(payload).unwrap();
       toast.info(result.message);
       closeModal();
     } catch (error) {
@@ -65,7 +65,7 @@ export const ManagePeriodOrder: FC<ManagePeriodOrderProps> = ({
       isOpen={true}
       titleText='Manage Period Order'
       contextText={<Chip label='Drag items vertically to reorder' color='primary' />}
-      isSaving={isUpdating}
+      isSaving={isReordering}
       closeModal={closeModal}
       handleSave={handleSave}
     >

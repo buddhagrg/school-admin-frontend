@@ -29,10 +29,10 @@ export const LeaveForm: FC<LeaveFormProps> = ({ methods, leavePolicies }) => {
 
   return (
     <>
-      <FormControl fullWidth size='small' sx={{ mt: 1 }} error={!!errors.policy}>
+      <FormControl fullWidth size='small' sx={{ mt: 1 }} error={!!errors.policyId}>
         <InputLabel id='policy'>Leave Policy</InputLabel>
         <Controller
-          name='policy'
+          name='policyId'
           control={control}
           render={({ field: { onChange, value } }) => (
             <Select label='Leave Policy' labelId='policy' value={value} onChange={onChange}>
@@ -44,7 +44,7 @@ export const LeaveForm: FC<LeaveFormProps> = ({ methods, leavePolicies }) => {
             </Select>
           )}
         />
-        <FormHelperText>{errors.policy?.message}</FormHelperText>
+        <FormHelperText>{errors.policyId?.message}</FormHelperText>
       </FormControl>
       <Grid2 container spacing={4} sx={{ mt: 1 }}>
         <Grid2 size={{ xs: 12, md: 6 }}>

@@ -16,7 +16,7 @@ const departmentApi = api.injectEndpoints({
         method: 'POST',
         body: { name }
       }),
-      invalidatesTags: (result) => (result ? [Tag.DEPARTMENTS] : [])
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.DEPARTMENTS])
     }),
     getDepartment: builder.query<DepartmentFormWithId, number>({
       query: (id) => `departments/${id}`,
@@ -28,14 +28,14 @@ const departmentApi = api.injectEndpoints({
         method: 'PUT',
         body: { name }
       }),
-      invalidatesTags: (result, _error, { id }) => (result ? [{ type: Tag.DEPARTMENTS, id }] : [])
+      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.DEPARTMENTS, id }])
     }),
     deleteDepartment: builder.mutation<{ message: string }, number>({
       query: (id) => ({
         url: `/departments/${id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: (result) => (result ? [Tag.DEPARTMENTS] : [])
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.DEPARTMENTS])
     })
   })
 });
