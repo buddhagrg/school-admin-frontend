@@ -20,7 +20,7 @@ export const Others: FC<OthersProps> = ({ hasSystemAccess, reporterName }) => {
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Typography variant='subtitle2'>Has System Access : &nbsp;</Typography>
           <Typography variant='body1' sx={getTextColor(hasSystemAccess)}>
-            {hasSystemAccess.toString()}
+            {hasSystemAccess ? 'Yes' : 'No'}
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>

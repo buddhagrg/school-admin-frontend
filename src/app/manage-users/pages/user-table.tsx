@@ -63,7 +63,7 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
           const status = cell.getValue<boolean>();
           return (
             <Box component='span' sx={getTextColor(status)}>
-              {status.toString()}
+              {status ? 'Yes' : 'No'}
             </Box>
           );
         }
