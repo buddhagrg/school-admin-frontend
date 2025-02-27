@@ -48,7 +48,7 @@ export const NoticeForm: FC<Props> = ({
   const recipientWatch = watch('recipientType');
 
   const getDependentFields = () => {
-    const role = data?.noticeRecipients.find((r) => r.roleId === selectedRoleId);
+    const role = data?.noticeRecipients.find((r) => r.id === selectedRoleId);
     if (!role) return { primaryDependents: [] };
 
     return {
@@ -56,7 +56,7 @@ export const NoticeForm: FC<Props> = ({
     };
   };
   const getDependentRole = (type: 'primaryDependents') => {
-    return data?.noticeRecipients.find((r) => r.roleId === selectedRoleId)?.[type].name;
+    return data?.noticeRecipients.find((r) => r.id === selectedRoleId)?.[type].name;
   };
 
   const { primaryDependents } = getDependentFields();
@@ -165,7 +165,7 @@ export const NoticeForm: FC<Props> = ({
                       }}
                     >
                       {data?.noticeRecipients.map((item) => (
-                        <MenuItem key={item.roleId} value={item.roleId}>
+                        <MenuItem key={item.id} value={item.id}>
                           {item.name}
                         </MenuItem>
                       ))}

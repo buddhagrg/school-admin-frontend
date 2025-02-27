@@ -8,7 +8,6 @@ export const NameValueSchema = z.object({
 export const RecipientDetailSchema = z.object({
   id: z.number(),
   name: z.string(),
-  roleId: z.number(),
   primaryDependents: z.object({
     name: z.string(),
     list: z.union([z.array(NameValueSchema), z.array(z.never())])
