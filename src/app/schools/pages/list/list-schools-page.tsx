@@ -24,11 +24,11 @@ export const ListSchoolsPage = () => {
     <>
       <PageContentHeader icon={Info} heading='Schools' />
       <Grid2 container columnSpacing={5} rowSpacing={2}>
-        <Grid2 size={{ xs: 12, md: 4 }}>
-          <ManageSchool operation='Add' methods={methods} />
-        </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
           <DisplaySchools />
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <ManageSchool operation='Add' methods={methods} />
         </Grid2>
       </Grid2>
     </>
