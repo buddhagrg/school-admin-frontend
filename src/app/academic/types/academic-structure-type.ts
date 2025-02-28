@@ -2,7 +2,8 @@ import { z } from 'zod';
 import {
   AcademicLevelFormSchema,
   AcademicPeriodFormSchema,
-  AddClassToLevelForm
+  AddClassToLevelForm,
+  PeriodDateFormSchema
 } from './academic-structure-schema';
 
 export type Level = { id: number; name: string };
@@ -44,5 +45,20 @@ export type AddClassToLevelFormProps = z.infer<typeof AddClassToLevelForm>;
 
 export type AddClassToAcademicLevel = {
   classId: number | string;
+  academicLevelId: number;
+};
+
+export type PeriodWithDate = {
+  id: number;
+  name: string;
+  startDate: Date | null;
+  endDate: Date | null;
+};
+export type PeriodsWithDatesData = {
+  periodsWithDates: PeriodWithDate[];
+};
+export type PeriodDateFormProps = z.infer<typeof PeriodDateFormSchema>;
+export type PeriodDateFormPropsWithLevelId = {
+  periodsDates: PeriodDateFormProps;
   academicLevelId: number;
 };

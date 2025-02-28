@@ -20,7 +20,7 @@ import { SignUpPage } from '@/app/auth/pages/signup/signup-page';
 import { PermissionPage } from '@/app/permissions/pages/permission-page';
 import { SuperAdminDashboard } from '@/app/super-admin-dashboard';
 import { EditSchool, ListSchoolsPage } from '@/app/schools/pages';
-import { LevelClassPage, AcademicPage } from '@/app/academic/pages';
+import { LevelClassPage, AcademicPage, PeriodDatePage } from '@/app/academic/pages';
 import { ClassSectionPage, ClassTeacherPage } from '@/app/class/pages';
 import { ManageUsers } from '@/app/manage-users/pages';
 
@@ -61,6 +61,7 @@ export const routes = [
       { path: 'account', element: <AccountPage /> },
       { path: 'academic/levels/periods', element: <AcademicPage /> },
       { path: 'academic/levels/classes', element: <LevelClassPage /> },
+      { path: 'academic/periods/dates', element: <PeriodDatePage /> },
       { path: 'classes/sections', element: <ClassSectionPage /> },
       { path: 'classes/teachers', element: <ClassTeacherPage /> },
       { path: 'users/roles-permissions', element: <RolePage /> },

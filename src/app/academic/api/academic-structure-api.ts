@@ -8,7 +8,9 @@ import {
   AcademicPeriodFormWithId,
   AcademicLevelsWithPeriods,
   AddClassToAcademicLevel,
-  ManagePeriodOrder
+  ManagePeriodOrder,
+  PeriodsWithDatesData,
+  PeriodDateFormPropsWithLevelId
 } from '../types';
 
 export const academicStructureApi = api.injectEndpoints({
@@ -95,7 +97,13 @@ export const academicStructureApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: (_result, error) =>
-        error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS, Tag.ACADEMIC_PERIODS]
+        error
+          ? []
+          : [
+              Tag.ACADEMIC_LEVELS_WITH_PERIODS,
+              Tag.ACADEMIC_PERIODS,
+              Tag.ACADEMIC_PERIODS_WITH_DATES
+            ]
     }),
     updateAcademicPeriod: builder.mutation<{ message: string }, AcademicPeriodFormWithId>({
       query: ({ id, name, academicLevelId }) => ({
@@ -104,7 +112,13 @@ export const academicStructureApi = api.injectEndpoints({
         body: { name, academicLevelId }
       }),
       invalidatesTags: (_result, error) =>
-        error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS, Tag.ACADEMIC_PERIODS]
+        error
+          ? []
+          : [
+              Tag.ACADEMIC_LEVELS_WITH_PERIODS,
+              Tag.ACADEMIC_PERIODS,
+              Tag.ACADEMIC_PERIODS_WITH_DATES
+            ]
     }),
     deleteAcademicPeriod: builder.mutation<{ message: string }, number>({
       query: (id) => ({
@@ -112,17 +126,40 @@ export const academicStructureApi = api.injectEndpoints({
         method: 'DELETE'
       }),
       invalidatesTags: (_result, error) =>
-        error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS, Tag.ACADEMIC_PERIODS]
+        error
+          ? []
+          : [
+              Tag.ACADEMIC_LEVELS_WITH_PERIODS,
+              Tag.ACADEMIC_PERIODS,
+              Tag.ACADEMIC_PERIODS_WITH_DATES
+            ]
     }),
     reorderPeriods: builder.mutation<{ message: string }, ManagePeriodOrder>({
       query: ({ academicLevelId, periods }) => ({
-        url: `/academic/periods/${academicLevelId}/reorder`,
+        url: `/academic/levels/${academicLevelId}/periods/reorder`,
         method: 'POST',
-        body: [...periods]
+        body: { periods }
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_LEVELS_WITH_PERIODS])
+    }),
+    getAcademicLevelPeriodsWithDates: builder.query<PeriodsWithDatesData, number>({
+      query: (id) => `/academic/levels/${id}/periods/dates`,
+      providesTags: (result, error) =>
+        error
+          ? []
+          : result?.periodsWithDates?.map(({ id }) => ({
+              type: Tag.ACADEMIC_PERIODS_WITH_DATES,
+              id
+            })) || [Tag.ACADEMIC_PERIODS_WITH_DATES]
+    }),
+    updatePeriodsDates: builder.mutation<{ message: string }, PeriodDateFormPropsWithLevelId>({
+      query: ({ academicLevelId, periodsDates }) => ({
+        url: `/academic/levels/${academicLevelId}/periods/dates`,
+        method: 'PUT',
+        body: { periodsDates }
+      }),
+      invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_PERIODS_WITH_DATES])
     })
-    //academic/levels/:id/periods/dates
   })
 });
 
@@ -138,5 +175,7 @@ export const {
   useDeleteAcademicLevelMutation,
   useGetAcademicLevelsWithClassesQuery,
   useDeleteLevelFromClassMutation,
-  useAddClassToAcademicLevelMutation
+  useAddClassToAcademicLevelMutation,
+  useGetAcademicLevelPeriodsWithDatesQuery,
+  useUpdatePeriodsDatesMutation
 } = academicStructureApi;
