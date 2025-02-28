@@ -143,8 +143,6 @@ export const ListPeriods: React.FC<ListPeriodsProps> = ({ levelDetail }) => {
       </Box>
     </>
   );
-
-  // return (
   //   <>
   //     <PageContentHeader heading={`Periods with dates of "${levelDetail.name}"`} />
   //     <Box component={'hr'} sx={{ mb: 1 }} />
