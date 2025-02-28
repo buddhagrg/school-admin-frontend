@@ -102,11 +102,11 @@ export const ListPeriods: React.FC<ListPeriodsProps> = ({ levelDetail }) => {
       <Box sx={{ p: 2 }} component={Paper}>
         {data.periodsWithDates.map(({ id, name }, index) => (
           <Box key={id}>
+            <Typography variant='body2' sx={{ mb: 1 }}>
+              {name}
+            </Typography>
             <Grid2 container spacing={2}>
               <Grid2 size={{ xs: 12, md: 6 }} sx={{ mb: 2 }}>
-                <Typography variant='body2' sx={{ mb: 1 }}>
-                  {name}
-                </Typography>
                 <FormControl fullWidth size='small'>
                   <DatePickerField
                     name={`${index}.startDate` as `${number}.startDate`}
@@ -115,9 +115,6 @@ export const ListPeriods: React.FC<ListPeriodsProps> = ({ levelDetail }) => {
                 </FormControl>
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>
-                <Typography variant='body2' sx={{ mb: 1 }}>
-                  {name}
-                </Typography>
                 <FormControl fullWidth size='small'>
                   <DatePickerField
                     name={`${index}.endDate` as `${number}.endDate`}
