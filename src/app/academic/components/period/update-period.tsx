@@ -31,6 +31,7 @@ export const UpdatePeriod: FC<UpdatePeriodProps> = ({ id, name, closeModal, acad
 
   useEffect(() => {
     methods.setValue('name', name);
+    methods.setValue('academicLevelId', academicLevelId);
   }, []);
 
   const handleSave = async (data: AcademicPeriodFormProps) => {
