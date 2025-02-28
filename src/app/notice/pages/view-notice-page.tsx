@@ -13,6 +13,7 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ViewNoticeSkeleton } from '../components';
 import { getAppBase } from '@/app/auth/slice';
 import { useGetNoticeDetailQuery, useUpdateNoticeStatusMutation } from '../api';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const ViewNotice = () => {
   const { id } = useParams();
@@ -47,7 +48,7 @@ export const ViewNotice = () => {
   } else if (isError) {
     content = <>{getErrorMsg(error).message}</>;
   } else if (!noticeDetail) {
-    content = <>Record not found</>;
+    content = <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   } else {
     const { id, title, description, author, createdDate } = noticeDetail;
 

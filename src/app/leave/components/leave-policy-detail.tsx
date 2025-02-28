@@ -58,7 +58,7 @@ export const LeavePolicyDetail = () => {
     content = (
       <Grid2 size={{ xs: 12 }}>
         <Box component={Paper} sx={{ p: 2 }}>
-          {ERROR_MESSAGE.NO_RECORD}
+          {ERROR_MESSAGE.DATA_NOT_FOUND}
         </Box>
       </Grid2>
     );

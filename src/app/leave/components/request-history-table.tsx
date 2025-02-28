@@ -8,6 +8,7 @@ import { MyLeaveRequestDetail } from '../types';
 import { LeaveStatus } from './leave-status';
 import { EditLeaveRequest } from '../pages/request/components/edit-leave-request';
 import { DeleteLeaveRequest } from '../pages/request/components/delete-leave-request';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 type RequestHistoryTableProps = {
   isLoading: boolean;
@@ -141,7 +142,7 @@ export const RequestHistoryTable: FC<RequestHistoryTableProps> = ({
       </>
     ),
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? errorMessage : 'No records to display';
+      const errorMsg = isError ? errorMessage : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

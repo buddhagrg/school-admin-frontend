@@ -28,7 +28,7 @@ export const Celebrations = ({ celebrations }: { celebrations: CelebrationProps[
         <CardContent>
           <List>
             {celebrations.length <= 0 ? (
-              <>{ERROR_MESSAGE.NO_RECORD}</>
+              <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>
             ) : (
               celebrations.map(({ userId, user, event, eventDate }) => (
                 <div key={`${userId}${event}`}>

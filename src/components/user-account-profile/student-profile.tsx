@@ -26,7 +26,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
   }
 
   if (!data) {
-    return <>{ERROR_MESSAGE.NO_RECORD}</>;
+    return <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   }
 
   const {

@@ -83,7 +83,7 @@ export const ListLevelsWithPeriods = () => {
   if (!data || data?.levelsWithPeriods.length <= 0) {
     return (
       <ResponsiveBox>
-        <>{ERROR_MESSAGE.NO_RECORD}</>
+        <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>
       </ResponsiveBox>
     );
   }

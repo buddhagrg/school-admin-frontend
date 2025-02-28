@@ -44,7 +44,7 @@ export const ListPeriods: React.FC<ListPeriodsProps> = ({ levelDetail }) => {
     return <>{getErrorMsg(error).message}</>;
   }
   if (!data || data?.periodsWithDates?.length <= 0) {
-    return <>{ERROR_MESSAGE.NO_RECORD}</>;
+    return <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   }
 
   const DatePickerField = ({

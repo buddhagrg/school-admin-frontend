@@ -8,6 +8,7 @@ import { User } from '@/app/roles/types';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { SwitchUserRole } from './switch-user-role';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 type UserListProps = {
   roleId: number;
@@ -54,7 +55,7 @@ export const UserList: FC<UserListProps> = ({ roleId }) => {
       </IconButton>
     ),
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

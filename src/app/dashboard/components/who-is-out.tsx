@@ -28,7 +28,7 @@ export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {
         <CardContent>
           <List>
             {whoIsOut.length <= 0 ? (
-              <>{ERROR_MESSAGE.NO_RECORD}</>
+              <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>
             ) : (
               whoIsOut.map(({ user, userId, fromDate, toDate, leaveType }) => (
                 <div key={`${userId}${fromDate}`}>

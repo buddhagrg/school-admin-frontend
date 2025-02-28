@@ -25,7 +25,7 @@ export const Notices = ({ notices }: { notices: Notice[] }) => {
 
   let content: ReactNode | null = null;
   if (!Array.isArray(notices) || notices.length <= 0) {
-    content = <>{ERROR_MESSAGE.NO_RECORD}</>;
+    content = <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   } else {
     content = notices.map(({ id, title, author, createdDate }, index) => (
       <List key={id}>

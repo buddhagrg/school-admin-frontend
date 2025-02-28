@@ -7,6 +7,7 @@ import { PolicyUser } from '@/app/leave/types';
 import { RemoveUserFromPolicy } from './remove-user-from-policy';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetLeavePolicyUsersQuery } from '@/app/leave/api';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const UserList = ({ policyId }: { policyId: number }) => {
   const { data, isLoading, isError, error } = useGetLeavePolicyUsersQuery(policyId);
@@ -59,7 +60,7 @@ export const UserList = ({ policyId }: { policyId: number }) => {
       </IconButton>
     ),
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

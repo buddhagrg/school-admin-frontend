@@ -10,6 +10,7 @@ import { useGetDepartmentsQuery } from '../../api';
 import { DepartmentFormWithId } from '../../types';
 import { DeleteDepartment } from './delete-department';
 import { getAppBase } from '@/app/auth/slice';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const DepartmentData = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -68,7 +69,7 @@ export const DepartmentData = () => {
       );
     },
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

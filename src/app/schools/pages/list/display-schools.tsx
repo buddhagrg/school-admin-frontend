@@ -10,6 +10,7 @@ import { useGetSchoolsQuery } from '../../api';
 import { School } from '../../types';
 import { getAppBase } from '@/app/auth/slice';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const DisplaySchools = () => {
   const appBase = useSelector(getAppBase);
@@ -83,7 +84,7 @@ export const DisplaySchools = () => {
       </IconButton>
     ),
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

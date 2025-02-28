@@ -66,7 +66,7 @@ export const LeavePolicyDetail = ({ leavePolicies }: { leavePolicies: MyLeavePol
 
   let content: ReactNode | null = null;
   if (!Array.isArray(leavePolicies) || leavePolicies.length <= 0) {
-    content = <>{ERROR_MESSAGE.NO_RECORD}</>;
+    content = <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   } else {
     content = (
       <div className='slider-container'>

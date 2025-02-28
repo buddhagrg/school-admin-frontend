@@ -8,6 +8,7 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetSchoolQuery } from '../api';
 import { SchoolProps, SchoolSchema } from '../types';
 import { ManageSchool } from '../components/manage-school';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 const initialState = {
   name: '',
@@ -37,7 +38,7 @@ export const EditSchool = () => {
   } else if (isError) {
     content = <>{getErrorMsg(error)}</>;
   } else if (!schoolDetail) {
-    content = <>Record not found</>;
+    content = <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   } else {
     content = <ManageSchool operation='Edit' id={Number(id)} methods={methods} />;
   }

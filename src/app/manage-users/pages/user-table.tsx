@@ -196,7 +196,7 @@ export const UserTable: FC<UserTableProps> = ({ users, isLoading, isError, error
       ];
     },
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : ERROR_MESSAGE.NO_RECORD;
+      const errorMsg = isError ? getErrorMsg(error).message : ERROR_MESSAGE.DATA_NOT_FOUND;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

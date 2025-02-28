@@ -33,7 +33,7 @@ export const ListLevels: React.FC<ListLevelsProps> = ({ setSelectedLevelDetail }
     return <>{getErrorMsg(error).message}</>;
   }
   if (!data || data?.academicLevels?.length <= 0) {
-    return <>{ERROR_MESSAGE.NO_RECORD}</>;
+    return <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   }
 
   const handleListItemClick = (

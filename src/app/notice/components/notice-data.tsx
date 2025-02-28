@@ -21,6 +21,7 @@ import { menuItemTexts } from '@/constants';
 import { getAppBase, getUserId } from '@/app/auth/slice';
 import { DialogModal } from '@/components/dialog-modal';
 import { useHandleMenuAction } from '@/hooks';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 type NoticeDataProps = {
   notices: Notice[];
@@ -182,7 +183,7 @@ export const NoticeData: FC<NoticeDataProps> = ({
       return actionCellType === 'reviewer' ? reviewerActions : userActions;
     },
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

@@ -8,6 +8,7 @@ import { DATE_FORMAT, DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/h
 import { MyLeaveRequestDetail } from '@/app/leave/types';
 import { useGetLeavePendingQuery } from '@/app/leave/api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 const initialState = {
   action: '',
@@ -91,7 +92,7 @@ export const PendingRequestData = () => {
       </>
     ),
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

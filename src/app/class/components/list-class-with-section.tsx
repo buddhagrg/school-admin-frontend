@@ -22,6 +22,7 @@ import { ClassStatus } from './class/class-status';
 import { SectionStatus } from './section/section-status';
 import { getTextColor } from '@/utils/helpers/get-text-color';
 import { useGetClassesWithSectionsQuery } from '../api';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 const classState = {
   id: 0,
@@ -183,7 +184,7 @@ export const ListClassWithSection = () => {
       ) : null;
     },
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

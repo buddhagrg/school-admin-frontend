@@ -10,7 +10,7 @@ type Props = {
 export const TableRowWithColSpan: FC<Props> = ({ colSpan, text }) => {
   return (
     <TableRow>
-      <TableCell colSpan={colSpan}>{text ? text : ERROR_MESSAGE.NO_RECORD}</TableCell>
+      <TableCell colSpan={colSpan}>{text ? text : ERROR_MESSAGE.DATA_NOT_FOUND}</TableCell>
     </TableRow>
   );
 };

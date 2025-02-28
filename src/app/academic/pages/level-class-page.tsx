@@ -29,7 +29,7 @@ export const LevelClassPage = () => {
   if (!data || data?.levelsWithClasses.length <= 0) {
     return (
       <ResponsiveBox>
-        <>{ERROR_MESSAGE.NO_RECORD}</>
+        <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>
       </ResponsiveBox>
     );
   }
@@ -48,7 +48,7 @@ export const LevelClassPage = () => {
                     <ClassItem key={item.id} classId={item.id} className={item.name} />
                   ))
                 ) : (
-                  <>{ERROR_MESSAGE.NO_RECORD}</>
+                  <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>
                 )}
               </Paper>
             </Grid2>

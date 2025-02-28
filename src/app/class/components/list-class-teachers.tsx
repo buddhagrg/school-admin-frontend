@@ -8,6 +8,7 @@ import { useGetClassTeachersQuery } from '../api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { UpdateClassTeacher } from './class/update-class-teacher';
 import { DeleteClassTeacher } from './class/delete-class-teacher';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 const classState = {
   id: 0,
@@ -72,7 +73,7 @@ export const ListClassTeachers = () => {
       );
     },
     renderEmptyRowsFallback: () => {
-      const errorMsg = isError ? getErrorMsg(error).message : 'No records to display';
+      const errorMsg = isError ? getErrorMsg(error).message : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });

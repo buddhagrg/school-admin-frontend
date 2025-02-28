@@ -8,6 +8,7 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ManageDepartment } from '../components';
 import { useGetDepartmentQuery } from '../api';
 import { DepartmentForm, DepartmentSchema } from '../types';
+import { ERROR_MESSAGE } from '@/components/errors';
 
 export const EditDepartmentPage = () => {
   const { id } = useParams();
@@ -31,7 +32,7 @@ export const EditDepartmentPage = () => {
   } else if (isError) {
     content = <>{getErrorMsg(error)}</>;
   } else if (!departmentDetail) {
-    content = <>Record not found</>;
+    content = <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
   } else {
     content = <ManageDepartment operation='Edit' id={Number(id)} methods={methods} />;
   }
