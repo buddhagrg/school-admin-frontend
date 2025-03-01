@@ -153,7 +153,6 @@ export const ListClassWithSection = () => {
                       <IconButton
                         title={isActive ? 'Deactivate Section' : 'Activate Section'}
                         aria-label='activate/deactivate'
-                        color='error'
                         onClick={() =>
                           handleSectionBtnClick(
                             classId,
