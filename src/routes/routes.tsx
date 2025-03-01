@@ -23,6 +23,7 @@ import { EditSchool, ListSchoolsPage } from '@/app/schools/pages';
 import { LevelClassPage, AcademicPage, PeriodDatePage } from '@/app/academic/pages';
 import { ClassSectionPage, ClassTeacherPage } from '@/app/class/pages';
 import { ManageUsers } from '@/app/manage-users/pages';
+import { AcademicYearsPage } from '@/app/academic-years/pages';
 
 export const routes = [
   {
@@ -62,6 +63,7 @@ export const routes = [
       { path: 'academic/levels/periods', element: <AcademicPage /> },
       { path: 'academic/levels/classes', element: <LevelClassPage /> },
       { path: 'academic/periods/dates', element: <PeriodDatePage /> },
+      { path: 'academic/years', element: <AcademicYearsPage /> },
       { path: 'classes/sections', element: <ClassSectionPage /> },
       { path: 'classes/teachers', element: <ClassTeacherPage /> },
       { path: 'users/roles-permissions', element: <RolePage /> },
