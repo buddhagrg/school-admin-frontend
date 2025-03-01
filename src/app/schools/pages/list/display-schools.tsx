@@ -11,6 +11,7 @@ import { School } from '../../types';
 import { getAppBase } from '@/app/auth/slice';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { ERROR_MESSAGE } from '@/components/errors';
+import { getTextColor } from '@/utils/helpers/get-text-color';
 
 export const DisplaySchools = () => {
   const appBase = useSelector(getAppBase);
@@ -50,13 +51,27 @@ export const DisplaySchools = () => {
       },
       {
         accessorKey: 'isActive',
-        header: 'Is Active',
-        Cell: ({ cell }) => <>{cell.getValue<boolean>().toString()}</>
+        header: 'Is Active?',
+        Cell: ({ cell }) => {
+          const status = cell.getValue<boolean>();
+          return (
+            <Box component='span' sx={getTextColor(status)}>
+              {status ? 'Active' : 'Inactive'}
+            </Box>
+          );
+        }
       },
       {
         accessorKey: 'isEmailVerified',
-        header: 'Is Email Verified',
-        Cell: ({ cell }) => <>{cell.getValue<boolean>().toString()}</>
+        header: 'Is Email Verified?',
+        Cell: ({ cell }) => {
+          const status = cell.getValue<boolean>();
+          return (
+            <Box component='span' sx={getTextColor(status)}>
+              {status ? 'Yes' : 'No'}
+            </Box>
+          );
+        }
       }
     ],
     []
@@ -75,7 +90,7 @@ export const DisplaySchools = () => {
     positionActionsColumn: 'last',
     renderRowActions: ({ row }) => (
       <IconButton
-        title='Edit class'
+        title='Edit School Detail'
         color='info'
         component={Link}
         to={`${appBase}/schools/edit/${row.original.schoolId}`}
