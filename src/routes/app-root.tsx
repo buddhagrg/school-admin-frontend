@@ -3,7 +3,7 @@ import { matchRoutes, Outlet, useLocation } from 'react-router-dom';
 import { MainLayout, PermissionErrorLayout } from '@/components/layout';
 import { usePermission } from '@/hooks';
 import { NotFound } from '@/components/errors';
-import { routes } from './routes';
+import { routes } from './router';
 
 export const AppRoot = () => {
   const { hasData, doesRouteExist } = usePermission();

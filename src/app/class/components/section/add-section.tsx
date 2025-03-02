@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { SectionForm } from './section-form';
 import { SectionFormProps, SectionFormSchema } from '../../types';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useAddSectionMutation } from '../../api';
+import { useAddSectionMutation } from '../../class-api';
 
 const initialState: SectionFormProps = {
   name: '',

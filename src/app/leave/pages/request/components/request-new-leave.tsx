@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import { useLeaveRequest } from '../context/leave-request-provider';
 import { DialogModal } from '@/components/dialog-modal';
-import { useApplyLeaveRequestMutation } from '@/app/leave/api';
+import { useApplyLeaveRequestMutation } from '@/app/leave/leave-api';
 import { LeaveRequestForm, LeaveRequestFormSchema } from '@/app/leave/types';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveForm } from '@/app/leave/components';

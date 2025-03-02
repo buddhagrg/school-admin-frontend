@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { AddEditRoleSchema } from './role-schema';
-import { BasePermissionProps, PermissionProps } from '@/utils/type/misc';
+import { BasePermissionProps, PermissionProps } from '@/app/permissions/types';
 
 export type Role = {
   id: number;

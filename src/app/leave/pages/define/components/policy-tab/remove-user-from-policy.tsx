@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
-import { useRemoveUserFromPolicyMutation } from '@/app/leave/api';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { useRemoveUserFromPolicyMutation } from '@/app/leave/leave-api';
 
 type RemoveUserFromPolicyProps = {
   policyId: number;

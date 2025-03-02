@@ -8,9 +8,8 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { PermissionFormProps } from '../pages/permission-page';
-import { AddEditPermissionProps, AddEditPermissionSchema } from '../types';
-import { useAddPermissionMutation, useUpdatePermissionMutation } from '../api';
+import { AddEditPermissionProps, AddEditPermissionSchema, PermissionFormProps } from '../types';
+import { useAddPermissionMutation, useUpdatePermissionMutation } from '../permission-api';
 
 type AddEditPermissionType = {
   closeModal: () => void;

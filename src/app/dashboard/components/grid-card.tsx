@@ -3,21 +3,21 @@ import { TrendingDown, TrendingUp } from '@mui/icons-material';
 import { Box, Card, CardContent, Chip, Typography } from '@mui/material';
 
 type GridCardType = {
-  heading: string;
+  title: string;
   totalNumberCurrentYear: number;
   totalNumberPercInComparisonFromPrevYear: number;
   totalNumberValueInComparisonFromPrevYear: number;
 };
 
 export const GridCard: FC<GridCardType> = (props) => {
-  const { heading, totalNumberCurrentYear, totalNumberPercInComparisonFromPrevYear } = props;
+  const { title, totalNumberCurrentYear, totalNumberPercInComparisonFromPrevYear } = props;
   const isNegative = totalNumberPercInComparisonFromPrevYear < 0 ? true : false;
 
   return (
     <Card>
       <CardContent>
         <Typography component='div' color='text.secondary' gutterBottom>
-          {heading}
+          {title}
         </Typography>
         <Box sx={{ display: 'flex' }}>
           <Typography variant='h6' gutterBottom sx={{ pr: 2 }}>

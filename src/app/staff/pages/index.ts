@@ -1,3 +1,3 @@
-export * from './add-staff-page';
-export * from './edit-staff-page';
-export * from './view-staff-page';
+export { AddStaff } from './add-staff';
+export { EditStaff } from './edit-staff';
+export { ViewStaff } from './view-staff';

@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import { Grid2 } from '@mui/material';
-import {
-  MiniAvatar,
-  Others,
-  ParentsAndGuardianInformation,
-  PersonalDetail
-} from '@/app/student/components/views';
-import { useGetStudentDetailQuery } from '@/app/student/api';
+
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ERROR_MESSAGE } from '../errors';
+import { useGetStudentDetailQuery } from '@/app/student/student-api';
+import {
+  ViewMiniAvatar,
+  ViewOtherInfo,
+  ViewParentsAndGuardianInformation,
+  ViewPersonalDetail
+} from '@/app/student/components';
 
 type StudentProfileProps = {
   id?: string;
@@ -56,7 +57,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
   return (
     <Grid2 container spacing={3}>
       <Grid2 size={{ xs: 12, md: 5 }}>
-        <MiniAvatar
+        <ViewMiniAvatar
           name={name}
           phone={phone}
           email={email}
@@ -66,7 +67,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
         />
       </Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
-        <PersonalDetail
+        <ViewPersonalDetail
           dob={dob}
           gender={gender}
           roll={roll}
@@ -77,7 +78,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
       </Grid2>
       <Grid2 size={{ xs: 12, md: 5 }}></Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
-        <ParentsAndGuardianInformation
+        <ViewParentsAndGuardianInformation
           fatherName={fatherName}
           fatherPhone={fatherPhone}
           motherName={motherName}
@@ -89,7 +90,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
       </Grid2>
       <Grid2 size={{ xs: 12, md: 5 }}></Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
-        <Others hasSystemAccess={hasSystemAccess ?? false} reporterName={reporterName} />
+        <ViewOtherInfo hasSystemAccess={hasSystemAccess ?? false} reporterName={reporterName} />
       </Grid2>
     </Grid2>
   );

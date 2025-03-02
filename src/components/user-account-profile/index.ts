@@ -1,2 +1,2 @@
-export * from './staff-profile';
-export * from './student-profile';
+export { StaffProfile } from './staff-profile';
+export { StudentProfile } from './student-profile';

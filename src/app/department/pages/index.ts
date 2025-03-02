@@ -1,2 +1,2 @@
-export * from './edit-department-page';
-export * from './list/list-departments-page';
+export { Departments } from './departments';
+export { EditDepartment } from './edit-department';

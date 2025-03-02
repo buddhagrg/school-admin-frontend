@@ -1,5 +1,4 @@
-export * from './mini-avatar';
-export * from './others';
-export * from './parents-information';
-export * from './personal-detail';
-export * from './staff-account-edit';
+export { ViewMiniAvatar } from './view-mini-avatar';
+export { ViewOtherInfo } from './view-other-info';
+export { ViewParentsInformation } from './view-parents-information';
+export { ViewPersonalDetail } from './view-personal-detail';

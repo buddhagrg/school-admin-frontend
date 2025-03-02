@@ -1,5 +1,4 @@
-export * from './adddress';
-export * from './basic-information';
-export * from './other-information';
-export * from './parents-information';
-export * from './staff-initial-state';
+export { AddressForm } from './adddress-form';
+export { BasicInformationForm } from './basic-information-form';
+export { OtherInformationForm } from './other-information-form';
+export { ParentsInformationForm } from './parents-information-form';

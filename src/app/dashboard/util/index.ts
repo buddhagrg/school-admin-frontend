@@ -1,2 +1,2 @@
-export * from './get-celebration-date';
-export * from './get-who-is-out-date';
+export { getFormattedCelebrationDate } from './get-celebration-date';
+export { getFormattedLeaveDate } from './get-who-is-out-date';

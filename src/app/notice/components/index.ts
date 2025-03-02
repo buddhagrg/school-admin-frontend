@@ -1,4 +1,4 @@
-export * from './notice-data';
-export * from './notice-form';
-export * from './notice-status';
-export * from './view-notice-skeleton';
+export { NoticeData } from './notice-data';
+export { NoticeForm } from './notice-form';
+export { NoticeStatus } from './notice-status';
+export { ViewNoticeSkeleton } from './view-notice-skeleton';

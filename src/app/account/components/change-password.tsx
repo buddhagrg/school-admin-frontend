@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useChangePwdMutation } from '@/app/auth/api';
+import { useChangePwdMutation } from '@/app/auth/auth-api';
 import { PasswordProps, PasswordSchema } from '@/app/auth/types';
 
 const initialState = {

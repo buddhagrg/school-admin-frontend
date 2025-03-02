@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { NameIdType } from '@/utils/type/misc';
 import { NoticeFormSchema, NoticeRecipientSchema, RecipientDetailSchema } from './notice-schema';
+import { NameIdType } from '@/types';
 
 export type Section = {
   [key: number]: NameIdType[];

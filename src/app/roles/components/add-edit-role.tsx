@@ -9,7 +9,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { AddEditRoleProps, AddEditRoleSchema } from '../types';
-import { useAddNewRoleMutation, useUpdateRoleMutation } from '../api';
+import { useAddNewRoleMutation, useUpdateRoleMutation } from '../roles-api';
 
 type ModalProps = {
   roleId?: number;

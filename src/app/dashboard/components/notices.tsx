@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 
 import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { Notice } from '@/app/notice/types';
-import { getAppBase } from '@/app/auth/slice';
+import { getAppBase } from '@/app/auth/auth-slice';
 import { ERROR_MESSAGE } from '@/components/errors';
 
 export const Notices = ({ notices }: { notices: Notice[] }) => {

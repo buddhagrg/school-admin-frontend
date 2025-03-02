@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { SchoolProps } from '../types';
-import { useAddSchoolMutation, useUpdateSchoolMutation } from '../api';
-import { getAppBase } from '@/app/auth/slice';
+import { useAddSchoolMutation, useUpdateSchoolMutation } from '../school-api';
+import { getAppBase } from '@/app/auth/auth-slice';
 
 type ManageSchoolPropsProps = {
   operation: string;

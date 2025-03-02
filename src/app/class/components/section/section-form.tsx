@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { SectionFormProps } from '../../types';
-import { useGetClassesQuery } from '../../api';
+import { useGetClassesQuery } from '../../class-api';
 
 type SectionFormType = {
   action: 'add' | 'update';

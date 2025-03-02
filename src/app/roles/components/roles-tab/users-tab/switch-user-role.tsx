@@ -9,8 +9,8 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetRolesQuery } from '@/app/roles/api';
-import { useSwitchUserRoleMutation } from '@/app/manage-users/api';
+import { useGetRolesQuery } from '@/app/roles/roles-api';
+import { useSwitchUserRoleMutation } from '@/app/manage-users/manage-users-api';
 
 type SwitchUserRoleProps = {
   userId: number;

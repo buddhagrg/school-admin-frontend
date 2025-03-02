@@ -13,7 +13,7 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveRequestForm, LeaveRequestFormSchema, MyLeavePolicy } from '@/app/leave/types';
 import { LeaveDetail, LeaveForm } from '@/app/leave/components';
-import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '@/app/leave/api';
+import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '@/app/leave/leave-api';
 import { ERROR_MESSAGE } from '@/components/errors';
 
 const settings = {

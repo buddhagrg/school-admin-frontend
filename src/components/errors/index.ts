@@ -1,4 +1,4 @@
-export * from './not-found';
-export * from './api-error';
-export * from './error-page';
-export * from './error-message';
+export { NotFound } from './not-found';
+export { ApiError } from './api-error';
+export { Error } from './error';
+export { ERROR_MESSAGE } from './error-message';

@@ -1,4 +1,3 @@
-import { useGetAcademicLevelsQuery } from '@/app/academic/api';
 import {
   FormControl,
   FormHelperText,
@@ -13,6 +12,7 @@ import { AcademicYearFormProps } from '../types';
 import { DatePicker } from '@mui/x-date-pickers';
 import { DATE_FORMAT } from '@/utils/helpers/date';
 import { parseISO } from 'date-fns';
+import { useGetAcademicLevelsQuery } from '@/app/levels-periods/levels-periods-api';
 
 type AcademicYearFormType = {
   methods: UseFormReturn<AcademicYearFormProps>;

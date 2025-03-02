@@ -1,1 +1,1 @@
-export * from './responsive-box';
+export { ResponsiveBox } from './responsive-box';

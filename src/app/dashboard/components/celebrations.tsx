@@ -12,7 +12,7 @@ import {
   Typography
 } from '@mui/material';
 import { getFormattedCelebrationDate } from '../util';
-import { CelebrationProps } from '../types';
+import { CelebrationProps } from '../dashboard-type';
 import { ERROR_MESSAGE } from '@/components/errors';
 
 export const Celebrations = ({ celebrations }: { celebrations: CelebrationProps[] }) => {

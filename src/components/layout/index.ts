@@ -1,2 +1,2 @@
-export * from './main-layout';
-export * from './permission-error-layout';
+export { MainLayout } from './main-layout';
+export { PermissionErrorLayout } from './permission-error-layout';

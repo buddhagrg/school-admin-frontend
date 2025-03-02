@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { DepartmentForm } from '../types';
-import { useAddNewDepartmentMutation, useUpdateDepartmentMutation } from '../api';
-import { getAppBase } from '@/app/auth/slice';
+import { useAddNewDepartmentMutation, useUpdateDepartmentMutation } from '../department-api';
+import { getAppBase } from '@/app/auth/auth-slice';
 
 type ManageDepartmentProps = {
   id?: number;

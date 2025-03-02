@@ -4,7 +4,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { toast } from 'react-toastify';
 
 import { DialogModal } from '@/components/dialog-modal';
-import { useHandlePendingLeaveStatusMutation } from '@/app/leave/api';
+import { useHandlePendingLeaveStatusMutation } from '@/app/leave/leave-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type HandleLeaveReuqestProps = {

@@ -6,8 +6,8 @@ import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'materi
 import { PolicyUser } from '@/app/leave/types';
 import { RemoveUserFromPolicy } from './remove-user-from-policy';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useGetLeavePolicyUsersQuery } from '@/app/leave/api';
 import { ERROR_MESSAGE } from '@/components/errors';
+import { useGetLeavePolicyUsersQuery } from '@/app/leave/leave-api';
 
 export const UserList = ({ policyId }: { policyId: number }) => {
   const { data, isLoading, isError, error } = useGetLeavePolicyUsersQuery(policyId);

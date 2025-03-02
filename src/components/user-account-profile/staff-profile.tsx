@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import { Grid2 } from '@mui/material';
-import {
-  MiniAvatar,
-  Others,
-  ParentsInformation,
-  PersonalDetail
-} from '@/app/staff/components/views';
-import { useGetStaffDetailQuery } from '@/app/staff/api';
+
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ERROR_MESSAGE } from '../errors';
+import { useGetStaffDetailQuery } from '@/app/staff/staff-api';
+import {
+  ViewMiniAvatar,
+  ViewOtherInfo,
+  ViewParentsInformation,
+  ViewPersonalDetail
+} from '@/app/staff/components';
 
 type StaffProfileProps = {
   id?: string;
@@ -53,7 +54,7 @@ export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
   return (
     <Grid2 container spacing={3}>
       <Grid2 size={{ xs: 12, md: 5 }}>
-        <MiniAvatar
+        <ViewMiniAvatar
           name={name}
           roleName={roleName}
           email={email}
@@ -62,7 +63,7 @@ export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
         />
       </Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
-        <PersonalDetail
+        <ViewPersonalDetail
           gender={gender}
           dob={dob}
           joinDate={joinDate}
@@ -75,7 +76,7 @@ export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
       </Grid2>
       <Grid2 size={{ xs: 12, md: 5 }}></Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
-        <ParentsInformation
+        <ViewParentsInformation
           fatherName={fatherName}
           motherName={motherName}
           emergencyPhone={emergencyPhone}
@@ -83,7 +84,7 @@ export const StaffProfile: FC<StaffProfileProps> = ({ id }) => {
       </Grid2>
       <Grid2 size={{ xs: 12, md: 5 }}></Grid2>
       <Grid2 size={{ xs: 12, md: 7 }}>
-        <Others hasSystemAccess={hasSystemAccess ?? false} reporterName={reporterName} />
+        <ViewOtherInfo hasSystemAccess={hasSystemAccess ?? false} reporterName={reporterName} />
       </Grid2>
     </Grid2>
   );

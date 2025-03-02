@@ -1,5 +1,5 @@
-export * from './leave-form';
-export * from './leave-policy-detail';
-export * from './leave-status';
-export * from './leave-detail';
-export * from './request-history-table';
+export { LeaveForm } from './leave-form';
+export { LeavePolicyDetail } from './leave-policy-detail';
+export { LeaveStatus } from './leave-status';
+export { LeaveDetail } from './leave-detail';
+export { RequestHistoryTable } from './request-history-table';

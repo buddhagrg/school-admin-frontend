@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import { ClassForm } from './class-form';
 import { ClassFormProps, ClassFormSchema } from '../../types';
-import { useAddClassMutation } from '../../api';
+import { useAddClassMutation } from '../../class-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 const initialState: ClassFormProps = {

@@ -1,3 +1,3 @@
-export * from './define/leave-define-page';
-export * from './pending/leave-pending-page';
-export * from './request/my-leave-request-page';
+export { LeaveDefine } from './define/leave-define';
+export { PendingRequest } from './pending/leave-pending';
+export { MyLeaveRequest } from './request/my-leave-request';

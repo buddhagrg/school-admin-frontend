@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { ClassFormSchema, ClassTeacherFormSchema, SectionFormSchema } from './class-schema';
-import { NameIdType } from '@/utils/type/misc';
+import { NameIdType } from '@/types';
 
 export type ClassFormProps = z.infer<typeof ClassFormSchema>;
 export type ClassFormWithId = ClassFormProps & { id: number };

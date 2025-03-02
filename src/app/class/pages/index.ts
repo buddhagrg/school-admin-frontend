@@ -1,2 +1,2 @@
-export * from './class-section-page';
-export * from './class-teacher-page';
+export { ClassSection } from './class-section';
+export { ClassTeacher } from './class-teacher';

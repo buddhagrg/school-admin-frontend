@@ -1,5 +1,5 @@
-export * from './add-notice-page';
-export * from './edit-notice-page';
-export * from './list-notices-page';
-export * from './manage-notice-page';
-export * from './view-notice-page';
+export { AddNotice } from './add-notice';
+export { EditNotice } from './edit-notice';
+export { ListNotices } from './list-notices';
+export { ManageNotices } from './manage-notice';
+export { ViewNotice } from './view-notice';

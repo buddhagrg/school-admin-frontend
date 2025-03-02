@@ -1,2 +1,3 @@
-export * from './login/login-page';
-export * from './setup-password/setup-password-page';
+export { Login } from './login/login';
+export { SetupPassword } from './setup-password/setup-password';
+export { SignUp } from './signup/signup';

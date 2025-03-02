@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { ClassFormProps } from '../../types';
-import { useGetAcademicLevelsQuery } from '@/app/academic/api';
+import { useGetAcademicLevelsQuery } from '@/app/levels-periods/levels-periods-api';
 
 type ClassFormType = {
   methods: UseFormReturn<ClassFormProps>;

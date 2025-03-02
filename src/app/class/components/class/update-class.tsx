@@ -7,7 +7,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { ClassFormProps, ClassFormSchema } from '../../types';
-import { useUpdateClassMutation } from '../../api';
+import { useUpdateClassMutation } from '../../class-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ClassForm } from './class-form';
 

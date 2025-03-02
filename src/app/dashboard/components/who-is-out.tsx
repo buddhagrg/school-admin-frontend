@@ -12,7 +12,7 @@ import {
   Typography
 } from '@mui/material';
 import { getFormattedLeaveDate } from '../util';
-import { WhoIsOutProps } from '../types';
+import { WhoIsOutProps } from '../dashboard-type';
 import { ERROR_MESSAGE } from '@/components/errors';
 
 export const WhoIsOut = ({ whoIsOut }: { whoIsOut: WhoIsOutProps[] }) => {

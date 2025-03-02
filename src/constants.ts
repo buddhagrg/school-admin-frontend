@@ -1,17 +1,17 @@
-import { NameIdType } from './utils/type/misc';
+import { NameIdType } from './types';
 
 export const noticeStatusList: NameIdType[] = [
   { id: 1, name: 'Draft' },
   { id: 2, name: 'Submit for Approval' }
 ];
 
-export const genders: NameIdType[] = [
+export const genders: NameIdType<string>[] = [
   { name: 'Male', id: 'Male' },
   { name: 'Female', id: 'Female' },
   { name: 'Other', id: 'Other' }
 ];
 
-export const maritalStatusList: NameIdType[] = [
+export const maritalStatusList: NameIdType<string>[] = [
   { name: 'Single', id: 'Single' },
   { name: 'Married', id: 'Married' },
   { name: 'Divorced', id: 'Divorced' },

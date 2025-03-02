@@ -9,6 +9,7 @@ export type UserAccountBasic = {
   hasSystemAccess: boolean;
   lastLogin: string;
   staticRoleId: number;
+  isEmailVerified: boolean;
 };
 
 export type UsersData = {

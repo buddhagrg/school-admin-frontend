@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { DialogModal } from '@/components/dialog-modal';
 import { ClassTeacherForm } from './class-teacher-form';
 import { ClassTeacherFormProps, ClassTeacherFormSchema } from '../../types';
-import { useAssignClassTeacherMutation } from '../../api';
+import { useAssignClassTeacherMutation } from '../../class-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type UpdateClassTeacherProps = {

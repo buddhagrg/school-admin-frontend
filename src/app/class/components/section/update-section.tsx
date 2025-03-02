@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import { SectionForm } from './section-form';
 import { SectionFormProps, SectionFormSchema } from '../../types';
-import { useUpdateSectionMutation } from '../../api';
+import { useUpdateSectionMutation } from '../../class-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { DialogModal } from '@/components/dialog-modal';
 

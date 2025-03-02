@@ -1,2 +1,2 @@
-export * from './api';
-export * from './tag-types';
+export { api } from './api';
+export { Tag } from './tag-types';

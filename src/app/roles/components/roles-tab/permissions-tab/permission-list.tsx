@@ -6,15 +6,15 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { useRolePermission } from '@/app/roles/context/role-provider';
-import { Permission } from '@/components/permission';
 import {
   useGetRolePermissionsQuery,
   useAssignRolePermissionsMutation,
   useDeleteRolePermissionsMutation
-} from '@/app/roles/api';
+} from '@/app/roles/roles-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ExtendedPermission } from '@/app/roles/types';
-import { PermissionProps } from '@/utils/type/misc';
+import { ListPermissions } from '@/app/permissions/components';
+import { PermissionProps } from '@/app/permissions/types';
 
 type PermissionListProps = {
   roleId: number;
@@ -106,7 +106,7 @@ export const PermissionList: FC<PermissionListProps> = ({ roleId }) => {
   return (
     <>
       <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }}>
-        <Permission
+        <ListPermissions
           rowSelection={rowSelection}
           permissions={currentRolePermissions}
           onRowSelectChange={setRowSelection}

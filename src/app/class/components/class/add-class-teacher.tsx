@@ -9,7 +9,7 @@ import { ClassTeacherForm } from './class-teacher-form';
 import { ClassTeacherFormProps, ClassTeacherFormSchema } from '../../types';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useAssignClassTeacherMutation } from '../../api';
+import { useAssignClassTeacherMutation } from '../../class-api';
 
 const initialState = {
   classId: '',

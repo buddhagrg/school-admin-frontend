@@ -20,8 +20,14 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useLogoutMutation } from '@/app/auth/api';
-import { getAppBase, getUserEmail, getUserName, getUserRole, resetUser } from '@/app/auth/slice';
+import { useLogoutMutation } from '@/app/auth/auth-api';
+import {
+  getAppBase,
+  getUserEmail,
+  getUserName,
+  getUserRole,
+  resetUser
+} from '@/app/auth/auth-slice';
 
 type AppBarLayoutProps = {
   handleDrawerToggle: () => void;

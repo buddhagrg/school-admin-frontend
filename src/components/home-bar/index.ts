@@ -1,1 +1,1 @@
-export * from './home-bar';
+export { HomeBar } from './home-bar';

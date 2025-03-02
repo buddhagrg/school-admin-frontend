@@ -6,7 +6,7 @@ import {
   SchoolProfileSchema,
   SetupPasswordSchema
 } from './auth-schema';
-import { BasePermissionProps, PermissionProps } from '@/utils/type/misc';
+import { BasePermissionProps, PermissionProps } from '@/app/permissions/types';
 
 export type SubMenu = {
   id: number;

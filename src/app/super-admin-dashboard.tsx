@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserMenus } from './auth/slice';
+import { getUserMenus } from './auth/auth-slice';
 
 export const SuperAdminDashboard = () => {
   const menus = useSelector(getUserMenus);

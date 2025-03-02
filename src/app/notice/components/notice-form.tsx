@@ -19,7 +19,7 @@ import { Controller, UseFormReturn } from 'react-hook-form';
 
 import { NoticeFormProps } from '../types';
 import { noticeStatusList } from '@/constants';
-import { useGetNoticeRecipientsQuery } from '../api';
+import { useGetNoticeRecipientsQuery } from '../notice-api';
 
 type Props = {
   isSaving: boolean;

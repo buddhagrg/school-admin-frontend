@@ -5,7 +5,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useUpdateSectionStatusMutation } from '../../api';
+import { useUpdateSectionStatusMutation } from '../../class-api';
 
 type SectionStatusProps = {
   closeModal: () => void;

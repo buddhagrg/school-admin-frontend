@@ -22,7 +22,10 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { PolicyUsers, PolicyUsersSchema } from '../../../types';
-import { useAddUserToPolicyMutation, useGetEligibleLeavePolicyUsersQuery } from '@/app/leave/api';
+import {
+  useAddUserToPolicyMutation,
+  useGetEligibleLeavePolicyUsersQuery
+} from '@/app/leave/leave-api';
 
 type AddPeopleToPolicyProps = {
   policyId: number;

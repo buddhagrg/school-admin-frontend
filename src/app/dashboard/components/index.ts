@@ -1,5 +1,5 @@
-export * from './celebrations';
-export * from './grid-card';
-export * from './leave-policy-detail';
-export * from './notices';
-export * from './who-is-out';
+export { Celebrations } from './celebrations';
+export { GridCard } from './grid-card';
+export { LeavePolicyDetail } from './leave-policy-detail';
+export { Notices } from './notices';
+export { WhoIsOut } from './who-is-out';

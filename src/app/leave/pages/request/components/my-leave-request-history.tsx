@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { useGetMyLeaveHistoryQuery } from '@/app/leave/api';
+import { useGetMyLeaveHistoryQuery } from '@/app/leave/leave-api';
 import { RequestHistoryTable } from '@/app/leave/components';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 

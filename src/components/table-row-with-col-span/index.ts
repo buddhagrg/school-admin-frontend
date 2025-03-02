@@ -1,1 +1,1 @@
-export * from './table-row.tsx';
+export { TableRowWithColSpan } from './table-row.tsx';

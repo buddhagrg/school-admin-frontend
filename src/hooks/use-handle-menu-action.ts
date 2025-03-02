@@ -1,11 +1,11 @@
+import { useUpdateUserSystemAccessMutation } from '@/app/manage-users/manage-users-api';
 import { menuItemTexts } from '../constants';
 import {
   useResendPwdSetupLinkMutation,
   useResendVerificationEmailMutation,
   useResetPwdMutation
-} from '@/app/auth/api';
-import { useUpdateUserSystemAccessMutation } from '@/app/manage-users/api';
-import { useUpdateNoticeStatusMutation } from '@/app/notice/api';
+} from '@/app/auth/auth-api';
+import { useUpdateNoticeStatusMutation } from '@/app/notice/notice-api';
 
 export const useHandleMenuAction = () => {
   const [updateUserSystemAccess] = useUpdateUserSystemAccessMutation();

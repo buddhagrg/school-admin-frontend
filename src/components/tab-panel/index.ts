@@ -1,1 +1,1 @@
-export * from './tab-panel';
+export { TabPanel } from './tab-panel';

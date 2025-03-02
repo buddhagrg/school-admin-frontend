@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { ClassTeacherFormProps } from '../../types';
-import { useGetClassesQuery, useGetTeachersQuery } from '../../api';
+import { useGetClassesQuery, useGetTeachersQuery } from '../../class-api';
 
 type ClassTeacherFormType = {
   methods: UseFormReturn<ClassTeacherFormProps>;

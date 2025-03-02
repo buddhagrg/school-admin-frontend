@@ -14,10 +14,10 @@ import {
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-
-import { getAppBase, isUserAuthenticated } from '../auth/slice';
-import { HomeBar } from '@/components/home-bar';
 import { Close, Menu } from '@mui/icons-material';
+
+import { getAppBase, isUserAuthenticated } from '../auth/auth-slice';
+import { HomeBar } from '@/components/home-bar';
 
 export const Appbar = () => {
   const theme = useTheme();

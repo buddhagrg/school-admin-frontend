@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import Cookies from 'js-cookie';
 import { Tag } from './tag-types';
-import { resetUser } from '@/app/auth/slice';
+import { resetUser } from '@/app/auth/auth-slice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_API_URL}/api/v1`,

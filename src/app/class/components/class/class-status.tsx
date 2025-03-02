@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useUpdateClassStatusMutation } from '../../api';
+import { useUpdateClassStatusMutation } from '../../class-api';
 
 type ClassStatusProps = {
   id: number;

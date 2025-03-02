@@ -5,7 +5,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { useDeletePermissionMutation } from '../api';
+import { useDeletePermissionMutation } from '../permission-api';
 
 type DeletePermissionProps = {
   permissionId: number;

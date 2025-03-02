@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
-import { useDeleteClassTeacherMutation } from '../../api';
+import { useDeleteClassTeacherMutation } from '../../class-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 type DeleteClassTeacherProps = {

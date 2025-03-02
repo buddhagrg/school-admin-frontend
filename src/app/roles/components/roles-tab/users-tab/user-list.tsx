@@ -3,7 +3,7 @@ import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'materi
 import { Box, IconButton } from '@mui/material';
 import { SwapHoriz } from '@mui/icons-material';
 
-import { useGetRoleUsersQuery } from '@/app/roles/api';
+import { useGetRoleUsersQuery } from '@/app/roles/roles-api';
 import { User } from '@/app/roles/types';
 import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { SwitchUserRole } from './switch-user-role';

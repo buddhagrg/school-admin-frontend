@@ -8,7 +8,7 @@ import { parseISO } from 'date-fns';
 
 import { LeaveRequestForm, LeaveRequestFormSchema, MyLeaveRequestDetail } from '@/app/leave/types';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { useUpdateLeaveRequestMutation } from '@/app/leave/api';
+import { useUpdateLeaveRequestMutation } from '@/app/leave/leave-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { DialogModal } from '@/components/dialog-modal';
 import { LeaveForm } from '@/app/leave/components';

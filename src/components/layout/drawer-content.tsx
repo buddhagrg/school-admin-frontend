@@ -13,7 +13,7 @@ import {
 import { blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAppBase, getUserMenus } from '@/app/auth/slice';
+import { getAppBase, getUserMenus } from '@/app/auth/auth-slice';
 
 type DrawerContentProps = {
   handleNavigationClick: (name: string) => void;
