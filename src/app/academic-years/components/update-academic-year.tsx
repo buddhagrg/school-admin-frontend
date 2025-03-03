@@ -12,6 +12,7 @@ import { AcademicYearFormProps } from '../types';
 import { useUpdateAcademicYearMutation } from '../academic-years-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { academicYearInitialState } from './academi-year-initial-state';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 
 type UpdateAcademicYearProps = {
   closeModal: () => void;
@@ -42,6 +43,8 @@ export const UpdateAcademicYear: React.FC<UpdateAcademicYearProps> = ({ closeMod
     try {
       const payload = {
         ...data,
+        startDate: getFormattedDate(data.startDate, API_DATE_FORMAT),
+        endDate: getFormattedDate(data.endDate, API_DATE_FORMAT),
         id
       };
       const result = await updateAcademicYear(payload).unwrap();
