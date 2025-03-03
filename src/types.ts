@@ -9,3 +9,6 @@ export type NameIdType<T = number> = {
   name: string;
   id: T;
 };
+export type ApiResponseSuccessMessage = {
+  message: string;
+};
