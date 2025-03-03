@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { PeriodDateFormPropsWithLevelId, PeriodsWithDatesData } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const periodsDatesApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,14 +14,16 @@ const periodsDatesApi = api.injectEndpoints({
               id
             })) || [Tag.ACADEMIC_PERIODS_WITH_DATES]
     }),
-    updatePeriodsDates: builder.mutation<{ message: string }, PeriodDateFormPropsWithLevelId>({
-      query: ({ academicLevelId, periodsDates }) => ({
-        url: `/academic/levels/${academicLevelId}/periods/dates`,
-        method: 'PUT',
-        body: { periodsDates }
-      }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_PERIODS_WITH_DATES])
-    })
+    updatePeriodsDates: builder.mutation<ApiResponseSuccessMessage, PeriodDateFormPropsWithLevelId>(
+      {
+        query: ({ academicLevelId, periodsDates }) => ({
+          url: `/academic/levels/${academicLevelId}/periods/dates`,
+          method: 'PUT',
+          body: { periodsDates }
+        }),
+        invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_PERIODS_WITH_DATES])
+      }
+    )
   })
 });
 

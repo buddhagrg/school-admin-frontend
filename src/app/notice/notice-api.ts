@@ -7,6 +7,7 @@ import {
   RecipientResponse,
   ReviewNotice
 } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const noticeApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,7 +26,7 @@ const noticeApi = api.injectEndpoints({
       query: (id) => `/notices/${id}`,
       providesTags: (result) => (result ? [{ type: Tag.NOTICES, id: result.id }] : [])
     }),
-    addNotice: builder.mutation<{ message: string }, NoticeFormProps>({
+    addNotice: builder.mutation<ApiResponseSuccessMessage, NoticeFormProps>({
       query: (payload) => ({
         url: `/notices`,
         method: 'POST',
@@ -33,7 +34,7 @@ const noticeApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.NOTICES, Tag.PENDING_NOTICES])
     }),
-    updateNotice: builder.mutation<{ message: string }, NoticeFormPropsWithId>({
+    updateNotice: builder.mutation<ApiResponseSuccessMessage, NoticeFormPropsWithId>({
       query: ({ id, ...payload }) => ({
         url: `/notices/${id}`,
         method: 'PUT',
@@ -42,7 +43,7 @@ const noticeApi = api.injectEndpoints({
       invalidatesTags: (_result, error, { id }) =>
         error ? [] : [{ type: Tag.NOTICES, id }, { type: Tag.PENDING_NOTICES }]
     }),
-    updateNoticeStatus: builder.mutation<{ message: string }, ReviewNotice>({
+    updateNoticeStatus: builder.mutation<ApiResponseSuccessMessage, ReviewNotice>({
       query: ({ id, status }) => ({
         url: `/notices/${id}/status`,
         method: 'PATCH',

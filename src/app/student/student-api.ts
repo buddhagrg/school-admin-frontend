@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { AddStudent, GetStudentDetailProps, StudentProps, StudentPropsWithId } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const studentApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,7 +16,7 @@ const studentApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.STUDENTS])
     }),
-    updateStudent: builder.mutation<{ message: string }, StudentPropsWithId>({
+    updateStudent: builder.mutation<ApiResponseSuccessMessage, StudentPropsWithId>({
       query: ({ id, ...payload }) => ({
         url: `/students/${id}`,
         method: 'PUT',

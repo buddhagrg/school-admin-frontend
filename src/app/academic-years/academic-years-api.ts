@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { AcademicYearData, AcademicYearFormProps, AcademicYearFormPropsWithId } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const academicYearApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,7 +14,7 @@ const academicYearApi = api.injectEndpoints({
               id
             })) || [Tag.ACADEMIC_YEARS]
     }),
-    addAcademicYear: builder.mutation<{ message: string }, AcademicYearFormProps>({
+    addAcademicYear: builder.mutation<ApiResponseSuccessMessage, AcademicYearFormProps>({
       query: (payload) => ({
         url: `/academic/years`,
         method: 'POST',
@@ -21,7 +22,7 @@ const academicYearApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_YEARS])
     }),
-    updateAcademicYear: builder.mutation<{ message: string }, AcademicYearFormPropsWithId>({
+    updateAcademicYear: builder.mutation<ApiResponseSuccessMessage, AcademicYearFormPropsWithId>({
       query: ({ id, ...payload }) => ({
         url: `/academic/years/${id}`,
         method: 'PUT',
@@ -29,7 +30,7 @@ const academicYearApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.ACADEMIC_YEARS, id }])
     }),
-    activateAcademicYear: builder.mutation<{ message: string }, number>({
+    activateAcademicYear: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `academic/years/${id}/activate`,
         method: 'PATCH'

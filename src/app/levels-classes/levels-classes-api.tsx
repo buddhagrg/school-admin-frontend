@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { AcademicLevelsWithClasses, AddClassToAcademicLevel } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const levelsClassesApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,14 +11,14 @@ const levelsClassesApi = api.injectEndpoints({
           return { type: Tag.ACADEMIC_LEVELS_WITH_CLASSES, id };
         }) || [Tag.ACADEMIC_LEVELS_WITH_CLASSES]
     }),
-    deleteLevelFromClass: builder.mutation<{ message: string }, number>({
+    deleteLevelFromClass: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/academic/levels/classes/${id}`,
         method: 'DELETE'
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_LEVELS_WITH_CLASSES])
     }),
-    addClassToAcademicLevel: builder.mutation<{ message: string }, AddClassToAcademicLevel>({
+    addClassToAcademicLevel: builder.mutation<ApiResponseSuccessMessage, AddClassToAcademicLevel>({
       query: ({ classId, academicLevelId }) => ({
         url: `/academic/levels/${academicLevelId}/classes`,
         method: 'PUT',

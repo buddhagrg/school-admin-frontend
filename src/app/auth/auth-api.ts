@@ -8,6 +8,7 @@ import {
   UserId
 } from './types';
 import { AdminStaffProps } from '@/app/staff/types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,41 +19,41 @@ export const authApi = api.injectEndpoints({
         body: payload
       })
     }),
-    logout: builder.mutation<{ message: string }, void>({
+    logout: builder.mutation<ApiResponseSuccessMessage, void>({
       query: () => ({
         url: `/auth/logout`,
         method: 'POST'
       })
     }),
-    changePwd: builder.mutation<{ message: string }, PasswordProps>({
+    changePwd: builder.mutation<ApiResponseSuccessMessage, PasswordProps>({
       query: (payload) => ({
         url: `/account/change-password`,
         method: 'POST',
         body: payload
       })
     }),
-    setupPassword: builder.mutation<{ message: string }, SetupPasswordProps>({
+    setupPassword: builder.mutation<ApiResponseSuccessMessage, SetupPasswordProps>({
       query: (payload) => ({
         url: `/auth/setup-password`,
         method: 'POST',
         body: payload
       })
     }),
-    resendVerificationEmail: builder.mutation<{ message: string }, UserId>({
+    resendVerificationEmail: builder.mutation<ApiResponseSuccessMessage, UserId>({
       query: (payload) => ({
         url: `/auth/resend-email-verification`,
         method: 'POST',
         body: payload
       })
     }),
-    resendPwdSetupLink: builder.mutation<{ message: string }, UserId>({
+    resendPwdSetupLink: builder.mutation<ApiResponseSuccessMessage, UserId>({
       query: (payload) => ({
         url: `/auth/resend-pwd-setup-link`,
         method: 'POST',
         body: payload
       })
     }),
-    resetPwd: builder.mutation<{ message: string }, UserId>({
+    resetPwd: builder.mutation<ApiResponseSuccessMessage, UserId>({
       query: (payload) => ({
         url: `/auth/reset-pwd`,
         method: 'POST',
@@ -60,7 +61,7 @@ export const authApi = api.injectEndpoints({
       })
     }),
     setupAdminProfile: builder.mutation<
-      { message: string },
+      ApiResponseSuccessMessage,
       AdminStaffProps & { schoolId: number }
     >({
       query: (payload) => ({

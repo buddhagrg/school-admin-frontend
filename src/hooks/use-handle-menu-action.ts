@@ -6,6 +6,7 @@ import {
   useResetPwdMutation
 } from '@/app/auth/auth-api';
 import { useUpdateNoticeStatusMutation } from '@/app/notice/notice-api';
+import { ApiResponseSuccessMessage } from '@/types';
 
 export const useHandleMenuAction = () => {
   const [updateUserSystemAccess] = useUpdateUserSystemAccessMutation();
@@ -16,7 +17,7 @@ export const useHandleMenuAction = () => {
 
   const handleAction = async (menuItemValue: string, selectedId: number) => {
     const actionHandlers: {
-      [key in keyof typeof menuItemTexts]: () => Promise<{ message: string }>;
+      [key in keyof typeof menuItemTexts]: () => Promise<ApiResponseSuccessMessage>;
     } = {
       ENABLE_SYSTEM_ACCESS: () =>
         updateUserSystemAccess({ id: selectedId, hasSystemAccess: true }).unwrap(),

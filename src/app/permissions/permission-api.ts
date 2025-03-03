@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { AddEditPermissionProps, AddEditPermissionPropsWithId, PermissionData } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const permissionApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +11,7 @@ const permissionApi = api.injectEndpoints({
           return { type: Tag.PERMISSIONS, id };
         }) || [{ type: Tag.PERMISSIONS }]
     }),
-    addPermission: builder.mutation<{ message: string }, AddEditPermissionProps>({
+    addPermission: builder.mutation<ApiResponseSuccessMessage, AddEditPermissionProps>({
       query: (payload) => ({
         url: `/permissions`,
         method: 'POST',
@@ -18,7 +19,7 @@ const permissionApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.PERMISSIONS, Tag.MY_PERMISSIONS])
     }),
-    updatePermission: builder.mutation<{ message: string }, AddEditPermissionPropsWithId>({
+    updatePermission: builder.mutation<ApiResponseSuccessMessage, AddEditPermissionPropsWithId>({
       query: ({ id, ...payload }) => ({
         url: `/permissions/${id}`,
         method: 'PUT',
@@ -27,7 +28,7 @@ const permissionApi = api.injectEndpoints({
       invalidatesTags: (_result, error, { id }) =>
         error ? [] : [{ type: Tag.PERMISSIONS, id }, Tag.MY_PERMISSIONS]
     }),
-    deletePermission: builder.mutation<{ message: string }, number>({
+    deletePermission: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/permissions/${id}`,
         method: 'DELETE'

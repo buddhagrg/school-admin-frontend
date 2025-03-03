@@ -2,6 +2,7 @@ import { api, Tag } from '@/api';
 import { UserFilterProps, UsersData, UserSystemAccessRequest } from './types';
 import { getQueryString } from '@/utils/helpers/get-query-string';
 import { UserRole } from '@/app/roles/types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const manageUsersApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,7 +16,7 @@ const manageUsersApi = api.injectEndpoints({
           return { type: Tag.USERS, id };
         }) || [{ type: Tag.USERS }]
     }),
-    updateUserSystemAccess: builder.mutation<{ message: string }, UserSystemAccessRequest>({
+    updateUserSystemAccess: builder.mutation<ApiResponseSuccessMessage, UserSystemAccessRequest>({
       query: ({ id, hasSystemAccess }) => ({
         url: `/users/${id}/status`,
         method: 'PATCH',
@@ -23,7 +24,7 @@ const manageUsersApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.USERS, id }])
     }),
-    switchUserRole: builder.mutation<{ message: string }, UserRole>({
+    switchUserRole: builder.mutation<ApiResponseSuccessMessage, UserRole>({
       query: ({ id, roleId }) => ({
         url: `/users/${id}/switch-role`,
         method: 'POST',

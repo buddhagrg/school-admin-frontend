@@ -12,6 +12,7 @@ import {
   ClassStatusProps,
   SectionStatusProps
 } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const classApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -23,7 +24,7 @@ const classApi = api.injectEndpoints({
           id
         })) || [Tag.CLASSES_WITH_SECTIONS]
     }),
-    addClass: builder.mutation<{ message: string }, ClassFormProps>({
+    addClass: builder.mutation<ApiResponseSuccessMessage, ClassFormProps>({
       query: (payload) => ({
         url: `/classes`,
         method: 'POST',
@@ -31,7 +32,7 @@ const classApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
     }),
-    updateClass: builder.mutation<{ message: string }, ClassFormWithId>({
+    updateClass: builder.mutation<ApiResponseSuccessMessage, ClassFormWithId>({
       query: ({ id, name }) => ({
         url: `/classes/${id}`,
         method: 'PUT',
@@ -39,7 +40,7 @@ const classApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
     }),
-    updateClassStatus: builder.mutation<{ message: string }, ClassStatusProps>({
+    updateClassStatus: builder.mutation<ApiResponseSuccessMessage, ClassStatusProps>({
       query: ({ id, status }) => ({
         url: `/classes/${id}/status`,
         method: 'PATCH',
@@ -55,7 +56,7 @@ const classApi = api.injectEndpoints({
           return { type: Tag.CLASSES, id };
         }) || [Tag.CLASSES]
     }),
-    addSection: builder.mutation<{ message: string }, SectionFormProps>({
+    addSection: builder.mutation<ApiResponseSuccessMessage, SectionFormProps>({
       query: ({ classId, name }) => ({
         url: `/classes/${classId}/sections`,
         method: 'POST',
@@ -63,7 +64,7 @@ const classApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS, Tag.CLASSES])
     }),
-    updateSection: builder.mutation<{ message: string }, SectionFormWithId>({
+    updateSection: builder.mutation<ApiResponseSuccessMessage, SectionFormWithId>({
       query: ({ classId, id, name }) => ({
         url: `/classes/${classId}/sections/${id}`,
         method: 'PUT',
@@ -71,7 +72,7 @@ const classApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS, Tag.CLASSES])
     }),
-    updateSectionStatus: builder.mutation<{ message: string }, SectionStatusProps>({
+    updateSectionStatus: builder.mutation<ApiResponseSuccessMessage, SectionStatusProps>({
       query: ({ classId, status, id }) => ({
         url: `/classes/${classId}/sections/${id}/status`,
         method: 'PATCH',
@@ -96,7 +97,7 @@ const classApi = api.injectEndpoints({
         })) || [Tag.TEACHERS]
     }),
     assignClassTeacher: builder.mutation<
-      { message: string },
+      ApiResponseSuccessMessage,
       Omit<ClassTeacherFormProps, 'className'>
     >({
       query: ({ classId, teacherId }) => ({
@@ -105,7 +106,7 @@ const classApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASS_TEACHERS])
     }),
-    deleteClassTeacher: builder.mutation<{ message: string }, number>({
+    deleteClassTeacher: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/classes/teachers/${id}`,
         method: 'DELETE'

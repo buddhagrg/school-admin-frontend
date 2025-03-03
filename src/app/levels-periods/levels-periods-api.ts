@@ -8,6 +8,7 @@ import {
   AcademicPeriodFormWithId,
   ManagePeriodOrder
 } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const levelsPeriodsApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,7 +20,7 @@ const levelsPeriodsApi = api.injectEndpoints({
           id
         })) || [Tag.ACADEMIC_LEVELS_WITH_PERIODS]
     }),
-    addAcademicLevel: builder.mutation<{ message: string }, AcademicLevelFormProps>({
+    addAcademicLevel: builder.mutation<ApiResponseSuccessMessage, AcademicLevelFormProps>({
       query: ({ name }) => ({
         url: '/academic/levels',
         method: 'POST',
@@ -34,7 +35,7 @@ const levelsPeriodsApi = api.injectEndpoints({
               Tag.ACADEMIC_LEVELS_WITH_CLASSES
             ]
     }),
-    updateAcademicLevel: builder.mutation<{ message: string }, AcademicLevelFormWithId>({
+    updateAcademicLevel: builder.mutation<ApiResponseSuccessMessage, AcademicLevelFormWithId>({
       query: ({ id, name }) => ({
         url: `/academic/levels/${id}`,
         method: 'PUT',
@@ -50,7 +51,7 @@ const levelsPeriodsApi = api.injectEndpoints({
           Tag.ACADEMIC_LEVELS
         ]
     }),
-    deleteAcademicLevel: builder.mutation<{ message: string }, number>({
+    deleteAcademicLevel: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/academic/levels/${id}`,
         method: 'DELETE'
@@ -64,7 +65,7 @@ const levelsPeriodsApi = api.injectEndpoints({
               Tag.ACADEMIC_LEVELS_WITH_CLASSES
             ]
     }),
-    addAcademicPeriod: builder.mutation<{ message: string }, AcademicPeriodFormProps>({
+    addAcademicPeriod: builder.mutation<ApiResponseSuccessMessage, AcademicPeriodFormProps>({
       query: (payload) => ({
         url: `/academic/periods`,
         method: 'POST',
@@ -79,7 +80,7 @@ const levelsPeriodsApi = api.injectEndpoints({
               Tag.ACADEMIC_PERIODS_WITH_DATES
             ]
     }),
-    updateAcademicPeriod: builder.mutation<{ message: string }, AcademicPeriodFormWithId>({
+    updateAcademicPeriod: builder.mutation<ApiResponseSuccessMessage, AcademicPeriodFormWithId>({
       query: ({ id, name, academicLevelId }) => ({
         url: `/academic/periods/${id}`,
         method: 'PUT',
@@ -94,7 +95,7 @@ const levelsPeriodsApi = api.injectEndpoints({
               Tag.ACADEMIC_PERIODS_WITH_DATES
             ]
     }),
-    deleteAcademicPeriod: builder.mutation<{ message: string }, number>({
+    deleteAcademicPeriod: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/academic/periods/${id}`,
         method: 'DELETE'
@@ -108,7 +109,7 @@ const levelsPeriodsApi = api.injectEndpoints({
               Tag.ACADEMIC_PERIODS_WITH_DATES
             ]
     }),
-    reorderPeriods: builder.mutation<{ message: string }, ManagePeriodOrder>({
+    reorderPeriods: builder.mutation<ApiResponseSuccessMessage, ManagePeriodOrder>({
       query: ({ academicLevelId, periods }) => ({
         url: `/academic/levels/${academicLevelId}/periods/reorder`,
         method: 'POST',

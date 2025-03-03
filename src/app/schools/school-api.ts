@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { School, SchoolProps, SchoolsData, SchoolWithIdProps } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const schoolApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,7 +15,7 @@ const schoolApi = api.injectEndpoints({
       query: (id) => `/schools/${id}`,
       providesTags: (result) => (result ? [{ type: Tag.SCHOOLS, id: result.schoolId }] : [])
     }),
-    updateSchool: builder.mutation<{ message: string }, SchoolWithIdProps>({
+    updateSchool: builder.mutation<ApiResponseSuccessMessage, SchoolWithIdProps>({
       query: ({ schoolId, ...payload }) => ({
         url: `/schools/${schoolId}`,
         method: 'PUT',
@@ -23,7 +24,7 @@ const schoolApi = api.injectEndpoints({
       invalidatesTags: (_result, error, { schoolId }) =>
         error ? [] : [{ type: Tag.SCHOOLS, id: schoolId }]
     }),
-    addSchool: builder.mutation<{ message: string }, SchoolProps>({
+    addSchool: builder.mutation<ApiResponseSuccessMessage, SchoolProps>({
       query: (payload) => ({
         url: `/schools`,
         method: 'POST',
@@ -31,7 +32,7 @@ const schoolApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.SCHOOLS])
     }),
-    deleteSchool: builder.mutation<{ message: string }, { schoolId: number }>({
+    deleteSchool: builder.mutation<ApiResponseSuccessMessage, { schoolId: number }>({
       query: (schoolId) => ({
         url: `/schools/${schoolId}`,
         method: 'DELETE'

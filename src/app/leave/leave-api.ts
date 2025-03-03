@@ -14,6 +14,7 @@ import {
   PendingLeaveRequestHistory,
   LeaveStatus
 } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const leaveApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -38,7 +39,7 @@ const leaveApi = api.injectEndpoints({
           return { type: Tag.LEAVE_POLICY_USERS, id };
         }) || [{ type: Tag.LEAVE_POLICY_USERS }]
     }),
-    addLeavePolicy: builder.mutation<{ message: string }, Pick<PolicyDetail, 'name'>>({
+    addLeavePolicy: builder.mutation<ApiResponseSuccessMessage, Pick<PolicyDetail, 'name'>>({
       query: ({ name }) => ({
         url: `/leaves/policies`,
         method: 'POST',
@@ -46,7 +47,10 @@ const leaveApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.LEAVE_POLICIES])
     }),
-    updateLeavePolicy: builder.mutation<{ message: string }, Pick<PolicyDetail, 'name' | 'id'>>({
+    updateLeavePolicy: builder.mutation<
+      ApiResponseSuccessMessage,
+      Pick<PolicyDetail, 'name' | 'id'>
+    >({
       query: ({ id, name }) => ({
         url: `/leaves/policies/${id}`,
         method: 'PUT',
@@ -54,7 +58,7 @@ const leaveApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.LEAVE_POLICIES, id }])
     }),
-    handleLeavePolicy: builder.mutation<{ message: string }, PolicyStatus>({
+    handleLeavePolicy: builder.mutation<ApiResponseSuccessMessage, PolicyStatus>({
       query: ({ id, status }) => ({
         url: `/leaves/policies/${id}/status`,
         method: 'PATCH',
@@ -62,7 +66,7 @@ const leaveApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.LEAVE_POLICIES, id }])
     }),
-    addUserToPolicy: builder.mutation<{ message: string }, AddUserToPolicy>({
+    addUserToPolicy: builder.mutation<ApiResponseSuccessMessage, AddUserToPolicy>({
       query: ({ userList, id }) => ({
         url: `/leaves/policies/${id}/users`,
         method: 'PUT',
@@ -78,7 +82,7 @@ const leaveApi = api.injectEndpoints({
               Tag.MY_LEAVE_POLICIES
             ]
     }),
-    removeUserFromPolicy: builder.mutation<{ message: string }, RemoveUserFromPolicy>({
+    removeUserFromPolicy: builder.mutation<ApiResponseSuccessMessage, RemoveUserFromPolicy>({
       query: ({ userId, policyId }) => ({
         url: `/leaves/policies/${policyId}/users`,
         method: 'DELETE',
@@ -107,7 +111,7 @@ const leaveApi = api.injectEndpoints({
           return { type: Tag.LEAVE_HISTORY, id };
         }) || [{ type: Tag.LEAVE_HISTORY }]
     }),
-    applyLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApi>({
+    applyLeaveRequest: builder.mutation<ApiResponseSuccessMessage, LeaveRequestApi>({
       query: (payload) => ({
         url: `/leaves/requests`,
         method: 'POST',
@@ -115,7 +119,7 @@ const leaveApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.LEAVE_HISTORY, Tag.PENDING_LEAVES])
     }),
-    updateLeaveRequest: builder.mutation<{ message: string }, LeaveRequestApiWithId>({
+    updateLeaveRequest: builder.mutation<ApiResponseSuccessMessage, LeaveRequestApiWithId>({
       query: ({ id, ...restPayload }) => ({
         url: `/leaves/requests/${id}`,
         method: 'PUT',
@@ -129,7 +133,7 @@ const leaveApi = api.injectEndpoints({
               { type: Tag.PENDING_LEAVES, id }
             ]
     }),
-    deleteLeaveRequest: builder.mutation<{ message: string }, number | undefined>({
+    deleteLeaveRequest: builder.mutation<ApiResponseSuccessMessage, number | undefined>({
       query: (id) => ({
         url: `/leaves/requests/${id}`,
         method: 'DELETE'
@@ -149,7 +153,7 @@ const leaveApi = api.injectEndpoints({
           return { type: Tag.PENDING_LEAVES, id };
         }) || [{ type: Tag.PENDING_LEAVES }]
     }),
-    handlePendingLeaveStatus: builder.mutation<{ message: string }, LeaveStatus>({
+    handlePendingLeaveStatus: builder.mutation<ApiResponseSuccessMessage, LeaveStatus>({
       query: ({ id, status }) => ({
         url: `/leaves/requests/pending/${id}/status`,
         method: 'PATCH',

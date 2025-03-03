@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { StaffData, StaffFormProps, StaffFormPropsWithId } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const staffApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,7 +15,7 @@ const staffApi = api.injectEndpoints({
       query: (id) => (id ? `/staff/${id}` : `/account/me`),
       providesTags: (result) => (result ? [{ type: Tag.STAFF, id: result.id }] : [])
     }),
-    addStaff: builder.mutation<{ message: string }, StaffFormProps>({
+    addStaff: builder.mutation<ApiResponseSuccessMessage, StaffFormProps>({
       query: (payload) => ({
         url: `/staff`,
         method: 'POST',
@@ -22,7 +23,7 @@ const staffApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.USERS])
     }),
-    updateStaff: builder.mutation<{ message: string }, StaffFormPropsWithId>({
+    updateStaff: builder.mutation<ApiResponseSuccessMessage, StaffFormPropsWithId>({
       query: ({ id, ...payload }) => ({
         url: `/staff/${id}`,
         method: 'PUT',

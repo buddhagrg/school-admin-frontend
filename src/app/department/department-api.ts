@@ -1,5 +1,6 @@
 import { api, Tag } from '@/api';
 import { DepartmentData, DepartmentForm, DepartmentFormWithId } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const departmentApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +11,7 @@ const departmentApi = api.injectEndpoints({
           return { type: Tag.DEPARTMENTS, id };
         }) || [{ type: Tag.DEPARTMENTS }]
     }),
-    addNewDepartment: builder.mutation<{ message: string }, DepartmentForm>({
+    addNewDepartment: builder.mutation<ApiResponseSuccessMessage, DepartmentForm>({
       query: ({ name }) => ({
         url: `/departments`,
         method: 'POST',
@@ -22,7 +23,7 @@ const departmentApi = api.injectEndpoints({
       query: (id) => `departments/${id}`,
       providesTags: (result) => (result ? [{ type: Tag.DEPARTMENTS, id: result.id }] : [])
     }),
-    updateDepartment: builder.mutation<{ message: string }, DepartmentFormWithId>({
+    updateDepartment: builder.mutation<ApiResponseSuccessMessage, DepartmentFormWithId>({
       query: ({ id, name }) => ({
         url: `/departments/${id}`,
         method: 'PUT',
@@ -30,7 +31,7 @@ const departmentApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.DEPARTMENTS, id }])
     }),
-    deleteDepartment: builder.mutation<{ message: string }, number>({
+    deleteDepartment: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/departments/${id}`,
         method: 'DELETE'

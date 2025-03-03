@@ -7,6 +7,7 @@ import {
   HandleRoleStatusProps,
   RoleUsersData
 } from './types';
+import { ApiResponseSuccessMessage } from '@/types';
 
 const rolesApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -31,7 +32,7 @@ const rolesApi = api.injectEndpoints({
           return { type: Tag.ROLE_PERMISSIONS, id };
         }) || [{ type: Tag.ROLE_PERMISSIONS }]
     }),
-    addNewRole: builder.mutation<{ message: string }, Omit<AddEditRoleProps, 'id'>>({
+    addNewRole: builder.mutation<ApiResponseSuccessMessage, Omit<AddEditRoleProps, 'id'>>({
       query: (payload) => ({
         url: `/roles`,
         method: 'POST',
@@ -39,7 +40,7 @@ const rolesApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.ROLES])
     }),
-    updateRole: builder.mutation<{ message: string }, AddEditRoleProps>({
+    updateRole: builder.mutation<ApiResponseSuccessMessage, AddEditRoleProps>({
       query: ({ id, ...payload }) => ({
         url: `/roles/${id}`,
         method: 'PUT',
@@ -47,7 +48,7 @@ const rolesApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.ROLES, id }])
     }),
-    updateRoleStatus: builder.mutation<{ message: string }, HandleRoleStatusProps>({
+    updateRoleStatus: builder.mutation<ApiResponseSuccessMessage, HandleRoleStatusProps>({
       query: ({ id, status }) => ({
         url: `/roles/${id}/status`,
         method: 'PATCH',
@@ -55,7 +56,7 @@ const rolesApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.ROLES, id }])
     }),
-    assignRolePermissions: builder.mutation<{ message: string }, RolePermission>({
+    assignRolePermissions: builder.mutation<ApiResponseSuccessMessage, RolePermission>({
       query: ({ id, permissions }) => ({
         url: `/roles/${id}/permissions`,
         method: 'POST',
@@ -64,7 +65,7 @@ const rolesApi = api.injectEndpoints({
       invalidatesTags: (_result, error, { id }) =>
         error ? [] : [{ type: Tag.ROLE_PERMISSIONS, id }]
     }),
-    deleteRolePermissions: builder.mutation<{ message: string }, RolePermission>({
+    deleteRolePermissions: builder.mutation<ApiResponseSuccessMessage, RolePermission>({
       query: ({ id, permissions }) => ({
         url: `/roles/${id}/permissions`,
         method: 'DELETE',
