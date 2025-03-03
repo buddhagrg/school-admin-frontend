@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 import { Box, IconButton } from '@mui/material';
-import { CheckBox, Edit } from '@mui/icons-material';
+import { TaskAlt, Edit } from '@mui/icons-material';
 
 import { AcademicYear, AcademicYearFormPropsWithOption } from '../types';
 import { useGetAcademicYearsQuery } from '../academic-years-api';
@@ -86,7 +86,7 @@ export const DisplayAcademicYears = () => {
               title='Activate Academic Year'
               aria-label='activate'
             >
-              <CheckBox color='success' />
+              <TaskAlt color='success' />
             </IconButton>
           )}
         </Box>

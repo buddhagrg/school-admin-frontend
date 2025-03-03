@@ -12,7 +12,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { CheckBox, DoNotDisturb, Edit } from '@mui/icons-material';
+import { TaskAlt, DoNotDisturb, Edit } from '@mui/icons-material';
 
 import { UpdateSection } from './section/update-section';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -104,7 +104,7 @@ export const ListClassSection = () => {
             aria-label='Activate/Deactivate'
             onClick={() => handleClassBtnClick(id, name, isActive ? 'deactivate' : 'activate')}
           >
-            {isActive ? <DoNotDisturb color='error' /> : <CheckBox color='success' />}
+            {isActive ? <DoNotDisturb color='error' /> : <TaskAlt color='success' />}
           </IconButton>
         </Box>
       );
@@ -162,7 +162,7 @@ export const ListClassSection = () => {
                           )
                         }
                       >
-                        {isActive ? <DoNotDisturb color='error' /> : <CheckBox color='success' />}
+                        {isActive ? <DoNotDisturb color='error' /> : <TaskAlt color='success' />}
                       </IconButton>
                     </Box>
                   </TableCell>
