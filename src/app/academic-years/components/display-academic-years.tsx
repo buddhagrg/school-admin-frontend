@@ -66,6 +66,7 @@ export const DisplayAcademicYears = () => {
       density: 'compact'
     },
     enableRowActions: true,
+    positionActionsColumn: 'last',
     renderRowActions: ({ row }) => {
       const { id, isActive } = row.original;
       return (
