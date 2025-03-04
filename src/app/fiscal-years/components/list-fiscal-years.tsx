@@ -24,7 +24,7 @@ export const ListFiscalYears = () => {
 
   const columns: MRT_ColumnDef<FiscalYear>[] = useMemo(
     () => [
-      { accessorKey: 'name', header: 'Name' },
+      { accessorKey: 'name', header: 'Fiscal Year Name' },
       {
         accessorKey: 'startDate',
         header: 'Start Date',
