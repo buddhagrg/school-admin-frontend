@@ -27,6 +27,7 @@ import { LevelsPeriods } from '@/app/levels-periods/levels-periods';
 import { LevelsClasses } from '@/app/levels-classes/levels-classes';
 import { PeriodsDates } from '@/app/periods-dates/periods-dates';
 import { FiscalYears } from '@/app/fiscal-years/fiscal-years';
+import { RecordStaffAttendance, RecordStudentsAttendance } from '@/app/attendance/pages';
 
 export const routes = [
   {
@@ -88,6 +89,8 @@ export const routes = [
       { path: 'departments', element: <Departments /> },
       { path: 'departments/edit/:id', element: <EditDepartment /> },
       { path: 'fiscal-years', element: <FiscalYears /> },
+      { path: 'attendances/staff', element: <RecordStaffAttendance /> },
+      { path: 'attendances/students', element: <RecordStudentsAttendance /> },
       { path: '*', element: <NotFound /> }
     ]
   },
