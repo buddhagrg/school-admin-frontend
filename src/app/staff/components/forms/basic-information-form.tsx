@@ -69,11 +69,13 @@ export const BasicInformationForm = <T extends FieldValues>({
                     onChange={(e) => onChange(e.target.value)}
                     notched
                   >
-                    {data?.roles.map((role) => (
-                      <MenuItem value={role.id} key={role.id}>
-                        {role.name}
-                      </MenuItem>
-                    ))}
+                    {data?.roles
+                      ?.filter((role) => role.staticRoleId !== 4)
+                      .map((role) => (
+                        <MenuItem value={role.id} key={role.id}>
+                          {role.name}
+                        </MenuItem>
+                      ))}
                   </Select>
                   <FormHelperText>{error?.message}</FormHelperText>
                 </>
