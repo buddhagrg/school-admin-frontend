@@ -6,6 +6,7 @@ export type Role = {
   id: number;
   name: string;
   status: boolean;
+  staticRoleId: number;
 };
 export type RoleWithUsersAssociated = Role & { usersAssociated: number };
 
