@@ -4,7 +4,7 @@ import { ApiResponseSuccessMessage } from '@/types';
 
 const staffApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getStaffs: builder.query<StaffData, void>({
+    getStaff: builder.query<StaffData, void>({
       query: () => `/staff`,
       providesTags: (result) =>
         result?.staff?.map(({ id }) => {
@@ -35,7 +35,7 @@ const staffApi = api.injectEndpoints({
 });
 
 export const {
-  useGetStaffsQuery,
+  useGetStaffQuery,
   useGetStaffDetailQuery,
   useAddStaffMutation,
   useUpdateStaffMutation

@@ -15,10 +15,10 @@ import {
 } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { StaffFormProps } from '../../types';
-import { useGetStaffsQuery } from '../../staff-api';
+import { useGetStaffQuery } from '../../staff-api';
 
 export const OtherInformationForm = ({ action }: { action: string }) => {
-  const { data } = useGetStaffsQuery();
+  const { data } = useGetStaffQuery();
 
   const {
     control,
@@ -29,7 +29,7 @@ export const OtherInformationForm = ({ action }: { action: string }) => {
     <>
       <Box sx={{ display: 'flex', flexGrow: 1 }}>
         <More sx={{ mr: 1 }} />
-        <Typography variant='body1'>Others</Typography>
+        <Typography variant='body1'>Other Information</Typography>
       </Box>
       <Stack sx={{ my: 2 }} spacing={2}>
         <Box>
