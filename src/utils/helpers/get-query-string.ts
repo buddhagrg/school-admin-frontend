@@ -1,4 +1,4 @@
-export const getQueryString = (queryParamsObj: object | null) => {
+export const getQueryString = (queryParamsObj: object | null | void) => {
   if (!queryParamsObj) return '';
 
   const queryParams: string[] = [];
