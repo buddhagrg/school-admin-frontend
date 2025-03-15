@@ -29,3 +29,10 @@ export const menuItemTexts: Record<string, string> = {
   DELETE_NOTICE: 'Delete Notice',
   DELETE_NOTICE_BY_SELF: 'Delete Notice'
 };
+
+export const attendanceStatus: NameIdType<string>[] = [
+  { id: 'PR', name: 'Present' },
+  { id: 'AB', name: 'Absent' },
+  { id: 'EL', name: 'Early Leave' },
+  { id: 'LP', name: 'Late Present' }
+];
