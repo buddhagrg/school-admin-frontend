@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
-import { Box, Chip, IconButton, Stack } from '@mui/material';
+import { Box, Chip, IconButton } from '@mui/material';
 import { Edit, ExitToApp, HighlightOff, Schedule, TaskAlt } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -29,6 +29,20 @@ const formState = {
   status: '',
   remarks: ''
 };
+const STATUS_ICONS: Record<AttendanceStatus, JSX.Element> = {
+  PR: <TaskAlt color='success' />,
+  AB: <HighlightOff color='error' />,
+  LP: <Schedule color='warning' />,
+  EL: <ExitToApp color='primary' />
+};
+const STATUS_COLORS: Record<AttendanceStatus, AttendanceStatusColor> = {
+  PR: 'success',
+  AB: 'error',
+  LP: 'warning',
+  EL: 'primary'
+};
+const getStatusIcon = (code: AttendanceStatus) => STATUS_ICONS[code];
+const getStatusColor = (code: AttendanceStatus) => STATUS_COLORS[code];
 export const ListAttendance: React.FC<ListAttendanceProps> = ({
   data,
   isLoading,
@@ -41,26 +55,6 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
     defaultValues: formState,
     resolver: zodResolver(AttendanceFormSchema)
   });
-
-  const getStatusIcon = (code: AttendanceStatus) => {
-    const status: Record<AttendanceStatus, JSX.Element> = {
-      PR: <TaskAlt color={getStatusColor(code)} />,
-      AB: <HighlightOff color={getStatusColor(code)} />,
-      LP: <Schedule color={getStatusColor(code)} />,
-      EL: <ExitToApp color={getStatusColor(code)} />
-    };
-    return status[code];
-  };
-
-  const getStatusColor = (code: AttendanceStatus) => {
-    const status: Record<AttendanceStatus, AttendanceStatusColor> = {
-      PR: 'success',
-      AB: 'error',
-      LP: 'warning',
-      EL: 'primary'
-    };
-    return status[code];
-  };
 
   const columns = useMemo<MRT_ColumnDef<UserAttendanceCommonDetail>[]>(
     () => [
@@ -79,14 +73,15 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
         Cell: ({ row }) => {
           const { attendanceStatusCode, attendanceStatus } = row.original;
           return (
-            <Stack direction='row' spacing={1}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <>{getStatusIcon(attendanceStatusCode as AttendanceStatus)}</>
               <Chip
                 label={attendanceStatus}
                 color={getStatusColor(attendanceStatusCode as AttendanceStatus)}
                 variant='outlined'
+                sx={{ ml: 1 }}
               />
-            </Stack>
+            </Box>
           );
         }
       },
@@ -110,7 +105,7 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
         header: 'Remarks'
       }
     ],
-    [data, getStatusColor]
+    []
   );
 
   const onEditBtn = (data: UserAttendanceCommonDetail) => {
