@@ -77,7 +77,7 @@ export const TakeStaffAttendanceFilter: FC<TakeStaffAttendanceFilterType> = ({
                     <i>Select None</i>
                   </MenuItem>
                   {rolesData?.roles
-                    ?.filter((role) => role.staticRoleId !== 2)
+                    .filter((role) => ![1, 2, 4, 5].includes(role.staticRoleId))
                     .map((item) => (
                       <MenuItem key={item.id} value={item.id.toString()}>
                         {item.name}
