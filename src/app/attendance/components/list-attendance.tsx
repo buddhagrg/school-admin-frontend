@@ -126,7 +126,7 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
       size: 'small',
       variant: 'outlined'
     },
-    getRowId: (row) => row?.id?.toString(),
+    getRowId: (row) => row?.id!.toString(),
     muiPaginationProps: {
       rowsPerPageOptions: [10, 20, 30],
       shape: 'rounded',
