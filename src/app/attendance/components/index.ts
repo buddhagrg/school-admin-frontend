@@ -1,3 +1,3 @@
-export { StaffAttendanceFilter } from './staff-attendance-filter';
-export { ListAttendance } from './list-attendance';
-export { StudentsAttendanceFilter } from './students-attendance-filter';
+export * from './staff';
+export * from './students';
+export { AttendanceSetting } from './attendance-setting';

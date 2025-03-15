@@ -2,38 +2,41 @@ import { api, Tag } from '@/api';
 import {
   StaffForAttendanceData,
   StudentsForAttendanceData,
-  StudentsAttendanceFilterProps,
+  GetStudentsAttendanceFilterProps,
   UserAttendanceProps,
-  StaffAttendanceFilterProps,
+  GetStaffAttendanceFilterProps,
   StudentsAttendanceRecord,
   StaffAttendanceRecord,
-  StaffAttendanceCurrentFilterProps,
-  StudentsAttendanceCurrentFilterProps
+  TakeStaffAttendanceFilterProps,
+  TakeStudentsAttendanceFilterProps,
+  AttendanceFormPropsWithId
 } from './types';
 import { ApiResponseSuccessMessage } from '@/types';
 import { getQueryString } from '@/utils/helpers/get-query-string';
 
 const attendanceApi = api.injectEndpoints({
-  endpoints: (buider) => ({
-    recordStudentsAttendance: buider.mutation<ApiResponseSuccessMessage, UserAttendanceProps>({
-      query: ({ attendances }) => ({
+  endpoints: (builder) => ({
+    recordStudentsAttendance: builder.mutation<ApiResponseSuccessMessage, UserAttendanceProps>({
+      query: (payload) => ({
         url: `/attendances`,
         method: 'POST',
-        body: { attendances }
+        body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.STUDENTS_FOR_ATTENDANCE])
+      invalidatesTags: (_result, error) =>
+        error ? [] : [Tag.STUDENTS_FOR_ATTENDANCE, Tag.STUDENTS_ATTENDANCE_RECORD]
     }),
-    recordStaffAttendance: buider.mutation<ApiResponseSuccessMessage, UserAttendanceProps>({
-      query: ({ attendances }) => ({
+    recordStaffAttendance: builder.mutation<ApiResponseSuccessMessage, UserAttendanceProps>({
+      query: (payload) => ({
         url: `/attendances`,
         method: 'POST',
-        body: { attendances }
+        body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.STAFF_FOR_ATTENDANCE])
+      invalidatesTags: (_result, error) =>
+        error ? [] : [Tag.STAFF_FOR_ATTENDANCE, Tag.STAFF_ATTENDANCE_RECORD]
     }),
-    getStudentsForAttendance: buider.query<
+    getStudentsForAttendance: builder.query<
       StudentsForAttendanceData,
-      StudentsAttendanceCurrentFilterProps | void
+      TakeStudentsAttendanceFilterProps | void
     >({
       query: (payload) => {
         const queryString = getQueryString(payload);
@@ -42,23 +45,30 @@ const attendanceApi = api.injectEndpoints({
       providesTags: (result, error) =>
         error
           ? []
-          : result?.students?.map(({ id }) => ({
+          : result?.students?.map(({ userId }) => ({
               type: Tag.STUDENTS_FOR_ATTENDANCE,
-              id
+              id: userId
             })) || [Tag.STUDENTS_FOR_ATTENDANCE]
     }),
-    getStudentsAttendanceRecord: buider.query<
+    getStudentsAttendanceRecord: builder.query<
       StudentsAttendanceRecord,
-      StudentsAttendanceFilterProps
+      Omit<GetStudentsAttendanceFilterProps, 'dateType'>
     >({
       query: (payload) => {
         const queryString = getQueryString(payload);
         return `/attendances/students/record${queryString}`;
-      }
+      },
+      providesTags: (result, error) =>
+        error
+          ? []
+          : result?.students?.map(({ userId }) => ({
+              type: Tag.STUDENTS_ATTENDANCE_RECORD,
+              id: userId
+            })) || [Tag.STUDENTS_ATTENDANCE_RECORD]
     }),
-    getStaffForAttendance: buider.query<
+    getStaffForAttendance: builder.query<
       StaffForAttendanceData,
-      StaffAttendanceCurrentFilterProps | void
+      TakeStaffAttendanceFilterProps | void
     >({
       query: (payload) => {
         const queryString = getQueryString(payload);
@@ -67,16 +77,60 @@ const attendanceApi = api.injectEndpoints({
       providesTags: (result, error) =>
         error
           ? []
-          : result?.staff?.map(({ id }) => ({
+          : result?.staff?.map(({ userId }) => ({
               type: Tag.STAFF_FOR_ATTENDANCE,
-              id
+              id: userId
             })) || [Tag.STAFF_FOR_ATTENDANCE]
     }),
-    getStaffAttendanceRecord: buider.query<StaffAttendanceRecord, StaffAttendanceFilterProps>({
+    getStaffAttendanceRecord: builder.query<
+      StaffAttendanceRecord,
+      Omit<GetStaffAttendanceFilterProps, 'dateType'>
+    >({
       query: (payload) => {
         const queryString = getQueryString(payload);
         return `/attendances/staff/record${queryString}`;
-      }
+      },
+      providesTags: (result, error) =>
+        error
+          ? []
+          : result?.staff?.map(({ userId }) => ({
+              type: Tag.STAFF_ATTENDANCE_RECORD,
+              id: userId
+            })) || [Tag.STAFF_ATTENDANCE_RECORD]
+    }),
+    updateStaffAttendanceRecord: builder.mutation<
+      ApiResponseSuccessMessage,
+      AttendanceFormPropsWithId
+    >({
+      query: ({ id, ...payload }) => ({
+        url: `attendances/${id}`,
+        method: 'PATCH',
+        body: payload
+      }),
+      invalidatesTags: (_result, error, { userId }) =>
+        error
+          ? []
+          : [
+              { type: Tag.STAFF_ATTENDANCE_RECORD, id: userId },
+              { type: Tag.STAFF_FOR_ATTENDANCE, id: userId }
+            ]
+    }),
+    updateStudentAttendanceRecord: builder.mutation<
+      ApiResponseSuccessMessage,
+      AttendanceFormPropsWithId
+    >({
+      query: ({ id, ...payload }) => ({
+        url: `attendances/${id}`,
+        method: 'PATCH',
+        body: payload
+      }),
+      invalidatesTags: (_result, error, { userId }) =>
+        error
+          ? []
+          : [
+              { type: Tag.STUDENTS_ATTENDANCE_RECORD, id: userId },
+              { type: Tag.STUDENTS_FOR_ATTENDANCE, id: userId }
+            ]
     })
   })
 });
@@ -87,5 +141,7 @@ export const {
   useGetStaffAttendanceRecordQuery,
   useGetStaffForAttendanceQuery,
   useGetStudentsAttendanceRecordQuery,
-  useGetStudentsForAttendanceQuery
+  useGetStudentsForAttendanceQuery,
+  useUpdateStaffAttendanceRecordMutation,
+  useUpdateStudentAttendanceRecordMutation
 } = attendanceApi;

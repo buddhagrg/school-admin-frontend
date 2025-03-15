@@ -1,2 +1,2 @@
-export { RecordStaffAttendance } from './record-staff-attendance';
-export { RecordStudentsAttendance } from './record-students-attendance';
+export { TakeAttendance } from './take-attendance';
+export { ViewAttendance } from './view-attendance';

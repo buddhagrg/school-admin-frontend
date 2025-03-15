@@ -1,22 +1,18 @@
-import {
-  MaterialReactTable,
-  MRT_ColumnDef,
-  MRT_GlobalFilterTextField,
-  MRT_RowSelectionState,
-  useMaterialReactTable
-} from 'material-react-table';
-import {
-  useRecordStaffAttendanceMutation,
-  useRecordStudentsAttendanceMutation
-} from '../attendance-api';
-import { UserAttendance, UserAttendanceCommonDetail } from '../types';
 import React, { useMemo, useState } from 'react';
-import { Box, Button, Switch } from '@mui/material';
-import { toast } from 'react-toastify';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
+import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
+import { Box, Chip, IconButton, Stack } from '@mui/material';
+import { Edit, ExitToApp, HighlightOff, Schedule, TaskAlt } from '@mui/icons-material';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import {
+  AttendanceFormPropsWithId,
+  AttendanceFormSchema,
+  UserAttendanceCommonDetail
+} from '../types';
 import { ERROR_MESSAGE } from '@/components/errors';
+import { DATE_FORMAT, DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { UpdateAttendance } from './update-attendance';
 
 type ListAttendanceProps = {
   data: UserAttendanceCommonDetail[];
@@ -24,128 +20,112 @@ type ListAttendanceProps = {
   isError: boolean;
   error?: string | null;
   type: 'staff' | 'students';
-  handleDataChange: (id: number, property: string, value: string) => void;
+};
+type AttendanceStatus = 'PR' | 'AB' | 'LP' | 'EL';
+type AttendanceStatusColor = 'success' | 'error' | 'warning' | 'primary';
+const formState = {
+  id: 0,
+  userId: 0,
+  status: '',
+  remarks: ''
 };
 export const ListAttendance: React.FC<ListAttendanceProps> = ({
-  handleDataChange,
   data,
   isLoading,
   type,
   isError,
   error
 }) => {
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
-  const [recordStudentsAttendance, { isLoading: isRecordingStudentsAttendance }] =
-    useRecordStudentsAttendanceMutation();
-  const [recordStaffAttendance, { isLoading: isRecordingStaffAttendance }] =
-    useRecordStaffAttendanceMutation();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const methods = useForm<AttendanceFormPropsWithId>({
+    defaultValues: formState,
+    resolver: zodResolver(AttendanceFormSchema)
+  });
+
+  const getStatusIcon = (code: AttendanceStatus) => {
+    const status: Record<AttendanceStatus, JSX.Element> = {
+      PR: <TaskAlt color={getStatusColor(code)} />,
+      AB: <HighlightOff color={getStatusColor(code)} />,
+      LP: <Schedule color={getStatusColor(code)} />,
+      EL: <ExitToApp color={getStatusColor(code)} />
+    };
+    return status[code];
+  };
+
+  const getStatusColor = (code: AttendanceStatus) => {
+    const status: Record<AttendanceStatus, AttendanceStatusColor> = {
+      PR: 'success',
+      AB: 'error',
+      LP: 'warning',
+      EL: 'primary'
+    };
+    return status[code];
+  };
 
   const columns = useMemo<MRT_ColumnDef<UserAttendanceCommonDetail>[]>(
     () => [
       {
         accessorKey: 'id',
-        header: 'Id',
-        size: 100,
-        enableEditing: false
+        header: 'Record Id',
+        size: 100
       },
       {
         accessorKey: 'name',
-        header: 'Name',
-        enableEditing: false
+        header: 'User Name'
       },
       {
         accessorKey: 'attendanceStatus',
         header: 'Attendance Status',
-        enableEditing: false
+        Cell: ({ row }) => {
+          const { attendanceStatusCode, attendanceStatus } = row.original;
+          return (
+            <Stack direction='row' spacing={1}>
+              <>{getStatusIcon(attendanceStatusCode as AttendanceStatus)}</>
+              <Chip
+                label={attendanceStatus}
+                color={getStatusColor(attendanceStatusCode as AttendanceStatus)}
+                variant='outlined'
+              />
+            </Stack>
+          );
+        }
       },
       {
-        id: 'attendanceAction',
-        header: 'Attendance Actions',
-        enableEditing: false,
-        columns: [
-          {
-            id: 'present',
-            header: 'Present',
-            enableEditing: false,
-            size: 50,
-            Cell: ({ row }) => {
-              const { id, attendanceStatusCode } = row.original;
-              return (
-                <Switch
-                  checked={attendanceStatusCode === 'PR'}
-                  onChange={() => handleDataChange(id, 'attendanceStatusCode', 'PR')}
-                />
-              );
-            }
-          },
-          {
-            id: 'absent',
-            header: 'Absent',
-            enableEditing: false,
-            size: 50,
-            Cell: ({ row }) => {
-              const { id, attendanceStatusCode } = row.original;
-              return (
-                <Switch
-                  checked={attendanceStatusCode === 'AB'}
-                  onChange={() => handleDataChange(id, 'attendanceStatusCode', 'AB')}
-                />
-              );
-            }
-          },
-          {
-            id: 'latePresent',
-            header: 'Late Present',
-            enableEditing: false,
-            size: 50,
-            Cell: ({ row }) => {
-              const { id, attendanceStatusCode } = row.original;
-              return (
-                <Switch
-                  checked={attendanceStatusCode === 'LP'}
-                  onChange={() => handleDataChange(id, 'attendanceStatusCode', 'LP')}
-                />
-              );
-            }
-          },
-          {
-            id: 'earlyLeave',
-            header: 'Early Leave',
-            enableEditing: false,
-            size: 50,
-            Cell: ({ row }) => {
-              const { id, attendanceStatusCode } = row.original;
-              return (
-                <Switch
-                  checked={attendanceStatusCode === 'EL'}
-                  onChange={() => handleDataChange(id, 'attendanceStatusCode', 'EL')}
-                />
-              );
-            }
-          }
-        ]
+        accessorKey: 'attendanceDate',
+        header: 'Attendance Date',
+        Cell: ({ cell }) => (
+          <>{getFormattedDate(cell.getValue<Date | string | null>(), DATE_FORMAT)}</>
+        )
+      },
+      {
+        accessorKey: 'lastUpdatedDate',
+        header: 'Last Updated',
+        size: 250,
+        Cell: ({ cell }) => (
+          <>{getFormattedDate(cell.getValue<Date | string | null>(), DATE_TIME_24_HR_FORMAT)}</>
+        )
       },
       {
         accessorKey: 'remarks',
-        header: 'Remarks',
-        muiEditTextFieldProps: ({ row }) => ({
-          type: 'text',
-          onChange: (event) => {
-            handleDataChange(row.original.id, 'remarks', event.target.value);
-          }
-        })
+        header: 'Remarks'
       }
     ],
-    [data, handleDataChange]
+    [data, getStatusColor]
   );
 
+  const onEditBtn = (data: UserAttendanceCommonDetail) => {
+    methods.setValue('id', data.id);
+    methods.setValue('userId', data.userId);
+    methods.setValue('name', data.name);
+    methods.setValue('status', data.attendanceStatusCode);
+    methods.setValue('remarks', data.remarks);
+    setIsModalOpen(true);
+  };
   const table = useMaterialReactTable({
     columns,
     data,
-    enableRowSelection: true,
-    enableEditing: true,
-    editDisplayMode: 'cell',
-    enableCellActions: true,
+    enableRowActions: true,
+    positionActionsColumn: 'last',
     paginationDisplayMode: 'pages',
     muiSearchTextFieldProps: {
       size: 'small',
@@ -160,33 +140,18 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
     state: {
       isLoading,
       density: 'compact',
-      showGlobalFilter: true,
-      rowSelection,
-      isSaving: isRecordingStaffAttendance || isRecordingStudentsAttendance
+      showGlobalFilter: true
     },
-    onRowSelectionChange: setRowSelection,
-    renderTopToolbar: ({ table }) => {
-      const isDisabled =
-        table.getIsAllRowsSelected() || table.getIsSomeRowsSelected() ? false : true;
+    renderRowActions: ({ row }) => {
       return (
-        <Box
-          sx={{
-            display: 'flex',
-            p: '8px',
-            justifyContent: 'space-between'
-          }}
+        <IconButton
+          title='Update status'
+          aria-label='update'
+          color='primary'
+          onClick={() => onEditBtn(row.original)}
         >
-          <MRT_GlobalFilterTextField table={table} />
-          <Button
-            size='small'
-            color='primary'
-            disabled={isDisabled}
-            onClick={onSubmit}
-            variant='contained'
-          >
-            Save
-          </Button>
-        </Box>
+          <Edit />
+        </IconButton>
       );
     },
     renderEmptyRowsFallback: () => {
@@ -194,39 +159,21 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
     }
   });
-
-  const onSubmit = async () => {
-    try {
-      const attendances = Object.keys(rowSelection).reduce<UserAttendance[]>((acc, key) => {
-        const keyNumber = Number(key);
-        const selected = data.find((item) => item.id === keyNumber);
-        if (selected) {
-          return [
-            ...acc,
-            {
-              id: keyNumber,
-              status: selected.attendanceStatusCode,
-              remarks: selected.remarks
-            }
-          ];
-        }
-
-        return acc;
-      }, []);
-      console.log(attendances);
-      const result =
-        type === 'staff'
-          ? await recordStaffAttendance({ attendances }).unwrap()
-          : await recordStudentsAttendance({ attendances }).unwrap();
-      toast.info(result.message);
-    } catch (error) {
-      toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
-    }
+  const closeModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
     <>
       <MaterialReactTable table={table} />
+      {isModalOpen && (
+        <UpdateAttendance
+          closeModal={closeModal}
+          methods={methods}
+          title='Update Attendance Status'
+          type={type}
+        />
+      )}
     </>
   );
 };

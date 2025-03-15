@@ -1,20 +1,14 @@
 import { z } from 'zod';
+import { stringNumberRefinement } from '@/utils/zod-validation';
 
 export const AcademicYearFormSchema = z
   .object({
     name: z.string().min(1, 'Name is required'),
     startDate: z.union([z.date(), z.string()]).nullable(),
     endDate: z.union([z.date(), z.string()]).nullable(),
-    academicLevelId: z.union([z.number(), z.string()]).refine(
-      (value) => {
-        if (typeof value === 'string' && value === '') return false;
-        if (typeof value === 'number' && value <= 0) return false;
-        return true;
-      },
-      {
-        message: 'Academic Level is required',
-        path: ['academicLevelId']
-      }
+    academicLevelId: stringNumberRefinement(
+      z.union([z.number(), z.string()]),
+      'Academic Level is required'
     )
   })
   .superRefine((data, ctx) => {

@@ -1,45 +1,54 @@
 import { z } from 'zod';
 import {
-  StaffAttendanceCurrentFilterSchema,
-  StaffAttendanceFilterSchema,
-  StudentsAttendanceCurrentFilterSchema,
-  StudentsAttendanceFilterSchema
+  AttendanceFormSchema,
+  TakeStaffAttendanceFilterSchema,
+  GetStaffAttendanceFilterSchema,
+  TakeStudentsAttendanceFilterSchema,
+  GetStudentsAttendanceFilterSchema
 } from './attendance-schema';
+import { NameIdType } from '@/types';
 
 export type UserAttendance = {
-  id: number;
+  userId: number;
   status: string | null;
   remarks?: string | null;
 };
 export type UserAttendanceProps = {
   attendances: UserAttendance[];
+  attendanceDate: string | Date;
 };
 export type UserAttendanceCommonDetail = {
-  id: number;
+  id?: number;
+  userId: number;
   name: string;
   attendanceStatus: string | null;
   attendanceStatusCode: string | null;
   remarks: string | null;
+  attendanceDate: Date | string | null;
+  lastUpdatedDate: Date | string | null;
 };
-type RecordDetail = Pick<UserAttendanceCommonDetail, 'id' | 'name'> & {
+export type RecordDetail = UserAttendanceCommonDetail & {
   totalOperatingDays: number;
   totalPresentDays: number;
 };
 export type StudentsForAttendanceData = {
   students: UserAttendanceCommonDetail[];
 };
-export type StudentsAttendanceFilterProps = z.infer<typeof StudentsAttendanceFilterSchema>;
+export type GetStudentsAttendanceFilterProps = z.infer<typeof GetStudentsAttendanceFilterSchema>;
 export type StudentsAttendanceRecord = {
   students: RecordDetail[];
 };
 export type StaffForAttendanceData = {
   staff: UserAttendanceCommonDetail[];
 };
-export type StaffAttendanceFilterProps = z.infer<typeof StaffAttendanceFilterSchema>;
+export type GetStaffAttendanceFilterProps = z.infer<typeof GetStaffAttendanceFilterSchema>;
 export type StaffAttendanceRecord = {
   staff: RecordDetail[];
 };
-export type StaffAttendanceCurrentFilterProps = z.infer<typeof StaffAttendanceCurrentFilterSchema>;
-export type StudentsAttendanceCurrentFilterProps = z.infer<
-  typeof StudentsAttendanceCurrentFilterSchema
->;
+export type TakeStaffAttendanceFilterProps = z.infer<typeof TakeStaffAttendanceFilterSchema>;
+export type TakeStudentsAttendanceFilterProps = z.infer<typeof TakeStudentsAttendanceFilterSchema>;
+export type AttendanceStatusData = {
+  attendanceStatus: NameIdType[];
+};
+export type AttendanceFormPropsWithId = z.infer<typeof AttendanceFormSchema>;
+export type UserSetting = 'staff' | 'students';

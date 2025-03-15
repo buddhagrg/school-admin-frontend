@@ -6,22 +6,23 @@ import {
   Grid2,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
-  TextField,
-  Typography
+  TextField
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
+import { DatePicker } from '@mui/x-date-pickers';
+import { parseISO } from 'date-fns';
 
 import { useGetRolesQuery } from '@/app/roles/roles-api';
-import { StaffAttendanceCurrentFilterProps } from '../types';
+import { TakeStaffAttendanceFilterProps } from '../../types';
+import { DATE_FORMAT } from '@/utils/helpers/date';
 
-type StaffAttendanceFilterType = {
-  methods: UseFormReturn<StaffAttendanceCurrentFilterProps>;
+type TakeStaffAttendanceFilterType = {
+  methods: UseFormReturn<TakeStaffAttendanceFilterProps>;
   searchUser: () => void;
   clearFilter: () => void;
 };
-export const StaffAttendanceFilter: FC<StaffAttendanceFilterType> = ({
+export const TakeStaffAttendanceFilter: FC<TakeStaffAttendanceFilterType> = ({
   methods,
   searchUser,
   clearFilter
@@ -30,11 +31,32 @@ export const StaffAttendanceFilter: FC<StaffAttendanceFilterType> = ({
   const { control, register } = methods;
 
   return (
-    <Box component={Paper} sx={{ p: 2 }}>
-      <Typography variant='body1' sx={{ mb: 3 }}>
-        Filter Criteria
-      </Typography>
+    <>
       <Grid2 container spacing={2}>
+        <Grid2 size={{ xs: 8, md: 3 }}>
+          <FormControl fullWidth size='small'>
+            <Controller
+              name='attendanceDate'
+              control={control}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <DatePicker
+                  label='Attendance Date'
+                  slotProps={{
+                    textField: {
+                      size: 'small',
+                      error: Boolean(error),
+                      helperText: error?.message,
+                      InputLabelProps: { shrink: true }
+                    }
+                  }}
+                  format={DATE_FORMAT}
+                  value={typeof value === 'string' ? parseISO(value) : value}
+                  onChange={(value) => onChange(value)}
+                />
+              )}
+            />
+          </FormControl>
+        </Grid2>
         <Grid2 size={{ xs: 8, md: 3 }}>
           <FormControl fullWidth size='small'>
             <InputLabel id='user-role' shrink>
@@ -45,10 +67,10 @@ export const StaffAttendanceFilter: FC<StaffAttendanceFilterType> = ({
               control={control}
               render={({ field: { onChange, value } }) => (
                 <Select
-                  labelId='user-role'
-                  label='User Role'
-                  value={value}
                   notched
+                  labelId='user-role'
+                  label='Staff Role'
+                  value={value}
                   onChange={onChange}
                 >
                   <MenuItem value=''>
@@ -92,6 +114,6 @@ export const StaffAttendanceFilter: FC<StaffAttendanceFilterType> = ({
           </Button>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };

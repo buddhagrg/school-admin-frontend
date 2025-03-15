@@ -7,23 +7,24 @@ import {
   Grid2,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
-  TextField,
-  Typography
+  TextField
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
+import { parseISO } from 'date-fns';
+import { DatePicker } from '@mui/x-date-pickers';
 
 import { useGetClassesWithSectionsQuery } from '@/app/class/class-api';
 import { SectionDetail } from '@/app/class/types';
-import { StudentsAttendanceCurrentFilterProps } from '../types';
+import { TakeStudentsAttendanceFilterProps } from '../../types';
+import { DATE_FORMAT } from '@/utils/helpers/date';
 
-type StudentsAttendanceFilterType = {
-  methods: UseFormReturn<StudentsAttendanceCurrentFilterProps>;
+type TakeStudentsAttendanceFilterType = {
+  methods: UseFormReturn<TakeStudentsAttendanceFilterProps>;
   searchUser: () => void;
   clearFilter: () => void;
 };
-export const StudentsAttendanceFilter: FC<StudentsAttendanceFilterType> = ({
+export const TakeStudentsAttendanceFilter: FC<TakeStudentsAttendanceFilterType> = ({
   methods,
   searchUser,
   clearFilter
@@ -45,19 +46,31 @@ export const StudentsAttendanceFilter: FC<StudentsAttendanceFilterType> = ({
   };
 
   return (
-    <Box component={Paper} sx={{ p: 2 }}>
-      <Typography variant='body1' sx={{ mb: 3 }}>
-        Filter Criteria
-      </Typography>
+    <>
       <Grid2 container spacing={2}>
         <Grid2 size={{ xs: 8, md: 3 }}>
-          <TextField
-            {...register('name')}
-            label='Name'
-            fullWidth
-            size='small'
-            slotProps={{ inputLabel: { shrink: true } }}
-          />
+          <FormControl fullWidth size='small'>
+            <Controller
+              name='attendanceDate'
+              control={control}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <DatePicker
+                  label='Attendance Date'
+                  slotProps={{
+                    textField: {
+                      size: 'small',
+                      error: Boolean(error),
+                      helperText: error?.message,
+                      InputLabelProps: { shrink: true }
+                    }
+                  }}
+                  format={DATE_FORMAT}
+                  value={typeof value === 'string' ? parseISO(value) : value}
+                  onChange={(value) => onChange(value)}
+                />
+              )}
+            />
+          </FormControl>
         </Grid2>
         <Grid2 size={{ xs: 8, md: 3 }}>
           <FormControl fullWidth size='small' error={Boolean(errors?.classId)}>
@@ -91,6 +104,15 @@ export const StudentsAttendanceFilter: FC<StudentsAttendanceFilterType> = ({
               )}
             />
           </FormControl>
+        </Grid2>
+        <Grid2 size={{ xs: 8, md: 3 }}>
+          <TextField
+            {...register('name')}
+            label='Name'
+            fullWidth
+            size='small'
+            slotProps={{ inputLabel: { shrink: true } }}
+          />
         </Grid2>
         <Grid2 size={{ xs: 8, md: 3 }}>
           <FormControl fullWidth size='small'>
@@ -136,6 +158,6 @@ export const StudentsAttendanceFilter: FC<StudentsAttendanceFilterType> = ({
           </Button>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };

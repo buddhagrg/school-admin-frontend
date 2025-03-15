@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { stringNumberRefinement } from '@/utils/zod-validation';
 
 export const BasicInfoSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -11,7 +12,7 @@ export const BasicInfoSchema = z.object({
 
 export const AcademicInfoSchema = z.object({
   class: z.string().min(1, 'Class is required').or(z.number().min(1, 'Class is required')),
-  section: z.union([z.string(), z.number()]),
+  section: stringNumberRefinement(z.union([z.string(), z.number()]), 'Section is required'),
   roll: z.string().min(1, 'Roll is required'),
   admissionDate: z.union([z.date(), z.string()])
 });

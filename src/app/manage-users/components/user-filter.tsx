@@ -6,10 +6,8 @@ import {
   Grid2,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
-  TextField,
-  Typography
+  TextField
 } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
@@ -37,10 +35,7 @@ export const UserFilter: FC<UserFilterType> = ({ methods, searchUser, clearFilte
   };
 
   return (
-    <Box component={Paper} sx={{ p: 2 }}>
-      <Typography variant='body1' sx={{ mb: 3 }}>
-        Filter Criteria
-      </Typography>
+    <>
       <Grid2 container spacing={2}>
         <Grid2 size={{ xs: 8, md: 3 }}>
           <FormControl fullWidth size='small'>
@@ -167,6 +162,6 @@ export const UserFilter: FC<UserFilterType> = ({ methods, searchUser, clearFilte
           </Button>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };
