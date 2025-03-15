@@ -103,7 +103,7 @@ export const ListUsersForAttendance: React.FC<ListUsersForAttendanceProps> = ({
         }
       }
     ],
-    [data, handleDataChange]
+    []
   );
 
   const table = useMaterialReactTable({
