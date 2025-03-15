@@ -7,8 +7,5 @@ export const AcademicLevelFormSchema = z.object({
 
 export const AcademicPeriodFormSchema = z.object({
   name: z.string().min(1, 'Period name is required'),
-  academicLevelId: stringNumberRefinement(
-    z.union([z.number(), z.string()]),
-    'Academic Level is required'
-  )
+  academicLevelId: stringNumberRefinement('Academic Level is required')
 });

@@ -12,7 +12,7 @@ export const BasicInfoSchema = z.object({
 
 export const AcademicInfoSchema = z.object({
   class: z.string().min(1, 'Class is required').or(z.number().min(1, 'Class is required')),
-  section: stringNumberRefinement(z.union([z.string(), z.number()]), 'Section is required'),
+  section: stringNumberRefinement('Section is required'),
   roll: z.string().min(1, 'Roll is required'),
   admissionDate: z.union([z.date(), z.string()])
 });

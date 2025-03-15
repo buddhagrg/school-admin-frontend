@@ -6,10 +6,7 @@ export const AcademicYearFormSchema = z
     name: z.string().min(1, 'Name is required'),
     startDate: z.union([z.date(), z.string()]).nullable(),
     endDate: z.union([z.date(), z.string()]).nullable(),
-    academicLevelId: stringNumberRefinement(
-      z.union([z.number(), z.string()]),
-      'Academic Level is required'
-    )
+    academicLevelId: stringNumberRefinement('Academic Level is required')
   })
   .superRefine((data, ctx) => {
     const { startDate, endDate } = data;

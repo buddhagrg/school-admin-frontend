@@ -3,10 +3,7 @@ import { stringNumberRefinement } from '@/utils/zod-validation';
 
 const BaseAttendanceRecordFilterSchema = z.object({
   name: z.string().optional(),
-  academicYearId: stringNumberRefinement(
-    z.union([z.number(), z.string()]),
-    'Academic Year is required'
-  ),
+  academicYearId: stringNumberRefinement('Academic Year is required'),
   dateFrom: z.union([z.date(), z.string()]).nullable(),
   dateTo: z.union([z.date(), z.string()]).nullable()
 });
@@ -45,7 +42,7 @@ const validateDateRange = <T extends z.ZodTypeAny>(schema: T) => {
 
 export const GetStudentsAttendanceFilterSchema = validateDateRange(
   BaseAttendanceRecordFilterSchema.extend({
-    classId: stringNumberRefinement(z.union([z.number(), z.string()]), 'Class is required'),
+    classId: stringNumberRefinement('Class is required'),
     sectionId: z.union([z.number(), z.string()]).optional(),
     dateType: z.string()
   })
@@ -101,7 +98,7 @@ export const TakeStaffAttendanceFilterSchema = z.object({
 
 export const TakeStudentsAttendanceFilterSchema = z.object({
   name: z.string().optional(),
-  classId: stringNumberRefinement(z.union([z.number(), z.string()]), 'Class is required'),
+  classId: stringNumberRefinement('Class is required'),
   sectionId: z.union([z.number(), z.string()]).optional(),
   attendanceDate: z
     .union([z.date(), z.string(), z.null()])
