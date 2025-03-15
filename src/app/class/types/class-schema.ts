@@ -5,6 +5,9 @@ export const ClassFormSchema = z.object({
   name: z.string().min(1, 'Class name is required'),
   academicLevelId: stringNumberRefinement('Academic Level is required')
 });
+export const ClassUpdateFormSchema = z.object({
+  name: z.string().min(1, 'Class name is required')
+});
 export const SectionFormSchema = z.object({
   name: z.string().min(1, 'Section name is required'),
   classId: stringNumberRefinement('Class is required')

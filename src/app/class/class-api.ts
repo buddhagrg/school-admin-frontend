@@ -1,7 +1,6 @@
 import { api, Tag } from '@/api';
 import {
   ClassFormProps,
-  ClassFormWithId,
   ClassesWithSections,
   ClassTeacherFormProps,
   ClassTeachers,
@@ -10,7 +9,8 @@ import {
   SectionFormWithId,
   Teachers,
   ClassStatusProps,
-  SectionStatusProps
+  SectionStatusProps,
+  ClassUpdateFormPropsWithId
 } from './types';
 import { ApiResponseSuccessMessage } from '@/types';
 
@@ -32,7 +32,7 @@ const classApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
     }),
-    updateClass: builder.mutation<ApiResponseSuccessMessage, ClassFormWithId>({
+    updateClass: builder.mutation<ApiResponseSuccessMessage, ClassUpdateFormPropsWithId>({
       query: ({ id, name }) => ({
         url: `/classes/${id}`,
         method: 'PUT',

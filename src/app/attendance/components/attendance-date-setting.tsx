@@ -7,26 +7,35 @@ import {
   Radio,
   RadioGroup
 } from '@mui/material';
-import { Controller, UseFormReturn } from 'react-hook-form';
+import { Controller, Path, PathValue, UseFormReturn } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers';
 import { parseISO } from 'date-fns';
-
-import { GetStaffAttendanceFilterProps, GetStudentsAttendanceFilterProps } from '../types';
 import { DATE_FORMAT } from '@/utils/helpers/date';
 
-export const AttendanceDateSetting: React.FC<{
-  methods: UseFormReturn<GetStaffAttendanceFilterProps | GetStudentsAttendanceFilterProps>;
-}> = ({ methods }) => {
+interface DateFields {
+  dateFrom: Date | null | string;
+  dateTo: Date | null | string;
+  dateType: string;
+}
+export const AttendanceDateSetting = <T extends DateFields>({
+  methods
+}: {
+  methods: UseFormReturn<T>;
+}) => {
   const { clearErrors, setValue, watch, control } = methods;
 
-  const dateFields: Array<{ name: 'dateFrom' | 'dateTo'; label: string; alterLabel: string }> = [
+  const dateFields: Array<{
+    name: keyof DateFields & string;
+    label: string;
+    alterLabel: string;
+  }> = [
     { name: 'dateFrom', label: 'Date From', alterLabel: 'Date' },
     { name: 'dateTo', label: 'Date To', alterLabel: '' }
   ];
   const handleDateChange = (type: string) => {
-    clearErrors(['dateFrom', 'dateTo']);
+    clearErrors(['dateFrom' as Path<T>, 'dateTo' as Path<T>]);
     if (type === 'S') {
-      setValue('dateTo', null);
+      setValue('dateTo' as Path<T>, null as unknown as PathValue<T, Path<T>>);
     }
   };
 
@@ -38,7 +47,7 @@ export const AttendanceDateSetting: React.FC<{
         <FormControl sx={{ mt: 2 }}>
           <FormLabel>Attendance Date</FormLabel>
           <Controller
-            name='dateType'
+            name={'dateType' as Path<T>}
             control={control}
             render={({ field: { onChange, value } }) => (
               <RadioGroup
@@ -67,7 +76,7 @@ export const AttendanceDateSetting: React.FC<{
               key={name}
             >
               <Controller
-                name={name}
+                name={name as Path<T>}
                 control={control}
                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                   <DatePicker

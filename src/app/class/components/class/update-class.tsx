@@ -6,7 +6,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
-import { ClassFormProps, ClassFormSchema } from '../../types';
+import { ClassFormProps, ClassUpdateFormProps, ClassUpdateFormSchema } from '../../types';
 import { useUpdateClassMutation } from '../../class-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ClassForm } from './class-form';
@@ -19,15 +19,15 @@ type UpdateClassProps = {
 export const UpdateClass: FC<UpdateClassProps> = ({ closeModal, id, name }) => {
   const methods = useForm<ClassFormProps>({
     defaultValues: { name: '' },
-    resolver: zodResolver(ClassFormSchema)
+    resolver: zodResolver(ClassUpdateFormSchema)
   });
   const [updateClass, { isLoading: isUpdating }] = useUpdateClassMutation();
 
   useEffect(() => {
     methods.setValue('name', name);
-  }, []);
+  }, [methods]);
 
-  const handleSave = async (data: ClassFormProps) => {
+  const handleSave = async (data: ClassUpdateFormProps) => {
     try {
       const payload = { id, name: data.name };
       const result = await updateClass(payload).unwrap();
