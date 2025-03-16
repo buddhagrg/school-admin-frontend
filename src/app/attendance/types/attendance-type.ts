@@ -27,23 +27,26 @@ export type UserAttendanceCommonDetail = {
   attendanceDate: Date | string | null;
   lastUpdatedDate: Date | string | null;
 };
-export type RecordDetail = UserAttendanceCommonDetail & {
+export type AttendanceCount = {
   totalOperatingDays: number;
   totalPresentDays: number;
+  totalAbsentDays: number;
+  totalEarlyLeaveDays: number;
+  totalLatePresentDays: number;
 };
 export type StudentsForAttendanceData = {
   students: UserAttendanceCommonDetail[];
 };
 export type GetStudentsAttendanceFilterProps = z.infer<typeof GetStudentsAttendanceFilterSchema>;
-export type StudentsAttendanceRecord = {
-  students: RecordDetail[];
+export type StudentsAttendanceRecord = AttendanceCount & {
+  attendances: UserAttendanceCommonDetail[];
 };
 export type StaffForAttendanceData = {
   staff: UserAttendanceCommonDetail[];
 };
 export type GetStaffAttendanceFilterProps = z.infer<typeof GetStaffAttendanceFilterSchema>;
-export type StaffAttendanceRecord = {
-  staff: RecordDetail[];
+export type StaffAttendanceRecord = AttendanceCount & {
+  attendances: UserAttendanceCommonDetail[];
 };
 export type TakeStaffAttendanceFilterProps = z.infer<typeof TakeStaffAttendanceFilterSchema>;
 export type TakeStudentsAttendanceFilterProps = z.infer<typeof TakeStudentsAttendanceFilterSchema>;
@@ -52,3 +55,5 @@ export type AttendanceStatusData = {
 };
 export type AttendanceFormPropsWithId = z.infer<typeof AttendanceFormSchema>;
 export type UserSetting = 'staff' | 'students';
+export type AttendanceStatus = 'PR' | 'AB' | 'LP' | 'EL';
+export type AttendanceStatusColor = 'success' | 'error' | 'warning' | 'primary';

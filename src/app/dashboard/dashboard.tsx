@@ -2,7 +2,13 @@ import { Grid2 } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { Celebrations, GridCard, LeavePolicyDetail, Notices, WhoIsOut } from './components';
+import {
+  Celebrations,
+  LeavePolicyDetail,
+  ListDashboardStat,
+  Notices,
+  WhoIsOut
+} from './components';
 import { getUserRole } from '@/app/auth/auth-slice';
 import { DashboardProps } from './dashboard-type';
 import { useGetDashboardDataQuery } from './dashboard-api';
@@ -24,19 +30,9 @@ export const Dashboard = () => {
   const { students, teachers, parents, notices, leavePolicies, celebrations, oneMonthLeave } =
     data as DashboardProps;
   return (
-    <Grid2 container spacing={4}>
+    <Grid2 container spacing={3}>
       {currentUserRole === 'admin' && (
-        <>
-          <Grid2 size={{ xs: 12, md: 4 }}>
-            <GridCard {...students} title='Total Students' />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 4 }}>
-            <GridCard {...teachers} title='Total Teachers' />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 4 }}>
-            <GridCard {...parents} title='Total Parents' />
-          </Grid2>
-        </>
+        <ListDashboardStat students={students} teachers={teachers} parents={parents} />
       )}
 
       <Grid2 container size={{ xs: 12 }} spacing={3}>

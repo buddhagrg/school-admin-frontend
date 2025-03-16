@@ -3,12 +3,13 @@ import { Box, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formatISO } from 'date-fns';
+import { Group } from '@mui/icons-material';
 
 import { ResponsiveBox } from '@/components/responsive-box';
 import {
-  RecordDetail,
   GetStudentsAttendanceFilterProps,
-  GetStudentsAttendanceFilterSchema
+  GetStudentsAttendanceFilterSchema,
+  StaffAttendanceRecord
 } from '../../types';
 import { useGetStudentsAttendanceRecordQuery } from '../../attendance-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -16,6 +17,9 @@ import { GetStudentsAttendanceFilter } from './get-students-attendance-filter';
 import { ListAttendance } from '../list-attendance';
 import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { FilterText } from '@/components/filter-text';
+import { attendanceData } from '../attendance-list-state';
+import { PageContentHeader } from '@/components/page-content-header';
+import { ListAttendanceStat } from '../list-attendance-stat';
 
 const filterState: GetStudentsAttendanceFilterProps = {
   dateFrom: formatISO(new Date(), { representation: 'date' }),
@@ -40,7 +44,7 @@ export const GetStudentsAttendance: React.FC<{ setting: React.ReactNode }> = ({ 
       skip: !filter.academicYearId || !filter.classId
     }
   );
-  const [users, setUsers] = useState<RecordDetail[]>([]);
+  const [users, setUsers] = useState<StaffAttendanceRecord>(attendanceData);
   const methods = useForm<GetStudentsAttendanceFilterProps>({
     defaultValues: filterState,
     resolver: zodResolver(GetStudentsAttendanceFilterSchema)
@@ -48,13 +52,13 @@ export const GetStudentsAttendance: React.FC<{ setting: React.ReactNode }> = ({ 
 
   useEffect(() => {
     if (isError) {
-      setUsers([]);
-    } else if (data?.students) {
-      setUsers(data.students);
+      setUsers(attendanceData);
+    } else if (data) {
+      setUsers(data);
     } else {
-      setUsers([]);
+      setUsers(attendanceData);
     }
-  }, [data?.students, isError]);
+  }, [data, isError]);
 
   const onClear = () => {
     methods.reset(filterState);
@@ -72,6 +76,9 @@ export const GetStudentsAttendance: React.FC<{ setting: React.ReactNode }> = ({ 
           onClearBtn={onClear}
         />
       </Box>
+      <PageContentHeader title='View Attendances' icon={Group} />
+      <ListAttendanceStat data={users} />
+      <Box sx={{ my: 3 }} />
       <ResponsiveBox>
         <ListAttendance
           type='students'

@@ -23,7 +23,9 @@ const attendanceApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: (_result, error) =>
-        error ? [] : [Tag.STUDENTS_FOR_ATTENDANCE, Tag.STUDENTS_ATTENDANCE_RECORD]
+        error
+          ? []
+          : [Tag.STUDENTS_FOR_ATTENDANCE, { type: Tag.STUDENTS_ATTENDANCE_RECORD, id: 'LIST' }]
     }),
     recordStaffAttendance: builder.mutation<ApiResponseSuccessMessage, UserAttendanceProps>({
       query: (payload) => ({
@@ -32,7 +34,7 @@ const attendanceApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: (_result, error) =>
-        error ? [] : [Tag.STAFF_FOR_ATTENDANCE, Tag.STAFF_ATTENDANCE_RECORD]
+        error ? [] : [Tag.STAFF_FOR_ATTENDANCE, { type: Tag.STAFF_ATTENDANCE_RECORD, id: 'LIST' }]
     }),
     getStudentsForAttendance: builder.query<
       StudentsForAttendanceData,
@@ -58,13 +60,8 @@ const attendanceApi = api.injectEndpoints({
         const queryString = getQueryString(payload);
         return `/attendances/students/record${queryString}`;
       },
-      providesTags: (result, error) =>
-        error
-          ? []
-          : result?.students?.map(({ userId }) => ({
-              type: Tag.STUDENTS_ATTENDANCE_RECORD,
-              id: userId
-            })) || [Tag.STUDENTS_ATTENDANCE_RECORD]
+      providesTags: (_result, error) =>
+        error ? [] : [{ type: Tag.STUDENTS_ATTENDANCE_RECORD, id: 'LIST' }]
     }),
     getStaffForAttendance: builder.query<
       StaffForAttendanceData,
@@ -90,13 +87,15 @@ const attendanceApi = api.injectEndpoints({
         const queryString = getQueryString(payload);
         return `/attendances/staff/record${queryString}`;
       },
-      providesTags: (result, error) =>
+      providesTags: (_result, error) =>
         error
           ? []
-          : result?.staff?.map(({ userId }) => ({
-              type: Tag.STAFF_ATTENDANCE_RECORD,
-              id: userId
-            })) || [Tag.STAFF_ATTENDANCE_RECORD]
+          : [
+              {
+                type: Tag.STAFF_ATTENDANCE_RECORD,
+                id: 'LIST'
+              }
+            ]
     }),
     updateStaffAttendanceRecord: builder.mutation<
       ApiResponseSuccessMessage,
@@ -111,7 +110,7 @@ const attendanceApi = api.injectEndpoints({
         error
           ? []
           : [
-              { type: Tag.STAFF_ATTENDANCE_RECORD, id: userId },
+              { type: Tag.STAFF_ATTENDANCE_RECORD, id: 'LIST' },
               { type: Tag.STAFF_FOR_ATTENDANCE, id: userId }
             ]
     }),
@@ -128,7 +127,7 @@ const attendanceApi = api.injectEndpoints({
         error
           ? []
           : [
-              { type: Tag.STUDENTS_ATTENDANCE_RECORD, id: userId },
+              { type: Tag.STUDENTS_ATTENDANCE_RECORD, id: 'LIST' },
               { type: Tag.STUDENTS_FOR_ATTENDANCE, id: userId }
             ]
     })

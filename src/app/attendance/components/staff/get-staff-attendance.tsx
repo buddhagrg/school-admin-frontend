@@ -3,12 +3,13 @@ import { Box, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formatISO } from 'date-fns';
+import { Group } from '@mui/icons-material';
 
 import { ResponsiveBox } from '@/components/responsive-box';
 import {
-  RecordDetail,
   GetStaffAttendanceFilterProps,
-  GetStaffAttendanceFilterSchema
+  GetStaffAttendanceFilterSchema,
+  StaffAttendanceRecord
 } from '../../types';
 import { useGetStaffAttendanceRecordQuery } from '../../attendance-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -16,6 +17,9 @@ import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { GetStaffAttendanceFilter } from './get-staff-attendance-filter';
 import { ListAttendance } from '../list-attendance';
 import { FilterText } from '@/components/filter-text';
+import { attendanceData } from '../attendance-list-state';
+import { PageContentHeader } from '@/components/page-content-header';
+import { ListAttendanceStat } from '../list-attendance-stat';
 
 const filterState: GetStaffAttendanceFilterProps = {
   dateFrom: formatISO(new Date(), { representation: 'date' }),
@@ -39,7 +43,7 @@ export const GetStaffAttendance: React.FC<{ setting: React.ReactNode }> = ({ set
       skip: !filter.academicYearId
     }
   );
-  const [users, setUsers] = useState<RecordDetail[]>([]);
+  const [users, setUsers] = useState<StaffAttendanceRecord>(attendanceData);
   const methods = useForm<GetStaffAttendanceFilterProps>({
     defaultValues: filterState,
     resolver: zodResolver(GetStaffAttendanceFilterSchema)
@@ -47,13 +51,13 @@ export const GetStaffAttendance: React.FC<{ setting: React.ReactNode }> = ({ set
 
   useEffect(() => {
     if (isError) {
-      setUsers([]);
-    } else if (data?.staff) {
-      setUsers(data.staff);
+      setUsers(attendanceData);
+    } else if (data) {
+      setUsers(data);
     } else {
-      setUsers([]);
+      setUsers(attendanceData);
     }
-  }, [data?.staff, isError]);
+  }, [data, isError]);
 
   const onClear = () => {
     methods.reset(filterState);
@@ -71,6 +75,9 @@ export const GetStaffAttendance: React.FC<{ setting: React.ReactNode }> = ({ set
           onClearBtn={onClear}
         />
       </Box>
+      <PageContentHeader title='View Attendances' icon={Group} />
+      <ListAttendanceStat data={users} />
+      <Box sx={{ my: 3 }} />
       <ResponsiveBox>
         <ListAttendance
           type='staff'

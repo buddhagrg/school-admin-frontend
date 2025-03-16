@@ -1,45 +1,34 @@
 import React, { useMemo, useState } from 'react';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 import { Box, Chip, IconButton } from '@mui/material';
-import { Edit, ExitToApp, HighlightOff, Schedule, TaskAlt } from '@mui/icons-material';
+import { Edit } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   AttendanceFormPropsWithId,
   AttendanceFormSchema,
+  AttendanceStatus,
+  StaffAttendanceRecord,
   UserAttendanceCommonDetail
 } from '../types';
 import { ERROR_MESSAGE } from '@/components/errors';
 import { DATE_FORMAT, DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { UpdateAttendance } from './update-attendance';
+import { STATUS_COLORS, STATUS_ICONS } from '../constant';
 
 type ListAttendanceProps = {
-  data: UserAttendanceCommonDetail[];
+  data: StaffAttendanceRecord;
   isLoading: boolean;
   isError: boolean;
   error?: string | null;
   type: 'staff' | 'students';
 };
-type AttendanceStatus = 'PR' | 'AB' | 'LP' | 'EL';
-type AttendanceStatusColor = 'success' | 'error' | 'warning' | 'primary';
 const formState = {
   id: 0,
   userId: 0,
   status: '',
   remarks: ''
-};
-const STATUS_ICONS: Record<AttendanceStatus, JSX.Element> = {
-  PR: <TaskAlt color='success' />,
-  AB: <HighlightOff color='error' />,
-  LP: <Schedule color='warning' />,
-  EL: <ExitToApp color='primary' />
-};
-const STATUS_COLORS: Record<AttendanceStatus, AttendanceStatusColor> = {
-  PR: 'success',
-  AB: 'error',
-  LP: 'warning',
-  EL: 'primary'
 };
 const getStatusIcon = (code: AttendanceStatus) => STATUS_ICONS[code];
 const getStatusColor = (code: AttendanceStatus) => STATUS_COLORS[code];
@@ -118,7 +107,7 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
   };
   const table = useMaterialReactTable({
     columns,
-    data,
+    data: data.attendances,
     enableRowActions: true,
     positionActionsColumn: 'last',
     paginationDisplayMode: 'pages',

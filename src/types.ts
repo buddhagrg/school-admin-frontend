@@ -12,3 +12,10 @@ export type NameIdType<T = number> = {
 export type ApiResponseSuccessMessage = {
   message: string;
 };
+export type StatCardProps = {
+  title: string;
+  stat: number;
+  icon: React.ReactNode;
+  bgColor?: string;
+  sideIcon?: React.ReactNode;
+};
