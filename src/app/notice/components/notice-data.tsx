@@ -199,7 +199,6 @@ export const NoticeData: FC<NoticeDataProps> = ({
       toast.info(result?.message);
       toggleModal();
     } catch (error) {
-      console.log(error);
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     } finally {
       setState((prevState) => ({ ...prevState, isSaving: !prevState.isSaving }));
