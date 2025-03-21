@@ -6,7 +6,16 @@ export const ApiError = ({ messages }: { messages: string[] }) => {
   }
 
   return (
-    <Box sx={{ mt: 2, color: 'red', fontSize: '15px' }}>
+    <Box
+      sx={{
+        color: 'red',
+        border: '1px solid red',
+        borderRadius: '5px',
+        fontSize: '15px',
+        textAlign: 'left',
+        mb: 2
+      }}
+    >
       <ul>
         {messages.map((msg) => (
           <li key={msg}>{msg}</li>

@@ -1,48 +1,78 @@
-import { FC } from 'react';
-import { Button, Stack, TextField } from '@mui/material';
+import { FC, useState } from 'react';
+import {
+  Button,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Stack,
+  TextField
+} from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import { LoginRequest } from '../../types';
+import { ApiError } from '@/components/errors';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 type LoginFormProps = {
   onSubmit: () => void;
   methods: UseFormReturn<LoginRequest>;
   isFetching: boolean;
+  apiErrors: string[];
 };
 
-export const LoginForm: FC<LoginFormProps> = ({ onSubmit, methods, isFetching }) => {
+export const LoginForm: FC<LoginFormProps> = ({ onSubmit, methods, isFetching, apiErrors }) => {
   const {
     register,
     formState: { errors }
   } = methods;
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <form onSubmit={onSubmit}>
-      <div>
+      <FormControl fullWidth size='small' sx={{ mt: 3 }} variant='outlined'>
         <TextField
-          variant='standard'
+          variant='outlined'
           size='small'
+          label='Username'
           type='text'
           placeholder='Username'
-          sx={{ margin: '30px 0' }}
           fullWidth
+          slotProps={{ inputLabel: { shrink: true } }}
           {...register('username')}
           error={!!errors.username}
           helperText={errors.username?.message}
         />
-      </div>
-      <div>
-        <TextField
-          variant='standard'
-          size='small'
-          type='password'
+      </FormControl>
+
+      <FormControl fullWidth size='small' sx={{ my: 4 }} variant='outlined'>
+        <InputLabel shrink>Password</InputLabel>
+        <OutlinedInput
+          type={showPassword ? 'text' : 'password'}
+          label='Password'
           placeholder='Password'
-          sx={{ marginBottom: '30px' }}
-          fullWidth
           {...register('password')}
           error={!!errors.password}
-          helperText={errors.password?.message}
+          notched
+          endAdornment={
+            <InputAdornment position='end'>
+              <IconButton
+                aria-label={showPassword ? 'hide the password' : 'display the password'}
+                onClick={togglePasswordVisibility}
+                edge='end'
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
-      </div>
+        <FormHelperText error>{errors?.password?.message}</FormHelperText>
+      </FormControl>
+      <ApiError messages={apiErrors} />
       <Stack>
         <Button
           loading={isFetching}

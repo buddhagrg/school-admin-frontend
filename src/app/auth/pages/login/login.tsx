@@ -11,18 +11,22 @@ import { Link } from 'react-router-dom';
 import { LoginRequest, LoginSchema } from '../../types';
 import { LoginForm } from './login-form';
 import { formatApiError } from '@/utils/helpers/format-api-error';
-import { ApiError } from '@/components/errors';
 import { HomeBar } from '@/components/home-bar';
 import { useLoginMutation } from '../../auth-api';
 import { setUser } from '../../auth-slice';
+import { DemoRoles } from './demo-roles';
 
 export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const methods = useForm<LoginRequest>({ resolver: zodResolver(LoginSchema) });
   const [apiErrors, setApiErrors] = useState<string[]>([]);
-
   const [login, { isLoading }] = useLoginMutation();
+
+  const updateState = () => {
+    methods.setValue('username', 'admin@school-admin.xyz');
+    methods.setValue('password', 'iamadmin');
+  };
 
   const onSubmit = async (data: LoginRequest) => {
     try {
@@ -70,24 +74,32 @@ export const Login = () => {
         }}
       >
         <Box
+          component={Paper}
           sx={{
-            width: { xs: '400px', md: '450px' }
+            width: { xs: '350px', md: '400px' },
+            border: '1px solid #e4e4e7',
+            padding: '30px',
+            textAlign: 'center'
           }}
         >
-          <Box sx={{ border: '1px solid #f3f6f999', padding: '40px' }} component={Paper}>
-            <Typography component='div' variant='h5' gutterBottom sx={{ fontWeight: 500 }}>
-              Sign In
-            </Typography>
-            <Typography variant='body1' color='text.secondary' gutterBottom>
-              Please signin to your account.
-            </Typography>
-            <LoginForm
-              methods={methods}
-              onSubmit={methods.handleSubmit(onSubmit)}
-              isFetching={isLoading}
-            />
-            <ApiError messages={apiErrors} />
-          </Box>
+          <Typography component='div' variant='h5' sx={{ fontWeight: 600 }}>
+            School Admin
+          </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            Please signin to your account.
+          </Typography>
+          <Box sx={{ mt: 2 }} />
+          <DemoRoles onClick={updateState} />
+          <Box sx={{ mt: 2 }} />
+          <LoginForm
+            methods={methods}
+            onSubmit={methods.handleSubmit(onSubmit)}
+            isFetching={isLoading}
+            apiErrors={apiErrors}
+          />
+          <Typography sx={{ mt: 3, fontSize: '13px' }} color='text.secondary' variant='body2'>
+            This is a demo version of School Admin
+          </Typography>
         </Box>
       </Box>
     </>
