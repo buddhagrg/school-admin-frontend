@@ -57,8 +57,8 @@ export const UserFilter: FC<UserFilterType> = ({ methods, searchUser, clearFilte
                     handleClassChange(selectedClass);
                   }}
                 >
-                  <MenuItem value=''>
-                    <i>Select None</i>
+                  <MenuItem value='' disabled>
+                    Select None
                   </MenuItem>
                   {rolesData?.roles?.map((item) => (
                     <MenuItem key={item.id} value={item.id.toString()}>

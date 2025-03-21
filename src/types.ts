@@ -17,5 +17,4 @@ export type StatCardProps = {
   stat: number;
   icon: React.ReactNode;
   bgColor?: string;
-  sideIcon?: React.ReactNode;
 };

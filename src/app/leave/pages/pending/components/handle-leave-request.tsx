@@ -6,10 +6,11 @@ import { toast } from 'react-toastify';
 import { DialogModal } from '@/components/dialog-modal';
 import { useHandlePendingLeaveStatusMutation } from '@/app/leave/leave-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { LeaveStatusType } from '@/app/leave/types';
 
 type HandleLeaveReuqestProps = {
   leaveId: number;
-  status: number;
+  status: LeaveStatusType;
   titleText: string;
   closeModal: () => void;
   contextText: string;

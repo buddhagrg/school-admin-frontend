@@ -1,4 +1,3 @@
-import { parseISO } from 'date-fns';
 import { z } from 'zod';
 
 export const NewLeavePolicySchema = z.object({
@@ -15,22 +14,9 @@ export const BaseLeaveSchema = z.object({
 });
 
 export const LeaveRequestFormSchema = BaseLeaveSchema.extend({
-  from: z.union([
-    z.string().transform((dtString) => (dtString ? parseISO(dtString) : null)),
-    z.null(),
-    z.date()
-  ]),
-  to: z.union([
-    z.string().transform((dtString) => (dtString ? parseISO(dtString) : null)),
-    z.null(),
-    z.date()
-  ])
+  from: z.union([z.string(), z.null(), z.date()]),
+  to: z.union([z.string(), z.null(), z.date()])
 }).refine((data) => !data.from || !data.to || data.from <= data.to, {
   message: "The 'from' date must be before or equal to 'to' date.",
   path: ['to']
-});
-
-export const LeaveRequestApiSchema = BaseLeaveSchema.extend({
-  from: z.string(),
-  to: z.string()
 });

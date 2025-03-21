@@ -39,7 +39,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
     dob,
     gender,
     roll,
-    admissionDate,
+    joinDate,
     currentAddress,
     permanentAddress,
     fatherName,
@@ -71,7 +71,7 @@ export const StudentProfile: FC<StudentProfileProps> = ({ id }) => {
           dob={dob}
           gender={gender}
           roll={roll}
-          admissionDate={admissionDate}
+          joinDate={joinDate}
           currentAddress={currentAddress}
           permanentAddress={permanentAddress}
         />

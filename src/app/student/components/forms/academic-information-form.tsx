@@ -112,7 +112,7 @@ export const AcademicInformationForm = () => {
         </Box>
         <Box>
           <Controller
-            name='admissionDate'
+            name='joinDate'
             control={control}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <DatePicker

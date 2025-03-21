@@ -18,7 +18,7 @@ export const NoticeFormSchema = z
   .object({
     title: z.string().min(1, 'Title is required'),
     description: z.string().min(1, 'Description is required'),
-    status: z.number().min(1, 'Status is required').or(z.string().min(1, 'Status is required')),
+    status: z.string().min(1, 'Status is required'),
     recipientType: z.enum(['EV', 'SP']),
     recipientRole: z.union([z.number(), z.string()]).nullable(),
     firstField: z.union([z.number(), z.string()]).nullable()

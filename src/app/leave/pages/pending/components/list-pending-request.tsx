@@ -5,18 +5,22 @@ import { Block, CheckCircle } from '@mui/icons-material';
 
 import { HandleLeaveRequest } from './handle-leave-request';
 import { DATE_FORMAT, DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { MyLeaveRequestDetail } from '@/app/leave/types';
+import { LeaveStatusType, MyLeaveRequestDetail } from '@/app/leave/types';
 import { useGetLeavePendingQuery } from '@/app/leave/leave-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { ERROR_MESSAGE } from '@/components/errors';
 
-const initialState = {
-  action: '',
+type State = {
+  action: LeaveStatusType;
+  leaveId: number;
+};
+const initialState: State = {
+  action: 'REVIEW_REQUEST',
   leaveId: 0
 };
 export const ListPendingRequest = () => {
   const { data, isLoading, isError, error } = useGetLeavePendingQuery();
-  const [state, setState] = useState<{ action: string; leaveId: number }>(initialState);
+  const [state, setState] = useState<State>(initialState);
 
   const columns: MRT_ColumnDef<MyLeaveRequestDetail>[] = useMemo(
     () => [
@@ -59,7 +63,7 @@ export const ListPendingRequest = () => {
     ],
     []
   );
-  const onActionBtnClick = (action: string, leaveId: number) => {
+  const onActionBtnClick = (action: LeaveStatusType, leaveId: number) => {
     setState({ action, leaveId });
   };
 
@@ -78,14 +82,14 @@ export const ListPendingRequest = () => {
         <IconButton
           title='Approve Leave'
           color='info'
-          onClick={() => onActionBtnClick('approve', row.original.id)}
+          onClick={() => onActionBtnClick('APPROVED', row.original.id)}
         >
           <CheckCircle />
         </IconButton>
         <IconButton
           title='Reject Leave'
           color='error'
-          onClick={() => onActionBtnClick('reject', row.original.id)}
+          onClick={() => onActionBtnClick('CANCELLED', row.original.id)}
         >
           <Block />
         </IconButton>
@@ -101,17 +105,23 @@ export const ListPendingRequest = () => {
   };
 
   const { action, leaveId } = state;
+  const actionTxt: Record<LeaveStatusType, string> = {
+    APPROVED: 'Approve',
+    CANCELLED: 'Cancel',
+    REVIEW_REQUEST: 'Review'
+  };
+
   return (
     <>
       <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }}>
         <MaterialReactTable table={table} />
 
-        {['approve', 'reject'].includes(action) && (
+        {['APPROVED', 'CANCELLED'].includes(action) && (
           <HandleLeaveRequest
             leaveId={leaveId}
-            status={action === 'approve' ? 2 : 3}
-            titleText={action === 'approve' ? 'Approve Leave' : 'Reject Leave'}
-            contextText={`Are you sure you want to ${action} this leave request?`}
+            status={action}
+            titleText={`${actionTxt[action]} Leave`}
+            contextText={`Are you sure you want to ${actionTxt[action]} this leave request?`}
             closeModal={closeModal}
           />
         )}

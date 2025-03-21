@@ -1,10 +1,4 @@
-import {
-  FamilyRestroom,
-  School,
-  SupervisorAccount,
-  TrendingDown,
-  TrendingUp
-} from '@mui/icons-material';
+import { TrendingDown, TrendingUp } from '@mui/icons-material';
 import { GeneralData } from '../dashboard-type';
 import { Grid2 } from '@mui/material';
 import { StatCard } from '@/components/stat-card';
@@ -34,44 +28,41 @@ export const ListDashboardStat: React.FC<ListDashboardStatProps> = ({
     {
       title: 'Students',
       stat: students.totalNumberCurrentYear,
-      icon: <School color={studentIconColor} />,
-      bgColor: studentIconColor === 'success' ? successColor : errorColor,
-      sideIcon:
+      icon:
         studentIconColor === 'success' ? (
           <TrendingUp color={studentIconColor} />
         ) : (
           <TrendingDown color={studentIconColor} />
-        )
+        ),
+      bgColor: studentIconColor === 'success' ? successColor : errorColor
     },
     {
       title: 'Teachers',
       stat: teachers.totalNumberCurrentYear,
-      icon: <SupervisorAccount color={teachersIconColor} />,
-      bgColor: teachersIconColor === 'success' ? successColor : errorColor,
-      sideIcon:
+      icon:
         teachersIconColor === 'success' ? (
           <TrendingUp color={teachersIconColor} />
         ) : (
           <TrendingDown color={teachersIconColor} />
-        )
+        ),
+      bgColor: teachersIconColor === 'success' ? successColor : errorColor
     },
     {
       title: 'Parents',
       stat: parents.totalNumberCurrentYear,
-      icon: <FamilyRestroom color={parentsIconColor} />,
-      bgColor: parentsIconColor === 'success' ? successColor : errorColor,
-      sideIcon:
+      icon:
         parentsIconColor === 'success' ? (
           <TrendingUp color={parentsIconColor} />
         ) : (
           <TrendingDown color={parentsIconColor} />
-        )
+        ),
+      bgColor: parentsIconColor === 'success' ? successColor : errorColor
     }
   ];
 
-  return stats.map(({ title, stat, icon, bgColor, sideIcon }) => (
+  return stats.map(({ title, stat, icon, bgColor }) => (
     <Grid2 size={{ xs: 12, md: 3 }} key={title}>
-      <StatCard title={title} stat={stat} icon={icon} bgColor={bgColor} sideIcon={sideIcon} />
+      <StatCard title={title} stat={stat} icon={icon} bgColor={bgColor} />
     </Grid2>
   ));
 };

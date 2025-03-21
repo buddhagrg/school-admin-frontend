@@ -7,7 +7,7 @@ type ViewPersonalDetailProps = {
   dob: string | Date;
   gender: string | number;
   roll: string;
-  admissionDate: string | Date;
+  joinDate: string | Date;
   currentAddress: string;
   permanentAddress: string;
 };
@@ -16,7 +16,7 @@ export const ViewPersonalDetail: FC<ViewPersonalDetailProps> = ({
   dob,
   gender,
   roll,
-  admissionDate,
+  joinDate,
   currentAddress,
   permanentAddress
 }) => {
@@ -43,7 +43,7 @@ export const ViewPersonalDetail: FC<ViewPersonalDetailProps> = ({
           </Grid2>
           <Grid2 size={{ xs: 12, sm: 6 }}>
             <Typography variant='subtitle2'>Admission Date</Typography>
-            <Typography variant='body1'>{getFormattedDate(admissionDate, DATE_FORMAT)}</Typography>
+            <Typography variant='body1'>{getFormattedDate(joinDate, DATE_FORMAT)}</Typography>
           </Grid2>
           <Grid2 size={{ xs: 12, sm: 6 }}>
             <Typography variant='subtitle2'>Current Address</Typography>

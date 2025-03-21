@@ -1,22 +1,23 @@
 import { FC } from 'react';
 import { AutoDelete, Block, Delete, Done, Drafts, HourglassTop } from '@mui/icons-material';
 import { Chip } from '@mui/material';
+import { NoticeStatusType } from '../types';
 
 type StatusMap = {
-  [key: number]: ['default' | 'success' | 'error', JSX.Element];
+  [key: NoticeStatusType]: ['default' | 'success' | 'error', JSX.Element];
 };
 
 const statusMap: StatusMap = {
-  1: ['default', <Drafts />],
-  2: ['default', <HourglassTop />],
-  3: ['default', <AutoDelete />],
-  4: ['error', <Block />],
-  5: ['success', <Done />],
-  6: ['default', <Delete />]
+  DRAFTED: ['default', <Drafts />],
+  REVIEW_REQUESTED: ['default', <HourglassTop />],
+  DELETE_REQUESTED: ['default', <AutoDelete />],
+  REJECTED: ['error', <Block />],
+  APPROVED: ['success', <Done />],
+  DELETED: ['default', <Delete />]
 };
 
 type LeaveStatusProps = {
-  statusId: number;
+  statusId: keyof typeof statusMap;
   label: string;
 };
 

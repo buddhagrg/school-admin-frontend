@@ -1,28 +1,30 @@
+import { NoticeStatusType } from '@/app/notice/types';
+
 export const isEditPermissionAvailable = (
   authorId: number,
-  statusId: number,
+  statusId: NoticeStatusType,
   userId: number | undefined
 ) => {
   if (authorId === userId) {
-    return statusId == 6;
+    return statusId == 'DELETED';
   }
   return authorId !== userId;
 };
 
-export const isApprovePermissionAvailable = (status: number) => {
+export const isApprovePermissionAvailable = (status: NoticeStatusType) => {
   switch (status) {
-    case 2:
+    case 'REVIEW_REQUESTED':
       return false;
     default:
       return true;
   }
 };
 
-export const isRejectPermissionAvailable = (status: number) => {
+export const isRejectPermissionAvailable = (status: NoticeStatusType) => {
   switch (status) {
-    case 2:
-    case 4:
-    case 5:
+    case 'REVIEW_REQUESTED':
+    case 'REJECTED':
+    case 'APPROVED':
       return false;
     default:
       return true;
@@ -31,13 +33,13 @@ export const isRejectPermissionAvailable = (status: number) => {
 
 export const isDeletePermissionAvailable = (
   authorId: number,
-  status: number,
+  status: NoticeStatusType,
   userId: number | undefined
 ) => {
   if (authorId === userId) {
     switch (status) {
-      case 1:
-      case 6:
+      case 'DRAFTED':
+      case 'DELETED':
         return true;
       default:
         return false;

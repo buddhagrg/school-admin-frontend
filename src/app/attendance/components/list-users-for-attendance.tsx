@@ -10,6 +10,7 @@ import { Box, Button, FormControlLabel, Radio, RadioGroup, TextField } from '@mu
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { red } from '@mui/material/colors';
 
 import {
   useRecordStaffAttendanceMutation,
@@ -62,7 +63,10 @@ export const ListUsersForAttendance: React.FC<ListUsersForAttendanceProps> = ({
         size: 400,
         Cell: ({ row }) => {
           const { userId, attendanceStatusCode } = row.original;
-          return (
+
+          return attendanceStatusCode === 'ON_LEAVE' ? (
+            <>User is on leave</>
+          ) : (
             <RadioGroup
               row
               aria-labelledby='demo-row-radio-buttons-group-label'
@@ -89,8 +93,10 @@ export const ListUsersForAttendance: React.FC<ListUsersForAttendanceProps> = ({
         accessorKey: 'remarks',
         header: 'Remarks',
         Cell: ({ row }) => {
-          const { userId, remarks } = row.original;
-          return (
+          const { userId, remarks, attendanceStatusCode } = row.original;
+          return attendanceStatusCode === 'ON_LEAVE' ? (
+            <></>
+          ) : (
             <TextField
               size='small'
               fullWidth
@@ -103,13 +109,13 @@ export const ListUsersForAttendance: React.FC<ListUsersForAttendanceProps> = ({
         }
       }
     ],
-    []
+    [handleDataChange]
   );
 
   const table = useMaterialReactTable({
     columns,
     data,
-    enableRowSelection: true,
+    enableRowSelection: (row) => row.original.attendanceStatusCode !== 'ON_LEAVE',
     muiSearchTextFieldProps: {
       size: 'small',
       variant: 'outlined'
@@ -147,6 +153,11 @@ export const ListUsersForAttendance: React.FC<ListUsersForAttendanceProps> = ({
         </Box>
       );
     },
+    muiTableBodyRowProps: ({ row }) => ({
+      sx: {
+        backgroundColor: row.original.attendanceStatusCode === 'ON_LEAVE' ? red[200] : 'inherit'
+      }
+    }),
     renderEmptyRowsFallback: () => {
       const errorMsg = isError ? error : <>{ERROR_MESSAGE.DATA_NOT_FOUND}</>;
       return <Box sx={{ textAlign: 'center', fontStyle: 'italic', my: 3 }}>{errorMsg}</Box>;
@@ -157,7 +168,9 @@ export const ListUsersForAttendance: React.FC<ListUsersForAttendanceProps> = ({
     try {
       const attendances = Object.keys(rowSelection).reduce<UserAttendance[]>((acc, key) => {
         const keyNumber = Number(key);
-        const selected = data.find((item) => item.userId === keyNumber);
+        const selected = data.find(
+          (item) => item.userId === keyNumber && item.attendanceStatusCode
+        );
         if (selected) {
           return [
             ...acc,
@@ -171,6 +184,11 @@ export const ListUsersForAttendance: React.FC<ListUsersForAttendanceProps> = ({
 
         return acc;
       }, []);
+
+      if (attendances.length <= 0) {
+        toast.error('User attendance data not provided');
+        return;
+      }
 
       const payload = {
         attendances,

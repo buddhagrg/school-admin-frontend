@@ -10,6 +10,8 @@ export type UserAccountBasic = {
   lastLogin: string;
   staticRoleId: number;
   isEmailVerified: boolean;
+  currentAddress?: string;
+  phone?: string;
 };
 
 export type UsersData = {

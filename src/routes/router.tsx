@@ -4,7 +4,12 @@ import { createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from './protected-route';
 import { AppRoot } from './app-root';
 import { Login, SetupPassword } from '@/app/auth/pages';
-import { LeaveDefine, MyLeaveRequest, PendingRequest } from '@/app/leave/pages';
+import {
+  ApplyLeaveForOthers,
+  LeaveDefine,
+  MyLeaveRequest,
+  PendingRequest
+} from '@/app/leave/pages';
 import { AddStudent, EditStudent, ViewStudent } from '@/app/student/pages';
 import { AddNotice, EditNotice, ListNotices, ManageNotices, ViewNotice } from '@/app/notice/pages';
 import { AddStaff, EditStaff, ViewStaff } from '@/app/staff/pages';
@@ -79,7 +84,8 @@ export const routes = [
       { path: 'users/staff/edit/:id', element: <EditStaff /> },
       { path: 'users/manage', element: <ManageUsers /> },
       { path: 'leaves/policies', element: <LeaveDefine /> },
-      { path: 'leaves/request', element: <MyLeaveRequest /> },
+      { path: 'leaves/apply', element: <MyLeaveRequest /> },
+      { path: 'leaves/apply-for-others', element: <ApplyLeaveForOthers /> },
       { path: 'leaves/review', element: <PendingRequest /> },
       { path: 'notices', element: <ListNotices /> },
       { path: 'notices/add', element: <AddNotice /> },

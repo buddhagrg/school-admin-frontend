@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material';
 import { StatCardProps } from '@/types';
 
-export const StatCard: FC<StatCardProps> = ({ title, stat, icon, bgColor, sideIcon }) => {
+export const StatCard: FC<StatCardProps> = ({ title, stat, icon, bgColor }) => {
   return (
     <Card sx={{ width: '100%', height: '100%' }}>
       <CardContent>
@@ -12,12 +12,9 @@ export const StatCard: FC<StatCardProps> = ({ title, stat, icon, bgColor, sideIc
             <Typography component='div' color='text.secondary' gutterBottom>
               {title}
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Typography variant='h5' fontWeight='bold'>
-                {stat}
-              </Typography>
-              {sideIcon}
-            </Box>
+            <Typography variant='h5' fontWeight='bold'>
+              {stat}
+            </Typography>
           </Box>
         </Box>
       </CardContent>

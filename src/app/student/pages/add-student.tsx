@@ -40,12 +40,12 @@ export const AddStudent = () => {
 
   const onSave = async (data: StudentProps) => {
     try {
-      const { dob, admissionDate, ...rest } = data;
+      const { dob, joinDate, ...rest } = data;
 
       const payload = {
         ...rest,
         dob: getFormattedDate(dob, API_DATE_FORMAT),
-        admissionDate: getFormattedDate(admissionDate, API_DATE_FORMAT)
+        joinDate: getFormattedDate(joinDate, API_DATE_FORMAT)
       };
 
       const result = await addStudent(payload).unwrap();

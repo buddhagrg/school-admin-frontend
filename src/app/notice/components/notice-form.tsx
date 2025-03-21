@@ -106,13 +106,15 @@ export const NoticeForm: FC<Props> = ({
                 notched
               >
                 <MenuItem value='' disabled>
-                  <em>None</em>
+                  Select None
                 </MenuItem>
-                {noticeStatusList.map(({ name, id }) => (
-                  <MenuItem key={id} value={id}>
-                    {name}
-                  </MenuItem>
-                ))}
+                {noticeStatusList
+                  .filter((sts) => ['DRAFTED', 'REVIEW_REQUESTED'].includes(sts.id))
+                  .map(({ name, id }) => (
+                    <MenuItem key={id} value={id}>
+                      {name}
+                    </MenuItem>
+                  ))}
               </Select>
               <FormHelperText>{error?.message}</FormHelperText>
             </>
@@ -201,7 +203,7 @@ export const NoticeForm: FC<Props> = ({
                         notched
                       >
                         <MenuItem value='' disabled>
-                          <em>None</em>
+                          Select None
                         </MenuItem>
                         {primaryDependents.map(({ id, name }) => (
                           <MenuItem key={id} value={id}>

@@ -47,7 +47,7 @@ export const EditStudent = () => {
         keyof StudentProps,
         StudentDetailValue<StudentProps>
       ][]) {
-        if (['admissionDate', 'dob'].includes(key)) {
+        if (['joinDate', 'dob'].includes(key)) {
           setValue(key, typeof value === 'string' ? parseISO(value) : value);
         } else {
           setValue(key, value);

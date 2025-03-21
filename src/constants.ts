@@ -1,21 +1,25 @@
 import { NameIdType } from './types';
 
-export const noticeStatusList: NameIdType[] = [
-  { id: 1, name: 'Draft' },
-  { id: 2, name: 'Submit for Approval' }
+export const noticeStatusList: NameIdType<string>[] = [
+  { id: 'DRAFTED', name: 'Draft' },
+  { id: 'REVIEW_REQUESTED', name: 'Submit for Approval' },
+  { id: 'DELETE_REQUESTED', name: 'Submit for deletion' },
+  { id: 'REJECTED', name: 'Reject' },
+  { id: 'APPROVED', name: 'Approve' },
+  { id: 'DELETED', name: 'Delete' }
 ];
 
 export const genders: NameIdType<string>[] = [
-  { name: 'Male', id: 'Male' },
-  { name: 'Female', id: 'Female' },
-  { name: 'Other', id: 'Other' }
+  { id: 'MALE', name: 'Male' },
+  { id: 'FEMALE', name: 'Female' },
+  { id: 'OTHER', name: 'Other' }
 ];
 
 export const maritalStatusList: NameIdType<string>[] = [
-  { name: 'Single', id: 'Single' },
-  { name: 'Married', id: 'Married' },
-  { name: 'Divorced', id: 'Divorced' },
-  { name: 'Widowed', id: 'Widowed' }
+  { id: 'SINGLE', name: 'Single' },
+  { id: 'MARRIED', name: 'Married' },
+  { id: 'DIVORCED', name: 'Divorced' },
+  { id: 'WIDOWED', name: 'Widowed' }
 ];
 
 export const menuItemTexts: Record<string, string> = {
@@ -31,8 +35,8 @@ export const menuItemTexts: Record<string, string> = {
 };
 
 export const attendanceStatus: NameIdType<string>[] = [
-  { id: 'PR', name: 'Present' },
-  { id: 'AB', name: 'Absent' },
-  { id: 'EL', name: 'Early Leave' },
-  { id: 'LP', name: 'Late Present' }
+  { id: 'PRESENT', name: 'Present' },
+  { id: 'ABSENT', name: 'Absent' },
+  { id: 'EARLY_LEAVE', name: 'Early Leave' },
+  { id: 'LATE_PRESENT', name: 'Late Present' }
 ];

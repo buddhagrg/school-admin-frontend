@@ -1,7 +1,7 @@
 import { api, Tag } from '@/api';
 import {
   LeavePolicyData,
-  LeaveRequestApi,
+  LeaveRequestForm,
   PolicyDetail,
   PolicyUserData,
   AddUserToPolicy,
@@ -9,10 +9,12 @@ import {
   EligiblePolicyUsers,
   PolicyStatus,
   LeaveRequestHistory,
-  LeaveRequestApiWithId,
+  LeaveRequestFormWithId,
   MyLeavePolicyData,
   PendingLeaveRequestHistory,
-  LeaveStatus
+  LeaveStatusProps,
+  UserDetailWithLeavePolicies,
+  LeaveRequestForOther
 } from './types';
 import { ApiResponseSuccessMessage } from '@/types';
 
@@ -84,9 +86,8 @@ const leaveApi = api.injectEndpoints({
     }),
     removeUserFromPolicy: builder.mutation<ApiResponseSuccessMessage, RemoveUserFromPolicy>({
       query: ({ userId, policyId }) => ({
-        url: `/leaves/policies/${policyId}/users`,
-        method: 'DELETE',
-        body: { userId }
+        url: `/leaves/policies/${policyId}/users/${userId}`,
+        method: 'DELETE'
       }),
       invalidatesTags: (_result, error, { userId }) =>
         error
@@ -111,7 +112,7 @@ const leaveApi = api.injectEndpoints({
           return { type: Tag.LEAVE_HISTORY, id };
         }) || [{ type: Tag.LEAVE_HISTORY }]
     }),
-    applyLeaveRequest: builder.mutation<ApiResponseSuccessMessage, LeaveRequestApi>({
+    applyLeaveRequest: builder.mutation<ApiResponseSuccessMessage, LeaveRequestForm>({
       query: (payload) => ({
         url: `/leaves/requests`,
         method: 'POST',
@@ -119,7 +120,7 @@ const leaveApi = api.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : [Tag.LEAVE_HISTORY, Tag.PENDING_LEAVES])
     }),
-    updateLeaveRequest: builder.mutation<ApiResponseSuccessMessage, LeaveRequestApiWithId>({
+    updateLeaveRequest: builder.mutation<ApiResponseSuccessMessage, LeaveRequestFormWithId>({
       query: ({ id, ...restPayload }) => ({
         url: `/leaves/requests/${id}`,
         method: 'PUT',
@@ -153,7 +154,7 @@ const leaveApi = api.injectEndpoints({
           return { type: Tag.PENDING_LEAVES, id };
         }) || [{ type: Tag.PENDING_LEAVES }]
     }),
-    handlePendingLeaveStatus: builder.mutation<ApiResponseSuccessMessage, LeaveStatus>({
+    handlePendingLeaveStatus: builder.mutation<ApiResponseSuccessMessage, LeaveStatusProps>({
       query: ({ id, status }) => ({
         url: `/leaves/requests/pending/${id}/status`,
         method: 'PATCH',
@@ -166,6 +167,16 @@ const leaveApi = api.injectEndpoints({
               { type: Tag.LEAVE_HISTORY, id },
               { type: Tag.PENDING_LEAVES, id }
             ]
+    }),
+    getUserDetailWithLeavePolicies: builder.query<UserDetailWithLeavePolicies, number>({
+      query: (id) => `/leaves/policies/users/${id}`
+    }),
+    applyLeaveForOther: builder.mutation<ApiResponseSuccessMessage, LeaveRequestForOther>({
+      query: ({ userId, ...payload }) => ({
+        url: `/leaves/requests/${userId}`,
+        method: 'POST',
+        body: payload
+      })
     })
   })
 });
@@ -185,5 +196,7 @@ export const {
   useUpdateLeaveRequestMutation,
   useDeleteLeaveRequestMutation,
   useGetMyLeavePoliciesQuery,
-  useHandlePendingLeaveStatusMutation
+  useHandlePendingLeaveStatusMutation,
+  useLazyGetUserDetailWithLeavePoliciesQuery,
+  useApplyLeaveForOtherMutation
 } = leaveApi;

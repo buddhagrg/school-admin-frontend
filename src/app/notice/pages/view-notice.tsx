@@ -29,7 +29,7 @@ export const ViewNotice = () => {
   };
   const onSave = async () => {
     try {
-      const result = await deleteNotice({ id: Number(id), status: 3 }).unwrap();
+      const result = await deleteNotice({ id: Number(id), status: 'DELETE_REQUEST' }).unwrap();
       toast.info(result.message);
       toggleDeleteConfirmationModal();
       navigate(`${appBase}/notices`);

@@ -9,7 +9,7 @@ export const studentFormInitialState: StudentProps = {
   class: '',
   section: '',
   roll: '',
-  admissionDate: new Date(),
+  joinDate: new Date(),
   fatherName: '',
   fatherPhone: '',
   motherName: '',

@@ -126,13 +126,16 @@ export const ListAttendance: React.FC<ListAttendanceProps> = ({
       density: 'compact',
       showGlobalFilter: true
     },
+
     renderRowActions: ({ row }) => {
+      const { attendanceStatusCode } = row.original;
       return (
         <IconButton
           title='Update status'
           aria-label='update'
           color='primary'
           onClick={() => onEditBtn(row.original)}
+          disabled={attendanceStatusCode === 'ON_LEAVE'}
         >
           <Edit />
         </IconButton>

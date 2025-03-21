@@ -14,7 +14,7 @@ export const AcademicInfoSchema = z.object({
   class: z.string().min(1, 'Class is required').or(z.number().min(1, 'Class is required')),
   section: stringNumberRefinement('Section is required'),
   roll: z.string().min(1, 'Roll is required'),
-  admissionDate: z.union([z.date(), z.string()])
+  joinDate: z.union([z.date(), z.string()])
 });
 
 export const AddressInfoSchema = z.object({

@@ -73,8 +73,8 @@ export const TakeStaffAttendanceFilter: FC<TakeStaffAttendanceFilterType> = ({
                   value={value}
                   onChange={onChange}
                 >
-                  <MenuItem value=''>
-                    <i>Select None</i>
+                  <MenuItem value='' disabled>
+                    Select None
                   </MenuItem>
                   {rolesData?.roles
                     .filter((role) => ![1, 2, 4, 5].includes(role.staticRoleId))

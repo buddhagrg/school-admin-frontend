@@ -15,38 +15,45 @@ export const ListAttendanceStat: React.FC<ListAttendanceStatProps> = ({ data }) 
     totalEarlyLeaveDays,
     totalLatePresentDays,
     totalOperatingDays,
-    totalPresentDays
+    totalPresentDays,
+    totalLeaveDays
   } = data;
   const stats = [
     {
       title: 'Operating Days',
       stat: totalOperatingDays,
       icon: <EventAvailable />,
-      bgColor: STATUS_ICON_BG_COLOR['CC']
+      bgColor: STATUS_ICON_BG_COLOR['COMMON']
     },
     {
       title: 'Absent',
       stat: totalAbsentDays,
-      icon: STATUS_ICONS['AB'],
-      bgColor: STATUS_ICON_BG_COLOR['AB']
+      icon: STATUS_ICONS['ABSENT'],
+      bgColor: STATUS_ICON_BG_COLOR['ABSENT']
     },
     {
       title: 'Present',
       stat: totalPresentDays,
-      icon: STATUS_ICONS['PR'],
-      bgColor: STATUS_ICON_BG_COLOR['PR']
+      icon: STATUS_ICONS['PRESENT'],
+      bgColor: STATUS_ICON_BG_COLOR['PRESENT']
     },
     {
       title: 'Early Leave',
       stat: totalEarlyLeaveDays,
-      icon: STATUS_ICONS['EL'],
-      bgColor: STATUS_ICON_BG_COLOR['EL']
+      icon: STATUS_ICONS['EARLY_LEAVE'],
+      bgColor: STATUS_ICON_BG_COLOR['EARLY_LEAVE']
     },
     {
       title: 'Late Present',
       stat: totalLatePresentDays,
-      icon: STATUS_ICONS['LP'],
-      bgColor: STATUS_ICON_BG_COLOR['LP']
+      icon: STATUS_ICONS['LATE_PRESENT'],
+      bgColor: STATUS_ICON_BG_COLOR['LATE_PRESENT']
+    },
+    {
+      title: 'On Leave',
+      stat: totalLeaveDays,
+      icon: STATUS_ICONS['ON_LEAVE'],
+      bgColor: STATUS_ICON_BG_COLOR['ON_LEAVE']
     }
   ];
 

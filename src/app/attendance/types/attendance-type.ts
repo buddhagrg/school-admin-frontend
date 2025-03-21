@@ -7,10 +7,12 @@ import {
   GetStudentsAttendanceFilterSchema
 } from './attendance-schema';
 import { NameIdType } from '@/types';
+import { attendanceStatus } from '@/constants';
 
+export type AttendanceStatusType = (typeof attendanceStatus)[number]['id'];
 export type UserAttendance = {
   userId: number;
-  status: string | null;
+  status: AttendanceStatusType;
   remarks?: string | null;
 };
 export type UserAttendanceProps = {
@@ -22,7 +24,7 @@ export type UserAttendanceCommonDetail = {
   userId: number;
   name: string;
   attendanceStatus: string | null;
-  attendanceStatusCode: string | null;
+  attendanceStatusCode: AttendanceStatusType;
   remarks: string | null;
   attendanceDate: Date | string | null;
   lastUpdatedDate: Date | string | null;
@@ -33,6 +35,7 @@ export type AttendanceCount = {
   totalAbsentDays: number;
   totalEarlyLeaveDays: number;
   totalLatePresentDays: number;
+  totalLeaveDays: number;
 };
 export type StudentsForAttendanceData = {
   students: UserAttendanceCommonDetail[];
@@ -55,5 +58,5 @@ export type AttendanceStatusData = {
 };
 export type AttendanceFormPropsWithId = z.infer<typeof AttendanceFormSchema>;
 export type UserSetting = 'staff' | 'students';
-export type AttendanceStatus = 'PR' | 'AB' | 'LP' | 'EL';
-export type AttendanceStatusColor = 'success' | 'error' | 'warning' | 'primary';
+export type AttendanceStatus = 'PRESENT' | 'ABSENT' | 'LATE_PRESENT' | 'EARLY_LEAVE' | 'ON_LEAVE';
+export type AttendanceStatusColor = 'success' | 'error' | 'warning' | 'primary' | 'info';

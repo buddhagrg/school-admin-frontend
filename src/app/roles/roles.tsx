@@ -36,7 +36,12 @@ const ViewRoles = () => {
   }, [permissionsData?.permissions, dispatch, initializePermissions]);
   useEffect(() => {
     if (rolesData) {
-      dispatch({ type: 'SET_ROLES', payload: rolesData.roles ?? [] });
+      dispatch({
+        type: 'SET_ROLES',
+        payload: rolesData?.roles
+          ? rolesData.roles?.filter((role) => role.staticRoleId !== 2) || []
+          : []
+      });
       dispatch({ type: 'SET_ROLE_TAB', payload: 0 });
     }
   }, [rolesData, dispatch]);

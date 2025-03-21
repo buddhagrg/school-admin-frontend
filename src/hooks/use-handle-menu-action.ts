@@ -27,10 +27,11 @@ export const useHandleMenuAction = () => {
         resendVerificationEmail({ userId: selectedId }).unwrap(),
       RESEND_PWD_LINK_EMAIL_TO_USER: () => resendPwdSetupLink({ userId: selectedId }).unwrap(),
       RESET_USER_PWD: () => resetPwd({ userId: selectedId }).unwrap(),
-      APPROVE_NOTICE: () => updateNoticeStatus({ id: selectedId, status: 5 }).unwrap(),
-      REJECT_NOTICE: () => updateNoticeStatus({ id: selectedId, status: 4 }).unwrap(),
-      DELETE_NOTICE: () => updateNoticeStatus({ id: selectedId, status: 6 }).unwrap(),
-      DELETE_NOTICE_BY_SELF: () => updateNoticeStatus({ id: selectedId, status: 3 }).unwrap()
+      APPROVE_NOTICE: () => updateNoticeStatus({ id: selectedId, status: 'APPROVED' }).unwrap(),
+      REJECT_NOTICE: () => updateNoticeStatus({ id: selectedId, status: 'REJECTED' }).unwrap(),
+      DELETE_NOTICE: () => updateNoticeStatus({ id: selectedId, status: 'DELETED' }).unwrap(),
+      DELETE_NOTICE_BY_SELF: () =>
+        updateNoticeStatus({ id: selectedId, status: 'DELETE_REQUEST' }).unwrap()
     };
 
     if (actionHandlers[menuItemValue]) {

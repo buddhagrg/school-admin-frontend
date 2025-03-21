@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { LeaveRequestApiSchema, LeaveRequestFormSchema, PolicyUsersSchema } from './leave-schema';
-import { User } from '@/app/auth/types';
+import { LeaveRequestFormSchema, PolicyUsersSchema } from './leave-schema';
+import { NameIdType } from '@/types';
+import { UserAccountBasic } from '@/app/manage-users/types';
 
 export type LeavePolicy = {
   id: number;
@@ -50,8 +51,7 @@ export type PolicyDetail = {
 export type PolicyUsers = z.infer<typeof PolicyUsersSchema>;
 
 export type LeaveRequestForm = z.infer<typeof LeaveRequestFormSchema>;
-export type LeaveRequestApi = z.infer<typeof LeaveRequestApiSchema>;
-export type LeaveRequestApiWithId = LeaveRequestApi & { id: number | undefined };
+export type LeaveRequestFormWithId = LeaveRequestForm & { id: number | undefined };
 export type LeaveRequestHistory = {
   leaveHistory: MyLeaveRequestDetail[];
 };
@@ -63,7 +63,7 @@ export type LeavePolicyData = {
 };
 
 export type EligiblePolicyUsers = {
-  users: Omit<User, 'lastLogin'>[];
+  users: NameIdType[];
 };
 
 export type PolicyUserData = {
@@ -85,11 +85,27 @@ export type PolicyStatus = {
   status: boolean;
 };
 
-export type LeaveStatus = {
+export type LeaveStatusProps = {
   id: number;
-  status: number;
+  status: LeaveStatusType;
 };
 
 export type MyLeavePolicyData = {
   leavePolicies: MyLeavePolicy[];
 };
+
+export type LeaveHistory = {
+  id: number;
+  name: string;
+  dateFrom: string;
+  dateTo: string;
+  status: string;
+  days: number;
+};
+export type UserDetailWithLeavePolicies = {
+  leaveHistory: LeaveHistory[];
+  leavePolicies: LeavePolicy[];
+  user: Pick<UserAccountBasic, 'id' | 'name' | 'role' | 'email'>;
+};
+export type LeaveRequestForOther = LeaveRequestForm & { userId: number };
+export type LeaveStatusType = 'APPROVED' | 'CANCELLED' | 'REVIEW_REQUEST';
