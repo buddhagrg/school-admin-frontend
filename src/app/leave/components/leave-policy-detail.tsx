@@ -4,6 +4,8 @@ import { Box, Button, Grid2, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 import { DialogModal } from '@/components/dialog-modal';
 import { LeaveDetail } from './leave-detail';
@@ -12,6 +14,7 @@ import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 import { LeaveRequestForm, LeaveRequestFormSchema } from '../types';
 import { useApplyLeaveRequestMutation, useGetMyLeavePoliciesQuery } from '../leave-api';
 import { ERROR_MESSAGE } from '@/components/errors';
+import { getErrorMsg } from '@/utils/helpers/get-error-message';
 
 export const LeavePolicyDetail = () => {
   const [applyLeaveRequest, { isLoading: isApplyingLeave }] = useApplyLeaveRequestMutation();
@@ -49,7 +52,7 @@ export const LeavePolicyDetail = () => {
       toast.success(result.message);
       closeModal();
     } catch (error) {
-      console.log(error);
+      toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }
   };
 
