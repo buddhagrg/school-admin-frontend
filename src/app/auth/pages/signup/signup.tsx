@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -24,7 +23,6 @@ import { SchoolProfileProps, SchoolProfileSchema } from '../../types';
 import { AdminStaffProps, AdminStaffSchema } from '@/app/staff/types';
 import { useSetupAdminProfileMutation, useSetupSchoolProfileMutation } from '../../auth-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { HomeBar } from '@/components/home-bar';
 import { staffInitialStateForAdminProfile } from '@/app/staff/components/staff-initial-state';
 
 const steps = ['School Profile', 'Admin Profile'];
@@ -116,22 +114,6 @@ export const SignUp = () => {
 
   return (
     <>
-      <HomeBar
-        actions={
-          <Button
-            component={Link}
-            to='/auth/login'
-            sx={{
-              textTransform: 'none',
-              fontSize: 16,
-              color: 'inherit',
-              border: '1px solid lightgray'
-            }}
-          >
-            Sign In
-          </Button>
-        }
-      />
       <Container sx={{ p: 2 }}>
         <Alert severity='info' sx={{ my: 2 }}>
           You're almost there! Just complete these two quick steps to join us.

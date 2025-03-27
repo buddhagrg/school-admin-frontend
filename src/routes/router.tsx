@@ -15,9 +15,7 @@ import { AddNotice, EditNotice, ListNotices, ManageNotices, ViewNotice } from '@
 import { AddStaff, EditStaff, ViewStaff } from '@/app/staff/pages';
 import { Error, NotFound } from '@/components/errors';
 import { MainLayout } from '@/components/layout';
-import { Home } from '@/app/landing';
 import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
-import { SignUp } from '@/app/auth/pages/signup/signup';
 import { Permissions } from '@/app/permissions/permissions';
 import { SuperAdminDashboard } from '@/app/super-admin-dashboard';
 import { EditSchool, Schools } from '@/app/schools/pages';
@@ -36,18 +34,9 @@ import { TakeAttendance, ViewAttendance } from '@/app/attendance/pages';
 
 export const routes = [
   {
-    path: '/',
-    element: <Home />
-  },
-  {
     path: '/auth/login',
     element: <Login />,
     errorElement: <Error message='Error loading login page' />
-  },
-  {
-    path: '/auth/signup',
-    element: <SignUp />,
-    errorElement: <Error message='Error loading signup page' />
   },
   {
     path: '/auth/setup-password/:token',
@@ -55,7 +44,7 @@ export const routes = [
     errorElement: <Error message='Error loading password setup page' />
   },
   {
-    path: '/app',
+    path: '',
     element: (
       <ProtectedRoute>
         <AppRoot />

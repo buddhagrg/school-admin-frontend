@@ -30,5 +30,12 @@ export const components = {
         }
       }
     }
+  },
+  MuiFormLabel: {
+    styleOverrides: {
+      root: {
+        color: 'black'
+      }
+    }
   }
 };

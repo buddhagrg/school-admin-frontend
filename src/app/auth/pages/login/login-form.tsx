@@ -3,11 +3,10 @@ import {
   Button,
   FormControl,
   FormHelperText,
+  FormLabel,
   IconButton,
   InputAdornment,
-  InputLabel,
   OutlinedInput,
-  Stack,
   TextField
 } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
@@ -34,30 +33,26 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit, methods, isFetching, a
 
   return (
     <form onSubmit={onSubmit}>
-      <FormControl fullWidth size='small' sx={{ mt: 3 }} variant='outlined'>
+      <FormControl fullWidth size='small' variant='outlined'>
+        <FormLabel sx={{ mb: '2px' }}>Username</FormLabel>
         <TextField
-          variant='outlined'
           size='small'
-          label='Username'
           type='text'
-          placeholder='Username'
+          placeholder='Your username'
           fullWidth
-          slotProps={{ inputLabel: { shrink: true } }}
           {...register('username')}
           error={!!errors.username}
           helperText={errors.username?.message}
         />
       </FormControl>
 
-      <FormControl fullWidth size='small' sx={{ my: 4 }} variant='outlined'>
-        <InputLabel shrink>Password</InputLabel>
+      <FormControl fullWidth size='small' sx={{ my: 2 }} variant='outlined'>
+        <FormLabel sx={{ mb: '2px' }}>Password</FormLabel>
         <OutlinedInput
           type={showPassword ? 'text' : 'password'}
-          label='Password'
-          placeholder='Password'
+          placeholder='Your password'
           {...register('password')}
           error={!!errors.password}
-          notched
           endAdornment={
             <InputAdornment position='end'>
               <IconButton
@@ -73,17 +68,9 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit, methods, isFetching, a
         <FormHelperText error>{errors?.password?.message}</FormHelperText>
       </FormControl>
       <ApiError messages={apiErrors} />
-      <Stack>
-        <Button
-          loading={isFetching}
-          loadingPosition='start'
-          type='submit'
-          size='small'
-          variant='contained'
-        >
-          <span>Sign In</span>
-        </Button>
-      </Stack>
+      <Button loading={isFetching} loadingPosition='start' type='submit' variant='contained'>
+        <span>Sign In</span>
+      </Button>
     </form>
   );
 };
