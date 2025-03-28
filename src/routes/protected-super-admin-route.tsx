@@ -8,7 +8,7 @@ export const ProtectedSuperAdminRoute = ({ children }: { children: ReactNode }) 
   const userRoleId = useSelector(getUserRoleId);
 
   if (!isAuthenticated) {
-    return <Navigate to={`/auth/login`} replace />;
+    return <Navigate to={`/login`} replace />;
   }
 
   if (userRoleId !== 1) {

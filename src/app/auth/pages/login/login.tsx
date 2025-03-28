@@ -47,7 +47,7 @@ export const Login = () => {
       if (user) {
         dispatch(setUser({ user }));
         const redirectPath = user.appBase;
-        navigate(redirectPath);
+        navigate(redirectPath ? redirectPath : '/');
       }
     } catch (error) {
       const apiErrors = formatApiError(error as FetchBaseQueryError | SerializedError);

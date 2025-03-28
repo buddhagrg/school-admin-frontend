@@ -32,7 +32,7 @@ export const SetupPassword = () => {
       const payload = { ...data, token };
       const result = await setupNewPassword(payload).unwrap();
       toast.info(result.message);
-      navigate('/auth/login');
+      navigate('/login');
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

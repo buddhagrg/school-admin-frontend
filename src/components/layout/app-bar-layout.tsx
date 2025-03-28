@@ -59,7 +59,7 @@ export const AppBarLayout: FC<AppBarLayoutProps> = ({
     try {
       await logout().unwrap();
       dispatch(resetUser());
-      navigate('/auth/login');
+      navigate('/login');
     } catch (error) {
       toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
     }

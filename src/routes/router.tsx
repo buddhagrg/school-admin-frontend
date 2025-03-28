@@ -34,12 +34,12 @@ import { TakeAttendance, ViewAttendance } from '@/app/attendance/pages';
 
 export const routes = [
   {
-    path: '/auth/login',
+    path: '/login',
     element: <Login />,
     errorElement: <Error message='Error loading login page' />
   },
   {
-    path: '/auth/setup-password/:token',
+    path: '/setup-password/:token',
     element: <SetupPassword />,
     errorElement: <Error message='Error loading password setup page' />
   },
