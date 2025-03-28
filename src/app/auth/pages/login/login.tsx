@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,6 @@ import { LoginForm } from './login-form';
 import { formatApiError } from '@/utils/helpers/format-api-error';
 import { useLoginMutation } from '../../auth-api';
 import { setUser } from '../../auth-slice';
-import { DemoRoles } from './demo-roles';
 import { BackToMainWebsite } from './back-to-main-website';
 
 const initState: LoginRequest = {
@@ -22,24 +21,12 @@ const initState: LoginRequest = {
 export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
   const methods = useForm<LoginRequest>({
     resolver: zodResolver(LoginSchema),
     defaultValues: initState
   });
   const [apiErrors, setApiErrors] = useState<string[]>([]);
   const [login, { isLoading }] = useLoginMutation();
-
-  const updateState = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = event.target;
-    setIsChecked(!isChecked);
-    if (checked) {
-      methods.setValue('username', 'admin@school-admin.xyz');
-      methods.setValue('password', 'iamadmin');
-    } else {
-      methods.reset(initState);
-    }
-  };
 
   const onSubmit = async (data: LoginRequest) => {
     try {
@@ -73,7 +60,6 @@ export const Login = () => {
         <Typography component='div' variant='h5' sx={{ fontWeight: 600 }}>
           Sign In to School Admin
         </Typography>
-        <DemoRoles toggleCheckBox={updateState} isChecked={isChecked} />
         <Box sx={{ mt: 5 }} />
         <LoginForm
           methods={methods}
