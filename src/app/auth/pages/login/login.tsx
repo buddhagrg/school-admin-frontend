@@ -14,6 +14,7 @@ import { useLoginMutation } from '../../auth-api';
 import { setUser } from '../../auth-slice';
 import { DemoRoles } from './demo-roles';
 import { BackToMainWebsite } from './back-to-main-website';
+import { DemoInfo } from './demo-info';
 
 const initState: LoginRequest = {
   username: '',
@@ -81,6 +82,8 @@ export const Login = () => {
           isFetching={isLoading}
           apiErrors={apiErrors}
         />
+        <Box sx={{ mt: 2 }} />
+        <DemoInfo />
       </Box>
     </Container>
   );
