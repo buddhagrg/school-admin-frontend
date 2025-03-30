@@ -23,7 +23,7 @@ export const ApiError = ({ messages }: { messages: string[] }) => {
       </Box>
       <List dense disablePadding sx={{ listStyleType: 'disc', marginLeft: 3 }}>
         {messages.map((msg) => (
-          <ListItem disablePadding sx={{ display: 'list-item' }}>
+          <ListItem disablePadding sx={{ display: 'list-item' }} key={msg}>
             <ListItemText primary={msg} />
           </ListItem>
         ))}
