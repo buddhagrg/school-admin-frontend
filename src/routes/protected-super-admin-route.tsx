@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { getUserRoleId, isUserAuthenticated } from '@/app/auth/auth-slice';
+import { getUserRoleId, isUserAuthenticated } from '@/features/auth/auth-slice';
 
 export const ProtectedSuperAdminRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(isUserAuthenticated);
@@ -11,7 +11,7 @@ export const ProtectedSuperAdminRoute = ({ children }: { children: ReactNode }) 
     return <Navigate to={`/login`} replace />;
   }
 
-  if (userRoleId !== 1) {
+  if (userRoleId !== 'SYSTEM_ADMIN') {
     return <Navigate to='/' replace />;
   }
 

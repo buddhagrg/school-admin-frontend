@@ -7,11 +7,11 @@ export const components = {
         },
         '&.Mui-disabled': {
           cursor: 'not-allowed !important',
-          pointerEvents: 'all !important'
+          pointerEvents: 'none'
         },
         '&.Mui-disabled:hover': {
           cursor: 'not-allowed !important',
-          pointerEvents: 'all !important'
+          pointerEvents: 'none'
         }
       }
     }
@@ -19,6 +19,9 @@ export const components = {
   MuiFilledInput: {
     styleOverrides: {
       root: {
+        '& input::placeholder': {
+          fontSize: '14px'
+        },
         backgroundColor: 'white',
         borderRadius: '8px',
         border: '1px solid #ccc',
@@ -31,10 +34,24 @@ export const components = {
       }
     }
   },
+  MuiInputLabel: {
+    styleOverrides: {
+      asterisk: {
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: '20px'
+      }
+    }
+  },
   MuiFormLabel: {
     styleOverrides: {
       root: {
-        color: 'black'
+        '&': {
+          color: '#272727',
+          fontWeight: 500,
+          marginBottom: '3px',
+          fontSize: '15px'
+        }
       }
     }
   }

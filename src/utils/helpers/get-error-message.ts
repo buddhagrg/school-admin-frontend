@@ -1,6 +1,6 @@
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { ApiResponseSuccessMessage } from '@/types';
+import type { ApiResponseSuccessMessage } from '@/shared/types';
 
 const unknownError: string = 'Unknown Error';
 
@@ -12,6 +12,7 @@ type Detail = {
 type ErrorResponse = {
   message: string;
   detail?: Detail[];
+  httpStatusCode?: number;
 };
 
 export const getErrorMsg = (
@@ -24,11 +25,12 @@ export const getErrorMsg = (
   if ('status' in error) {
     const fetchError = error as FetchBaseQueryError;
 
-    const apiError = fetchError.data as { error: string; detail: Detail[] };
+    const apiError = fetchError.data as { error: string; detail: Detail[]; httpStatusCode: number };
+    const httpStatusCode = fetchError.status as number;
 
     if (apiError?.error) {
       const { error, detail } = apiError;
-      return { message: error, detail };
+      return { message: error, detail, httpStatusCode };
     }
 
     const errorMsg =

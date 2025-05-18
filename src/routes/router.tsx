@@ -3,34 +3,27 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ProtectedRoute } from './protected-route';
 import { AppRoot } from './app-root';
-import { Login, SetupPassword } from '@/app/auth/pages';
-import {
-  ApplyLeaveForOthers,
-  LeaveDefine,
-  MyLeaveRequest,
-  PendingRequest
-} from '@/app/leave/pages';
-import { AddStudent, EditStudent, ViewStudent } from '@/app/student/pages';
-import { AddNotice, EditNotice, ListNotices, ManageNotices, ViewNotice } from '@/app/notice/pages';
-import { AddStaff, EditStaff, ViewStaff } from '@/app/staff/pages';
-import { Error, NotFound } from '@/components/errors';
-import { MainLayout } from '@/components/layout';
+import { Login, ResetPassword, SetupPassword } from '@/features/auth/pages';
+import { Error, MainLayout, PageNotFound } from '@/shared/components';
+
 import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
-import { Permissions } from '@/app/permissions/permissions';
-import { SuperAdminDashboard } from '@/app/super-admin-dashboard';
-import { EditSchool, Schools } from '@/app/schools/pages';
-import { ClassSection, ClassTeacher } from '@/app/class/pages';
-import { ManageUsers } from '@/app/manage-users/manage-users';
-import { Dashboard } from '@/app/dashboard/dashboard';
-import { Account } from '@/app/account/account';
-import { Departments, EditDepartment } from '@/app/department/pages';
-import { AcademicYears } from '@/app/academic-years/academic-years';
-import { Roles } from '@/app/roles/roles';
-import { LevelsPeriods } from '@/app/levels-periods/levels-periods';
-import { LevelsClasses } from '@/app/levels-classes/levels-classes';
-import { PeriodsDates } from '@/app/periods-dates/periods-dates';
-import { FiscalYears } from '@/app/fiscal-years/fiscal-years';
-import { TakeAttendance, ViewAttendance } from '@/app/attendance/pages';
+import { Permissions } from '@/features/permissions/permissions';
+import { SuperAdminDashboard } from '@/features/super-admin-dashboard';
+import { EditSchool, Schools } from '@/features/schools/pages';
+import { ClassSection, ClassTeacher } from '@/features/class/pages';
+import { Dashboard } from '@/features/dashboard/dashboard';
+import { Account } from '@/features/account/account';
+import { AcademicYears } from '@/features/academic-years/academic-years';
+import { Roles } from '@/features/roles/roles';
+import { LevelsPeriods } from '@/features/levels-periods/levels-periods';
+import { Students } from '@/features/students/students';
+import { Staff } from '@/features/staff/staff';
+import { Departments } from '@/features/departments/departments';
+import { LeavePolicies } from '@/features/leave-policies/leave-policies';
+import { RequestLeave } from '@/features/request-leave/request-leave';
+import { ReviewLeave } from '@/features/review-leave/review-leave';
+import { Notices } from '@/features/notices/notices';
+import { SchoolSetting } from '@/features/school-settings/school-setting';
 
 export const routes = [
   {
@@ -44,49 +37,36 @@ export const routes = [
     errorElement: <Error message='Error loading password setup page' />
   },
   {
+    path: '/password-reset',
+    element: <ResetPassword />,
+    errorElement: <Error message='Error loading password reset page' />
+  },
+  {
     path: '',
     element: (
       <ProtectedRoute>
         <AppRoot />
       </ProtectedRoute>
     ),
-    errorElement: (
-      <MainLayout>
-        <Error message='Error loading the app' />
-      </MainLayout>
-    ),
+    errorElement: <Error message='Error loading the app' />,
     children: [
       { index: true, element: <Dashboard /> },
+      { path: 'dashboard', element: <Dashboard /> },
       { path: 'account', element: <Account /> },
-      { path: 'academic/levels/periods', element: <LevelsPeriods /> },
-      { path: 'academic/levels/classes', element: <LevelsClasses /> },
-      { path: 'academic/periods/dates', element: <PeriodsDates /> },
-      { path: 'academic/years', element: <AcademicYears /> },
-      { path: 'classes/sections', element: <ClassSection /> },
-      { path: 'classes/teachers', element: <ClassTeacher /> },
-      { path: 'users/roles-permissions', element: <Roles /> },
-      { path: 'users/students/add', element: <AddStudent /> },
-      { path: 'users/students/:id', element: <ViewStudent /> },
-      { path: 'users/students/edit/:id', element: <EditStudent /> },
-      { path: 'users/staff/add', element: <AddStaff /> },
-      { path: 'users/staff/:id', element: <ViewStaff /> },
-      { path: 'users/staff/edit/:id', element: <EditStaff /> },
-      { path: 'users/manage', element: <ManageUsers /> },
-      { path: 'leaves/policies', element: <LeaveDefine /> },
-      { path: 'leaves/apply', element: <MyLeaveRequest /> },
-      { path: 'leaves/apply-for-others', element: <ApplyLeaveForOthers /> },
-      { path: 'leaves/review', element: <PendingRequest /> },
-      { path: 'notices', element: <ListNotices /> },
-      { path: 'notices/add', element: <AddNotice /> },
-      { path: 'notices/:id', element: <ViewNotice /> },
-      { path: 'notices/edit/:id', element: <EditNotice /> },
-      { path: 'notices/review', element: <ManageNotices /> },
-      { path: 'departments', element: <Departments /> },
-      { path: 'departments/edit/:id', element: <EditDepartment /> },
-      { path: 'fiscal-years', element: <FiscalYears /> },
-      { path: 'attendances', element: <ViewAttendance /> },
-      { path: 'attendances/record', element: <TakeAttendance /> },
-      { path: '*', element: <NotFound /> }
+      { path: 'academic-structure/levels-periods', element: <LevelsPeriods /> },
+      { path: 'academic-structure/years', element: <AcademicYears /> },
+      { path: 'academic-structure/departments', element: <Departments /> },
+      { path: 'class-management/classes-sections', element: <ClassSection /> },
+      { path: 'class-management/classes-teachers', element: <ClassTeacher /> },
+      { path: 'user-management/roles-permissions', element: <Roles /> },
+      { path: 'user-management/students', element: <Students /> },
+      { path: 'user-management/staff', element: <Staff /> },
+      { path: 'leave-management/policies', element: <LeavePolicies /> },
+      { path: 'leave-management/request', element: <RequestLeave /> },
+      { path: 'leave-management/review', element: <ReviewLeave /> },
+      { path: 'notices', element: <Notices /> },
+      { path: 'system-config/settings', element: <SchoolSetting /> },
+      { path: '*', element: <PageNotFound /> }
     ]
   },
   {
@@ -111,8 +91,8 @@ export const routes = [
   },
   {
     path: '*',
-    element: <NotFound />,
-    errorElement: <Error />
+    element: <PageNotFound />,
+    errorElement: <Error message='Error loading the page' />
   }
 ];
 
