@@ -128,7 +128,7 @@ export const StaffTable = () => {
       if (!data?.id) return;
 
       const userId = data.id;
-      const result = await handleAction({ menuAction, userId, entity: 'students' });
+      const result = await handleAction({ menuAction, userId, entity: 'staff' });
       toast.info(result?.message);
       dispatch({ type: 'TOGGLE_MODAL' });
     } catch (error) {
