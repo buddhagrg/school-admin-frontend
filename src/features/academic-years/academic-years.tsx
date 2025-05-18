@@ -10,8 +10,8 @@ export const AcademicYears = () => {
         <PageContentHeader title='Manage Academic Years' subtitle='Manage academic years' />
         <AddAcademicYearsBtn />
       </Box>
-      <Grid2 container spacing={3}>
-        <Grid2 size={{ xs: 12 }}>
+      <Grid2 container sx={{ mt: 3 }}>
+        <Grid2 size={12}>
           <ResponsiveBox>
             <DisplayAcademicYears />
           </ResponsiveBox>

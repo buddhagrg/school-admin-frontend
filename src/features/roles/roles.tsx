@@ -45,7 +45,7 @@ const ViewRoles = () => {
 
   return (
     <>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', mb: 2 }}>
         <PageContentHeader
           title='Roles & Permissions'
           subtitle='Manage user roles and their access permissions'

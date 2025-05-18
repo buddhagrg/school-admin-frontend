@@ -32,20 +32,23 @@ export const ListPolicies = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
-      <Box component={Paper} sx={{ p: 2, maxHeight: '70vh', overflowY: 'auto' }}>
-        <SearchText
-          titleText='Policy Types'
-          subtitleText='Manage different types of leave'
-          searchTerm={searchTerm}
-          handleChange={handleChange}
-          placeholder='Search Policies...'
-        />
-        <Box mt={3} />
-        {filteredPolicies?.map((policy) => (
-          <PolicyItem key={policy.id} data={policy} handleEdit={handleEdit} />
-        ))}
-      </Box>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Box component={Paper} sx={{ p: 2, maxHeight: '70vh', overflowY: 'auto' }}>
+          <SearchText
+            titleText='Policy Types'
+            subtitleText='Manage different types of leave'
+            searchTerm={searchTerm}
+            handleChange={handleChange}
+            placeholder='Search Policies...'
+          />
+          <Box mt={3} />
+          {filteredPolicies?.map((policy) => (
+            <PolicyItem key={policy.id} data={policy} handleEdit={handleEdit} />
+          ))}
+        </Box>
+      )}
 
       {selectedPolicy?.id && <UpdatePolicy closeModal={closeModal} />}
     </>

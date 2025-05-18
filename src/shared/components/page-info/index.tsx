@@ -9,7 +9,7 @@ type PageInfo = {
 };
 export const PageInfo: React.FC<PageInfo> = ({ title, subTitle }) => {
   return (
-    <Box sx={{ border: `1px solid ${blue[100]}`, mb: 3 }}>
+    <Box sx={{ border: `1px solid ${blue[100]}` }}>
       <Box sx={{ display: 'flex', bgcolor: blue[50], p: 2, color: blue[800] }}>
         <InfoOutlined fontSize='small' />
         <Box sx={{ ml: 2 }}>

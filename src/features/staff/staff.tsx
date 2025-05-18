@@ -17,7 +17,9 @@ export const Staff = () => {
         <PageContentHeader title='Staff' subtitle='Manage all staff members' />
         <StaffActionBtn mode='Add' icon={PersonAddAlt} />
       </Box>
-      <SetupInfo screen='staff' items={items} />
+      <Box sx={{ my: 2 }}>
+        <SetupInfo screen='staff' items={items} />
+      </Box>
       <StaffTable />
     </>
   );

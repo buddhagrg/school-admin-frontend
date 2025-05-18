@@ -14,7 +14,7 @@ export const LeavePolicies = () => {
 
   if (isLoading) {
     return (
-      <Paper>
+      <Paper sx={{ p: 3 }}>
         <Loader />
       </Paper>
     );

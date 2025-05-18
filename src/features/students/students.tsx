@@ -16,7 +16,9 @@ export const Students = () => {
         <PageContentHeader title='Students' subtitle='Manage student records and enrollment' />
         <StudentActionBtn mode='Add' icon={PersonAddAlt} />
       </Box>
-      <SetupInfo screen='students' items={items} />
+      <Box sx={{ my: 2 }}>
+        <SetupInfo screen='students' items={items} />
+      </Box>
       <StudentTable />
     </>
   );
