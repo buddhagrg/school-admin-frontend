@@ -17,19 +17,23 @@ export const ClassSection = () => {
   };
 
   return (
-    <ResponsiveBox>
+    <>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <PageContentHeader title='Class Management' subtitle='Manage classes and sections' />
         <AddBtn />
       </Box>
-      <SetupInfo screen='classes-sections' items={items} />
+      <Box sx={{ my: 2 }}>
+        <SetupInfo screen='classes-sections' items={items} />
+      </Box>
       <FilterClass levelId={level} handleChange={handleChange} />
       <Box mt={3} />
       <Grid2 container>
         <Grid2 size={{ xs: 12 }}>
-          <ListClassSection level={level} />
+          <ResponsiveBox>
+            <ListClassSection level={level} />
+          </ResponsiveBox>
         </Grid2>
       </Grid2>
-    </ResponsiveBox>
+    </>
   );
 };

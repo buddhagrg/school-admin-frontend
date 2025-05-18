@@ -26,7 +26,7 @@ export const SetupInfo: React.FC<SetupInfoProps> = ({ items, screen }) => {
   if (display !== 'true') return null;
 
   return (
-    <Box sx={{ border: `1px solid ${blue[100]}`, mb: 3 }}>
+    <Box sx={{ border: `1px solid ${blue[100]}` }}>
       <Box sx={{ display: 'flex', bgcolor: blue[50], p: 2, color: blue[800] }}>
         <InfoOutlined sx={{ fontSize: '17px', mt: 0.2 }} />
         <Box sx={{ ml: 2 }}>

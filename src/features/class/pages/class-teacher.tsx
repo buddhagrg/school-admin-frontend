@@ -10,18 +10,21 @@ const items: SetupItems[] = [
 ];
 export const ClassTeacher = () => {
   return (
-    <ResponsiveBox>
+    <>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <PageContentHeader title='Class Teachers' subtitle='Assign teachers to classes' />
         <AddClassTeacherBtn />
       </Box>
-      <Box mt={3} />
-      <SetupInfo screen='class-teacher' items={items} />
+      <Box sx={{ my: 2 }}>
+        <SetupInfo screen='class-teacher' items={items} />
+      </Box>
       <Grid2 container>
         <Grid2 size={{ xs: 12 }}>
-          <ListClassTeachers />
+          <ResponsiveBox>
+            <ListClassTeachers />
+          </ResponsiveBox>
         </Grid2>
       </Grid2>
-    </ResponsiveBox>
+    </>
   );
 };
