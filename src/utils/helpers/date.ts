@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 
 export const DATE_FORMAT = 'MMMM d, yyyy';
 export const DATE_TIME_FORMAT = "MMMM d, yyyy 'at' hh:mm:ss a";
@@ -10,5 +10,12 @@ export const getFormattedDate = (dt: Date | null | string, dtFormat: string): st
   if (!dt) return '';
 
   const formattedDt = format(dt, dtFormat);
+  return formattedDt;
+};
+
+export const getFormattedDateDistance = (dt: Date | null | string): string => {
+  if (!dt) return '';
+
+  const formattedDt = formatDistanceToNow(dt);
   return formattedDt;
 };

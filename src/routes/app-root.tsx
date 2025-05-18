@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { matchRoutes, Outlet, useLocation } from 'react-router-dom';
-import { MainLayout, PermissionErrorLayout } from '@/components/layout';
-import { usePermission } from '@/hooks';
-import { NotFound } from '@/components/errors';
+
+import { usePermission } from '@/shared/hooks';
 import { routes } from './router';
+import { MainLayout, PageNotFound, PermissionErrorLayout } from '@/shared/components';
 
 export const AppRoot = () => {
   const { hasData, doesRouteExist } = usePermission();
@@ -21,5 +21,5 @@ export const AppRoot = () => {
   if (!hasData) return <PermissionErrorLayout error='No permission data available' />;
 
   const isRouteAvailable = doesRouteExist(currentPath);
-  return <MainLayout>{isRouteAvailable ? <Outlet /> : <NotFound />}</MainLayout>;
+  return <MainLayout>{isRouteAvailable ? <Outlet /> : <PageNotFound />}</MainLayout>;
 };

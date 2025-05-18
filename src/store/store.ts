@@ -10,14 +10,15 @@ import {
   PURGE,
   REGISTER
 } from 'redux-persist';
-import { api } from '../api';
+
 import { appReducer } from './app-reducer';
 import { purgeMiddleware } from './middleware';
+import { baseApi } from '@/api';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: [api.reducerPath]
+  blacklist: [baseApi.reducerPath]
 };
 
 const persistedRootReducer = persistReducer(persistConfig, appReducer);
@@ -30,7 +31,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
       }
     })
-      .concat(api.middleware)
+      .concat(baseApi.middleware)
       .concat(purgeMiddleware)
 });
 

@@ -1,11 +1,27 @@
 :root {
-  --link-color: #03588a;
+  --link-color: #df5c52;
 }
 
 body {
   margin: 0 !important;
   padding: 0 !important;
   background-color: #f3f6f999;
+  /* font-family: Roobert,sans-serif; */
+}
+
+.link-text {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.link-text:hover,
+.link-text-inherit:hover {
+  text-decoration: underline;
+}
+
+.link-text-inherit {
+  color: inherit;
+  text-decoration: none;
 }
 
 .notice-title {
@@ -28,4 +44,8 @@ body {
 
 .section-title {
   color: var(--link-color);
+}
+
+.black-link {
+  color: #212121de !important;
 }
