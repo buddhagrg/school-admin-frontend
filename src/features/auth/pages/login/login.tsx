@@ -37,7 +37,7 @@ export const Login = () => {
     setIsChecked(!isChecked);
     if (checked) {
       methods.setValue('email', 'admin@school-admin.xyz');
-      methods.setValue('password', 'iamadmin');
+      methods.setValue('password', 'schooladmin');
     } else {
       methods.reset(initState);
     }
