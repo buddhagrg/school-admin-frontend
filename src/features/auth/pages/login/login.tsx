@@ -70,6 +70,7 @@ export const Login = () => {
       />
       <Box sx={{ mt: 5 }} />
       <LoginAlternative />
+      <Box mt={2} />
       <DemoInfo />
     </AuthLayout>
   );
