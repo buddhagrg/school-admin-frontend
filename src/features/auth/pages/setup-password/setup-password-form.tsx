@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Grid2, TextField } from '@mui/material';
+import { Box, Button, FormControl, FormLabel, TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import type { SetupPasswordProps } from '../../types';
 
@@ -23,42 +23,26 @@ export const SetupPasswordForm: React.FC<SetupPasswordFormProps> = ({
 
   return (
     <form onSubmit={onSubmit}>
-      <Grid2 container spacing={2} sx={{ mt: 3 }}>
-        <Grid2 size={{ xs: 12, md: 6 }}>
-          <TextField
-            size='small'
-            label='Username'
-            fullWidth
-            {...register('username')}
-            error={!!errors.username}
-            helperText={errors.username?.message}
-          />
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 6 }} />
-
-        <Grid2 size={{ xs: 12, md: 6 }}>
-          <TextField
-            size='small'
-            type='password'
-            label='Password'
-            fullWidth
-            {...register('password')}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-          />
-        </Grid2>
-        <Grid2 size={{ xs: 12, md: 6 }}>
-          <TextField
-            size='small'
-            type='password'
-            label='Confirm Password'
-            fullWidth
-            {...register('confirmPassword')}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword?.message}
-          />
-        </Grid2>
-      </Grid2>
+      <FormControl fullWidth error={!!errors.password}>
+        <FormLabel>Password</FormLabel>
+        <TextField
+          size='small'
+          type='password'
+          {...register('password')}
+          error={!!errors.password}
+          helperText={errors.password?.message}
+        />
+      </FormControl>
+      <FormControl fullWidth error={!!errors.confirmPassword} sx={{ mt: 2 }}>
+        <FormLabel>Re-type Password</FormLabel>
+        <TextField
+          size='small'
+          type='password'
+          {...register('confirmPassword')}
+          error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message}
+        />
+      </FormControl>
       <Box sx={{ mt: 4 }}>
         <Button
           type='button'

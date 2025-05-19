@@ -40,7 +40,7 @@ export type LoginRequest = z.infer<typeof LoginSchema>;
 export type PasswordProps = z.infer<typeof PasswordSchema>;
 
 export type SetupPasswordProps = z.infer<typeof SetupPasswordSchema>;
-
+export type SetupPasswordPropsWithToken = SetupPasswordProps & { token: string };
 export type UserId = {
   userId: number;
 };
