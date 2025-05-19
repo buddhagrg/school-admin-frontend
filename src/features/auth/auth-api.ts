@@ -1,5 +1,11 @@
 import { baseApi } from '@/api';
-import type { LoginRequest, ResetPwdFormProps, SetupPasswordProps, User, UserId } from './types';
+import type {
+  LoginRequest,
+  ResetPwdFormProps,
+  SetupPasswordPropsWithToken,
+  User,
+  UserId
+} from './types';
 import type { ApiResponseSuccessMessage } from '@/shared/types';
 
 export const authApi = baseApi.injectEndpoints({
@@ -17,7 +23,7 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST'
       })
     }),
-    setupPassword: builder.mutation<ApiResponseSuccessMessage, SetupPasswordProps>({
+    setupPassword: builder.mutation<ApiResponseSuccessMessage, SetupPasswordPropsWithToken>({
       query: (payload) => ({
         url: `/auth/setup-password`,
         method: 'POST',

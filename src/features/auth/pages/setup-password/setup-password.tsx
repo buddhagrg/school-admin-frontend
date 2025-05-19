@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { useForm } from 'react-hook-form';
@@ -10,10 +10,10 @@ import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useSetupPasswordMutation } from '../../auth-api';
 import { type SetupPasswordProps, SetupPasswordSchema } from '../../types';
 import { SetupPasswordForm } from './setup-password-form';
+import { SubSoftText, TitleText } from '@/shared/components';
 
-const initialState = {
-  oldPassword: '',
-  newPassword: '',
+const initialState: SetupPasswordProps = {
+  password: '',
   confirmPassword: ''
 };
 
@@ -29,6 +29,8 @@ export const SetupPassword = () => {
 
   const setupPassword = async (data: SetupPasswordProps) => {
     try {
+      if (!token) return;
+
       const payload = { ...data, token };
       const result = await setupNewPassword(payload).unwrap();
       toast.info(result.message);
@@ -61,13 +63,11 @@ export const SetupPassword = () => {
           padding: '20px'
         }}
       >
-        <Typography component='div' variant='h6'>
-          Set Up Your Account Password
-        </Typography>
-        <Typography variant='subtitle1' color='text.secondary'>
-          You're almost done! Please set your password to complete the setup and access the main
-          application.
-        </Typography>
+        <TitleText text='Set Up Your Account Password' />
+        <SubSoftText
+          text={`You're almost done! Please set your password to complete the setup and access the main application.`}
+        />
+        <Box mt={3} />
         <SetupPasswordForm
           onSubmit={methods.handleSubmit(setupPassword)}
           methods={methods}

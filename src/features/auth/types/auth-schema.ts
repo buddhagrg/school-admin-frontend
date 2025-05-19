@@ -18,10 +18,8 @@ export const PasswordSchema = z
 
 export const SetupPasswordSchema = z
   .object({
-    username: z.string().min(1, 'Username is required'),
     password: z.string().min(1, 'New Password is required'),
-    confirmPassword: z.string().min(1, 'Confirm Password is required'),
-    token: z.string().optional()
+    confirmPassword: z.string().min(1, 'Confirm Password is required')
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
