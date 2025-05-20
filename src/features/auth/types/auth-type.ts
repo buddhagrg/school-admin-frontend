@@ -46,3 +46,8 @@ export type UserId = {
 };
 
 export type ResetPwdFormProps = z.infer<typeof ResetPwdFormSchema>;
+
+export type ApiResponseAlertType = {
+  severity: 'error' | 'success';
+  messages: string[];
+};
