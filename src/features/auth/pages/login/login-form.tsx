@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -10,35 +10,80 @@ import {
   OutlinedInput,
   TextField
 } from '@mui/material';
-import { UseFormReturn } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import type { LoginRequest } from '../../types';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { LoginSchema, type LoginRequest } from '../../types';
 import { ApiError } from '@/shared/components';
+import { useLoginMutation } from '../../auth-api';
+import { setUser } from '../../auth-slice';
+import { formatApiError } from '@/utils/helpers/format-api-error';
+import { DemoRoles } from './demo-roles';
 
-type LoginFormProps = {
-  onSubmit: () => void;
-  methods: UseFormReturn<LoginRequest>;
-  isFetching: boolean;
-  apiErrors: string[];
+const initState: LoginRequest = {
+  email: '',
+  password: ''
 };
-
-export const LoginForm: React.FC<LoginFormProps> = ({
-  onSubmit,
-  methods,
-  isFetching,
-  apiErrors
-}) => {
+export const LoginForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
-    formState: { errors }
-  } = methods;
+    formState: { errors },
+    setValue,
+    reset,
+    handleSubmit
+  } = useForm<LoginRequest>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: initState
+  });
+
+  const [apiErrors, setApiErrors] = useState<string[]>([]);
+  const [alertOpen, setAlertOpen] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [login, { isLoading: isFetching }] = useLoginMutation();
+  const [demoFieldChecked, setDemoFieldChecked] = useState(false);
+
+  const toggleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+    setDemoFieldChecked(!demoFieldChecked);
+    if (checked) {
+      setValue('email', 'admin@school-admin.xyz');
+      setValue('password', 'schooladmin');
+    } else {
+      reset(initState);
+    }
+  };
+  const onSubmit = async (data: LoginRequest) => {
+    try {
+      const user = await login(data).unwrap();
+      dispatch(setUser({ user }));
+      const redirectPath = user.appBase;
+      navigate(redirectPath ? redirectPath : '/');
+      setApiErrors([]);
+    } catch (error) {
+      const apiErrors = formatApiError(error as FetchBaseQueryError | SerializedError);
+      setApiErrors(apiErrors);
+      setAlertOpen(true);
+    }
+  };
+
+  const closeAlert = () => {
+    setAlertOpen(false);
+  };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <DemoRoles toggleCheckBox={toggleCheckBox} isChecked={demoFieldChecked} />
+      <Box sx={{ mt: 3 }} />
       <FormControl fullWidth size='small' variant='outlined'>
         <FormLabel sx={{ mb: '2px' }}>Username</FormLabel>
         <TextField
@@ -74,7 +119,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         <FormHelperText error>{errors?.password?.message}</FormHelperText>
       </FormControl>
       <Box mt={2} />
-      <ApiError messages={apiErrors} />
+
+      {apiErrors.length > 0 && (
+        <ApiError messages={apiErrors} closeAlert={closeAlert} open={alertOpen} />
+      )}
+
       <Box sx={{ mt: 2 }} />
       <Button loading={isFetching} loadingPosition='start' type='submit' variant='contained'>
         <span>Sign In</span>

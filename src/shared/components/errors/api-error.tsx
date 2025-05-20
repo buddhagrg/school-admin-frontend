@@ -1,33 +1,53 @@
-import { ErrorOutline } from '@mui/icons-material';
-import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
-import { COLORS } from '@/theme/custom-colors';
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Collapse,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText
+} from '@mui/material';
+import { Clear } from '@mui/icons-material';
 
-export const ApiError = ({ messages }: { messages: string[] }) => {
-  if (messages.length <= 0) {
-    return null;
-  }
-
+export const ApiError = ({
+  messages,
+  closeAlert,
+  open = true
+}: {
+  messages: string[];
+  closeAlert: () => void;
+  open: boolean;
+}) => {
   return (
-    <Box
-      sx={{
-        color: `${COLORS.error}`,
-        border: `1px solid ${COLORS.error}`,
-        borderRadius: '5px',
-        fontSize: '15px',
-        padding: '5px'
-      }}
-    >
-      <Box display='flex' alignItems='center'>
-        <ErrorOutline sx={{ color: COLORS.error, marginRight: '3px', fontSize: '16px' }} />
-        <Typography variant='body1'>Following error occured:</Typography>
-      </Box>
-      <List dense disablePadding sx={{ listStyleType: 'disc', marginLeft: 3 }}>
-        {messages.map((msg) => (
-          <ListItem disablePadding sx={{ display: 'list-item' }} key={msg}>
-            <ListItemText primary={msg} />
-          </ListItem>
-        ))}
-      </List>
+    <Box sx={{ width: '100%' }}>
+      <Collapse in={open}>
+        <Alert
+          severity='error'
+          action={
+            <IconButton
+              aria-label='close'
+              color='inherit'
+              size='small'
+              onClick={() => {
+                closeAlert();
+              }}
+            >
+              <Clear fontSize='small' />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
+          <AlertTitle>Error</AlertTitle>
+          <List dense disablePadding sx={{ listStyleType: 'disc', marginLeft: 2 }}>
+            {messages.map((msg) => (
+              <ListItem disablePadding sx={{ display: 'list-item' }} key={msg}>
+                <ListItemText primary={msg} />
+              </ListItem>
+            ))}
+          </List>
+        </Alert>
+      </Collapse>
     </Box>
   );
 };
