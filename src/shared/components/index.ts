@@ -21,3 +21,4 @@ export { TabPanel } from './tab-panel';
 export { TableRowWithColSpan } from './table-row-with-col-span';
 export { TitleText } from './title-text';
 export { UserDetailInfo } from './user-detail-info';
+export { ApiResponseAlert } from './api-response-alert';

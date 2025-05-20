@@ -18,16 +18,20 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { LoginSchema, type LoginRequest } from '../../types';
-import { ApiError } from '@/shared/components';
+import { type ApiResponseAlertType, LoginSchema, type LoginRequest } from '../../types';
 import { useLoginMutation } from '../../auth-api';
 import { setUser } from '../../auth-slice';
 import { formatApiError } from '@/utils/helpers/format-api-error';
 import { DemoRoles } from './demo-roles';
+import { ApiResponseAlert } from '@/shared/components';
 
 const initState: LoginRequest = {
   email: '',
   password: ''
+};
+const initialApiResponse: ApiResponseAlertType = {
+  severity: 'success',
+  messages: []
 };
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -43,7 +47,7 @@ export const LoginForm = () => {
     defaultValues: initState
   });
 
-  const [apiErrors, setApiErrors] = useState<string[]>([]);
+  const [apiResponse, setApiResponse] = useState(initialApiResponse);
   const [alertOpen, setAlertOpen] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [login, { isLoading: isFetching }] = useLoginMutation();
@@ -65,10 +69,11 @@ export const LoginForm = () => {
       dispatch(setUser({ user }));
       const redirectPath = user.appBase;
       navigate(redirectPath ? redirectPath : '/');
-      setApiErrors([]);
+      setApiResponse({ severity: 'success', messages: ['Login Successful'] });
     } catch (error) {
-      const apiErrors = formatApiError(error as FetchBaseQueryError | SerializedError);
-      setApiErrors(apiErrors);
+      const errors = formatApiError(error as FetchBaseQueryError | SerializedError);
+      setApiResponse({ severity: 'error', messages: errors });
+    } finally {
       setAlertOpen(true);
     }
   };
@@ -120,8 +125,13 @@ export const LoginForm = () => {
       </FormControl>
       <Box mt={2} />
 
-      {apiErrors.length > 0 && (
-        <ApiError messages={apiErrors} closeAlert={closeAlert} open={alertOpen} />
+      {apiResponse.messages.length > 0 && (
+        <ApiResponseAlert
+          severity={apiResponse.severity}
+          messages={apiResponse.messages}
+          onClose={closeAlert}
+          open={alertOpen}
+        />
       )}
 
       <Box sx={{ mt: 2 }} />
