@@ -15,13 +15,15 @@ type ApiResponseAlertProps = {
   severity: 'error' | 'success';
   open: boolean;
   messages: string[];
-  onClose: () => void;
+  onClose?: () => void;
+  showCloseBtn?: boolean;
 };
 export const ApiResponseAlert: React.FC<ApiResponseAlertProps> = ({
   severity,
   open,
   messages,
-  onClose
+  onClose,
+  showCloseBtn = true
 }) => {
   const renderMessage = () => {
     return messages.length === 1 ? (
@@ -43,18 +45,19 @@ export const ApiResponseAlert: React.FC<ApiResponseAlertProps> = ({
         <Alert
           severity={severity}
           action={
-            <IconButton
-              aria-label='close'
-              color='inherit'
-              size='small'
-              onClick={() => {
-                onClose();
-              }}
-            >
-              <Cancel fontSize='small' />
-            </IconButton>
+            showCloseBtn && (
+              <IconButton
+                aria-label='close'
+                color='inherit'
+                size='small'
+                onClick={() => {
+                  onClose && onClose();
+                }}
+              >
+                <Cancel fontSize='small' />
+              </IconButton>
+            )
           }
-          sx={{ mb: 2 }}
         >
           <AlertTitle>{severity === 'error' ? 'Error' : 'Success'}</AlertTitle>
           {renderMessage()}

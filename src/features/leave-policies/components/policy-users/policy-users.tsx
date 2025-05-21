@@ -7,6 +7,7 @@ import {
 } from 'material-react-table';
 import { Box, Button, IconButton } from '@mui/material';
 import { PersonAddAlt1Outlined, PersonRemoveOutlined } from '@mui/icons-material';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { useGetLeavePolicyUsersQuery } from '../../leave-policy-api';
@@ -16,7 +17,6 @@ import { usePolicyDetail } from '../../leave-policy-context-provider';
 import { AssignUsers } from './assign-users';
 import { ERROR_MESSAGE } from '@/shared/constants/error-message';
 import { ResponsiveBox } from '@/shared/components';
-import { skipToken } from '@reduxjs/toolkit/query';
 
 export const PolicyUsers = () => {
   const { state } = usePolicyDetail();

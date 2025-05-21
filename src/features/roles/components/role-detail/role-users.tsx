@@ -6,13 +6,13 @@ import {
   useMaterialReactTable
 } from 'material-react-table';
 import { Box } from '@mui/material';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import type { User } from '../../types';
 import { useGetRoleUsersQuery } from '../../roles-api';
 import { useRolePermission } from '../../context/role-provider';
 import { ERROR_MESSAGE } from '@/shared/constants/error-message';
-import { skipToken } from '@reduxjs/toolkit/query';
 
 export const RoleUsers = () => {
   const {
@@ -45,8 +45,6 @@ export const RoleUsers = () => {
       showGlobalFilter: true
     },
     enablePagination: false,
-    enableRowActions: true,
-    positionActionsColumn: 'last',
     enableColumnActions: false,
     renderTopToolbar: ({ table }) => (
       <Box sx={{ p: 1 }}>

@@ -3,11 +3,11 @@ import { FormControl, FormHelperText, FormLabel, MenuItem, Select, TextField } f
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers';
 import { parseISO } from 'date-fns';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 import type { AcademicPeriodFormProps } from '../../types';
 import { useGetAcademicLevelsQuery } from '../../levels-periods-api';
 import { DATE_FORMAT } from '@/utils/helpers/date';
-import { skipToken } from '@reduxjs/toolkit/query';
 
 type PeriodFormProps = {
   methods: UseFormReturn<AcademicPeriodFormProps>;

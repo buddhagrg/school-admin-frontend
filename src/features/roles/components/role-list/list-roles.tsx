@@ -6,9 +6,9 @@ import { useRolePermission } from '../../context/role-provider';
 import type { RoleWithUsersAssociated } from '../../types';
 import { UpdateRole } from './update-role';
 import { RoleInfo } from './role-info';
-import { SearchText } from '@/shared/components';
+import { Loader, SearchText } from '@/shared/components';
 
-export const ListRoles = () => {
+export const ListRoles = ({ isLoading }: { isLoading: boolean }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState<RoleWithUsersAssociated | null>(null);
   const {
@@ -43,9 +43,14 @@ export const ListRoles = () => {
         <Box mt={3} />
         <RoleInfo />
         <Box mt={2} />
-        {filteredRoles?.map((role) => (
-          <RoleItem key={role.id} data={role} handleEdit={handleEdit} />
-        ))}
+
+        {isLoading ? (
+          <Loader />
+        ) : (
+          filteredRoles?.map((role) => (
+            <RoleItem key={role.id} data={role} handleEdit={handleEdit} />
+          ))
+        )}
       </Box>
 
       {selectedRole?.id && <UpdateRole role={selectedRole} closeModal={closeModal} />}
