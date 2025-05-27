@@ -9,8 +9,18 @@ const userSystemAccessApi = baseApi.injectEndpoints({
         method: 'PATCH',
         body: { hasSystemAccess }
       }),
-      invalidatesTags: (_result, error, { userId: id, entity }) =>
-        error ? [] : [{ type: entity === 'students' ? Tag.STUDENTS : Tag.STAFF, id }]
+      invalidatesTags: (_result, _error, { userId: id, entity }) =>
+        entity === 'students'
+          ? [
+              { type: Tag.STUDENTS, id },
+              { type: Tag.STUDENTS, id: Tag.LIST },
+              { type: Tag.STUDENT_DETAIL, id }
+            ]
+          : [
+              { type: Tag.STAFF, id },
+              { type: Tag.STAFF, id: Tag.LIST },
+              { type: Tag.STAFF_DETAIL, id }
+            ]
     })
   })
 });

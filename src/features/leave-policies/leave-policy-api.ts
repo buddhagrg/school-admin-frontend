@@ -10,36 +10,25 @@ import type {
   RemoveUserFromPolicy
 } from './types';
 import { baseApi, Tag } from '@/api';
+import { providesListTags } from '@/utils/helpers/provides-list-tags';
 
 const leaveApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getLeavePolicies: builder.query<LeavePolicyData, void>({
       query: () => '/leaves/policies',
-      providesTags: (result) =>
-        result?.leavePolicies.map(({ id }) => {
-          return { type: Tag.LEAVE_POLICIES, id };
-        }) || [{ type: Tag.LEAVE_POLICIES }]
+      providesTags: (result) => providesListTags(result?.leavePolicies, Tag.LEAVE_POLICIES)
     }),
     getMyLeavePolicies: builder.query<MyLeavePolicyData, void>({
       query: () => `/leaves/policies/my`,
-      providesTags: (result) =>
-        result?.leavePolicies.map(({ id }) => {
-          return { type: Tag.MY_LEAVE_POLICIES, id };
-        }) || [{ type: Tag.MY_LEAVE_POLICIES }]
+      providesTags: (result) => providesListTags(result?.leavePolicies, Tag.MY_LEAVE_POLICIES)
     }),
     getEligibleLeavePolicyUsers: builder.query<EligiblePolicyUsers, void>({
       query: () => `leaves/policies/eligible-users`,
-      providesTags: (result) =>
-        result?.users.map(({ id }) => {
-          return { type: Tag.LEAVE_ELIGIBLE_USERS, id };
-        }) || [{ type: Tag.LEAVE_ELIGIBLE_USERS }]
+      providesTags: (result) => providesListTags(result?.users, Tag.LEAVE_ELIGIBLE_USERS)
     }),
     getLeavePolicyUsers: builder.query<PolicyUserData, number>({
       query: (id) => `/leaves/policies/${id}/users`,
-      providesTags: (result) =>
-        result?.users.map(({ id }) => {
-          return { type: Tag.LEAVE_POLICY_USERS, id };
-        }) || [{ type: Tag.LEAVE_POLICY_USERS }]
+      providesTags: (result) => providesListTags(result?.users, Tag.LEAVE_POLICY_USERS)
     }),
     addLeavePolicy: builder.mutation<ApiResponseSuccessMessage, PolicyFormProps>({
       query: (payload) => ({
@@ -47,7 +36,7 @@ const leaveApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.LEAVE_POLICIES])
+      invalidatesTags: [{ type: Tag.LEAVE_POLICIES, id: Tag.LIST }]
     }),
     updateLeavePolicy: builder.mutation<ApiResponseSuccessMessage, PolicyFormPropsWithId>({
       query: ({ id, ...payload }) => ({
@@ -55,7 +44,10 @@ const leaveApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.LEAVE_POLICIES, id }])
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: Tag.LEAVE_POLICIES, id },
+        { type: Tag.LEAVE_POLICIES, id: Tag.LIST }
+      ]
     }),
     addUserToPolicy: builder.mutation<ApiResponseSuccessMessage, AddUserToPolicy>({
       query: ({ users, id }) => ({
@@ -63,30 +55,23 @@ const leaveApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: { users }
       }),
-      invalidatesTags: (_result, error) =>
-        error
-          ? []
-          : [
-              Tag.LEAVE_POLICY_USERS,
-              Tag.LEAVE_ELIGIBLE_USERS,
-              Tag.LEAVE_POLICIES,
-              Tag.MY_LEAVE_POLICIES
-            ]
+      invalidatesTags: [
+        { type: Tag.LEAVE_POLICY_USERS },
+        { type: Tag.LEAVE_POLICIES },
+        { type: Tag.MY_LEAVE_POLICIES }
+      ]
     }),
     removeUserFromPolicy: builder.mutation<ApiResponseSuccessMessage, RemoveUserFromPolicy>({
       query: ({ userId, policyId }) => ({
         url: `/leaves/policies/${policyId}/users/${userId}`,
         method: 'DELETE'
       }),
-      invalidatesTags: (_result, error) =>
-        error
-          ? []
-          : [
-              Tag.LEAVE_POLICY_USERS,
-              Tag.LEAVE_ELIGIBLE_USERS,
-              Tag.LEAVE_POLICIES,
-              Tag.MY_LEAVE_POLICIES
-            ]
+      invalidatesTags: (_result, _error, { userId: id }) => [
+        { type: Tag.LEAVE_POLICY_USERS, id },
+        { type: Tag.LEAVE_POLICY_USERS, id: Tag.LIST },
+        { type: Tag.LEAVE_POLICIES },
+        { type: Tag.MY_LEAVE_POLICIES }
+      ]
     })
   })
 });

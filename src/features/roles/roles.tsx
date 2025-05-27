@@ -7,7 +7,7 @@ import { useGetRolesQuery } from './roles-api';
 import { useGetPermissionsQuery } from '../permissions/permission-api';
 import { RoleProvider, useRolePermission } from './context/role-provider';
 import { AddRoleBtn, ListRoles, RoleDetail, RoleNotSelected } from './components';
-import { Loader, PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/shared/components';
 
 const ViewRoles = () => {
   const { data: rolesData, isLoading } = useGetRolesQuery();
@@ -53,7 +53,9 @@ const ViewRoles = () => {
         <AddRoleBtn />
       </Box>
       <Grid2 container spacing={3}>
-        <Grid2 size={{ xs: 12, lg: 4 }}>{isLoading ? <Loader /> : <ListRoles />}</Grid2>
+        <Grid2 size={{ xs: 12, lg: 4 }}>
+          <ListRoles isLoading={isLoading} />
+        </Grid2>
         <Grid2 size={{ xs: 12, lg: 8 }}>{roleDetail ? <RoleDetail /> : <RoleNotSelected />}</Grid2>
       </Grid2>
     </>

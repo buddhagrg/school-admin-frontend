@@ -3,8 +3,8 @@ import { z } from 'zod';
 import {
   LoginSchema,
   PasswordSchema,
-  ResetPwdFormSchema,
-  SetupPasswordSchema
+  ForgotPwdFormSchema,
+  PasswordActionFormSchema
 } from './auth-schema';
 import type { BasePermissionProps, PermissionProps } from '@/features/permissions/types';
 import { StaticRole } from '@/features/dashboard/dashboard-type';
@@ -39,13 +39,13 @@ export type LoginRequest = z.infer<typeof LoginSchema>;
 
 export type PasswordProps = z.infer<typeof PasswordSchema>;
 
-export type SetupPasswordProps = z.infer<typeof SetupPasswordSchema>;
-export type SetupPasswordPropsWithToken = SetupPasswordProps & { token: string };
+export type PasswordActionFormProps = z.infer<typeof PasswordActionFormSchema>;
+export type PasswordActionFormPropsWithToken = PasswordActionFormProps & { token: string };
 export type UserId = {
   userId: number;
 };
 
-export type ResetPwdFormProps = z.infer<typeof ResetPwdFormSchema>;
+export type ForgotPwdFormProps = z.infer<typeof ForgotPwdFormSchema>;
 
 export type ApiResponseAlertType = {
   severity: 'error' | 'success';

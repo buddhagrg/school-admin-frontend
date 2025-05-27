@@ -11,6 +11,7 @@ import { useAddAcademicYearMutation } from '../academic-years-api';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { academicYearInitialState } from './academi-year-initial-state';
 import { DialogModal } from '@/shared/components';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
 
 type AddAcademicYearProps = {
   closeModal: () => void;
@@ -27,7 +28,12 @@ export const AddAcademicYear: React.FC<AddAcademicYearProps> = ({ closeModal }) 
   };
   const onSave = async (data: AcademicYearFormProps) => {
     try {
-      const result = await addAademicYear(data).unwrap();
+      const payload = {
+        ...data,
+        startDate: getFormattedDate(data.startDate, API_DATE_FORMAT),
+        endDate: getFormattedDate(data.endDate, API_DATE_FORMAT)
+      };
+      const result = await addAademicYear(payload).unwrap();
       toast.info(result.message);
       handleClear();
       closeModal();

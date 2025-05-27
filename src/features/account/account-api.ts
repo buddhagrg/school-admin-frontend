@@ -7,7 +7,7 @@ const atccountApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMyAccountDetail: builder.query<AccountMeResponse, AccountMode>({
       query: (mode) => `/account/me?mode=${mode}`,
-      providesTags: (_result, error) => (error ? [] : [Tag.MY_ACCOUNT])
+      providesTags: () => [{ type: Tag.MY_ACCOUNT }]
     }),
     changeAccountPassword: builder.mutation<ApiResponseSuccessMessage, PasswordProps>({
       query: (payload) => ({

@@ -1,80 +1,79 @@
-import { toast } from 'react-toastify';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Paper } from '@mui/material';
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { PasswordActionForm } from '../../components/password-action-form';
+import {
+  ApiResponseAlertType,
+  PasswordActionFormProps,
+  PasswordActionFormSchema
+} from '../../types';
+import { formatApiError } from '@/utils/helpers/format-api-error';
+import { initialApiResponse } from '@/shared/constants/initial-state';
 import { useSetupPasswordMutation } from '../../auth-api';
-import { type SetupPasswordProps, SetupPasswordSchema } from '../../types';
-import { SetupPasswordForm } from './setup-password-form';
+import { AuthLayout } from '../../components/auth-layout';
 import { SubSoftText, TitleText } from '@/shared/components';
+import { Box } from '@mui/material';
 
-const initialState: SetupPasswordProps = {
-  password: '',
-  confirmPassword: ''
-};
-
+const initialState: PasswordActionFormProps = { password: '', confirmPassword: '' };
+const REDIRECT_DELAY_MS = 2000;
 export const SetupPassword = () => {
+  const [setupPassword, { isLoading }] = useSetupPasswordMutation();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { token } = useParams();
 
-  const [setupNewPassword, { isLoading: isSettingPassword }] = useSetupPasswordMutation();
-  const methods = useForm<SetupPasswordProps>({
+  const [apiResponse, setApiResponse] = useState<ApiResponseAlertType>(initialApiResponse);
+  const [success, setSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<PasswordActionFormProps>({
     defaultValues: initialState,
-    resolver: zodResolver(SetupPasswordSchema)
+    resolver: zodResolver(PasswordActionFormSchema)
   });
 
-  const setupPassword = async (data: SetupPasswordProps) => {
-    try {
-      if (!token) return;
+  const onSubmit = async (data: PasswordActionFormProps) => {
+    const token = searchParams.get('token');
+    if (!token) return;
 
-      const payload = { ...data, token };
-      const result = await setupNewPassword(payload).unwrap();
-      toast.info(result.message);
-      navigate('/login');
-    } catch (error) {
-      toast.error(getErrorMsg(error as FetchBaseQueryError | SerializedError).message);
+    try {
+      const result = await setupPassword({ ...data, token }).unwrap();
+      setApiResponse({ severity: 'success', messages: [result.message] });
+      setSuccess(true);
+
+      setTimeout(() => navigate('/login'), REDIRECT_DELAY_MS);
+    } catch (err) {
+      setApiResponse({
+        severity: 'error',
+        messages: formatApiError(err as FetchBaseQueryError | SerializedError)
+      });
+      setSuccess(false);
     }
   };
 
-  const clearForm = () => {
-    methods.reset();
-  };
-
+  const header = `Set Up Your Account Password`;
+  const subHeader = `You're almost there! Create a secure password to complete your account setup and start using the application.`;
   return (
-    <Box
-      component={Paper}
-      sx={{
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        overflow: 'auto',
-        maxHeight: 'calc(100vh - 40px)'
-      }}
-    >
-      <Box
-        sx={{
-          width: { xs: '400px', md: '500px' },
-          border: '1px solid #f3f6f999',
-          padding: '20px'
-        }}
-      >
-        <TitleText text='Set Up Your Account Password' />
-        <SubSoftText
-          text={`You're almost done! Please set your password to complete the setup and access the main application.`}
-        />
-        <Box mt={3} />
-        <SetupPasswordForm
-          onSubmit={methods.handleSubmit(setupPassword)}
-          methods={methods}
-          isLoading={isSettingPassword}
-          clearForm={clearForm}
-        />
-      </Box>
-    </Box>
+    <AuthLayout>
+      <TitleText text={header} />
+      <SubSoftText text={subHeader} />
+      <Box sx={{ mt: 3 }} />
+      <PasswordActionForm
+        register={register}
+        errors={errors}
+        loading={isLoading}
+        success={success}
+        apiResponse={apiResponse}
+        onSubmit={handleSubmit(onSubmit)}
+        onClear={() => reset(initialState)}
+        submitText='Set Password'
+      />
+    </AuthLayout>
   );
 };

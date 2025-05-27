@@ -85,7 +85,7 @@ export const ListSchools = () => {
       density: 'compact'
     },
     enableDensityToggle: false,
-    getRowId: (row) => row?.schoolId?.toString(),
+    getRowId: (row) => row?.id?.toString(),
     enableRowActions: true,
     positionActionsColumn: 'last',
     renderRowActions: ({ row }) => (
@@ -93,7 +93,7 @@ export const ListSchools = () => {
         title='Edit School Detail'
         color='info'
         component={Link}
-        to={`${appBase}/schools/edit/${row.original.schoolId}`}
+        to={`${appBase}/schools/edit/${row.original.id}`}
       >
         <Edit />
       </IconButton>

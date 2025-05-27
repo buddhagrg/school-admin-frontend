@@ -49,3 +49,12 @@ body {
 .black-link {
   color: #212121de !important;
 }
+
+fieldset {
+  border: 0px;
+  padding: 0;
+}
+
+fieldset:disabled {
+  opacity: 0.5;
+}

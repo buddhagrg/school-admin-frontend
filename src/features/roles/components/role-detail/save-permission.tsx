@@ -42,6 +42,8 @@ export const SavePermission = () => {
     }
   };
 
+  const isSaveBtnDisabled =
+    roleDetail?.staticRole === 'ADMIN' || getSelectedPermissions().length <= 0;
   return (
     <Box sx={{ display: 'flex' }}>
       <Button
@@ -53,7 +55,7 @@ export const SavePermission = () => {
         startIcon={<Save />}
         loading={isLoading}
         onClick={onSave}
-        disabled={getSelectedPermissions().length <= 0}
+        disabled={isSaveBtnDisabled}
       >
         Save Permissions
       </Button>

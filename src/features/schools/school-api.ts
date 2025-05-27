@@ -1,19 +1,17 @@
 import { baseApi, Tag } from '@/api';
 import type { School, SchoolProps, SchoolsData, SchoolWithIdProps } from './types';
 import type { ApiResponseSuccessMessage } from '@/shared/types';
+import { providesListTags } from '@/utils/helpers/provides-list-tags';
 
 const schoolApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getSchools: builder.query<SchoolsData, void>({
       query: () => `/schools`,
-      providesTags: (result) =>
-        result?.schools?.map(({ schoolId }) => {
-          return { type: Tag.SCHOOLS, id: schoolId };
-        }) || [{ type: Tag.SCHOOLS }]
+      providesTags: (result) => providesListTags(result?.schools, Tag.SCHOOLS)
     }),
     getSchool: builder.query<School, number>({
       query: (id) => `/schools/${id}`,
-      providesTags: (result) => (result ? [{ type: Tag.SCHOOLS, id: result.schoolId }] : [])
+      providesTags: (_result, _error, id) => [{ type: Tag.SCHOOL_DETAIL, id }]
     }),
     updateSchool: builder.mutation<ApiResponseSuccessMessage, SchoolWithIdProps>({
       query: ({ schoolId, ...payload }) => ({
@@ -21,8 +19,11 @@ const schoolApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { schoolId }) =>
-        error ? [] : [{ type: Tag.SCHOOLS, id: schoolId }]
+      invalidatesTags: (_result, _error, { schoolId }) => [
+        { type: Tag.SCHOOLS, id: schoolId },
+        { type: Tag.SCHOOLS, id: Tag.LIST },
+        { type: Tag.SCHOOL_DETAIL, id: schoolId }
+      ]
     }),
     addSchool: builder.mutation<ApiResponseSuccessMessage, SchoolProps>({
       query: (payload) => ({
@@ -30,14 +31,7 @@ const schoolApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.SCHOOLS])
-    }),
-    deleteSchool: builder.mutation<ApiResponseSuccessMessage, { schoolId: number }>({
-      query: (schoolId) => ({
-        url: `/schools/${schoolId}`,
-        method: 'DELETE'
-      }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.SCHOOLS])
+      invalidatesTags: [{ type: Tag.SCHOOLS, id: Tag.LIST }]
     })
   })
 });
@@ -46,6 +40,5 @@ export const {
   useGetSchoolsQuery,
   useGetSchoolQuery,
   useAddSchoolMutation,
-  useUpdateSchoolMutation,
-  useDeleteSchoolMutation
+  useUpdateSchoolMutation
 } = schoolApi;
