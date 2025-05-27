@@ -6,7 +6,7 @@ const settingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMySchool: builder.query<SchoolDataResponse, void>({
       query: () => `/schools/my`,
-      providesTags: (_result, error) => (error ? [] : [Tag.MY_SCHOOL])
+      providesTags: () => [{ type: Tag.MY_SCHOOL }]
     }),
     updateMySchool: builder.mutation<ApiResponseSuccessMessage, SchoolFormProps>({
       query: (body) => ({
@@ -14,7 +14,7 @@ const settingApi = baseApi.injectEndpoints({
         method: 'PUT',
         body
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.MY_SCHOOL])
+      invalidatesTags: () => [{ type: Tag.MY_SCHOOL }]
     })
   })
 });

@@ -16,14 +16,14 @@ type ApiResponseAlertProps = {
   open: boolean;
   messages: string[];
   onClose?: () => void;
-  showCloseBtn?: boolean;
+  shouldShowCloseIcon?: boolean;
 };
 export const ApiResponseAlert: React.FC<ApiResponseAlertProps> = ({
   severity,
   open,
   messages,
   onClose,
-  showCloseBtn = true
+  shouldShowCloseIcon = true
 }) => {
   const renderMessage = () => {
     return messages.length === 1 ? (
@@ -45,7 +45,7 @@ export const ApiResponseAlert: React.FC<ApiResponseAlertProps> = ({
         <Alert
           severity={severity}
           action={
-            showCloseBtn && (
+            shouldShowCloseIcon && (
               <IconButton
                 aria-label='close'
                 color='inherit'
@@ -58,6 +58,7 @@ export const ApiResponseAlert: React.FC<ApiResponseAlertProps> = ({
               </IconButton>
             )
           }
+          sx={{ mb: 2 }}
         >
           <AlertTitle>{severity === 'error' ? 'Error' : 'Success'}</AlertTitle>
           {renderMessage()}

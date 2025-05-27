@@ -8,22 +8,22 @@ import type {
   RoleFormPropsWithId
 } from './types';
 import type { ApiResponseSuccessMessage } from '@/shared/types';
+import { providesListTags } from '@/utils/helpers/provides-list-tags';
 
 const rolesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getRoles: builder.query<RolesData, void>({
       query: () => `/roles`,
-      providesTags: (result) =>
-        result?.roles?.map(({ id }) => {
-          return { type: Tag.ROLES, id };
-        }) || [{ type: Tag.ROLES }]
+      providesTags: (result) => providesListTags(result?.roles, Tag.ROLES)
     }),
     getRoleUsers: builder.query<RoleUsersData, number>({
-      query: (id) => `/roles/${id}/users`,
-      providesTags: (result) =>
-        result?.users.map(({ id }) => {
-          return { type: Tag.ROLE_USERS, id };
-        }) || [{ type: Tag.ROLE_USERS }]
+      query: (roleId) => `/roles/${roleId}/users`,
+      providesTags: (result, _error, roleId) => [
+        ...(result?.users.map(({ id }) => ({
+          type: Tag.ROLE_USERS,
+          id
+        })) || [{ type: Tag.ROLE_USERS, id: `LIST-${roleId}` }])
+      ]
     }),
     addNewRole: builder.mutation<ApiResponseSuccessMessage, Omit<RoleFormProps, 'id'>>({
       query: (payload) => ({
@@ -31,7 +31,7 @@ const rolesApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.ROLES])
+      invalidatesTags: [{ type: Tag.ROLES }]
     }),
     updateRole: builder.mutation<ApiResponseSuccessMessage, RoleFormPropsWithId>({
       query: ({ id, ...payload }) => ({
@@ -39,14 +39,18 @@ const rolesApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.ROLES, id }])
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: Tag.ROLES, id },
+        { type: Tag.ROLES, id: Tag.LIST }
+      ]
     }),
     getRolePermissions: builder.query<RolePermissionsData, number>({
-      query: (id) => `/roles/${id}/permissions`,
-      providesTags: (result) =>
-        result?.permissions.map(({ id }) => {
-          return { type: Tag.ROLE_PERMISSIONS, id };
-        }) || [{ type: Tag.ROLE_PERMISSIONS }]
+      query: (roleId) => `/roles/${roleId}/permissions`,
+      providesTags: (result, _error, roleId) => [
+        ...(result?.permissions.map(({ id }) => ({ type: Tag.ROLE_PERMISSIONS, id })) || [
+          { type: Tag.ROLE_PERMISSIONS, id: `LIST-${roleId}` }
+        ])
+      ]
     }),
     saveRolePermissions: builder.mutation<ApiResponseSuccessMessage, RolePermission>({
       query: ({ roleId, permissions }) => ({
@@ -54,8 +58,9 @@ const rolesApi = baseApi.injectEndpoints({
         method: 'POST',
         body: { permissions }
       }),
-      invalidatesTags: (_result, error, { roleId: id }) =>
-        error ? [] : [{ type: Tag.ROLE_PERMISSIONS, id }]
+      invalidatesTags: (_result, _error, { roleId }) => [
+        { type: Tag.ROLE_PERMISSIONS, id: `LIST-${roleId}` }
+      ]
     })
   })
 });

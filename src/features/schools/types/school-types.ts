@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { SchoolSchema } from './school-schema';
 
 export type School = {
-  schoolId: number;
+  id: number;
   name: string;
   email: string;
   phone: string;

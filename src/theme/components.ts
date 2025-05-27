@@ -48,7 +48,6 @@ export const components = {
       root: {
         '&': {
           color: '#272727',
-          fontWeight: 500,
           marginBottom: '3px',
           fontSize: '15px'
         }

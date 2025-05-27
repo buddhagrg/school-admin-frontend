@@ -1,24 +1,29 @@
 import React from 'react';
-import { Box, Container } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import { BackToMainWebsite } from './back-to-main-website';
+import { BackToLogin } from '../pages/login/back-to-login';
 
-export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+type AuthLayoutProps = {
+  showLoginPageLink?: boolean;
+  children: React.ReactNode;
+};
+export const AuthLayout: React.FC<AuthLayoutProps> = ({ showLoginPageLink = true, children }) => {
   return (
-    <Container maxWidth={'xl'}>
+    <Box sx={{ m: 1 }}>
       <BackToMainWebsite />
       <Box
-        sx={{
-          position: 'absolute',
-          left: '50%',
-          transform: 'translate(-50%)',
-          overflow: 'auto',
-          width: { xs: '70%', md: '50%', lg: '35%' },
-          p: 2,
-          marginTop: '60px'
-        }}
+        display='flex'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+        minHeight='80vh'
+        p={2}
       >
-        {children}
+        <Card sx={{ p: 2, width: '100%', maxWidth: 500 }}>
+          {showLoginPageLink && <BackToLogin />}
+          <Box mt={2}>{children}</Box>
+        </Card>
       </Box>
-    </Container>
+    </Box>
   );
 };

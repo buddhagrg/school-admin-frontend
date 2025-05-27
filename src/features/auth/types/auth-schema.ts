@@ -16,16 +16,16 @@ export const PasswordSchema = z
     message: 'New Password and Confirm Password do not match'
   });
 
-export const SetupPasswordSchema = z
+export const PasswordActionFormSchema = z
   .object({
     password: z.string().min(1, 'New Password is required'),
     confirmPassword: z.string().min(1, 'Confirm Password is required')
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
-    message: 'New Password and Confirm Password do not match'
+    message: 'Passwords don’t match. Please re-enter them.'
   });
 
-export const ResetPwdFormSchema = z.object({
+export const ForgotPwdFormSchema = z.object({
   email: z.string().email()
 });

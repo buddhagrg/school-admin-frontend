@@ -1,18 +1,14 @@
 import { baseApi, Tag } from '@/api';
 import type { AcademicYearData, AcademicYearFormProps, AcademicYearFormPropsWithId } from './types';
 import type { ApiResponseSuccessMessage } from '@/shared/types';
+import { providesListTags } from '@/utils/helpers/provides-list-tags';
 
+const DEFAULT_TAG = { type: Tag.ACADEMIC_YEARS, id: Tag.LIST };
 const academicYearApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAcademicYears: builder.query<AcademicYearData, void>({
       query: () => `/academic/years`,
-      providesTags: (result, error) =>
-        error
-          ? []
-          : result?.academicYears?.map(({ id }) => ({
-              type: Tag.ACADEMIC_YEARS,
-              id
-            })) || [Tag.ACADEMIC_YEARS]
+      providesTags: (result) => providesListTags(result?.academicYears, Tag.ACADEMIC_YEARS)
     }),
     addAcademicYear: builder.mutation<ApiResponseSuccessMessage, AcademicYearFormProps>({
       query: (payload) => ({
@@ -20,7 +16,7 @@ const academicYearApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.ACADEMIC_YEARS])
+      invalidatesTags: [DEFAULT_TAG]
     }),
     updateAcademicYear: builder.mutation<ApiResponseSuccessMessage, AcademicYearFormPropsWithId>({
       query: ({ id, ...payload }) => ({
@@ -28,7 +24,7 @@ const academicYearApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.ACADEMIC_YEARS, id }])
+      invalidatesTags: (_result, _error, { id }) => [{ type: Tag.ACADEMIC_YEARS, id }, DEFAULT_TAG]
     })
   })
 });

@@ -1,18 +1,24 @@
 import { ArrowBack } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { COLORS } from '@/theme/custom-colors';
 
 export const BackToMainWebsite = () => {
   const mainSite = import.meta.env.VITE_MAIN_SITE;
   return (
-    <Button
-      variant='outlined'
-      sx={{ mt: 2, borderRadius: '10px' }}
+    <Typography
       component={Link}
       to={mainSite}
-      startIcon={<ArrowBack />}
+      variant='body2'
+      sx={{
+        color: COLORS.primaryLink,
+        textDecoration: 'none',
+        display: 'flex',
+        alignItems: 'center'
+      }}
     >
+      <ArrowBack sx={{ mr: 0.5, fontSize: '15px' }} />
       Main Website
-    </Button>
+    </Typography>
   );
 };

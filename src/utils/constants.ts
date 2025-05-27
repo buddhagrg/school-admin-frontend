@@ -12,8 +12,7 @@ export const USER_ACTION_MENUS: Partial<Record<UserActions, string>> = {
   ENABLE_SYSTEM_ACCESS: 'Enable System Access',
   DISABLE_SYSTEM_ACCESS: 'Disable System Access',
   RESEND_VERIFICATION_EMAIL_TO_USER: 'Resend Verification Email',
-  RESEND_PWD_LINK_EMAIL_TO_USER: 'Resend Password Setup Link',
-  RESET_USER_PWD: 'Reset User Password'
+  RESEND_PWD_LINK_EMAIL_TO_USER: 'Resend Password Setup Link'
 };
 export const menuItemTexts: Record<string, string> = {
   APPROVE_NOTICE: 'Approve Notice',

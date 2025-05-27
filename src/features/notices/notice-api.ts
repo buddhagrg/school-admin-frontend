@@ -9,6 +9,7 @@ import type {
 } from './types';
 import type { ApiResponseSuccessMessage } from '@/shared/types';
 import { getQueryString } from '@/utils/helpers/get-query-string';
+import { providesListTags } from '@/utils/helpers/provides-list-tags';
 
 const noticeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -17,10 +18,7 @@ const noticeApi = baseApi.injectEndpoints({
         const query = getQueryString(payload);
         return `/notices${query}`;
       },
-      providesTags: (result) =>
-        result?.notices?.map(({ id }) => {
-          return { type: Tag.NOTICES, id };
-        }) || [{ type: Tag.NOTICES }]
+      providesTags: (result) => providesListTags(result?.notices, Tag.NOTICES)
     }),
     addNotice: builder.mutation<ApiResponseSuccessMessage, NoticeFormProps>({
       query: (payload) => ({
@@ -28,7 +26,7 @@ const noticeApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.NOTICES])
+      invalidatesTags: [{ type: Tag.NOTICES }]
     }),
     updateNotice: builder.mutation<ApiResponseSuccessMessage, NoticeFormPropsWithId>({
       query: ({ id, ...payload }) => ({
@@ -36,7 +34,10 @@ const noticeApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.NOTICES, id }])
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: Tag.NOTICES, id },
+        { type: Tag.NOTICES, id: Tag.LIST }
+      ]
     }),
     reviewNoticeStatus: builder.mutation<ApiResponseSuccessMessage, ReviewNoticeRequest>({
       query: ({ id, status }) => ({
@@ -44,28 +45,35 @@ const noticeApi = baseApi.injectEndpoints({
         method: 'PATCH',
         body: { status }
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.NOTICES])
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: Tag.NOTICES, id },
+        { type: Tag.NOTICES, id: Tag.LIST }
+      ]
     }),
     publishNotice: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/notices/${id}/publish`,
         method: 'PATCH'
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.NOTICES])
+      invalidatesTags: (_result, _error, id) => [
+        { type: Tag.NOTICES, id },
+        { type: Tag.NOTICES, id: Tag.LIST }
+      ]
     }),
     deleteNotice: builder.mutation<ApiResponseSuccessMessage, number>({
       query: (id) => ({
         url: `/notices/${id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.NOTICES])
+      invalidatesTags: (_result, _error, id) => [
+        { type: Tag.NOTICES, id },
+        { type: Tag.NOTICES, id: Tag.LIST }
+      ]
     }),
     getNoticeRecipients: builder.query<RecipientResponse, void>({
       query: () => `/notices/recipients`,
       providesTags: (result) =>
-        result?.noticeRecipients?.map(({ id }) => {
-          return { type: Tag.NOTICE_RECIPIENT_LIST, id };
-        }) || [{ type: Tag.NOTICE_RECIPIENT_LIST }]
+        providesListTags(result?.noticeRecipients, Tag.NOTICE_RECIPIENT_LIST)
     })
   })
 });

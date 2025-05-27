@@ -5,7 +5,7 @@ const dashboardApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getDashboardData: builder.query<DashboardData, void>({
       query: () => '/dashboard',
-      providesTags: [Tag.DASHBOARD]
+      providesTags: () => [{ type: Tag.DASHBOARD }]
     })
   })
 });

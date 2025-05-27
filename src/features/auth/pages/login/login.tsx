@@ -6,7 +6,7 @@ import { AuthLayout } from '../../components/auth-layout';
 
 export const Login = () => {
   return (
-    <AuthLayout>
+    <AuthLayout showLoginPageLink={false}>
       <Typography variant='h6'>Sign In to School Admin</Typography>
       <Box sx={{ mt: 3 }} />
       <LoginForm />

@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ProtectedRoute } from './protected-route';
 import { AppRoot } from './app-root';
-import { Login, ResetPassword, SetupPassword } from '@/features/auth/pages';
+import { Login, ForgotPassword, SetupPassword, ResetPassword } from '@/features/auth/pages';
 import { Error, MainLayout, PageNotFound } from '@/shared/components';
 
 import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
@@ -32,14 +32,19 @@ export const routes = [
     errorElement: <Error message='Error loading login page' />
   },
   {
-    path: '/setup-password/:token',
+    path: '/setup-password',
     element: <SetupPassword />,
-    errorElement: <Error message='Error loading password setup page' />
+    errorElement: <Error message='Error loading setup password page' />
   },
   {
-    path: '/password-reset',
+    path: '/forgot-password',
+    element: <ForgotPassword />,
+    errorElement: <Error message='Error loading forgot password page' />
+  },
+  {
+    path: '/reset-password',
     element: <ResetPassword />,
-    errorElement: <Error message='Error loading password reset page' />
+    errorElement: <Error message='Error loading reset password page' />
   },
   {
     path: '',

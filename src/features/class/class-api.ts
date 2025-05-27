@@ -12,7 +12,9 @@ import type {
 } from './types';
 import type { ApiResponseSuccessMessage } from '@/shared/types';
 import { getQueryString } from '@/utils/helpers/get-query-string';
+import { providesListTags } from '@/utils/helpers/provides-list-tags';
 
+const DEFAULT_TAG = { type: Tag.CLASSES_WITH_SECTIONS, id: Tag.LIST };
 const classApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getClassesWithSections: builder.query<ClassesWithSections, void | number | string>({
@@ -21,10 +23,7 @@ const classApi = baseApi.injectEndpoints({
         return `/classes/sections${query}`;
       },
       providesTags: (result) =>
-        result?.classesWithSections?.map(({ id }) => ({
-          type: Tag.CLASSES_WITH_SECTIONS,
-          id
-        })) || [Tag.CLASSES_WITH_SECTIONS]
+        providesListTags(result?.classesWithSections, Tag.CLASSES_WITH_SECTIONS)
     }),
     addClass: builder.mutation<ApiResponseSuccessMessage, ClassFormProps>({
       query: (payload) => ({
@@ -32,7 +31,7 @@ const classApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
+      invalidatesTags: [DEFAULT_TAG]
     }),
     updateClass: builder.mutation<ApiResponseSuccessMessage, ClassFormWithId>({
       query: ({ id, ...payload }) => ({
@@ -40,8 +39,10 @@ const classApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { id }) =>
-        error ? [] : [{ type: Tag.CLASSES_WITH_SECTIONS, id }]
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: Tag.CLASSES_WITH_SECTIONS, id },
+        DEFAULT_TAG
+      ]
     }),
     addSection: builder.mutation<ApiResponseSuccessMessage, SectionFormProps>({
       query: ({ classId, ...payload }) => ({
@@ -49,7 +50,7 @@ const classApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASSES_WITH_SECTIONS])
+      invalidatesTags: [DEFAULT_TAG]
     }),
     updateSection: builder.mutation<ApiResponseSuccessMessage, SectionFormWithId>({
       query: ({ classId, id, ...payload }) => ({
@@ -57,24 +58,18 @@ const classApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { classId }) =>
-        error ? [] : [{ type: Tag.CLASSES_WITH_SECTIONS, id: classId }]
+      invalidatesTags: (_result, _error, { classId: id }) => [
+        { type: Tag.CLASSES_WITH_SECTIONS, id },
+        DEFAULT_TAG
+      ]
     }),
     getTeachers: builder.query<Teachers, void>({
       query: () => `/teachers`,
-      providesTags: (result) =>
-        result?.teachers?.map(({ id }) => ({
-          type: Tag.TEACHERS,
-          id
-        })) || [Tag.TEACHERS]
+      providesTags: (result) => providesListTags(result?.teachers, Tag.TEACHERS)
     }),
     getClassTeachers: builder.query<ClassTeachers, void>({
       query: () => `/class-teachers`,
-      providesTags: (result) =>
-        result?.classTeachers?.map(({ id }) => ({
-          type: Tag.CLASS_TEACHERS,
-          id
-        })) || [Tag.CLASS_TEACHERS]
+      providesTags: (result) => providesListTags(result?.classTeachers, Tag.CLASS_TEACHERS)
     }),
     assignClassTeacher: builder.mutation<
       ApiResponseSuccessMessage,
@@ -85,7 +80,7 @@ const classApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: (_result, error) => (error ? [] : [Tag.CLASS_TEACHERS])
+      invalidatesTags: [{ type: Tag.CLASS_TEACHERS }]
     }),
     updateClassTeacher: builder.mutation<ApiResponseSuccessMessage, ClassTeacherUpdateRequest>({
       query: ({ id, ...payload }) => ({
@@ -93,7 +88,10 @@ const classApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: payload
       }),
-      invalidatesTags: (_result, error, { id }) => (error ? [] : [{ type: Tag.CLASS_TEACHERS, id }])
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: Tag.CLASS_TEACHERS, id },
+        { type: Tag.CLASS_TEACHERS, id: Tag.LIST }
+      ]
     })
   })
 });

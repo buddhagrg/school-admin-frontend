@@ -141,8 +141,7 @@ export const StudentTable = () => {
     'ENABLE_SYSTEM_ACCESS',
     'DISABLE_SYSTEM_ACCESS',
     'RESEND_VERIFICATION_EMAIL_TO_USER',
-    'RESEND_PWD_LINK_EMAIL_TO_USER',
-    'RESET_USER_PWD'
+    'RESEND_PWD_LINK_EMAIL_TO_USER'
   ];
   const studentId = state.data?.id;
   return (

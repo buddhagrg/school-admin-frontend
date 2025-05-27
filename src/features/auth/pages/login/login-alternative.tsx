@@ -11,15 +11,9 @@ export const LoginAlternative = () => {
       action: 'Request access'
     },
     {
-      label: `Want to see how it works?`,
-      isLinkExternal: true,
-      link: '/book-demo',
-      action: 'Book a demo'
-    },
-    {
       label: `Forgot your password?`,
       isLinkExternal: false,
-      link: '/password-reset',
+      link: '/forgot-password',
       action: 'Reset it'
     }
   ];

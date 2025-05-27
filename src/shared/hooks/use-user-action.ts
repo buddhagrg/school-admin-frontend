@@ -1,8 +1,7 @@
 import { USER_ACTION_MENUS } from '../../utils/constants';
 import {
   useResendPwdSetupLinkMutation,
-  useResendVerificationEmailMutation,
-  useResetPwdMutation
+  useResendVerificationEmailMutation
 } from '@/features/auth/auth-api';
 import type { ApiResponseSuccessMessage, UserActions, UserEntity } from '@/shared/types';
 import { useUpdateUserSystemAccessMutation } from '../api/user-system-access-api';
@@ -11,7 +10,6 @@ export const useUserAction = () => {
   const [updateUserSystemAccess] = useUpdateUserSystemAccessMutation();
   const [resendVerificationEmail] = useResendVerificationEmailMutation();
   const [resendPwdSetupLink] = useResendPwdSetupLinkMutation();
-  const [resetPwd] = useResetPwdMutation();
 
   const handleAction = async ({
     menuAction,
@@ -30,8 +28,7 @@ export const useUserAction = () => {
       DISABLE_SYSTEM_ACCESS: () =>
         updateUserSystemAccess({ userId, hasSystemAccess: false, entity }).unwrap(),
       RESEND_VERIFICATION_EMAIL_TO_USER: () => resendVerificationEmail({ userId }).unwrap(),
-      RESEND_PWD_LINK_EMAIL_TO_USER: () => resendPwdSetupLink({ userId }).unwrap(),
-      RESET_USER_PWD: () => resetPwd({ userId }).unwrap()
+      RESEND_PWD_LINK_EMAIL_TO_USER: () => resendPwdSetupLink({ userId }).unwrap()
     };
 
     if (actionHandlers[menuAction]) {

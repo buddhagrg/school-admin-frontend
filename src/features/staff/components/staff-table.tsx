@@ -6,6 +6,9 @@ import {
   useMaterialReactTable
 } from 'material-react-table';
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
 import { getTextColor } from '@/utils/helpers/get-text-color';
@@ -21,9 +24,6 @@ import { userActionReducer, userActionState } from '@/shared/reducer/user-action
 import { USER_ACTION_MENU_LIST } from '@/shared/constants/user-action-menus';
 import { isMenuDisabled } from '@/shared/utils/is-menu-disabled';
 import { USER_ACTION_MENUS } from '@/utils/constants';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 export const StaffTable = () => {
   const { data, isLoading, isError, error } = useGetStaffQuery();
@@ -142,8 +142,7 @@ export const StaffTable = () => {
     'ENABLE_SYSTEM_ACCESS',
     'DISABLE_SYSTEM_ACCESS',
     'RESEND_VERIFICATION_EMAIL_TO_USER',
-    'RESEND_PWD_LINK_EMAIL_TO_USER',
-    'RESET_USER_PWD'
+    'RESEND_PWD_LINK_EMAIL_TO_USER'
   ];
   const staffId = state.data?.id;
   return (

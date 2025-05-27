@@ -43,7 +43,7 @@ export const RolePermissions = () => {
             severity='error'
             open={true}
             messages={[errorMsg]}
-            showCloseBtn={false}
+            shouldShowCloseIcon={false}
           />
         </Box>
       )}
