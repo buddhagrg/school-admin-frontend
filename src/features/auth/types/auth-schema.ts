@@ -13,7 +13,7 @@ export const PasswordSchema = z
   })
   .refine((data) => data.newPassword === data.confirmNewPassword, {
     path: ['confirmNewPassword'],
-    message: 'New Password and Confirm Password do not match'
+    message: 'New password and re-typed password do not match. Please re-enter them.'
   });
 
 export const PasswordActionFormSchema = z
