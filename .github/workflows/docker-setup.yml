@@ -33,5 +33,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{github.repository_owner}}/ci-cd-test:latest
-            ghcr.io/${{github.repository_owner}}/ci-cd-test:${{github.sha}}
+            ghcr.io/${{github.repository_owner}}/school-admin-frontend:latest
+            ghcr.io/${{github.repository_owner}}/school-admin-frontend:${{github.sha}}
