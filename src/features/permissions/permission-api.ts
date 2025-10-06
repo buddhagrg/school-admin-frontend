@@ -1,7 +1,7 @@
 import { baseApi, Tag } from '@/api';
 import type { AddEditPermissionProps, AddEditPermissionPropsWithId, PermissionData } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import type { ApiResponseSuccessMessage } from '@/types';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const permissionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

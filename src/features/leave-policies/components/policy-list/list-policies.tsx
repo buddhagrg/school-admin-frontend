@@ -5,7 +5,7 @@ import { useGetLeavePoliciesQuery } from '../../leave-policy-api';
 import { PolicyItem } from './policy-item';
 import type { LeavePolicy } from '../../types';
 import { UpdatePolicy } from './update-policy';
-import { Loader, SearchText } from '@/shared/components';
+import { Loader, SearchText } from '@/components';
 
 export const ListPolicies = () => {
   const [searchTerm, setSearchTerm] = useState('');

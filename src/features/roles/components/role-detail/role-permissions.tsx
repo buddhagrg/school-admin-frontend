@@ -6,8 +6,8 @@ import { useRolePermission } from '../../context/role-provider';
 import { PermissionItem } from './permission-item';
 import { SavePermission } from './save-permission';
 import { useGetRolePermissionsQuery } from '../../roles-api';
-import { ApiResponseAlert } from '@/shared/components';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { ApiResponseAlert } from '@/components';
+import { getErrorMsg } from '@/utils/get-error-message';
 
 export const RolePermissions = () => {
   const {

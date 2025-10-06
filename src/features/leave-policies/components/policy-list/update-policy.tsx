@@ -7,10 +7,10 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { PolicyForm } from '../policy-form';
 import { type PolicyFormProps, PolicyFormSchema } from '../../types';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { usePolicyDetail } from '../../leave-policy-context-provider';
 import { useUpdateLeavePolicyMutation } from '../../leave-policy-api';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type UpdatePolicyProps = {
   closeModal: () => void;

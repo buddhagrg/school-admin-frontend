@@ -5,7 +5,7 @@ import { SchoolGeneralInfo } from './school-general-info';
 import { SchoolContactInfo } from './school-contact-info';
 import { SchoolLegalInfo } from './school-legal-info';
 import { SchoolPreferences } from './school-preferences';
-import { TabPanel } from '@/shared/components';
+import { TabPanel } from '@/components';
 
 const tabs = [
   { label: 'General', component: <SchoolGeneralInfo /> },

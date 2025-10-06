@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { LeaveHistory, LeavePolicies, RequestLeaveBtn } from './components';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const RequestLeave = () => {
   return (

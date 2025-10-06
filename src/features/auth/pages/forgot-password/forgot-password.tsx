@@ -12,8 +12,8 @@ import {
   ForgotPwdFormSchema
 } from '../../types';
 import { useRequestPwdResetMutation } from '../../auth-api';
-import { formatApiError } from '@/utils/helpers/format-api-error';
-import { ApiResponseAlert } from '@/shared/components';
+import { formatApiError } from '@/utils/format-api-error';
+import { ApiResponseAlert } from '@/components';
 
 const initialApiResponse: ApiResponseAlertType = {
   severity: 'success',

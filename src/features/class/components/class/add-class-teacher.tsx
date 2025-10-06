@@ -7,9 +7,9 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { ClassTeacherForm } from './class-teacher-form';
 import { type ClassTeacherFormProps, ClassTeacherFormSchema } from '../../types';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useAssignClassTeacherMutation } from '../../class-api';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 const initialState = {
   classId: '',

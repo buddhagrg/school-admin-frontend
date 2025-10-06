@@ -11,10 +11,10 @@ import {
   PasswordActionFormProps,
   PasswordActionFormSchema
 } from '../../types';
-import { formatApiError } from '@/utils/helpers/format-api-error';
-import { initialApiResponse } from '@/shared/constants/initial-state';
+import { formatApiError } from '@/utils/format-api-error';
+import { initialApiResponse } from '@/constants/initial-state';
 import { useResetPwdMutation } from '../../auth-api';
-import { SubSoftText, TitleText } from '@/shared/components';
+import { SubSoftText, TitleText } from '@/components';
 import { AuthLayout } from '../../components/auth-layout';
 import { Box } from '@mui/material';
 

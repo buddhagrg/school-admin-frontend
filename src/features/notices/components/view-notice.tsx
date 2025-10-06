@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 import type { Notice } from '../types';
 import { NoticeDetail } from './notice-detail';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type ViewNoticeProps = {
   notice: Notice;

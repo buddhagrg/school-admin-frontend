@@ -19,14 +19,14 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import {
   useAddUserToPolicyMutation,
   useGetEligibleLeavePolicyUsersQuery
 } from '../../leave-policy-api';
 import { type PolicyUsersProps, PolicyUsersSchema } from '../../types';
 import { usePolicyDetail } from '../../leave-policy-context-provider';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type AssignUsersProps = {
   closeModal: () => void;

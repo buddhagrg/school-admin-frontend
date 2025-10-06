@@ -1,7 +1,7 @@
 import { ErrorOutline } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { orange } from '@mui/material/colors';
-import { InfoSection, SubSoftText, TitleText } from '@/shared/components';
+import { InfoSection, SubSoftText, TitleText } from '@/components';
 
 export const NoLeavePolicy = () => {
   return (

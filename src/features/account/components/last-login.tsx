@@ -1,8 +1,8 @@
 import { History, PublicOutlined } from '@mui/icons-material';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { COLORS } from '@/theme/custom-colors';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { HeadingText, SubSoftText } from '@/shared/components';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { HeadingText, SubSoftText } from '@/components';
 
 export const LastLogin = ({
   recentDeviceInfo,

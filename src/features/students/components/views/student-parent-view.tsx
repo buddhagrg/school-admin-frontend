@@ -1,6 +1,6 @@
 import { EmailOutlined, PeopleOutlined, PersonOutlined, PhoneOutlined } from '@mui/icons-material';
 import { useStudentDetail } from '../../student-context-provider';
-import { AccountDetailLayout } from '@/shared/components';
+import { AccountDetailLayout } from '@/components';
 
 export const StudentParentView = () => {
   const { state } = useStudentDetail();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableCell, TableRow } from '@mui/material';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 type Props = {
   colSpan: number;

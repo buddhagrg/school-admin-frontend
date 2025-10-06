@@ -1,10 +1,10 @@
-import { USER_ACTION_MENUS } from '../../utils/constants';
+import { USER_ACTION_MENUS } from '@/constants/general';
 import {
   useResendPwdSetupLinkMutation,
   useResendVerificationEmailMutation
 } from '@/features/auth/auth-api';
-import type { ApiResponseSuccessMessage, UserActions, UserEntity } from '@/shared/types';
-import { useUpdateUserSystemAccessMutation } from '../api/user-system-access-api';
+import type { ApiResponseSuccessMessage, UserActions, UserEntity } from '@/types';
+import { useUpdateUserSystemAccessMutation } from '../api/shared/user-system-access-api';
 
 export const useUserAction = () => {
   const [updateUserSystemAccess] = useUpdateUserSystemAccessMutation();

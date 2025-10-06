@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useDeleteDepartmentMutation } from '../department-api';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type DeleteDepartmentProps = {
   closeModal: () => void;

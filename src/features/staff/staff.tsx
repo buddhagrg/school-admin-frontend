@@ -2,8 +2,8 @@ import { Box } from '@mui/material';
 import { PersonAddAlt } from '@mui/icons-material';
 
 import { StaffActionBtn, StaffTable } from './components';
-import type { SetupItems } from '@/shared/types';
-import { PageContentHeader, SetupInfo } from '@/shared/components';
+import type { SetupItems } from '@/types';
+import { PageContentHeader, SetupInfo } from '@/components';
 
 export const Staff = () => {
   const items: SetupItems[] = [

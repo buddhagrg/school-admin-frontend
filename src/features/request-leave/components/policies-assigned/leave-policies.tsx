@@ -1,7 +1,7 @@
 import { Grid2, Paper } from '@mui/material';
 import { LeavePolicyItem } from './leave-policy-item';
 import { NoLeavePolicy } from './no-leave-policy';
-import { Loader } from '@/shared/components';
+import { Loader } from '@/components';
 import { useGetMyLeavePoliciesQuery } from '@/features/leave-policies/leave-policy-api';
 
 export const LeavePolicies = () => {

@@ -9,8 +9,8 @@ import { type NoticeFormProps, NoticeFormSchema } from '../types';
 import { noticeFormState } from './notice-form-state';
 import { useAddNoticeMutation } from '../notice-api';
 import { NoticeForm } from './notice-form';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DialogModal } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DialogModal } from '@/components';
 
 type AddNoticeProps = {
   closeModal: () => void;

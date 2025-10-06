@@ -2,9 +2,9 @@ import { CakeOutlined, WorkspacePremiumOutlined } from '@mui/icons-material';
 import { Avatar, Box } from '@mui/material';
 
 import { COLORS } from '@/theme/custom-colors';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { CelebrationProps } from '../../dashboard-type';
-import { HeadingText, SubHardText } from '@/shared/components';
+import { HeadingText, SubHardText } from '@/components';
 
 export const CelebrationItem = ({ celebration }: { celebration: CelebrationProps }) => {
   const { user, event, eventDate, type } = celebration;

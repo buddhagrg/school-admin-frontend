@@ -10,20 +10,20 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { getTextColor } from '@/utils/helpers/get-text-color';
-import type { UserActions } from '@/shared/types';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { getTextColor } from '@/utils/get-text-color';
+import type { UserActions } from '@/types';
 import type { Staff } from '../types';
 import { useGetStaffQuery } from '../staff-api';
 import { EditStaff } from './add-edit-staff/edit-staff';
 import { ViewStaff } from './view-staff';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
-import { DialogModal, ResponsiveBox } from '@/shared/components';
-import { useUserAction } from '@/shared/hooks';
-import { userActionReducer, userActionState } from '@/shared/reducer/user-action-reducer';
-import { USER_ACTION_MENU_LIST } from '@/shared/constants/user-action-menus';
-import { isMenuDisabled } from '@/shared/utils/is-menu-disabled';
-import { USER_ACTION_MENUS } from '@/utils/constants';
+import { ERROR_MESSAGE } from '@/constants/error-message';
+import { DialogModal, ResponsiveBox } from '@/components';
+import { useUserAction } from '@/hooks';
+import { userActionReducer, userActionState } from '@/reducer/user-action-reducer';
+import { USER_ACTION_MENU_LIST } from '@/constants/user-action-menus';
+import { isMenuDisabled } from '@/utils/is-menu-disabled';
+import { USER_ACTION_MENUS } from '@/constants/general';
 
 export const StaffTable = () => {
   const { data, isLoading, isError, error } = useGetStaffQuery();

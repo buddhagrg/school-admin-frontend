@@ -2,9 +2,9 @@ import { Box, Chip, Divider, Grid2, Typography } from '@mui/material';
 import { CalendarTodayOutlined } from '@mui/icons-material';
 
 import { NOTICE_STATUS_CHIP } from './notice-status-chip';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import type { Notice } from '../types';
-import { SubHardText, SubSoftText, TitleText } from '@/shared/components';
+import { SubHardText, SubSoftText, TitleText } from '@/components';
 
 export const NoticeDetail = ({ notice }: { notice: Notice }) => {
   const {

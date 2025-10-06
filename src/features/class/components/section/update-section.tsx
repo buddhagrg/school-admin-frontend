@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import { SectionForm } from './section-form';
 import { type SectionFormProps, SectionFormSchema } from '../../types';
 import { useUpdateSectionMutation } from '../../class-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DialogModal } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DialogModal } from '@/components';
 
 type UpdateSectionProps = {
   closeModal: () => void;

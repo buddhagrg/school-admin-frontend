@@ -12,7 +12,7 @@ import { Controller, UseFormReturn } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers';
 import { parseISO } from 'date-fns';
 
-import { DATE_FORMAT } from '@/utils/helpers/date';
+import { DATE_FORMAT } from '@/utils/date';
 import type { LeaveFormProps } from '../types';
 import { useGetMyLeavePoliciesQuery } from '@/features/leave-policies/leave-policy-api';
 

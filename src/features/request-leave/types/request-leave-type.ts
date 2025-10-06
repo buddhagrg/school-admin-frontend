@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { LeaveRequestFilterSchema, LeaveFormSchema } from './request-leave-schema';
-import type { LeaveDetail } from '@/shared/types';
+import type { LeaveDetail } from '@/types';
 
 export type MyLeaveHistoryData = {
   leaveHistory: LeaveDetail[];

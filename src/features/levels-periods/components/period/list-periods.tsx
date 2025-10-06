@@ -22,11 +22,11 @@ import {
   useReorderPeriodsMutation
 } from '../../levels-periods-api';
 import { DisplayItem } from '../display-item';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { UpdatePeriod } from './update-period';
 import { DeletePeriod } from './delete-period';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { Error, HeadingText, Loader, SubSoftText, TitleText } from '@/shared/components';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { Error, HeadingText, Loader, SubSoftText, TitleText } from '@/components';
 
 type PeriodStateType = Period & {
   action: string;

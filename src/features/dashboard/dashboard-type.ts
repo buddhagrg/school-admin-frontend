@@ -1,4 +1,4 @@
-import type { LeaveDetail } from '@/shared/types';
+import type { LeaveDetail } from '@/types';
 import type { Notice } from '../notices/types';
 
 export type GeneralData = {

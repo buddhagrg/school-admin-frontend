@@ -6,13 +6,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box } from '@mui/material';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { useAddStaffMutation } from '../../staff-api';
 import { type StaffFormProps, StaffFormSchema } from '../../types';
 import { staffFormInitialState } from '../staff-form-initial-state';
 import { StaffStepper } from './staff-stepper';
-import { DialogModal, RequiredField } from '@/shared/components';
+import { DialogModal, RequiredField } from '@/components';
 
 type AddStaffProps = {
   closeModal: () => void;

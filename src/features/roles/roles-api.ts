@@ -7,8 +7,8 @@ import type {
   RoleUsersData,
   RoleFormPropsWithId
 } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import type { ApiResponseSuccessMessage } from '@/types';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const rolesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

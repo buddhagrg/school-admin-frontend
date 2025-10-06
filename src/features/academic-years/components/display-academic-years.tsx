@@ -10,12 +10,12 @@ import { EditNote } from '@mui/icons-material';
 
 import type { AcademicYear, AcademicYearFormPropsWithOption } from '../types';
 import { useGetAcademicYearsQuery } from '../academic-years-api';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { UpdateAcademicYear } from './update-academic-year';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { getTextColor } from '@/utils/helpers/get-text-color';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { getTextColor } from '@/utils/get-text-color';
 import { academicYearInitialState } from './academi-year-initial-state';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 const initialState = {
   ...academicYearInitialState,

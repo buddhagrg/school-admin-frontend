@@ -13,12 +13,12 @@ import {
   TextField
 } from '@mui/material';
 
-import type { LeaveDetail } from '@/shared/types';
+import type { LeaveDetail } from '@/types';
 import { useApproveLeaveRequestMutation, useRejectLeaveRequestMutation } from '../review-leave-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { LEAVE_STATUS_CHIP } from '@/features/request-leave/components/leave-status';
-import { DialogModal, HeadingText, SubHardText, SubSoftText } from '@/shared/components';
+import { DialogModal, HeadingText, SubHardText, SubSoftText } from '@/components';
 
 type ReviewLeaveRequestProps = {
   closeModal: () => void;

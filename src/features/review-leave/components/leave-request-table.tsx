@@ -8,12 +8,12 @@ import {
 import { Box, Button } from '@mui/material';
 
 import { LEAVE_STATUS_CHIP } from '@/features/request-leave/components/leave-status';
-import type { LeaveDetail } from '@/shared/types';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import type { LeaveDetail } from '@/types';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { useGetPendingLeavesQuery } from '../review-leave-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { ReviewLeaveRequest } from './review-leave-request';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 type State = LeaveDetail | null;
 

@@ -8,10 +8,10 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { LeaveForm } from '../leave-form';
 import { type LeaveFormProps, LeaveFormSchema } from '../../types';
 import { leaveFormState } from './leave-form-initial-state';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useApplyLeaveRequestMutation } from '../../request-leave-api';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { DialogModal } from '@/shared/components';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { DialogModal } from '@/components';
 
 type AddLeaveRequestProps = {
   closeModal: () => void;

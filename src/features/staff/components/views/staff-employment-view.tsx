@@ -1,7 +1,7 @@
 import { CalendarTodayOutlined, DomainOutlined, WorkOutline } from '@mui/icons-material';
 import { useStaffDetail } from '@/features/staff/staff-context-provider';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { AccountDetailLayout } from '@/shared/components';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { AccountDetailLayout } from '@/components';
 
 export const StaffEmploymentView = () => {
   const { state } = useStaffDetail();

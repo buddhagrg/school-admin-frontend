@@ -2,7 +2,7 @@ import React from 'react';
 import { Delete, Edit, KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import { Box, IconButton } from '@mui/material';
 
-import { HeadingText, SubSoftText } from '@/shared/components';
+import { HeadingText, SubSoftText } from '@/components';
 import { COLORS } from '@/theme/custom-colors';
 
 type DisplayItemProps = {

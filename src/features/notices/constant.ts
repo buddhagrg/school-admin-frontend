@@ -1,4 +1,4 @@
-import type { NameIdType, Status } from '@/shared/types';
+import type { NameIdType, Status } from '@/types';
 
 export const NOTICE_STATUS_LIST: Status[] = [
   { code: 'DRAFT', name: 'Draft', action: 'Save as Draft' },

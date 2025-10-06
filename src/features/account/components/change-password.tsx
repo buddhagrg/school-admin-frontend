@@ -5,9 +5,9 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { type PasswordProps, PasswordSchema } from '@/features/auth/types';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 import { useChangeAccountPasswordMutation } from '../account-api';
 
 const initialState = {

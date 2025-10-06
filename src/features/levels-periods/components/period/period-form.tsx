@@ -7,7 +7,7 @@ import { skipToken } from '@reduxjs/toolkit/query';
 
 import type { AcademicPeriodFormProps } from '../../types';
 import { useGetAcademicLevelsQuery } from '../../levels-periods-api';
-import { DATE_FORMAT } from '@/utils/helpers/date';
+import { DATE_FORMAT } from '@/utils/date';
 
 type PeriodFormProps = {
   methods: UseFormReturn<AcademicPeriodFormProps>;

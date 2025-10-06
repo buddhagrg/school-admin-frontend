@@ -10,9 +10,9 @@ import { EditNote } from '@mui/icons-material';
 
 import type { ClassTeacherDetail } from '../types';
 import { useGetClassTeachersQuery } from '../class-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { UpdateClassTeacher } from './class/update-class-teacher';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 const classState: ClassTeacherDetail = {
   id: 0,

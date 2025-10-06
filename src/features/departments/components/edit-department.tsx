@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useUpdateDepartmentMutation } from '../department-api';
 import { type DepartmentFormProps, DepartmentFormSchema } from '../types';
 import { DepartmentForm } from './department-form';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type EditDepartmentProps = {
   id: number;

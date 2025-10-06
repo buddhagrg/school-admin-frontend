@@ -1,6 +1,6 @@
 import { baseApi, Tag } from '@/api';
 import type { SchoolDataResponse, SchoolFormProps } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
+import type { ApiResponseSuccessMessage } from '@/types';
 
 const settingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,8 +1,8 @@
 import type { GetStaffDetail, StaffData, StaffFormProps, StaffFormPropsWithId } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
+import type { ApiResponseSuccessMessage } from '@/types';
 import { StaffAccount } from '../account/account-type';
 import { baseApi, Tag } from '@/api';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const staffApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

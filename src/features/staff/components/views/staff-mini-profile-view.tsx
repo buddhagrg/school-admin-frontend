@@ -10,10 +10,10 @@ import {
 } from '@mui/icons-material';
 import { Avatar, Box, Chip, Typography } from '@mui/material';
 
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { useStaffDetail } from '../../staff-context-provider';
 import { StaffActionBtn } from '../add-edit-staff/staff-action-btn';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const StaffMiniProfileView = () => {
   const { state } = useStaffDetail();

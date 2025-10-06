@@ -4,8 +4,8 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 import { useDeleteLeaveRequestMutation } from '../../request-leave-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DialogModal } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DialogModal } from '@/components';
 
 type DeleteLeaveRequestProps = {
   id: number;

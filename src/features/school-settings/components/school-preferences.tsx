@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { SettingsOutlined } from '@mui/icons-material';
 
-import { SubSoftText, TitleText } from '@/shared/components';
+import { SubSoftText, TitleText } from '@/components';
 import type { SchoolPreferencesProps } from '../types';
 
 export const SchoolPreferences = () => {

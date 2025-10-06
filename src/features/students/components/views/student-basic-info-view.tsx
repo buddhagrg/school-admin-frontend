@@ -1,7 +1,7 @@
 import { BloodtypeOutlined, CalendarMonthOutlined, PersonOutline } from '@mui/icons-material';
 import { useStudentDetail } from '../../student-context-provider';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { AccountDetailLayout } from '@/shared/components';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { AccountDetailLayout } from '@/components';
 
 export const StudentBasicInfoView = () => {
   const { state } = useStudentDetail();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, FormControl, FormLabel, Switch, TextField } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
-import { SubHardText } from '@/shared/components';
+import { SubHardText } from '@/components';
 import type { PolicyFormProps } from '../types';
 
 type PolicyFormType = {

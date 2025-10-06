@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { AdminDashboard, DefaultDashboard } from './components';
 import { getUserRoleId } from '@/features/auth/auth-slice';
 import { StaticRole } from './dashboard-type';
 import { useGetDashboardDataQuery } from './dashboard-api';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
-import { Loader } from '@/shared/components';
+import { ERROR_MESSAGE } from '@/constants/error-message';
+import { Loader } from '@/components';
 
 export const Dashboard = () => {
   const role = useSelector(getUserRoleId);

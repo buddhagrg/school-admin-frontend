@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import { type AcademicLevelFormProps, AcademicLevelFormSchema } from '../../types';
 import { useUpdateAcademicLevelMutation } from '../../levels-periods-api';
 import { LevelForm } from './level-form';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DialogModal } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DialogModal } from '@/components';
 
 type UpdateLevelProps = {
   closeModal: () => void;

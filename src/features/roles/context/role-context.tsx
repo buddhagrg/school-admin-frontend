@@ -1,6 +1,6 @@
 import { createContext, Dispatch } from 'react';
 import type { ExtendedPermission, RoleWithUsersAssociated } from '../types';
-import type { NameIdType } from '@/shared/types';
+import type { NameIdType } from '@/types';
 
 export const initialState: State = {
   roleDetail: null,

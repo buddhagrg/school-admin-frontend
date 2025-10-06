@@ -5,8 +5,8 @@ import { Box } from '@mui/material';
 import { ViewNotice } from '@/features/notices/components';
 import type { Notice } from '@/features/notices/types';
 import { COLORS } from '@/theme/custom-colors';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { HeadingText, SubSoftText } from '@/shared/components';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { HeadingText, SubSoftText } from '@/components';
 
 export const NoticeItem = ({ notice }: { notice: Notice }) => {
   const { title, publishedDate, author } = notice;

@@ -1,7 +1,7 @@
 import { Box, Grid2 } from '@mui/material';
 import { DisplayAcademicYears } from './components';
 import { AddAcademicYearsBtn } from './components/add-academic-year-btn';
-import { PageContentHeader, ResponsiveBox } from '@/shared/components';
+import { PageContentHeader, ResponsiveBox } from '@/components';
 
 export const AcademicYears = () => {
   return (

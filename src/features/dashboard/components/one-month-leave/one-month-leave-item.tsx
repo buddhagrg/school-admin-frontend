@@ -4,9 +4,9 @@ import { Box, Chip } from '@mui/material';
 
 import { ViewLeaveDetail } from '@/features/request-leave/components';
 import { COLORS } from '@/theme/custom-colors';
-import type { LeaveDetail } from '@/shared/types';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { HeadingText, SubSoftText } from '@/shared/components';
+import type { LeaveDetail } from '@/types';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { HeadingText, SubSoftText } from '@/components';
 
 export const OneMonthLeaveItem = ({ leave }: { leave: LeaveDetail }) => {
   const { user, policy, fromDate, toDate, duration } = leave;

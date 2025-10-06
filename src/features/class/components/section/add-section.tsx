@@ -7,9 +7,9 @@ import { toast } from 'react-toastify';
 
 import { SectionForm } from './section-form';
 import { type SectionFormProps, SectionFormSchema } from '../../types';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useAddSectionMutation } from '../../class-api';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 const initialState: SectionFormProps = {
   name: '',

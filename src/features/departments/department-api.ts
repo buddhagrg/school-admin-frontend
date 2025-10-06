@@ -1,7 +1,7 @@
 import { baseApi, Tag } from '@/api';
 import type { DepartmentData, DepartmentFormProps, DepartmentFormPropsWithId } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import type { ApiResponseSuccessMessage } from '@/types';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const DEFAULT_TAG = { type: Tag.DEPARTMENTS, id: Tag.LIST };
 const departmentApi = baseApi.injectEndpoints({

@@ -7,9 +7,9 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { useAddNewRoleMutation } from '../roles-api';
 import { type RoleFormProps, RoleFormSchema } from '../types';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { RoleForm } from './role-list/role-form';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type AddRoleProps = {
   closeModal: () => void;

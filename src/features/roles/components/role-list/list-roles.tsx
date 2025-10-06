@@ -6,7 +6,7 @@ import { useRolePermission } from '../../context/role-provider';
 import type { RoleWithUsersAssociated } from '../../types';
 import { UpdateRole } from './update-role';
 import { RoleInfo } from './role-info';
-import { Loader, SearchText } from '@/shared/components';
+import { Loader, SearchText } from '@/components';
 
 export const ListRoles = ({ isLoading }: { isLoading: boolean }) => {
   const [searchTerm, setSearchTerm] = useState('');

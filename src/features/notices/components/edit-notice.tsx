@@ -7,10 +7,10 @@ import { useForm } from 'react-hook-form';
 
 import { type Notice, type NoticeFormProps, NoticeFormSchema } from '../types';
 import { useUpdateNoticeMutation } from '../notice-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { NoticeForm } from './notice-form';
 import { noticeFormState } from './notice-form-state';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type EditNoticeProps = {
   closeModal: () => void;

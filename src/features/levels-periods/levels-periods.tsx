@@ -1,4 +1,4 @@
-import { PageContentHeader, PageInfo } from '@/shared/components';
+import { PageContentHeader, PageInfo } from '@/components';
 import { ManageLevelPeriodTab } from './components';
 import { Box } from '@mui/material';
 

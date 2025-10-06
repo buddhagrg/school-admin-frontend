@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import { ClassTeacherForm } from './class-teacher-form';
 import { type ClassTeacherFormProps, ClassTeacherFormSchema } from '../../types';
 import { useUpdateClassTeacherMutation } from '../../class-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DialogModal } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DialogModal } from '@/components';
 
 type UpdateClassTeacherProps = {
   closeModal: () => void;

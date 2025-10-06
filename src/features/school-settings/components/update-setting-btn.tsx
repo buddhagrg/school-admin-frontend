@@ -4,7 +4,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { toast } from 'react-toastify';
 import { useFormContext } from 'react-hook-form';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import type { SchoolFormProps } from '../types';
 import { useUpdateMySchoolMutation } from '../school-setting-api';
 

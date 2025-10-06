@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import { MaterialReactTable, MRT_ColumnDef, useMaterialReactTable } from 'material-react-table';
 import { useSelector } from 'react-redux';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useGetSchoolsQuery } from '../school-api';
 import type { School } from '../types';
 import { getAppBase } from '@/features/auth/auth-slice';
-import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { getTextColor } from '@/utils/helpers/get-text-color';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { DATE_TIME_24_HR_FORMAT, getFormattedDate } from '@/utils/date';
+import { getTextColor } from '@/utils/get-text-color';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 export const ListSchools = () => {
   const appBase = useSelector(getAppBase);

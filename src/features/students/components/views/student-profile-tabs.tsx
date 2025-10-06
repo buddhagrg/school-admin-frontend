@@ -5,7 +5,7 @@ import { StudentBasicInfoView } from './student-basic-info-view';
 import { StudentContactView } from './student-contact-view';
 import { StudentClassView } from './student-class-view';
 import { StudentParentView } from './student-parent-view';
-import { AccountDetailTabContent, TabPanel } from '@/shared/components';
+import { AccountDetailTabContent, TabPanel } from '@/components';
 
 const tabs = ['Personal', 'Academic'];
 export const StudentProfileTabs = () => {

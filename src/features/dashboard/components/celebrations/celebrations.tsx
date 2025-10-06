@@ -4,7 +4,7 @@ import { Box, Card, CardContent } from '@mui/material';
 
 import { CelebrationProps } from '../../dashboard-type';
 import { CelebrationItem } from './celebration-item';
-import { DataNotFound, SubSoftText, TitleText } from '@/shared/components';
+import { DataNotFound, SubSoftText, TitleText } from '@/components';
 
 export const Celebrations = ({ celebrations }: { celebrations: CelebrationProps[] }) => {
   const currentMonthAndYear = format(new Date(), 'MMMM yyyy');

@@ -7,7 +7,7 @@ import { type SchoolFormProps, SchoolFormSchema } from './types';
 import { schoolFormState } from './school-form-init-state';
 import { SchoolTabs, UpdateSettingBtn } from './components';
 import { useGetMySchoolQuery } from './school-setting-api';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const SchoolSetting = () => {
   const { data } = useGetMySchoolQuery();

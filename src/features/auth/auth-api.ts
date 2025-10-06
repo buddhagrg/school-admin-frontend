@@ -6,7 +6,7 @@ import type {
   User,
   UserId
 } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
+import type { ApiResponseSuccessMessage } from '@/types';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

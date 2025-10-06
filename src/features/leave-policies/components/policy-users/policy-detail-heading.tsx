@@ -4,7 +4,7 @@ import { EditNote } from '@mui/icons-material';
 
 import { usePolicyDetail } from '../../leave-policy-context-provider';
 import { UpdatePolicy } from '../policy-list/update-policy';
-import { TitleText } from '@/shared/components';
+import { TitleText } from '@/components';
 
 export const PolicyDetailHeading = () => {
   const { state } = usePolicyDetail();

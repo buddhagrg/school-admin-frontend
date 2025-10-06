@@ -19,8 +19,8 @@ import { parseISO } from 'date-fns';
 import type { LeaveRequestFilterProps } from '../../types';
 import { filterState } from './filter-state';
 import { LEAVE_HISTORY_DATE_RANGES, LEAVE_STATUS_LIST } from '../../constant';
-import { DATE_FORMAT } from '@/utils/helpers/date';
-import { HeadingText } from '@/shared/components';
+import { DATE_FORMAT } from '@/utils/date';
+import { HeadingText } from '@/components';
 import { useGetMyLeavePoliciesQuery } from '@/features/leave-policies/leave-policy-api';
 
 type LeaveRequestFilterType = {

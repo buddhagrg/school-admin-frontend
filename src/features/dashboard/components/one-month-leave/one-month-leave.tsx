@@ -3,8 +3,8 @@ import { ArrowOutwardOutlined, GroupRemoveOutlined } from '@mui/icons-material';
 import { Box, Button, Card, CardContent } from '@mui/material';
 
 import { OneMonthLeaveItem } from './one-month-leave-item';
-import type { LeaveDetail } from '@/shared/types';
-import { DataNotFound, SubSoftText, TitleText } from '@/shared/components';
+import type { LeaveDetail } from '@/types';
+import { DataNotFound, SubSoftText, TitleText } from '@/components';
 
 export const OneMonthLeave = ({ leaves }: { leaves: LeaveDetail[] }) => {
   const currentMonthAndYear = format(new Date(), 'MMMM yyyy');

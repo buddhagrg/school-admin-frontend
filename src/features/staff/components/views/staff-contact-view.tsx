@@ -1,6 +1,6 @@
 import { EmailOutlined, LocationOnOutlined, PhoneOutlined } from '@mui/icons-material';
 import { useStaffDetail } from '../../staff-context-provider';
-import { AccountDetailLayout } from '@/shared/components';
+import { AccountDetailLayout } from '@/components';
 
 export const StaffContactView = () => {
   const { state } = useStaffDetail();

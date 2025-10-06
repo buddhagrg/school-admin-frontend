@@ -8,12 +8,12 @@ import {
   useMaterialReactTable
 } from 'material-react-table';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useGetDepartmentsQuery } from '../department-api';
 import { DeleteDepartment } from './delete-department';
 import type { DepartmentFormPropsWithId } from '../types';
 import { EditDepartment } from './edit-department';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 type State = {
   action: string;

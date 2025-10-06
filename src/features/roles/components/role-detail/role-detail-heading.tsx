@@ -4,7 +4,7 @@ import { EditNote, LockOpenOutlined } from '@mui/icons-material';
 
 import { useRolePermission } from '../../context/role-provider';
 import { UpdateRole } from '../role-list/update-role';
-import { SubSoftText, TitleText } from '@/shared/components';
+import { SubSoftText, TitleText } from '@/components';
 
 export const RoleDetailHeading = () => {
   const {

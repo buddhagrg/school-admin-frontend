@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Card, CardContent, Typography } from '@mui/material';
-import { HeadingText } from '@/shared/components';
+import { HeadingText } from '@/components';
 
 type LeavePolicyItemProps = {
   name: string;

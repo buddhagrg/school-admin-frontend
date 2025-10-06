@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { NoticeFilterSchema, NoticeFormSchema, RecipientTypes } from './notice-schema';
-import type { NameIdType } from '@/shared/types';
+import type { NameIdType } from '@/types';
 import { NOTICE_STATUS_LIST } from '../constant';
 
 export type RecipientTypeProps = (typeof RecipientTypes)[number];

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { RoleFormSchema } from './role-schema';
 import type { BasePermissionProps } from '@/features/permissions/types';
-import type { NameIdType } from '@/shared/types';
+import type { NameIdType } from '@/types';
 
 export type Role = {
   id: number;

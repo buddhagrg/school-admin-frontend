@@ -1,4 +1,4 @@
-import type { ApiResponseSuccessMessage } from '@/shared/types';
+import type { ApiResponseSuccessMessage } from '@/types';
 import type { AccountMeResponse, AccountMode } from './account-type';
 import type { PasswordProps } from '../auth/types';
 import { baseApi, Tag } from '@/api';

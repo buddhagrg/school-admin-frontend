@@ -11,19 +11,19 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 
 import type { Student } from '../types';
-import type { UserActions } from '@/shared/types';
+import type { UserActions } from '@/types';
 import { useGetStudentsQuery } from '../students-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { getTextColor } from '@/utils/helpers/get-text-color';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { getTextColor } from '@/utils/get-text-color';
 import { EditStudent } from './add-edit-student/edit-student';
 import { ViewStudent } from './view-student';
-import { isMenuDisabled } from '../../../shared/utils/is-menu-disabled';
-import { userActionReducer, userActionState } from '@/shared/reducer/user-action-reducer';
-import { USER_ACTION_MENUS } from '@/utils/constants';
-import { useUserAction } from '@/shared/hooks';
-import { DialogModal, ResponsiveBox } from '@/shared/components';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
-import { USER_ACTION_MENU_LIST } from '@/shared/constants/user-action-menus';
+import { isMenuDisabled } from '../../../utils/is-menu-disabled';
+import { userActionReducer, userActionState } from '@/reducer/user-action-reducer';
+import { USER_ACTION_MENUS } from '@/constants/general';
+import { useUserAction } from '@/hooks';
+import { DialogModal, ResponsiveBox } from '@/components';
+import { ERROR_MESSAGE } from '@/constants/error-message';
+import { USER_ACTION_MENU_LIST } from '@/constants/user-action-menus';
 
 export const StudentTable = () => {
   const { data, isLoading, isError, error } = useGetStudentsQuery();

@@ -10,9 +10,9 @@ import type {
   ClassFormWithId,
   ClassTeacherUpdateRequest
 } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
-import { getQueryString } from '@/utils/helpers/get-query-string';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import type { ApiResponseSuccessMessage } from '@/types';
+import { getQueryString } from '@/utils/get-query-string';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const DEFAULT_TAG = { type: Tag.CLASSES_WITH_SECTIONS, id: Tag.LIST };
 const classApi = baseApi.injectEndpoints({

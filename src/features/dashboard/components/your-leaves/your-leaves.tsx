@@ -3,9 +3,9 @@ import { Box, Button, Card, CardContent } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { RequestLeaveBtn } from './request-leave-btn';
-import type { LeaveDetail } from '@/shared/types';
+import type { LeaveDetail } from '@/types';
 import { LeaveItem } from './leave-item';
-import { DataNotFound, SubSoftText, TitleText } from '@/shared/components';
+import { DataNotFound, SubSoftText, TitleText } from '@/components';
 
 export const YourLeaves = ({ leaveHistory }: { leaveHistory: LeaveDetail[] }) => {
   return (

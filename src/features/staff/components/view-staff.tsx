@@ -6,7 +6,7 @@ import { StaffContextProvider, useStaffDetail } from '../staff-context-provider'
 import { useGetStaffDetailQuery } from '../staff-api';
 import { StaffMiniProfileView } from './views/staff-mini-profile-view';
 import { StaffProfileTabs } from './views/staff-profile-tabs';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type ViewStaffProps = {
   id: number;

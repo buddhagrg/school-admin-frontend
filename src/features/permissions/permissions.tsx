@@ -7,7 +7,7 @@ import {
   permissionFormState
 } from './components/index.ts';
 import type { PermissionFormProps } from './types/index.ts';
-import { ResponsiveBox } from '@/shared/components';
+import { ResponsiveBox } from '@/components';
 
 export const Permissions = () => {
   const [formState, setFormState] = useState<PermissionFormProps>(permissionFormState);

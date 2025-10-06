@@ -1,7 +1,7 @@
 import { Box, Card, CardContent } from '@mui/material';
 import { AccountPassword } from './account-password';
 import { LastLogin } from './last-login';
-import { getFormattedDateDistance } from '@/utils/helpers/date';
+import { getFormattedDateDistance } from '@/utils/date';
 
 export const AccountSecurity = ({
   pwdLastChanged,

@@ -6,7 +6,7 @@ import { blue } from '@mui/material/colors';
 import { COLORS } from '@/theme/custom-colors';
 import type { RoleWithUsersAssociated } from '../../types';
 import { useRolePermission } from '../../context/role-provider';
-import { HeadingText, SubSoftText } from '@/shared/components';
+import { HeadingText, SubSoftText } from '@/components';
 
 type RoleItemProps = {
   data: RoleWithUsersAssociated;

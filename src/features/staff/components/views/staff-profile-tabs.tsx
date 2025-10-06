@@ -6,7 +6,7 @@ import { StaffContactView } from './staff-contact-view';
 import { StaffEmploymentView } from './staff-employment-view';
 import { StaffEmergencyContactView } from './staff-emergency-contact-view';
 import { StaffQualificationView } from './staff-qualification-view';
-import { AccountDetailTabContent, TabPanel } from '@/shared/components';
+import { AccountDetailTabContent, TabPanel } from '@/components';
 
 const tabs = ['Personal', 'Professional'];
 export const StaffProfileTabs = () => {

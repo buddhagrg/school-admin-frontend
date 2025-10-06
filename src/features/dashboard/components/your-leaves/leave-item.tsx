@@ -4,9 +4,9 @@ import { AccessTimeOutlined, CalendarTodayOutlined } from '@mui/icons-material';
 
 import { LEAVE_STATUS_CHIP, ViewLeaveDetail } from '@/features/request-leave/components';
 import { COLORS } from '@/theme/custom-colors';
-import type { LeaveDetail } from '@/shared/types';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { HeadingText, SubSoftText } from '@/shared/components';
+import type { LeaveDetail } from '@/types';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { HeadingText, SubSoftText } from '@/components';
 
 export const LeaveItem = ({ leave }: { leave: LeaveDetail }) => {
   const { policy, fromDate, toDate, duration, statusId } = leave;

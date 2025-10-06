@@ -6,9 +6,9 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { PolicyForm } from './policy-form';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useAddLeavePolicyMutation } from '../leave-policy-api';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 import { type PolicyFormProps, PolicyFormSchema } from '../types';
 
 type AddPolicyProps = {

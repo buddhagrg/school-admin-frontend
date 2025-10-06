@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { PolicyFormSchema, PolicyUsersSchema } from './leave-policy-schema';
-import type { NameIdType } from '@/shared/types';
+import type { NameIdType } from '@/types';
 
 export type PolicyFormProps = z.infer<typeof PolicyFormSchema>;
 export type PolicyFormPropsWithId = PolicyFormProps & { id: number };

@@ -4,7 +4,7 @@ import { StaffContactView } from '@/features/staff/components/views/staff-contac
 import { StaffEmergencyContactView } from '@/features/staff/components/views/staff-emergency-contact-view';
 import { StaffEmploymentView } from '@/features/staff/components/views/staff-employment-view';
 import { StaffQualificationView } from '@/features/staff/components/views/staff-qualification-view';
-import { AccountDetailTabContent } from '@/shared/components';
+import { AccountDetailTabContent } from '@/components';
 
 export const StaffAccountPersonal = () => {
   const components: React.ReactNode[] = [

@@ -1,7 +1,7 @@
 import { SearchOffOutlined } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
-import { ERROR_MESSAGE } from '../../constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 import { HeadingText } from '../heading-text';
 
 export const DataNotFound = () => {

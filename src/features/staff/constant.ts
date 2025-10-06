@@ -1,4 +1,4 @@
-import type { NameIdType } from '@/shared/types';
+import type { NameIdType } from '@/types';
 
 export const MARITAL_STATUS_LIST: NameIdType<string>[] = [
   { id: 'SINGLE', name: 'Single' },

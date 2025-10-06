@@ -4,10 +4,10 @@ import { Card, CardContent, CardHeader } from '@mui/material';
 import type { Level } from '../../types';
 import { useGetAcademicLevelsQuery } from '../../levels-periods-api';
 import { DisplayItem } from '../display-item';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { UpdateLevel } from './update-level';
 import { DeleteLevel } from './delete-level';
-import { Error, Loader, SubSoftText, TitleText } from '@/shared/components';
+import { Error, Loader, SubSoftText, TitleText } from '@/components';
 
 type LevelInitialStateType = {
   id: number;

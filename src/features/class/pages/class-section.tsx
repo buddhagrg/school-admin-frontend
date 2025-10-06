@@ -4,8 +4,8 @@ import { Box, Grid2, SelectChangeEvent } from '@mui/material';
 import { ListClassSection } from '../components/list-class-section';
 import { AddBtn } from '../components/add-class-and-section-btn';
 import { FilterClass } from '../components/class/filter-class';
-import type { SetupItems } from '@/shared/types';
-import { PageContentHeader, ResponsiveBox, SetupInfo } from '@/shared/components';
+import type { SetupItems } from '@/types';
+import { PageContentHeader, ResponsiveBox, SetupInfo } from '@/components';
 
 const items: SetupItems[] = [
   { route: '/academic-structure/levels-periods', name: 'Academic Levels' }

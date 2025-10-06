@@ -1,5 +1,5 @@
 import { baseApi, Tag } from '@/api';
-import type { ApiResponseSuccessMessage, UserSystemAccess } from '@/shared/types';
+import type { ApiResponseSuccessMessage, UserSystemAccess } from '@/types';
 
 const userSystemAccessApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

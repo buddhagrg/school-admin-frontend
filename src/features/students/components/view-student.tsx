@@ -6,7 +6,7 @@ import { StudentMiniProfileView } from './views/student-mini-profile-view';
 import { StudentProfileTabs } from './views/student-profile-tabs';
 import { useGetStudentDetailQuery } from '../students-api';
 import { StudentContextProvider, useStudentDetail } from '../student-context-provider';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type ViewStudentProps = {
   id: number;

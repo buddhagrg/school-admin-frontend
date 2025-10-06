@@ -15,9 +15,9 @@ import { parseISO } from 'date-fns';
 import { DatePicker } from '@mui/x-date-pickers';
 
 import type { AcademicYearFormProps } from '../types';
-import { DATE_FORMAT } from '@/utils/helpers/date';
+import { DATE_FORMAT } from '@/utils/date';
 import { useGetAcademicLevelsQuery } from '@/features/levels-periods/levels-periods-api';
-import { STATUS_LIST } from '@/utils/constants';
+import { STATUS_LIST } from '@/constants/general';
 
 type AcademicYearFormType = {
   methods: UseFormReturn<AcademicYearFormProps>;

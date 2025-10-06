@@ -19,7 +19,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import type { NoticeFilterProps } from '../types';
 import { useGetRolesQuery } from '@/features/roles/roles-api';
 import { DATE_RANGES, NOTICE_STATUS_LIST } from '../constant';
-import { DATE_FORMAT } from '@/utils/helpers/date';
+import { DATE_FORMAT } from '@/utils/date';
 
 type NoticeFilterType = {
   applyFilter: () => void;

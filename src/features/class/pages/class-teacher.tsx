@@ -1,8 +1,8 @@
 import { Box, Grid2 } from '@mui/material';
 import { ListClassTeachers } from '../components/list-class-teachers';
 import { AddClassTeacherBtn } from '../components/class/add-class-teacher-btn';
-import type { SetupItems } from '@/shared/types';
-import { PageContentHeader, ResponsiveBox, SetupInfo } from '@/shared/components';
+import type { SetupItems } from '@/types';
+import { PageContentHeader, ResponsiveBox, SetupInfo } from '@/components';
 
 const items: SetupItems[] = [
   { route: '/class-management/classes-sections', name: 'Class & Sections' },

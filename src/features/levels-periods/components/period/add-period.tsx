@@ -8,10 +8,10 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { type AcademicPeriodFormProps, AcademicPeriodFormSchema } from '../../types';
 import { useAddAcademicPeriodMutation } from '../../levels-periods-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { PeriodForm } from './period-form';
-import { SubSoftText, TitleText } from '@/shared/components';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { SubSoftText, TitleText } from '@/components';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
 
 const initialState: AcademicPeriodFormProps = {
   name: '',

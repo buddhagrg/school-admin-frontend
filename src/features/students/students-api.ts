@@ -6,11 +6,11 @@ import type {
   StudentPropsWithId,
   StudentsData
 } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
-import { getQueryString } from '@/utils/helpers/get-query-string';
+import type { ApiResponseSuccessMessage } from '@/types';
+import { getQueryString } from '@/utils/get-query-string';
 import { StudentAccount } from '../account/account-type';
 import { baseApi, Tag } from '@/api';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const studentsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

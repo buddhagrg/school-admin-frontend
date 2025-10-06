@@ -7,10 +7,10 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { AcademicYearForm } from './academic-year-form';
 import { useUpdateAcademicYearMutation } from '../academic-years-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { academicYearInitialState } from './academi-year-initial-state';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { DialogModal } from '@/shared/components';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { DialogModal } from '@/components';
 import { type AcademicYearFormProps, AcademicYearFormSchema } from '../types';
 
 type UpdateAcademicYearProps = {

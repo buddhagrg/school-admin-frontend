@@ -3,10 +3,10 @@ import { toast } from 'react-toastify';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useRemoveUserFromPolicyMutation } from '../../leave-policy-api';
 import { usePolicyDetail } from '../../leave-policy-context-provider';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type RemoveUserProps = {
   id: number;

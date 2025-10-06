@@ -1,4 +1,4 @@
-import type { NameIdType, UserActions } from '../shared/types';
+import type { NameIdType, UserActions } from '../types';
 
 export const GENDERS: NameIdType<string>[] = [
   { id: 'MALE', name: 'Male' },

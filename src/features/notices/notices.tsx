@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { AddNoticeBtn, NoticeManagement } from './components';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const Notices = () => {
   return (

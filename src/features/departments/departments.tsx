@@ -1,7 +1,7 @@
 import { Box, Grid2 } from '@mui/material';
 
 import { AddDepartment, ListDepartments } from './components';
-import { PageContentHeader, ResponsiveBox } from '@/shared/components';
+import { PageContentHeader, ResponsiveBox } from '@/components';
 
 export const Departments = () => {
   return (

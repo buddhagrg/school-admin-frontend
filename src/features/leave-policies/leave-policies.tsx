@@ -2,7 +2,7 @@ import { Box, Grid2 } from '@mui/material';
 import { AddPolicyBtn, ListPolicies, PolicyNotSelected } from './components';
 import { PolicyDetail } from './components/policy-users/policy-detail';
 import { PolicyContextProvider, usePolicyDetail } from './leave-policy-context-provider';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 const LeavePolicyPage = () => {
   const { state } = usePolicyDetail();

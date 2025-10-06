@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const LeaveHistoryHeading = () => {
   return (

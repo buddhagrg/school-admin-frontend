@@ -7,9 +7,9 @@ import type {
   RecipientResponse,
   ReviewNoticeRequest
 } from './types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
-import { getQueryString } from '@/utils/helpers/get-query-string';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import type { ApiResponseSuccessMessage } from '@/types';
+import { getQueryString } from '@/utils/get-query-string';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const noticeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

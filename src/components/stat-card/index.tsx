@@ -1,6 +1,6 @@
 import { Avatar, Box, Card, CardContent, Chip, Typography } from '@mui/material';
 import { TrendingDown, TrendingUp } from '@mui/icons-material';
-import type { StatCardProps } from '@/shared/types';
+import type { StatCardProps } from '@/types';
 
 export const StatCard = ({ stat }: { stat: StatCardProps }) => {
   const { title, totalCount, percentDiff, icon, bgColor } = stat;

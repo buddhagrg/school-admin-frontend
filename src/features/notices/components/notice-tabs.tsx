@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 
 import { NoticeTable } from './notice-table';
 import type { NoticeFilterProps } from '../types';
-import { getDateRange } from '@/utils/helpers/get-date-range';
+import { getDateRange } from '@/utils/get-date-range';
 import { useGetNoticesQuery } from '../notice-api';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { getUser } from '@/features/auth/auth-slice';
-import { TabPanel } from '@/shared/components';
+import { TabPanel } from '@/components';
 
 export const NoticeTabs = ({ filter }: { filter: NoticeFilterProps }) => {
   const [tab, setTab] = useState(0);

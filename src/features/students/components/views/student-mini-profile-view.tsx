@@ -11,10 +11,10 @@ import {
 } from '@mui/icons-material';
 import { Avatar, Box, Chip, Typography } from '@mui/material';
 
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { useStudentDetail } from '../../student-context-provider';
 import { StudentActionBtn } from '../add-edit-student/student-action-btn';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const StudentMiniProfileView = () => {
   const { state } = useStudentDetail();

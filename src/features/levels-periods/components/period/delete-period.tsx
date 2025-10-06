@@ -4,8 +4,8 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { useDeleteAcademicPeriodMutation } from '../../levels-periods-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DialogModal } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DialogModal } from '@/components';
 
 type DeletePeriodProps = {
   closeModal: () => void;

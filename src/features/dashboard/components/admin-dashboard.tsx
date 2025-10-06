@@ -6,7 +6,7 @@ import { ListDashboardStat } from './list-dashboard-stat';
 import { Notices } from './notices/notices';
 import { OneMonthLeave } from './one-month-leave/one-month-leave';
 import { Celebrations } from './celebrations/celebrations';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const AdminDashboard = () => {
   const { data } = useGetDashboardDataQuery();

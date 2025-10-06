@@ -4,11 +4,11 @@ import { Grid2 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useGetSchoolQuery } from '../school-api';
 import { type SchoolProps, SchoolSchema } from '../types';
 import { ManageSchool } from '../components/manage-school';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 const initialState = {
   name: '',

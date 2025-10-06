@@ -1,13 +1,13 @@
-import type { ApiResponseSuccessMessage } from '@/shared/types';
+import type { ApiResponseSuccessMessage } from '@/types';
 import type {
   LeaveFormProps,
   LeaveFormPropsWithId,
   LeaveRequestFilterProps,
   MyLeaveHistoryData
 } from './types';
-import { getQueryString } from '@/utils/helpers/get-query-string';
+import { getQueryString } from '@/utils/get-query-string';
 import { baseApi, Tag } from '@/api';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const leaveApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

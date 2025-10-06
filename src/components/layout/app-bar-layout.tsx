@@ -19,7 +19,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useLogoutMutation } from '@/features/auth/auth-api';
 import {
   getAppBase,

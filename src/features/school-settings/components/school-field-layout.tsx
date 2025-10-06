@@ -12,7 +12,7 @@ import {
 import { useFormContext } from 'react-hook-form';
 
 import type { SchoolFormProps } from '../types';
-import { SubSoftText, TitleText } from '@/shared/components';
+import { SubSoftText, TitleText } from '@/components';
 
 type SchoolFieldLayoutProps = {
   icon: React.FC<SvgIconProps>;

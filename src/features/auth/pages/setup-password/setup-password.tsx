@@ -11,11 +11,11 @@ import {
   PasswordActionFormProps,
   PasswordActionFormSchema
 } from '../../types';
-import { formatApiError } from '@/utils/helpers/format-api-error';
-import { initialApiResponse } from '@/shared/constants/initial-state';
+import { formatApiError } from '@/utils/format-api-error';
+import { initialApiResponse } from '@/constants/initial-state';
 import { useSetupPasswordMutation } from '../../auth-api';
 import { AuthLayout } from '../../components/auth-layout';
-import { SubSoftText, TitleText } from '@/shared/components';
+import { SubSoftText, TitleText } from '@/components';
 import { Box } from '@mui/material';
 
 const initialState: PasswordActionFormProps = { password: '', confirmPassword: '' };

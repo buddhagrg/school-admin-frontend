@@ -7,9 +7,9 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { type ClassFormProps, ClassFormSchema } from '../../types';
 import { useUpdateClassMutation } from '../../class-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { ClassForm } from './class-form';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type UpdateClassProps = {
   closeModal: () => void;

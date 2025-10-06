@@ -4,7 +4,7 @@ import { Box, Paper, Tab, Tabs } from '@mui/material';
 import { RolePermissions } from './role-permissions';
 import { RoleUsers } from './role-users';
 import { RoleDetailHeading } from './role-detail-heading';
-import { TabPanel } from '@/shared/components';
+import { TabPanel } from '@/components';
 
 export const RoleDetail = () => {
   const [tab, setTab] = useState(0);

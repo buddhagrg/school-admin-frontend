@@ -1,4 +1,4 @@
-import type { NameIdType, Status } from '@/shared/types';
+import type { NameIdType, Status } from '@/types';
 
 export const LEAVE_STATUS_LIST: Status[] = [
   { code: 'PENDING', name: 'Pending' },

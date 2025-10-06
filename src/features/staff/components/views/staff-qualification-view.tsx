@@ -1,6 +1,6 @@
 import { AccessTime, SchoolOutlined } from '@mui/icons-material';
 import { useStaffDetail } from '@/features/staff/staff-context-provider';
-import { AccountDetailLayout } from '@/shared/components';
+import { AccountDetailLayout } from '@/components';
 
 export const StaffQualificationView = () => {
   const { state } = useStaffDetail();

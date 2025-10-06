@@ -6,11 +6,11 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { type DepartmentFormProps, DepartmentFormSchema } from '../types';
 import { useAddNewDepartmentMutation } from '../department-api';
 import { DepartmentForm } from './department-form';
-import { SubSoftText, TitleText } from '@/shared/components';
+import { SubSoftText, TitleText } from '@/components';
 
 export const AddDepartment = () => {
   const methods = useForm<DepartmentFormProps>({

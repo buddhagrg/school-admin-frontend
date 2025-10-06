@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { LockOutlined } from '@mui/icons-material';
 
 import { ChangePassword } from './change-password';
-import { HeadingText, SubSoftText, TitleText } from '@/shared/components';
+import { HeadingText, SubSoftText, TitleText } from '@/components';
 
 export const AccountPassword = ({ pwdLastChanged }: { pwdLastChanged: string }) => {
   const [modal, setModal] = useState(false);

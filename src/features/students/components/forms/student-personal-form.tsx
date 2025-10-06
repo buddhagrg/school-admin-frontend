@@ -15,8 +15,8 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers';
 import { parseISO } from 'date-fns';
 
-import { BLOOD_GROUPS, GENDERS, STATUS_LIST } from '@/utils/constants';
-import { DATE_FORMAT } from '@/utils/helpers/date';
+import { BLOOD_GROUPS, GENDERS, STATUS_LIST } from '@/constants/general';
+import { DATE_FORMAT } from '@/utils/date';
 import type { SectionDetail } from '@/features/class/types';
 import type { StudentFormProps } from '../../types';
 import { useGetClassesWithSectionsQuery } from '@/features/class/class-api';

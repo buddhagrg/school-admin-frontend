@@ -1,5 +1,5 @@
 import { useGetAcademicLevelsQuery } from '@/features/levels-periods/levels-periods-api';
-import { Loader, SubSoftText, TitleText } from '@/shared/components';
+import { Loader, SubSoftText, TitleText } from '@/components';
 
 import {
   Box,

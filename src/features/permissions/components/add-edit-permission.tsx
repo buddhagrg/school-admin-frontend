@@ -6,14 +6,14 @@ import { TextField } from '@mui/material';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import {
   type AddEditPermissionProps,
   AddEditPermissionSchema,
   type PermissionFormProps
 } from '../types';
 import { useAddPermissionMutation, useUpdatePermissionMutation } from '../permission-api';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type AddEditPermissionType = {
   closeModal: () => void;

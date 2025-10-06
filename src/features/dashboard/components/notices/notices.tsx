@@ -4,7 +4,7 @@ import { Box, Button, Card, CardContent } from '@mui/material';
 
 import type { Notice } from '@/features/notices/types';
 import { NoticeItem } from './notice-item';
-import { DataNotFound, SubSoftText, TitleText } from '@/shared/components';
+import { DataNotFound, SubSoftText, TitleText } from '@/components';
 
 export const Notices = ({ notices }: { notices: Notice[] }) => {
   return (

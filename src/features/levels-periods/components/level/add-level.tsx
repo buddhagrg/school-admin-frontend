@@ -6,11 +6,11 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { type AcademicLevelFormProps, AcademicLevelFormSchema } from '../../types';
 import { useAddAcademicLevelMutation } from '../../levels-periods-api';
 import { LevelForm } from './level-form';
-import { SubSoftText, TitleText } from '@/shared/components';
+import { SubSoftText, TitleText } from '@/components';
 
 export const AddLevel = () => {
   const methods = useForm<AcademicLevelFormProps>({

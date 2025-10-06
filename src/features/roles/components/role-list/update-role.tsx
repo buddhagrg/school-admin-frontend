@@ -7,9 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useUpdateRoleMutation } from '../../roles-api';
 import { type RoleFormProps, RoleFormSchema, type RoleWithUsersAssociated } from '../../types';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { RoleForm } from './role-form';
-import { DialogModal } from '@/shared/components';
+import { DialogModal } from '@/components';
 
 type UpdateRoleProps = {
   closeModal: () => void;

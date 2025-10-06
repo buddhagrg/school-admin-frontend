@@ -5,16 +5,16 @@ import { MoreVert } from '@mui/icons-material';
 
 import { useGetMyLeaveHistoryQuery } from '../../request-leave-api';
 import type { LeaveRequestFilterProps } from '../../types';
-import type { LeaveDetail, NameIdType } from '@/shared/types';
-import { API_DATE_FORMAT, DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import type { LeaveDetail, NameIdType } from '@/types';
+import { API_DATE_FORMAT, DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { DeleteLeaveRequest } from './delete-leave-request';
 import { EditLeaveRequest } from '../leave-action/edit-leave-request';
 import { LEAVE_STATUS_CHIP } from '../leave-status';
 import { ViewLeaveDetail } from '../leave-action/view-leave-detail';
-import { getDateRange } from '@/utils/helpers/get-date-range';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
-import { ResponsiveBox } from '@/shared/components';
+import { getDateRange } from '@/utils/get-date-range';
+import { ERROR_MESSAGE } from '@/constants/error-message';
+import { ResponsiveBox } from '@/components';
 
 type LeaveRequestTableProps = {
   filter: LeaveRequestFilterProps;

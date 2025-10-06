@@ -7,10 +7,10 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { type AcademicPeriodFormProps, AcademicPeriodFormSchema, type Period } from '../../types';
 import { useUpdateAcademicPeriodMutation } from '../../levels-periods-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { PeriodForm } from './period-form';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { DialogModal } from '@/shared/components';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { DialogModal } from '@/components';
 
 type UpdatePeriodProps = Period & {
   closeModal: () => void;

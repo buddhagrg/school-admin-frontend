@@ -8,7 +8,7 @@ import { LeaveRequestFilter } from './leave-request-filter';
 import { LeaveRequestTable } from './leave-request-table';
 import { filterState } from './filter-state';
 import { type LeaveRequestFilterProps, LeaveRequestFilterSchema } from '../../types';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const LeaveHistory = () => {
   const [appliedFilter, setAppliedFilter] = useState<LeaveRequestFilterProps>(filterState);

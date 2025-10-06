@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { matchRoutes, Outlet, useLocation } from 'react-router-dom';
 
-import { usePermission } from '@/shared/hooks';
+import { usePermission } from '@/hooks';
 import { routes } from './router';
-import { MainLayout, PageNotFound, PermissionErrorLayout } from '@/shared/components';
+import { MainLayout, PageNotFound, PermissionErrorLayout } from '@/components';
 
 export const AppRoot = () => {
   const { hasData, doesRouteExist } = usePermission();

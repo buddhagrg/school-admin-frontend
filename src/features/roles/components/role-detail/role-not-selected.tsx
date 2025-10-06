@@ -1,6 +1,6 @@
 import { Box, Paper } from '@mui/material';
 import { ShieldOutlined } from '@mui/icons-material';
-import { HeadingText, SubSoftText } from '@/shared/components';
+import { HeadingText, SubSoftText } from '@/components';
 
 export const RoleNotSelected = () => {
   return (

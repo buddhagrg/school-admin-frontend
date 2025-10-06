@@ -7,7 +7,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import type { SchoolProps } from '../types';
 import { useAddSchoolMutation, useUpdateSchoolMutation } from '../school-api';
 import { getAppBase } from '@/features/auth/auth-slice';

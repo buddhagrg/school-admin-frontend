@@ -5,7 +5,7 @@ import { useGetDashboardDataQuery } from '../dashboard-api';
 import { Notices } from './notices/notices';
 import { OneMonthLeave } from './one-month-leave/one-month-leave';
 import { Celebrations } from './celebrations/celebrations';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 export const StudentDashboard = () => {
   const { data } = useGetDashboardDataQuery();

@@ -3,8 +3,8 @@ import { Grid2 } from '@mui/material';
 import { blue } from '@mui/material/colors';
 
 import { GeneralData } from '../dashboard-type';
-import type { StatCardProps } from '@/shared/types';
-import { StatCard } from '@/shared/components';
+import type { StatCardProps } from '@/types';
+import { StatCard } from '@/components';
 
 type ListDashboardStatProps = {
   students: GeneralData;

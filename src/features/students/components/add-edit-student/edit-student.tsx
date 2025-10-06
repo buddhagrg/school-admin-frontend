@@ -10,9 +10,9 @@ import { StudenStepper } from './student-stepper';
 import { useGetStudentDetailQuery, useUpdateStudentMutation } from '../../students-api';
 import { type StudentFormProps, StudentFormSchema } from '../../types';
 import { studentFormInitialState } from '../student-initial-state';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { DialogModal, RequiredField } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { DialogModal, RequiredField } from '@/components';
 
 type EditStudentProps = {
   id: number;

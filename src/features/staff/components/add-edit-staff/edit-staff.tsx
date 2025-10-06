@@ -6,13 +6,13 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { Box } from '@mui/material';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { useGetStaffDetailQuery, useUpdateStaffMutation } from '../../staff-api';
 import { type StaffFormProps, StaffFormSchema } from '../../types';
 import { staffFormInitialState } from '../staff-form-initial-state';
 import { StaffStepper } from './staff-stepper';
-import { DialogModal, RequiredField } from '@/shared/components';
+import { DialogModal, RequiredField } from '@/components';
 
 type EditStaffProps = {
   id: number;

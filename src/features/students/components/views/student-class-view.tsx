@@ -1,6 +1,6 @@
 import { MenuBookOutlined, PeopleOutlined, PersonOutlined } from '@mui/icons-material';
 import { useStudentDetail } from '../../student-context-provider';
-import { AccountDetailLayout } from '@/shared/components';
+import { AccountDetailLayout } from '@/components';
 
 export const StudentClassView = () => {
   const { state } = useStudentDetail();

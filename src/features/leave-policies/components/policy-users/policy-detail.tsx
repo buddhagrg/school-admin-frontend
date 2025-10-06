@@ -3,7 +3,7 @@ import { Box, Paper, Tab, Tabs } from '@mui/material';
 
 import { PolicyDetailHeading } from './policy-detail-heading';
 import { PolicyUsers } from './policy-users';
-import { TabPanel } from '@/shared/components';
+import { TabPanel } from '@/components';
 
 export const PolicyDetail = () => {
   const [tab, setTab] = useState(0);

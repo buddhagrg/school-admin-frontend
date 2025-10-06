@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import { ClassForm } from './class-form';
 import { type ClassFormProps, ClassFormSchema } from '../../types';
 import { useAddClassMutation } from '../../class-api';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
-import { DialogModal } from '@/shared/components';
+import { getErrorMsg } from '@/utils/get-error-message';
+import { DialogModal } from '@/components';
 
 const initialState: ClassFormProps = {
   name: '',

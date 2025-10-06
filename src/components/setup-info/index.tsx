@@ -4,7 +4,7 @@ import { Close, InfoOutlined } from '@mui/icons-material';
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 
-import type { SetupItems } from '@/shared/types';
+import type { SetupItems } from '@/types';
 
 type SetupInfoProps = {
   screen: string;

@@ -1,4 +1,4 @@
-import { InfoSection } from '@/shared/components';
+import { InfoSection } from '@/components';
 
 export const RoleInfo = () => {
   const list = [

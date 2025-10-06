@@ -1,4 +1,4 @@
-import type { LeaveDetail } from '@/shared/types';
+import type { LeaveDetail } from '@/types';
 
 export type PendingLeavesData = {
   pendingLeaves: LeaveDetail[];

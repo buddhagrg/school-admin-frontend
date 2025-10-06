@@ -5,7 +5,7 @@ import { blue } from '@mui/material/colors';
 import type { ExtendedPermission } from '../../types';
 import { COLORS } from '@/theme/custom-colors';
 import { useRolePermission } from '../../context/role-provider';
-import { HeadingText, SubHardText, SubSoftText } from '@/shared/components';
+import { HeadingText, SubHardText, SubSoftText } from '@/components';
 
 type PermissionItemProps = {
   item: ExtendedPermission;

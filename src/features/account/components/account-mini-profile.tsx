@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Box } from '@mui/material';
-import { HeadingText, TitleText } from '@/shared/components';
+import { HeadingText, TitleText } from '@/components';
 
 type AccountMiniProfileProps = {
   name?: string;

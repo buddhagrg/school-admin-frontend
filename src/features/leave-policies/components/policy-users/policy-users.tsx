@@ -9,14 +9,14 @@ import { Box, Button, IconButton } from '@mui/material';
 import { PersonAddAlt1Outlined, PersonRemoveOutlined } from '@mui/icons-material';
 import { skipToken } from '@reduxjs/toolkit/query';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { useGetLeavePolicyUsersQuery } from '../../leave-policy-api';
 import { RemoveUser } from './remove-user';
 import type { PolicyUser } from '../../types';
 import { usePolicyDetail } from '../../leave-policy-context-provider';
 import { AssignUsers } from './assign-users';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
-import { ResponsiveBox } from '@/shared/components';
+import { ERROR_MESSAGE } from '@/constants/error-message';
+import { ResponsiveBox } from '@/components';
 
 export const PolicyUsers = () => {
   const { state } = usePolicyDetail();

@@ -7,7 +7,7 @@ import { useGetRolesQuery } from './roles-api';
 import { useGetPermissionsQuery } from '../permissions/permission-api';
 import { RoleProvider, useRolePermission } from './context/role-provider';
 import { AddRoleBtn, ListRoles, RoleDetail, RoleNotSelected } from './components';
-import { PageContentHeader } from '@/shared/components';
+import { PageContentHeader } from '@/components';
 
 const ViewRoles = () => {
   const { data: rolesData, isLoading } = useGetRolesQuery();

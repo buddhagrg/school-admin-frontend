@@ -3,15 +3,15 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { toast } from 'react-toastify';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import {
   useDeleteNoticeMutation,
   usePublishNoticeMutation,
   useReviewNoticeStatusMutation
 } from '../notice-api';
 import type { NoticeStatusCode } from '../types';
-import type { ApiResponseSuccessMessage } from '@/shared/types';
-import { DialogModal } from '@/shared/components';
+import type { ApiResponseSuccessMessage } from '@/types';
+import { DialogModal } from '@/components';
 
 type ReviewNoticeProps = {
   action: string;

@@ -3,7 +3,7 @@ import { Box, Tab, Tabs } from '@mui/material';
 
 import { LevelTabContent } from './level';
 import { PeriodTabContent } from './period';
-import { TabPanel } from '@/shared/components';
+import { TabPanel } from '@/components';
 
 const tabs = ['Academic Levels', 'Periods'];
 export const ManageLevelPeriodTab = () => {

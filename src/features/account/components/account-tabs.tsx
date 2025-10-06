@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Tab, Tabs } from '@mui/material';
 import { AccountSecurity } from './account-security';
-import { TabPanel } from '@/shared/components';
+import { TabPanel } from '@/components';
 
 type AccountTabsProps = {
   component: React.ReactNode;

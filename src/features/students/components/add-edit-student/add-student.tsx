@@ -8,11 +8,11 @@ import { Box } from '@mui/material';
 
 import { useAddStudentMutation } from '../../students-api';
 import { type StudentFormProps, StudentFormSchema } from '../../types';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { studentFormInitialState } from '../student-initial-state';
 import { StudenStepper } from './student-stepper';
-import { API_DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import { DialogModal, RequiredField } from '@/shared/components';
+import { API_DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import { DialogModal, RequiredField } from '@/components';
 
 type AddStudentProps = {
   closeModal: () => void;

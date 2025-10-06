@@ -15,12 +15,12 @@ import {
 import { EditNote } from '@mui/icons-material';
 
 import { UpdateSection } from './section/update-section';
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import { UpdateClass } from './class/update-class';
 import type { ClassSection } from '../types';
-import { getTextColor } from '@/utils/helpers/get-text-color';
+import { getTextColor } from '@/utils/get-text-color';
 import { useGetClassesWithSectionsQuery } from '../class-api';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 type ClassStateProps = {
   id: number;

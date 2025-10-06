@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Divider } from '@mui/material';
 
 import { LEAVE_STATUS_CHIP } from '../leave-status';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
-import type { LeaveDetail } from '@/shared/types';
-import { DialogModal, HeadingText, SubHardText, SubSoftText } from '@/shared/components';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
+import type { LeaveDetail } from '@/types';
+import { DialogModal, HeadingText, SubHardText, SubSoftText } from '@/components';
 
 type ViewLeaveDetailProps = {
   data: LeaveDetail;

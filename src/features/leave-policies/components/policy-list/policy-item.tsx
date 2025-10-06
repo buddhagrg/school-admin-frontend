@@ -6,7 +6,7 @@ import { blue } from '@mui/material/colors';
 import { COLORS } from '@/theme/custom-colors';
 import type { LeavePolicy } from '../../types';
 import { usePolicyDetail } from '../../leave-policy-context-provider';
-import { HeadingText, SubSoftText } from '@/shared/components';
+import { HeadingText, SubSoftText } from '@/components';
 
 type PolicyItemProps = {
   data: LeavePolicy;

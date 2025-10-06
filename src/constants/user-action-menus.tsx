@@ -1,7 +1,7 @@
 import React from 'react';
 import { SvgIconProps } from '@mui/material';
 import { Block, CheckCircle, Edit, Email, Key, Visibility } from '@mui/icons-material';
-import { USER_ACTION_MENUS } from '@/utils/constants';
+import { USER_ACTION_MENUS } from '@/constants/general';
 import type { UserActions } from '../types';
 
 const getUserActionContent = (action: UserActions): string => {

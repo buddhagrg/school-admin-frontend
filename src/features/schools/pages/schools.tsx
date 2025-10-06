@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { type SchoolProps, SchoolSchema } from '../types';
 import { ListSchools, ManageSchool } from '../components';
-import { PageContentHeader, ResponsiveBox } from '@/shared/components';
+import { PageContentHeader, ResponsiveBox } from '@/components';
 
 const initialState = {
   name: '',

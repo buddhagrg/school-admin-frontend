@@ -3,7 +3,7 @@ import { Box, Button, FormControl, FormLabel, TextField } from '@mui/material';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import type { ApiResponseAlertType, PasswordActionFormProps } from '../types';
-import { ApiResponseAlert } from '@/shared/components';
+import { ApiResponseAlert } from '@/components';
 
 type PasswordActionFormType = {
   register: UseFormRegister<PasswordActionFormProps>;

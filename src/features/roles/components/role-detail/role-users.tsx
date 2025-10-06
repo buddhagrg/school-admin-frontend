@@ -8,11 +8,11 @@ import {
 import { Box } from '@mui/material';
 import { skipToken } from '@reduxjs/toolkit/query';
 
-import { getErrorMsg } from '@/utils/helpers/get-error-message';
+import { getErrorMsg } from '@/utils/get-error-message';
 import type { User } from '../../types';
 import { useGetRoleUsersQuery } from '../../roles-api';
 import { useRolePermission } from '../../context/role-provider';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
+import { ERROR_MESSAGE } from '@/constants/error-message';
 
 export const RoleUsers = () => {
   const {

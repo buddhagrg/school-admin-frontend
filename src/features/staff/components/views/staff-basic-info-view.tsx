@@ -6,9 +6,9 @@ import {
   PersonOutline
 } from '@mui/icons-material';
 
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { useStaffDetail } from '../../staff-context-provider';
-import { AccountDetailLayout } from '@/shared/components';
+import { AccountDetailLayout } from '@/components';
 
 export const StaffBasicInfoView = () => {
   const { state } = useStaffDetail();

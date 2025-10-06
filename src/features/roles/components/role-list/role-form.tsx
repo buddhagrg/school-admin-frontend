@@ -2,7 +2,7 @@ import { Box, FormControl, FormLabel, Switch, TextField } from '@mui/material';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
 import type { RoleFormProps } from '../../types';
-import { SubHardText } from '@/shared/components';
+import { SubHardText } from '@/components';
 
 export const RoleForm = ({ methods }: { methods: UseFormReturn<RoleFormProps> }) => {
   const {

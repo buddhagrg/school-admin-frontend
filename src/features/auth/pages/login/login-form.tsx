@@ -21,8 +21,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { type ApiResponseAlertType, LoginSchema, type LoginRequest } from '../../types';
 import { useLoginMutation } from '../../auth-api';
 import { setUser } from '../../auth-slice';
-import { formatApiError } from '@/utils/helpers/format-api-error';
-import { ApiResponseAlert } from '@/shared/components';
+import { formatApiError } from '@/utils/format-api-error';
+import { ApiResponseAlert } from '@/components';
 
 const initState: LoginRequest = {
   email: '',

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { LeaveRequestTable } from './components';
-import { PageContentHeader, ResponsiveBox } from '@/shared/components';
+import { PageContentHeader, ResponsiveBox } from '@/components';
 
 export const ReviewLeave = () => {
   return (

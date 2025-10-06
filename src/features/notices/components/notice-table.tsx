@@ -11,14 +11,14 @@ import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 
 import type { Notice, NoticeStatusCode } from '../types';
 import { NOTICE_STATUS_CHIP } from './notice-status-chip';
-import { DATE_FORMAT, getFormattedDate } from '@/utils/helpers/date';
+import { DATE_FORMAT, getFormattedDate } from '@/utils/date';
 import { ViewNotice } from './view-notice';
 import { EditNotice } from './edit-notice';
 import { ReviewNotice } from './review-notice';
 import { getUser } from '@/features/auth/auth-slice';
 import { getAvailableActions } from '../get-available-actions';
-import { ERROR_MESSAGE } from '@/shared/constants/error-message';
-import { ResponsiveBox } from '@/shared/components';
+import { ERROR_MESSAGE } from '@/constants/error-message';
+import { ResponsiveBox } from '@/components';
 
 type RowData = {
   action: string;

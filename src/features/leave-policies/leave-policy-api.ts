@@ -1,4 +1,4 @@
-import type { ApiResponseSuccessMessage } from '@/shared/types';
+import type { ApiResponseSuccessMessage } from '@/types';
 import type {
   AddUserToPolicy,
   EligiblePolicyUsers,
@@ -10,7 +10,7 @@ import type {
   RemoveUserFromPolicy
 } from './types';
 import { baseApi, Tag } from '@/api';
-import { providesListTags } from '@/utils/helpers/provides-list-tags';
+import { providesListTags } from '@/utils/provides-list-tags';
 
 const leaveApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

@@ -4,7 +4,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from './protected-route';
 import { AppRoot } from './app-root';
 import { Login, ForgotPassword, SetupPassword, ResetPassword } from '@/features/auth/pages';
-import { Error, MainLayout, PageNotFound } from '@/shared/components';
 
 import { ProtectedSuperAdminRoute } from './protected-super-admin-route';
 import { Permissions } from '@/features/permissions/permissions';
@@ -24,6 +23,8 @@ import { RequestLeave } from '@/features/request-leave/request-leave';
 import { ReviewLeave } from '@/features/review-leave/review-leave';
 import { Notices } from '@/features/notices/notices';
 import { SchoolSetting } from '@/features/school-settings/school-setting';
+import { Error, PageNotFound } from '@/components/errors';
+import { MainLayout } from '@/components/layout';
 
 export const routes = [
   {
